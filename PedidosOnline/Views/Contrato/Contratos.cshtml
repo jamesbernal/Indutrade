@@ -64,6 +64,12 @@
                     {
                         <tr>
                             <td>@contratos.RowID</td>
+                            <td>
+                                <a href="javascript:UtilExportarPDF('CONTRATO',@contratos.RowID)" class="alink" ata-toggle="tooltip" data-placement="bottom" title="Exportar PDF">
+                                    <i class="glyphicon glyphicon-file"></i>
+                                </a>
+                                @*<a href="@Url.Action("Export", "Proforma", new { @rowid = @cal.RowID, @rih = Request.Params["rih"] })"><i class="glyphicon glyphicon-export"></i></a>*@
+                            </td>
                             <td>@contratos.Titulo</td>
                             <td>@contratos.Fecha</td>
                             <td>@contratos.Proforma.Tercero1.RazonSocial</td>

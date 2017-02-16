@@ -1993,6 +1993,7 @@
     <Content Include="Views\Proforma\RecursoProformaImportacion.cshtml" />
     <Content Include="Views\Contrato\ContratoImportacion.cshtml" />
     <Content Include="Views\Contrato\RecursosContrato.cshtml" />
+    <Content Include="RDL_FILES\Contrato.rdl" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
