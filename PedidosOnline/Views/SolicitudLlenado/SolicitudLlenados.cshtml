@@ -1,0 +1,77 @@
+﻿@using PedidosOnline.Models;
+@model List<PedidosOnline.Models.SolicitudLlenado>
+@{
+    ViewBag.Title = "SolicitudLlenados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    a {
+        color: #333;
+    }
+</style>
+<script>
+
+    $(document).ready(function () {
+        $('tblSLlenado').dataTable({
+            " processing": true,
+            "bFilter": true,
+            "bPaginate": true,
+            "info": false,
+            "bDestroy":true,
+            aLengthMenu: [
+            [15, 25, 50, 100, -1],
+            [15, 25, 50, 100, "All"]
+            ],
+            "iDisplayLength": 15
+
+        });
+
+    });
+</script>
+<div class="panel">
+    <div class="row">
+        <div>
+            <div class="nav">
+                <span>
+                    &nbsp;&nbsp;
+                    <a href="@Url.Action("SolicitudLlenado", "SolicitudLlenado")" class="alink">
+                        <i class="glyphicon glyphicon-plus"></i>&nbsp;<span class="lang" key="NUEVO">Nuevo</span>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <table id="tblSLlenado" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Contrato</th>
+                        <th>Fec. Descargue</th>
+                        <th>Destino</th>
+                        <th>BKK(WOW-Sealand)</th>
+                        <th>Empaque</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (PedidosOnline.Models.SolicitudLlenado solicitud in ViewBag.solicitudes)
+                    {
+                        <tr>
+                            <td>@solicitud.RowID</td>
+                            <td>@solicitud.Contrato.Titulo</td>
+                            <td>@solicitud.FechaDescargue</td>
+                            <td>@solicitud.Ciudad.Nombre</td>
+                            <td>@solicitud.BKK</td>
+                            <td>@solicitud.Opcion.Nombre</td>
+                            <td><a href="@Url.Action("SolicitudLlenado", "SolicitudLlenado", new { RowID = solicitud.RowID })"><i class="glyphicon glyphicon-pencil"></i></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

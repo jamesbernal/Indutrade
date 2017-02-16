@@ -1,0 +1,125 @@
+﻿
+@model ErpPortal.WebApp.Models.RecuperarCuentaModel
+
+@{
+    ViewBag.Title = "RecuperarCuenta";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	   
+        <title>Login</title>
+        <link href="~/js/select2/select2.css" rel="stylesheet" />
+        <script type="text/javascript" src="~/js/select2/select2.min.js?v=166"></script> <!-- Styled select boxes -->
+        <link href="~/Assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+        <script src="~/Assets/js/jquery-1.10.2.min.js"></script>
+        <script src="~/js/jquery/ui/jquery-ui.js"></script>
+        <script src="~/Assets/js/bootstrap.min.js"></script>
+
+
+        <script>
+            //$(document).ready(function () {
+                $("#myModal1").modal('show')
+
+                $(".salir").click(function () {
+                    $("#myModal1").modal('hide')
+                });
+            //});
+        </script>
+    </head>
+
+    <body>                  
+        @using (Html.BeginForm()){
+            <div class="modal fade" id="myModal1" data-backdrop="static" data-keyboard="false" style="overflow: hidden;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+	                    <div class="modal-header">
+				            <button type="button" class="close salir" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <img src="~/Images/pedidosonlinelogopeque.jpg" />
+
+    				        <h5 class="modal-title" style="text-align:center"><b>Recuperar Contraseña</b></h5>
+			            </div> 
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">              
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Email)
+                                        @Html.TextBoxFor(m => m.Email, new {@type="email",@class="form-control",@required="required" ,@placeholder="Ingrese Email del Usuario",@id="email",@name="email"})
+
+                                    </div>
+            
+                                    @Html.ValidationSummary()  
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            @*<input type="submit" class="btn btn-primary" value="Recordar Contraseña"  style="color: #fff;background-color: #428bca;border-color: #357ebd;"/>*@
+                            <a href="javascript:GuardarCambio();" class="btn btn-primary"   >Recordar Contraseña</a>
+                            <a href="/Home/Index" class="btn btn-danger salir" data-dismiss="modal" style="color: #fff;">Cancelar</a>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        }
+
+        <div id="DivLoadingPage"></div>
+        <div class="modal fade" data-backdrop="static" data-keyboard="false" id="ModalProcessing" style="overflow:hidden; text-align:center;z-index:99999999999;">
+            <img src="~/Images/modal-loading.gif" alt="Loading" style="display: block;margin-left: auto; margin-right: auto; margin-top: 250px;">
+        </div>
+    </body>
+
+ 
+</html>
+
+<script>
+   
+    // Muestra Modal Procesando
+    function ModalProcesandoShow() {
+        $("#ModalProcessing").modal()// initialized with defaults
+        $("#ModalProcessing").modal({ backdrop: 'static', keyboard: false })// initialized with no keyboard
+        $("#ModalProcessing").modal('show')
+    }
+
+    // Oculta Modal de procesando
+    function ModalProcesandoHiden() {
+        $("#ModalProcessing").modal('hide');
+    }
+
+    function GuardarCambio() {
+        ModalProcesandoShow();
+
+        $.ajax({
+            type: "POST",
+            url: "/Account/RecuperarCuenta",
+            data: {
+                email: $("#email").val()
+            },
+            success: function (data) { 
+                if (data != 'OK') { //si no hay mensaje de actualizada  
+                    ModalProcesandoHiden();
+                    alert("ERROR: " + data);               
+                }
+                else {
+                    
+                    alert("Envio de email de recuperacion de cuenta exitoso");
+                    //Mensajes("Recuperacion de cuenta exitosa, revisar email", 'success', '');
+                    window.location = "/Account/CloseSession";
+               }
+
+            },
+            error: function (request) {
+                ModalProcesandoHiden();
+                alert("ERROR: " + request.responseText);
+                //Mensajes(request.responseText, 'error', '');
+            }
+        });
+
+    }
+
+</script>

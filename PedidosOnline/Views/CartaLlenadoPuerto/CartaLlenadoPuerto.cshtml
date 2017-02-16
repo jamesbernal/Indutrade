@@ -1,0 +1,487 @@
+﻿@model PedidosOnline.Models.CartaLlenadoPuerto
+@{
+    ViewBag.Title = "CartaLlenadoPuerto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Tabs.css" rel="stylesheet" />
+<style>
+    a {
+        color: #333;
+    }
+</style>
+<script type="text/javascript">
+  
+    function guardarSolicitud(a)
+    {
+        debugger
+        ModalProcesandoShow();
+        var RowID = $(".RowID").val();
+        var RowIDM = $(".RowIDM").val();
+        var RowIDP= $(".RowIDP").val();
+        var RowIDE= $(".RowIDE").val();
+        var RowIDV= $(".RowIDV").val();
+        var RowIDT= $(".RowIDT").val();
+        var medida = $("#medidaP").val();
+        if(RowIDM == "0"){
+            Mensajes('El campo Motonave es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+        if(RowIDP == "0"){
+            Mensajes('El campo puerto de destino es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+        if(medida == ""){
+            Mensajes('El campo medida de peso es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+
+        if(RowIDE== "0"){
+            Mensajes('El campo empresa de transporte es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+
+        if(RowIDV== "0"){
+            Mensajes('El campo placa del vehiculo es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+
+        if(RowIDT== "0"){
+            Mensajes('El campo conductor es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/CartaLlenadoPuerto/RegistrarCartaLlenadoPuerto",
+            data: {
+                formulario: $("#form").serialize(),
+                RowID: RowID,
+                RowIDM: RowIDM,
+                RowIDT: RowIDT,
+                RowIDP: RowIDP,
+                RowIDE: RowIDE,
+                RowIDV: RowIDV,
+            },
+            success: function (data2) {
+                debugger
+                if(a == 1){
+                    if(@Model.RowID > 0){
+                        Mensajes('Guardado Satisfactoriamente','success','');
+                    }else{
+                        location.href="../CartaLlenadoPuerto/CartaLlenadoPuerto?rowid="+data2;
+                    }
+                }else
+                {
+                    Mensajes('Guardado Satisfactoriamente','success','');
+                    window.location = "/CartaLlenadoPuerto/CartaLlenadoPuertos";
+                }
+                ModalProcesandoHiden();
+            },
+            error: function (request) {
+                debugger
+                ModalProcesandoHiden();
+                Mensajes(request.responseText, 'error', '');
+            }
+        });
+
+    }
+
+</script>
+<div id="Dialog"></div>
+<div class="panel">
+    <div class="row">
+        <div class="row" id="div_menu" style="margin-bottom:20px">
+            <div class="col-md-12">
+                <div class="nav">
+                    <span>
+                        &nbsp;&nbsp;
+                        <a href="@Url.Action("CartaLlenadoPuertos","CartaLlenadoPuerto",new {  @rih = Request.Params["rih"] })" class="alink">
+                            <i class="glyphicon glyphicon-list-alt"></i>&nbsp;<span class="lang" key="VISTA">Vista&nbsp;&nbsp;</span>
+                        </a>
+                    </span>
+                    <span>
+                        <a href="javascript:guardarSolicitud(1);" class="alink">
+                            <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
+                        </a>
+                    </span>
+                    <span>
+                        &nbsp;&nbsp;
+                        <a href="javascript:guardarSolicitud(2);" class="alink">
+                            <i class="glyphicon glyphicon-floppy-disk"></i><span class="lang" key="GUARDAR_&_CERRAR">&nbsp;Guardar&nbsp;&&nbsp;Cerrar</span>
+                        </a>
+                    </span>
+                    @if (Model.RowID != 0)
+                    {
+                        <span>
+                            &nbsp;&nbsp;
+                            <a href="~/MatrizBL/MatrizBL" class="alink">
+                                <i class="glyphicon glyphicon-arrow-right"></i><span class="lang" key="Siguiente">Siguiente</span>
+                            </a>
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="tabbable tabbable-custom tabs-top">
+            <ul class="nav nav-tabs tabs-top">
+                <li id="li_tab1" class="active"><a href="#tab1" data-toggle="tab">Datos generales</a></li>
+            </ul>
+        </div>
+        <div class="tab-content" style="overflow:hidden">
+            <div class="col-md-12">
+                <form id="form" name="form" onsubmit="return false">
+
+                    <input type="hidden" class="RowID" name="RowID" value="@Model.RowID" />
+                    <input type="hidden" class="RowIDM" name="RowIDM" value="@Model.MotonaveID" />
+                    <input type="hidden" class="RowIDP" name="RowIDP" value="@Model.PuertoID" />
+                    <input type="hidden" class="RowIDE" name="RowIDE" value="@Model.EmpresaID" />
+                    <input type="hidden" class="RowIDV" name="RowIDV" value="@Model.VehiculoID" />
+                    <input type="hidden" class="RowIDT" name="RowIDT" value="@Model.TerceroID" />
+                    <div id="datosG">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="autoc_motonave" class="lang" key="MOTONAVE">Motonave</label>
+                                </div>
+                                <div class="col-md-5">
+                                    @if (Model.RowID > 0)
+                                    {
+                                        <input type="text" id="autoc_motonave" name="autoc_motonave" value="@Model.MotoNave.Nombre" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+
+                                    }
+                                    else
+                                    {
+                                        <input type="text" id="autoc_motonave" name="autoc_motonave" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                    }
+
+
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="autoc_puerto" class="lang" key="PUERTO">Puerto de destino</label>
+                                </div>
+                                <div class="col-md-5">
+                                    @if (Model.RowID > 0)
+                                    {
+                                        <input type="text" id="autoc_puerto" name="autoc_puerto" value="@Model.Puerto.Nombre" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+
+                                    }
+                                    else
+                                    {
+                                        <input type="text" id="autoc_puerto" name="autoc_puerto" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                    }
+
+
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="descripcionM" class="lang">Descripción mercancía</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <textarea id="descripcionM" name="descripcionM" style="width: 100%; resize:none" rows="6">@Model.DescripcionMercancia</textarea>
+                                </div>
+                            </div>
+                            <br /><br /><br /><br /><br /><br />
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="peso" class="lang">Peso</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="number" id="peso" name="peso" onkeypress="return SoloNumeros(event)" style="width: 30%;float: left;">
+                                    <div class="col-md-8">
+                                        <select id="medidaP" name="medidaP" style="width: 100%" required>
+                                            <option value="">---</option>
+                                            @foreach (var medidas in ViewBag.medidas)
+                                            {
+                                                if (/*Model.RowID != null ||*/ Model.RowID > 0)
+                                                {
+                                                    if (Model.OpcionID == medidas.RowID)
+                                                    {
+                                                        <option value="@Model.Opcion.RowID" selected>@Model.Opcion.Nombre</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@medidas.RowID">@medidas.Nombre</option>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <option value="@medidas.RowID">@medidas.Nombre</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="porcentajeV" class="lang">Porcentaje Vacío</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" id="porcentajeV" name="porcentajeV" onkeypress="return SoloNumeros(event)" value="@Model.PorcentajeVacio" style="width: 100%" />
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="importador" class="lang">Importador</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" id="importador" name="importador" style="width: 100%" value="@Model.Importador"  />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="direccion" class="lang">Dirección</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" id="direccion" name="direccion" style="width: 100%" value="@Model.Direccion"  />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="importador" class="lang">Nombre SIA</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" id="nombreS" name="nombreS" style="width: 100%" value="@Model.NombreSIA" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="autoc_empresa" class="lang">Empresa transporte</label>
+                                </div>
+                                <div class="col-md-5">
+                                    @if (Model.RowID > 0)
+                                    {
+                                        <input type="text" id="autoc_empresa" name="autoc_empresa" value="@Model.Empresa.RazonSocial" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+
+                                    }
+                                    else
+                                    {
+                                        <input type="text" id="autoc_empresa" name="autoc_empresa" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                    }
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="autoc_vehiculo" class="lang">Placa vehículo</label>
+                                </div>
+                                <div class="col-md-5">
+                                    @if (Model.RowID > 0)
+                                    {
+                                        <input type="text" id="autoc_vehiculo" name="autoc_vehiculo" value="@Model.Vehiculo.Placa" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+
+                                    }
+                                    else
+                                    {
+                                        <input type="text" id="autoc_vehiculo" name="autoc_vehiculo" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                    }
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="autoc_conductor" class="lang">Cedula conductor</label>
+                                </div>
+                                <div class="col-md-5">
+                                    @if (Model.RowID > 0)
+                                    {
+                                        <input type="text" id="autoc_conductor" name="autoc_conductor" value="@Model.Tercero.Identificacion" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" id="autoc_conductor" name="autoc_conductor" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                    }
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="nombreC" class="lang">Nombre conductor</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" id="nombreC" name="nombreC" style="width: 100%" value="" readonly="readonly" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function SoloNumeros(e){
+        debugger
+        var key = window.Event ? e.which : e.keyCode
+        return (key >= 48 && key <= 57 || key == 46 )
+    }
+    $('#autoc_motonave').on('keyup keypress', function (e) {
+
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) { //Enter keycode
+            return false;
+        }
+    });
+
+    $("#autoc_motonave").autocomplete({
+        source: "Buscar_Motonaves",
+        minLenght: 3,
+        select: function (evento, ui) {//seleccion al autocompletar
+            debugger
+            if (ui.item != null) {//si hay valor en la seleccion autocompletar
+                debugger
+                $("#autoc_motonave").val(ui.item.label);
+                $(".RowIDM").val(ui.item.RowID);
+            }
+        },
+        change: function (event, ui) {
+
+        }
+    });
+
+    $('#autoc_puerto').on('keyup keypress', function (e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) { //Enter keycode
+            return false;
+        }
+    });
+
+    $("#autoc_puerto").autocomplete({
+        source: "Buscar_Puertos",
+        minLenght: 3,
+        select: function (evento, ui) {//seleccion al autocompletar
+            debugger
+            if (ui.item != null) {//si hay valor en la seleccion autocompletar
+                $("#autoc_puerto").val(ui.item.label);
+                $(".RowIDP").val(ui.item.RowID);
+            }
+        },
+        change: function (event, ui) {
+
+        }
+    });
+
+    $('#autoc_empresa').on('keyup keypress', function (e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) { //Enter keycode
+            return false;
+        }
+    });
+
+    $("#autoc_empresa").autocomplete({
+        source: "Buscar_Empresas",
+        minLenght: 3,
+        select: function (evento, ui) {//seleccion al autocompletar
+            debugger
+            if (ui.item != null) {//si hay valor en la seleccion autocompletar
+                $("#autoc_empresa").val(ui.item.label);
+                $(".RowIDE").val(ui.item.RowID);
+            }
+        },
+        change: function (event, ui) {
+
+        }
+    });
+
+    $('#autoc_vehiculo').on('keyup keypress', function (e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) { //Enter keycode
+            return false;
+        }
+    });
+
+    $("#autoc_vehiculo").autocomplete({
+        source: "Buscar_Vehiculos",
+        minLenght: 3,
+        select: function (evento, ui) {//seleccion al autocompletar
+            debugger
+            if (ui.item != null) {//si hay valor en la seleccion autocompletar
+                $("#autoc_vehiculo").val(ui.item.label);
+                $(".RowIDV").val(ui.item.RowID);
+            }
+        },
+        change: function (event, ui) {
+
+        }
+    });
+
+    $('#autoc_conductor').on('keyup keypress', function (e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) { //Enter keycode
+            return false;
+        }
+    });
+
+    $("#autoc_conductor").autocomplete({
+        source: "Buscar_Conductores",
+        minLenght: 3,
+        select: function (evento, ui) {//seleccion al autocompletar
+            debugger
+            if (ui.item != null) {//si hay valor en la seleccion autocompletar
+                $("#autoc_conductor").val(ui.item.label);
+                $("#nombreC").val(ui.item.RazonSocial);
+                $(".RowIDT").val(ui.item.RowID);
+            }
+        },
+        change: function (event, ui) {
+
+        }
+    });
+
+    $("#li_tab1").click(function () {
+        debugger
+
+    });
+
+    
+
+    $(document).ready(function () {
+        debugger
+        if (@Model.RowID > 0)
+        {
+            var titulo = $("#autoc_conductor").val();
+            $.ajax({
+                type: "GET",
+                url: "/CartaLlenadoPuerto/Datos_Conductor",
+                data:
+                      {
+                          titulo: titulo
+                      },
+                success: function (data) {
+                    debugger
+                    $("#autoc_conductor").val(data.Identificacion);
+                    $("#nombreC").val(data.Nombre);
+                    $(".RowIDT").val(data.RowID);
+                },
+                error: function (request) {
+                    Mensajes("Se presento un error", 'error', '');
+
+                }
+            });
+        }
+    });
+
+
+
+</script>
+

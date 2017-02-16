@@ -1,0 +1,612 @@
+﻿@model PedidosOnline.Models.Contacto
+
+@{
+    ViewBag.Title = "Contacto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    input {
+        width:100%
+    }
+    textarea {
+        width: 100%;
+    }
+    select{
+        width: 100%;
+    }
+</style>
+<link href="~/js/select2/select2.css" rel="stylesheet" />
+<script type="text/javascript" src="~/js/select2/select2.min.js?v=166"></script> <!-- Styled select boxes -->
+<script type="text/javascript">
+    var hasChangue = false;//indica si se han realizado cambios en el formulario
+    //evita que se dispare el mensaje de confirmacion de cierre de la pantalla al momento de enviar el servicio
+    $(document).on("submit", "form", function(event){
+        // deshabilita el mensaje
+        $(window).off('beforeunload');
+    });
+
+    // Crea la alerta de salida de la pantalla cuando se han realizado cambios
+    $(window).on('beforeunload', function(){
+        if(hasChangue) return "Se perderán todos los cambios";
+    });
+
+    $(document).ready(function () {
+        /*indica que en el formulario se modifico cualquier atributo*/
+        $(':input').change(function() {
+            hasChangue=true;
+        });
+
+
+        if(@Model.RowID >0){
+            @*dibujarActividades(@Model.RowID);*@
+        }
+        else{
+            $("#actividades").hide();
+        }
+
+        $('#table').dataTable({
+            "processing": true,
+            "bFilter": true,
+            "bPaginate": true,
+            "info": false,
+            "bDestroy": true,
+            aLengthMenu: [
+                [10,25,50, 100, -1],
+                [10,25,50, 100, "All"]
+            ],
+            "iDisplayLength": 10
+        });
+
+        @try
+        {
+        <text>
+        if ('@ViewBag.Sucursal' != "") {
+            $("#aut_sucursal").val('@ViewBag.Sucursal');
+            $("#rowid_sucursal").val('@Model.SucursalID');
+        }
+
+        if(@Model.RowID>0){
+
+            if("@Model.ruta_imagen"!=""){
+                var preview_ = document.querySelector('.img_preview');
+                preview_.src = "@Model.ruta_imagen";
+            }
+        }
+        </text>
+        }
+        catch  { }
+
+        $("#file_url_img").change(function () {
+            var preview = document.querySelector('.img_preview');
+            var file = document.querySelector('.file_img').files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+                preview.src = reader.result;
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "/Images/imagennodisponible.jpg";
+            }
+
+        });
+
+        $("#aut_sucursal").on('keypress Blur', function () {
+            $("#rowid_sucursal").val('');
+        });
+
+        $("#aut_sucursal").on('keyup', function () {
+            $("#rowid_sucursal").val('');
+        });
+        $("#aut_sucursal").autocomplete({
+            source: "Buscar_Sucursal",//metodo del cntrolador
+            minLenght: 3,
+            select: function (evento, ui) {//seleccion al autocompletar
+                if (ui.item != null) {//si hay valor en la seleccion autocompletar
+                    $("#rowid_sucursal").val(ui.item.rowid);
+                }
+            },
+            change: function (event, ui) {
+
+            }
+        });
+
+        if ('@Request.Params["Msj"]' != '') {
+            alert('@Request.Params["Msj"]');
+            window.history.back();
+        }
+
+        if ('@ViewBag.error' != '') {
+            alert('@ViewBag.error');
+            window.history.back();
+        }
+        //===== Validation =====//
+        //===== Validation =====//
+        $.extend($.validator.defaults, {
+            invalidHandler: function (form, validator) {
+                var errors = validator.numberOfInvalids();
+                if (errors) {
+                    var message = errors == 1
+                    ? 'Completar Campo Vacio.'
+                    : 'Completar ' + errors + ' Campos que se encuentran vacios.';
+                    Mensajes(message, 'error', '');
+                }
+            }
+        });
+
+        $.validator.messages.required = 'Campo requerido';
+        $.validator.messages.email = 'Email invalido';
+
+    });
+
+
+    /**********************************************************/
+    /*FUNCIONES                                               */
+    /**********************************************************/
+    function LimpiarActividades(){
+        $("#table").empty();
+        $("#table").append('<thead>' +
+                                    '<tr>' +
+                                        '<th class="lang" key="TIPO">Tipo</th>' +
+                                        '<th class="lang" key="ASUNTO">Asunto</th>' +
+                                        '<th class="lang" key="PRIORIDAD">Prioridad</th>  '+
+                                        '<th class="lang" key="DESCRIPCION">Descripción</th>' +
+                                        '<th class="lang" key="INICIO">Inicio</th>'+
+                                        '<th class="lang" key="FIN">Fin</th>'+
+                                        '<th class="lang" key="ESTADO">Estado</th>'+
+                                    '</tr>' +
+                                '</thead>' +
+                                '<tbody>');
+    }
+
+    function dibujarActividades(rowid_contacto) {
+        ModalProcesandoShow();
+        $.ajax({
+            type: "post",
+            url: "/CRM/Actividades_Contacto",
+            data: {
+                rowid_contacto:rowid_contacto
+            },
+            success: function (data) {
+                LimpiarActividades();
+                data.forEach(function (reg) {
+
+                    $("#table").append('<tr>' +
+                                '<td>'+reg.TipoID+'</td>' +
+                                '<td>'+reg.Tema+'</td>' +
+                                '<td>'+''+'</td>' +
+                                '<td>'+reg.Descripcion+'</td>' +
+                                '<td>'+reg.FechaInicial+'</td>' +
+                                '<td>'+reg.FechaFinal+'</td>' +
+                                '<td>'+reg.EstadoID+'</td>' +
+                            '</tr>');
+                });
+                $("#table").append('</tbody>');
+
+                ModalProcesandoHiden();
+
+                $('#table').dataTable({
+                    "processing": true,
+                    "bFilter": true,
+                    "bPaginate": true,
+                    "info": false,
+                    "bDestroy": true,
+                    aLengthMenu: [
+                        [10,25,50, 100, -1],
+                        [10,25,50, 100, "All"]
+                    ],
+                    "iDisplayLength": 10
+                });
+
+                $("#table").removeAttr('style');
+                ModalProcesandoHiden();
+            },
+            error: function (result1) {
+                ModalProcesandoHiden();
+                alert("[error] problemas al cargar las actividades del contacto");
+                $("#tbl_recursos").empty();
+            }
+        });
+    }
+
+    function EnviarContacto(accion) {
+        //accion = 1 guardar, 2 guardar y cerrar, 3: editar
+        $('#accion').val(accion);
+        //$("#form").submit();
+        hasChangue = false;
+        $.ajax({
+            type: "POST",
+            url: "/CRM/Contacto",
+            data: {
+                FormData: $("#form").serialize(),
+            },
+            success: function (rowid) {
+                ModalProcesandoHiden();
+                Mensajes('Datos almacenados exitosamente', 'success', '');
+
+                if(accion==1){
+                    if(@Model.RowID <=0)
+                        location.href="/CRM/Contacto?rowid="+rowid+"&rih=@Request.Params["rih"]";
+                }
+                else{
+                    location.href="/CRM/ListadoContactos?rih=@Request.Params["rih"]";
+                }
+            },
+            error: function (request) {
+                hasChangue = true;
+                ModalProcesandoHiden();
+                Mensajes("Se presento un problema al almacenar la informacion, intente nuevamente", 'error', '');
+            }
+        });
+    }
+    function CargarPais()
+    {
+        $.ajax({
+            url:"SelectPaises",
+            asyn:false,
+            success:function(data){
+                $('#pais').empty();
+                $('#pais').append(data);
+                if (@Model.RowID>0) {
+                    $('#pais').val(@Model.Ciudad.Departamento.PaisID);
+                    
+                }
+            }
+        });
+    }
+    function CargarDepartamento(rowid)
+    {
+        $.ajax({
+            url:"SelectDepartamento",
+            data:{rowid:rowid},
+            success:function(data){
+                $('#Departamento').empty();
+                $('#Departamento').append(data);
+                if (@Model.RowID>0) {
+                    $('#Departamento').val(@Model.Ciudad.DepartamentoID);
+                    CargarCiudad(@Model.Ciudad.DepartamentoID)
+                }
+            }
+        });
+    }
+    function CargarCiudad(rowid)
+    {
+        $.ajax({
+            url:"SelectCiudades",
+            data:{rowid:rowid},
+            success:function(data){
+                $('#Ciudad').empty();
+                $('#Ciudad').append(data);
+                if (@Model.RowID>0) {
+                    $('#Ciudad').val(@Model.CiudadID);
+                }
+                
+            }
+        });
+    }
+    CargarPais();
+    $(document).ready(function(){
+
+        $('#pais').change(function(){
+            CargarDepartamento($('#pais').val());
+        })
+        $('#Departamento').change(function(){
+            CargarCiudad($('#Departamento').val());
+        })
+        if (@Model.RowID>0) {
+            debugger
+            $('#pais').val(@Model.Ciudad.Departamento.PaisID);
+            CargarDepartamento(@Model.Ciudad.Departamento.PaisID)
+        }
+    });
+    function EnviarDatos(accion) {
+        var validator = $("#form").validate();
+        if (!validator.form())
+            return false;
+
+        var ruta = null;
+        var imagen = "";
+
+        ModalProcesandoShow();
+
+        var formdata = new FormData(); //FormData object
+        var fileInput = $("#file_url_img").get(0).files;
+
+        for (i = 0; i < fileInput.length; i++) {
+            formdata.append("file" + i, fileInput[i]);
+            imagen = "1";
+        }
+
+        if (imagen == "") {
+            EnviarContacto(accion);
+        }
+        else{
+            $.ajax({
+                type: "POST",
+                url: "/CRM/Get_Ruta_File",
+                contentType: false,
+                processData: false,
+                data: formdata,
+                success: function (data) {
+                    ruta = data;//regresa la ruta donde se almaceno
+                    $("#ruta_imagen").val(ruta);
+
+                    ModalProcesandoHiden();
+                    EnviarContacto(accion);
+                },
+                error: function (request) {
+                    ruta = null;
+                    ModalProcesandoHiden();
+                    Mensajes(request.responseText, 'error', '');
+                    $("#file_url_img").val('');
+                    $("#img_img").attr("src", "/Images/imagennodisponible.jpg");
+                }
+            });
+        }
+    }
+</script>
+
+<div style="margin-bottom: 20px;">
+    <div class="nav">
+        <span>
+            <a href="javascript:EnviarDatos(1);" class="alink">
+                <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
+            </a>
+        </span>
+        <span>
+            &nbsp;&nbsp;
+            <a href="javascript:EnviarDatos(2);" class="alink">
+                <i class="glyphicon glyphicon-floppy-disk"></i><span class="lang" key="GUARDAR_&_CERRAR">&nbsp;Guardar&nbsp;&&nbsp;Cerrar</span>
+            </a>
+        </span>
+        <span>
+            &nbsp;&nbsp;
+            <a href="@Url.Action("ListadoContactos","CRM", new { @rih = Request.Params["rih"] })" class="alink">
+                <i class="glyphicon glyphicon-list-alt"></i>&nbsp;<span class="lang" key="VISTA">Vista</span>
+            </a>
+        </span>
+    </div>
+</div>
+
+<div class="row">
+    <form id="form" name="form" method="post">
+
+        <div class="col-md-4">
+            <h4 class="lang" key="DATOS_GENERALES">Datos Generales</h4>
+            <hr style="margin:0">
+            <br />
+            <div class="row">
+
+
+                <div class="col-md-12">
+                    <input type="hidden" id="accion" name="accion" />
+
+                    @if (Model.RowID > 0)
+                    {
+                            <input type="hidden" id="rowid" name="rowid" value="@Model.RowID" />
+                    }
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lang" for="nombres" key="NOMBRES">Nombres</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" id="nombres" name="nombres" value="@Model.Nombre" placeholder="---" required="required" />
+                            <input type="hidden" id="ruta_imagen" name="ruta_imagen" value="@Model.ruta_imagen" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lang" for="apellidos" key="APELLIDOS">Apellidos</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" id="apellidos" name="apellidos" value="@Model.Apellido" placeholder="---" required="required" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lang" for="identificacion" key="IDENTIFICACION">Identificación</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" id="identificacion" name="identificacion" value="@Model.Identificacion" placeholder="---" required="required" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lang" for="cargo" key="CARGO">Cargo</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="cargo" name="cargo" required="required">
+                                <option value="" class="lang" key="SELECCIONAR">- Seleccionar -</option>
+                                @foreach (var item in ((List<PedidosOnline.Models.Opcion>)ViewBag.cargos))
+                                {
+                                    if (Model.RowID > 0)
+                                    {
+                                        if (Model.Cargo == item.Codigo)
+                                        {
+                                            <option value="@item.Codigo" selected="selected"> @item.Nombre</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Codigo">@item.Nombre</option>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Codigo"> @item.Nombre</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lang" for="area" key="AREA">&Aacute;rea</label>
+                            
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" id="area" name="area" value="@Model.Area" placeholder="---" required="required" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lang" for="aut_sucursal" key="SUCURSAL">Sucursal</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" id="aut_sucursal" placeholder="---" />
+
+                            <input type="hidden" id="rowid_sucursal" name="rowid_sucursal" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lang" key="SUCURSAL">Pais</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="pais" name="pais" required>
+                                <option value="">-Seleccionar-</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lang" key="SUCURSAL">Departamento</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="Departamento" name="Departamento" required>
+                                <option value="">-Seleccionar-</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lang"  key="SUCURSAL">Ciudad</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="Ciudad" name="Ciudad" required>
+                                <option value="">-Seleccionar-</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4 class="lang" key="INFORMACION_CONTACTO">Información Contacto</h4>
+            <hr style="margin:0">
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lang" for="telefono" key="TELEFONO">Teléfono</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" id="telefono" name="telefono" value="@Model.Telefono1" placeholder="---" onkeypress="return SoloNumeros(event)" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lang" for="celular" key="CELULAR">Celular</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" id="celular" name="celular" value="@Model.Celular" placeholder="---" onkeypress="return SoloNumeros(event)" />
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lang" for="email" key="EMAIL">Email</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="email" id="email" name="email" value="@Model.Email" placeholder="---" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lang" for="skype" key="SKYPE">Skype</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" id="skype" name="skype" value="@Model.Skype" placeholder="---" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lang" for="descripcion" key="DESCRIPCION">Descripción</label>
+                        </div>
+                        <div class="col-md-8">
+                            <textarea id="descripcion" name="descripcion" rows="3" style="resize:none" placeholder="---">@Model.Descripcion</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4 class="lang" key="FOTO_PERFIL">Foto Perfil</h4>
+            <hr style="margin:0">
+            <br />
+            <div class="col-md-12">
+                <div class="thumbnail" style="border:none;">
+                    <img class="img_preview" id="img_evidencia" name="img_evidencia" src="/Images/imagennodisponible.jpg" onmouseover="this.width=206;this.height=148;" onmouseout="this.width=120;this.height=100;" width="120" height="100">
+                </div>
+                <div class="form-group">
+                    <input type="file" class="file_img" name="file_url_img" id="file_url_img" accept="image/*" style="margin-left:auto;margin-right:auto;" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row">
+
+    <div class="col-md-12" id="actividades">
+        <div style="margin-bottom: 20px;">
+            <h4 class="lang" key="ACTIVIDADES">Actividades</h4>
+            <hr style="margin:0px">
+        </div>
+        <table id="table" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+            <thead>
+                <tr>
+                    <th class="lang" key="TIPO">Tipo</th>
+                    <th class="lang" key="ASUNTO">Asunto</th>
+                    @*<th class="lang" key="PRIORIDAD">Prioridad</th>*@
+                    <th class="lang" key="DESCRIPCION">Descripción</th>
+                    <th class="lang" key="INICIO">Inicio</th>
+                    <th class="lang" key="FIN">Fin</th>
+                    <th class="lang" key="ESTADO">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (PedidosOnline.Models.Actividad actividad in ((List<PedidosOnline.Models.Actividad>)ViewBag.Actividades).ToList())
+                {
+                    <tr>
+                        <td>
+                            @actividad.Opcion2.Nombre
+                        </td>
+                        <td>
+                            @actividad.Tema
+                        </td>
+                        @*<td>
+                                @actividad.ind_prioridad
+                            </td>*@
+                        <td>
+                            @actividad.Descripcion
+                        </td>
+                        <td>
+                            @actividad.FechaInicial
+                        </td>
+                        <td>
+                            @actividad.FechaFinal
+                        </td>
+                        <td>
+                            @actividad.Opcion1.Nombre
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

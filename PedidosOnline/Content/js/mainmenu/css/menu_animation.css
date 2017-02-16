@@ -1,0 +1,476 @@
+﻿body{
+       overflow-x: hidden;
+}
+
+.overlay-bg {
+        display: none;
+        background-color:transparent;
+          top: 180px;
+           left: 0px;
+        width: 100%; 
+        height: 367px;
+        position: absolute;
+        margin: 0 0 0 0; /* add negative left margin for half the width to center the div */
+        cursor: default;
+        z-index: 11000;
+        border-radius: 0;
+        box-shadow: 0 0 0 rgba(0,0,0,0.9);
+}
+    .overlay-content {
+        display: none;
+        background: #fff;
+        padding: 1%;
+        width: 625px;
+    height: 100px;
+    left: 8px;
+        position: absolute;
+        margin: 30 0 0 0; /* add negative left margin for half the width to center the div */
+        cursor: default;
+        z-index: 10001;
+        border-radius: 4px;
+        box-shadow: 0 0 5px rgba(0,0,0,0.9);
+    }
+ 
+ 
+      #pop2 {
+        display: none;
+        background: #fff;
+        padding: 1%;
+        width: 225px;
+    height: 97px;
+    float:right;
+  left:50px;
+  top:0px;
+        position: relative;
+        margin: 30 0 0 0; /* add negative left margin for half the width to center the div */
+        cursor: default;
+        z-index: 20001;
+        border-radius: 4px;
+        box-shadow: 0 0 5px rgba(0,0,0,0.9);
+    }
+      #inicio_nombre{
+          font-size:13px;
+              font-family:'Segoe UI WPC Semilight','Segoe UI Semilight','Segoe UI',Tahoma,'Microsoft Sans Serif',Verdana,sans-serif;
+              font-weight: bold;
+                  text-transform: capitalize;
+      }
+#inicio_correo, #inicio_usuario {
+        font-size: 13px;
+        font-family:'Segoe UI WPC','Segoe UI',Tahoma,'Microsoft Sans Serif',Verdana,sans-serif;
+}
+#btn_cerrar{
+ 
+        font: 13px/27px Arial,sans-serif;
+}
+
+    .close-btn {
+        cursor: pointer;
+        border: 1px solid #333;
+        padding: 2% 5%;
+        background: #a9e7f9; /* fallback */
+        background: -moz-linear-gradient(top,  #a9e7f9 0%, #77d3ef 4%, #05abe0 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a9e7f9), color-stop(4%,#77d3ef), color-stop(100%,#05abe0));
+        background: -webkit-linear-gradient(top,  #a9e7f9 0%,#77d3ef 4%,#05abe0 100%);
+        background: -o-linear-gradient(top,  #a9e7f9 0%,#77d3ef 4%,#05abe0 100%);
+        background: -ms-linear-gradient(top,  #a9e7f9 0%,#77d3ef 4%,#05abe0 100%);
+        background: linear-gradient(to bottom,  #a9e7f9 0%,#77d3ef 4%,#05abe0 100%);
+        border-radius: 4px;
+        box-shadow: 0 0 4px rgba(0,0,0,0.3);
+    }
+    .close-btn:hover {
+        background: #05abe0;
+    }
+
+     .men{
+        position:absolute;
+        bottom:10px;
+           color: white;
+       font-size: larger;
+       text-decoration:none;
+        font-family: 'Segoe UI ','Segoe UI Web ','Segoe UI Web Regular','Segoe UI','Segoe UI Symbol','HelveticaNeue-Light','Helvetica Neue','Arial,sans-serif';
+        
+    }
+    
+    
+    
+  
+
+    #navbar {
+        height: 46px;
+        width: 100%;
+        top: 0;
+        left: 46px;
+        font-size: large;
+        background-color: #00032F;
+        position: relative;
+        background-image: -moz-linear-gradient(top, #00032F, #00032F);
+        background-image: -ms-linear-gradient(top, #00032F, #00032F);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#00032F), to(#00032F));
+        background-image: -webkit-linear-gradient(top, #00032F, #00032F);
+        background-image: -o-linear-gradient(top, #00032F, #00032F);
+        background-image: linear-gradient(top, #00032F, #00032F);
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1560bd', endColorstr='#1560bd', GradientType=0);
+        border-color: #1560bd #1560bd #0d3d78;
+        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+        overflow:hidden;
+       
+    }
+  #submenu {
+        height: 46px;
+        width: 100%;
+        top: -46px;
+        left: 0px;
+        font-size: large;
+        background-color: transparent;
+        position: relative;
+     
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1560bd', endColorstr='#1560bd', GradientType=0);
+        border-color: #1560bd #1560bd #0d3d78;
+        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+        overflow:hidden;
+       
+    }
+    #crm {
+        height: 46px;
+        width: 100%;
+        top: -46px;
+        left: 46px;
+        font-size: large;
+        background-color: green;
+        position: relative;
+        background-image: -moz-linear-gradient(top, #FB0203, #FB0203);
+        background-image: -ms-linear-gradient(top, #FB0203, #FB0203);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FB0203), to(#FB0203));
+        background-image: -webkit-linear-gradient(top, #FB0203, #FB0203);
+        background-image: -o-linear-gradient(top, #FB0203, #FB0203);
+        background-image: linear-gradient(top, #FB0203, #FB0203);
+        background-repeat: repeat-x;
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1560bd', endColorstr='#1560bd', GradientType=0);
+        border-color: #1560bd #1560bd #0d3d78;
+        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+    }
+    #ventas {
+        height: 46px;
+        width: 100%;
+        top: -46px;
+        left: 46px;
+        font-size: large;
+        background-color: green;
+        position: relative;
+        background-image: -moz-linear-gradient(top, #0072C6, #0072C6);
+        background-image: -ms-linear-gradient(top, #0072C6, #0072C6);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0072C6), to(#0072C6));
+        background-image: -webkit-linear-gradient(top, #0072C6, #0072C6);
+        background-image: -o-linear-gradient(top, #0072C6, #0072C6);
+        background-image: linear-gradient(top, #0072C6, #0072C6);
+        background-repeat: repeat-x;
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1560bd', endColorstr='#1560bd', GradientType=0);
+        border-color: #1560bd #1560bd #0d3d78;
+        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+    }
+    #servicio {
+        height: 46px;
+        width: 100%;
+        top: -46px;
+        left: 46px;
+        font-size: large;
+        background-color: green;
+        position: relative;
+        background-image: -moz-linear-gradient(top, #00A815, #00A815);
+        background-image: -ms-linear-gradient(top, #00A815, #00A815);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#00A815), to(#00A815));
+        background-image: -webkit-linear-gradient(top, #00A815, #00A815);
+        background-image: -o-linear-gradient(top, #00A815, #00A815);
+        background-image: linear-gradient(top, #00A815, #00A815);
+        background-repeat: repeat-x;
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1560bd', endColorstr='#1560bd', GradientType=0);
+        border-color: #1560bd #1560bd #0d3d78;
+        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+    }
+    #autoservicio {
+        height: 46px;
+        width: 100%;
+        top: -46px;
+        left: 46px;
+        font-size: large;
+        background-color: green;
+        position: relative;
+        background-image: -moz-linear-gradient(top, #FF9900, #FF9900);
+        background-image: -ms-linear-gradient(top, #FF9900, #FF9900);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FF9900), to(#FF9900));
+        background-image: -webkit-linear-gradient(top, #FF9900, #FF9900);
+        background-image: -o-linear-gradient(top, #336699, #336699);
+        background-image: linear-gradient(top, #336699, #336699);
+        background-repeat: repeat-x;
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1560bd', endColorstr='#1560bd', GradientType=0);
+        border-color: #1560bd #1560bd #0d3d78;
+        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+    }
+    #erp {
+        height: 46px;
+        width: 100%;
+        top: -46px;
+        left: 46px;
+        font-size: large;
+        background-color: green;
+        position: relative;
+        background-image: -moz-linear-gradient(top, #336699, #336699);
+        background-image: -ms-linear-gradient(top, #336699, #336699);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#336699), to(#336699));
+        background-image: -webkit-linear-gradient(top, #336699, #336699);
+        background-image: -o-linear-gradient(top, #336699, #336699);
+        background-image: linear-gradient(top, #336699, #336699);
+        background-repeat: repeat-x;
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1560bd', endColorstr='#1560bd', GradientType=0);
+        border-color: #1560bd #1560bd #0d3d78;
+        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+    }
+    #config {
+        height: 46px;
+        width: 100%;
+        top: 0px;
+        left: 46px;
+        font-size: large;
+        background-color: green;
+        position: absolute;
+        background-image: -moz-linear-gradient(top, #58595B, #58595B);
+        background-image: -ms-linear-gradient(top, #58595B, #58595B);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#58595B), to(#58595B));
+        background-image: -webkit-linear-gradient(top, #58595B, #58595B);
+        background-image: -o-linear-gradient(top, #58595B, #58595B);
+        background-image: linear-gradient(top, #58595B, #58595B);
+        background-repeat: repeat-x;
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1560bd', endColorstr='#1560bd', GradientType=0);
+        border-color: #1560bd #1560bd #0d3d78;
+        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+    }
+
+    .abuttons{
+        width: 100px; 
+        height: 100px; 
+        background-color: transparent;
+         border-style: none;
+    }
+
+    .imgbtn{
+        width: 100px;
+         height: 100px;
+    }
+
+    .opcion{
+         position: absolute;
+         top: 70px;
+          align-self: center;
+          color: white; padding: 10px; 
+          font-family: 'Segoe UI Light','Segoe UI Web Light','Segoe UI Web Regular','Segoe UI','Segoe UI Symbol','HelveticaNeue-Light','Helvetica Neue','Arial,sans-serif';
+          font-size:16;
+    }
+    .show-popup {
+        width: 46px;
+         height: 46px;
+          background-color: transparent;
+           border-style: none;
+           position:absolute;
+            z-index:10001;
+    }
+
+    .icon{
+        width: 46px;
+         height: 46px;
+         position:absolute;
+         
+    }
+     .iconp {
+        top:-48px;
+        position: relative;
+        width: 46px;
+        height: 46px;
+        right:50px;
+    }
+    #cuenta {
+       top:-3px;
+        position: relative;
+        width: 56px;
+        height: 46px;
+    }
+#default {
+    align-content:center;
+     left:450px;
+      top:150px;
+      position:absolute;
+}
+
+.tabss{
+    
+    background-color: transparent;
+     border-style: none;
+      color: white;
+       font-size: medium;
+       display:inline-block;
+           color: white;
+       font-size: medium;
+         font-family: 'Segoe UI ','Segoe UI Web ','Segoe UI Web Regular','Segoe UI','Segoe UI Symbol','HelveticaNeue-Light','Helvetica Neue','Arial,sans-serif';
+        
+}
+.tabsm{
+    
+    background-color: transparent;
+     border-style: none;
+      color: white;
+       font-size: 12px;
+       display:inline-block;
+           color: black;
+       font-size: medium;
+         font-family: 'Segoe UI ','Segoe UI Web ','Segoe UI Web Regular','Segoe UI','Segoe UI Symbol','HelveticaNeue-Light','Helvetica Neue','Arial,sans-serif';
+            text-transform: uppercase;
+}
+ .tit {
+        color: white;
+        font-size: 19px;
+        font-family: 'Segoe UI ','Segoe UI Web ','Segoe UI Web Regular','Segoe UI','Segoe UI Symbol','HelveticaNeue-Light','Helvetica Neue','Arial,sans-serif';
+    }
+ .ic{
+     
+ }
+ #observacionescliente{
+     resize:none;
+ }
+ .combo{
+    width:188px;
+     padding: 4px 8px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgba(0,0,0,0.4);
+    background-color: rgba(255,255,255,0.4);
+    height: 32px;
+    height: 2rem;
+ }
+
+
+ .tittabla{
+     font-family: 'Segoe UI ','Segoe UI Web ','Segoe UI Web Regular','Segoe UI','Segoe UI Symbol','HelveticaNeue-Light','Helvetica Neue','Arial,sans-serif';
+     font-weight:bold;
+     align-content:center;
+           font-size: 20px;
+    line-height: 24px;
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    padding-bottom: 1.636px;
+    padding-top: 1.636px;
+ }
+
+ .btn{
+     
+    display: inline-block;
+    min-width: 100px;
+    padding: 4px 12px 4px 12px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    position: relative;
+    max-width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+    text-overflow: clip;
+    touch-action: manipulation;
+    color: #000;
+    border-style: solid;
+    border-width: 2px;
+    border-color: transparent;
+    background-color: rgba(0,0,0,.2);
+     
+   
+}
+ 
+
+ 
+ #bluebtn
+     {
+    
+    border-color: #0078d7;
+    background-color: #0078d7;
+    color:#fff;
+}
+ #graybtn
+     {
+        font-family: "Segoe UI Webfont","Ebrima","Nirmala UI","Gadugi","Segoe Xbox Symbol","Segoe UI Symbol","Meiryo UI","Khmer UI","Tunga","Lao UI","Raavi","Iskoola Pota","Latha","Leelawadee","Microsoft YaHei UI","Microsoft JhengHei UI","Malgun Gothic","Estrangelo Edessa","Microsoft Himalaya","Microsoft New Tai Lue","Microsoft PhagsPa","Microsoft Tai Le","Microsoft Yi Baiti","Mongolian Baiti","MV Boli","Myanmar Text","Cambria Math";
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: normal;
+        font-size: 13px;
+        color:black;
+        line-height: 1.25rem;
+        padding-bottom: .227px;
+        padding-top: .227px;
+        padding-bottom: .227px;
+        padding-top: .227px;
+        padding:3px;
+    border-color:#ccc;
+   text-decoration:none;
+   }
+ #btnContinuar{
+         font-family: "Segoe UI Webfont","Ebrima","Nirmala UI","Gadugi","Segoe Xbox Symbol","Segoe UI Symbol","Meiryo UI","Khmer UI","Tunga","Lao UI","Raavi","Iskoola Pota","Latha","Leelawadee","Microsoft YaHei UI","Microsoft JhengHei UI","Malgun Gothic","Estrangelo Edessa","Microsoft Himalaya","Microsoft New Tai Lue","Microsoft PhagsPa","Microsoft Tai Le","Microsoft Yi Baiti","Mongolian Baiti","MV Boli","Myanmar Text","Cambria Math";
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: normal;
+        font-size: 13px;
+        color:black;
+        line-height: 1.25rem;
+        padding-bottom: .227px;
+        padding-top: .227px;
+        padding-bottom: .227px;
+        padding-top: .227px;
+        padding:3px;
+    border-color:#ccc;
+   text-decoration:none;
+ }
+ .txt{
+         padding: 4px 8px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgba(0,0,0,0.4);
+    background-color: rgba(255,255,255,0.4);
+    height: 32px;
+    height: 2rem;
+ }
+ .labeltxt{
+         margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 1.25rem;
+    margin-top: 1.25rem;
+ }
+
+ .btncerrar{
+         background: #4d90fe;
+    border-color: #3079ed;
+    font-weight: bold;
+    margin: 10px 0 0 0;
+    color: #fff;
+    border: 1px solid #c6c6c6;
+    display: inline-block;
+    line-height: 28px;
+    padding: 0 12px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+ }
+
+ .btncerrar:hover{
+       outline: 2px solid #0078d7;
+
+ }

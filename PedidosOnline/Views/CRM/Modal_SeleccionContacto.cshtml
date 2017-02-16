@@ -1,0 +1,170 @@
+﻿@model IEnumerable<PedidosOnline.Models.Contacto>
+@{
+    ViewBag.Title = "Modal_SeleccionContacto";
+    Layout = null;
+}
+<link href="~/Content/Tabs.css" rel="stylesheet" />
+
+<script>
+    var IsData = {};
+
+    ModalProcesandoHiden();//Siempre debe de ir para que el modal abra
+
+    $("#myModal1").modal('show');//Siempre debe de ir para que el modal se muestre
+
+    $(".seleccion").click(function () {
+
+        IsData.Valor = $(this).val();
+        if ($(this).val().length == 0 || IsData.Valor == "on") {
+            IsData.Valor = '';
+            IsData.nombre = '';
+            IsData.telefono = '';
+            IsData.email = '';
+            IsData.celular = '';
+
+
+        } else {
+            IsData.nombre = $(this).data("nombre");
+            IsData.telefono = $(this).data("telefono");
+            IsData.email = $(this).data("email");
+            IsData.celular = $(this).data("celular");
+        }
+    });
+
+    $('#table_contactos').dataTable({
+        "processing": true,
+        "bFilter": true,
+        "bPaginate": true,
+        "info": false,
+        "bDestroy": true,
+        aLengthMenu: [
+            [50, 100, -1],
+            [50, 100, "All"]
+        ],
+        "iDisplayLength": 50
+    });
+
+    function Confirmar() {
+        if (IsData.Valor != undefined && IsData.Valor != "") {
+            $("#ContactoID").val(IsData.Valor);
+            $("#nombre_contacto").val(IsData.nombre);
+            $("#telefono_contacto").val(IsData.telefono);
+            $("#email_contacto").val(IsData.email);
+
+            //if($("#llamada").val()=="ACTIVIDADES"){
+            try
+            { $("#celular_contacto").val(IsData.celular); }
+            catch (e)
+            { }
+            try {
+                dibujarActividadesContacto(IsData.Valor);
+
+            } catch (e) { }
+            informacioncontacto(IsData.Valor)
+            //}
+            $("#myModal1").modal('hide');
+        }
+        else {
+            alert("[Error] Debe seleccionar almenos un registro");
+        }
+    }
+    function informacioncontacto(rowid)
+    {
+        $.ajax({
+            url: "InformacionContacto",
+            data: { rowid: rowid },
+            asyn:false,
+            success: function (data)
+            {
+                debugger
+                $('#id_pais').val(data[0].pais);
+                $('#id_ciudad').val(data[0].ciudad);
+                $('#id_depto').val(data[0].departamento);
+                $('#celular_contacto').val(data[0].telefono1);
+                $('#telefono1').val(data[0].telefono2);
+                $('#direccion1').val(data[0].direccion);
+            }
+        });
+    }
+
+</script>
+
+<div class="modal fade" id="myModal1" data-backdrop="static" data-keyboard="false" style="overflow: hidden;">
+    <div class="modal-dialog" style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close salir" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="lang modal-title" key="@ViewBag.titulo"><b>@ViewBag.titulo</b></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" id="div_btns">
+                    <div class="col-md-12">
+                        <div class="nav" style="margin-left:30px">
+                            <div id="Dialog"></div><!--Abre el modal  -->
+                            <span>
+                                <a href="#" class="alink" title="Confirmar" onclick="Confirmar();">
+                                    <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;Confirmar
+                                </a>
+                            </span>
+                            <span>
+                                &nbsp;&nbsp;
+                                <a href="#" class="alink" data-dismiss="modal" title="Salir">
+                                    <i class="glyphicon glyphicon-log-in"></i>&nbsp;Salir
+                                </a>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_3_1">
+                                <br />
+                                <div class="row" style="margin-right: 15px;margin-left: 15px;">
+                                    <div class="col-md-12">
+                                        <div style="overflow-y:auto;height:350px">
+                                            <table id="table_contactos" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive datatable">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th class="lang" key="ID">ID</th>
+                                                        <th class="lang" key="NOMBRE">Nombre</th>
+                                                        <th class="lang" key="SUCURSAL">Sucursal</th>
+                                                        <th class="lang" key="CARGO">Cargo</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (PedidosOnline.Models.Contacto reg in Model.ToList())
+                                                    {
+                                                        string nombre = reg.Nombre + " " + reg.Apellido;
+                                                        string sucursal = "";
+
+                                                        if (reg.Sucursal != null)
+                                                        {
+                                                            sucursal = reg.Sucursal.Codigo + " - " + reg.Sucursal.Nombre;
+                                                        }
+
+                                                        <tr>
+                                                            <td>
+                                                                <input type="radio" class="seleccion" name="seleccion" data-nombre="@nombre" data-telefono="@reg.Telefono1" data-email="@reg.Email" data-valor="@reg.RowID" data-celular="@reg.Celular" value="@reg.RowID">
+                                                            </td>
+                                                            <td>@reg.Identificacion</td>
+                                                            <td>@nombre</td>
+                                                            <td>@sucursal</td>
+                                                            <td>@reg.Cargo</td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

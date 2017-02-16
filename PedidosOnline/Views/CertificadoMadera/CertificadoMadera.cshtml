@@ -1,0 +1,395 @@
+﻿@model PedidosOnline.Models.CertificadoMadera
+@{
+    ViewBag.Title = "CertificadoMadera";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    a {
+        color: #333;
+    }
+</style>
+
+<link href="~/Content/Tabs.css" rel="stylesheet" />
+<script type="text/javascript">
+    function guardarCertificadoMadera(a)
+    {
+        debugger
+        ModalProcesandoShow();
+        var RowID = $(".RowID").val();
+        var RowIDBL = $(".RowIDBL").val();
+        var RowIDM =  $(".RowIDM").val();
+        var RowIDC =  $(".RowIDC").val();
+        var fecha = $("#fecha").val();
+        if(RowIDBL == ""){
+            Mensajes('El campo documento B/L es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+
+        if(RowIDM == ""){
+            Mensajes('El campo buque es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+
+        if(RowIDC == ""){
+            Mensajes('El campo lugar inspección es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+
+        if(fecha == ""){
+            Mensajes('El campo día inspección es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/CertificadoMadera/RegistrarCertificadoMadera",
+            data: {
+                formulario: $("#form").serialize(),
+                RowID: RowID,
+                RowIDBL: RowIDBL,
+                RowIDM: RowIDM,
+                RowIDC: RowIDC
+            },
+            success: function (data2) {
+                debugger
+                if(a == 1){
+                    if(@Model.RowID > 0){
+                        Mensajes('Guardado Satisfactoriamente','success','');
+                    }else{
+                        location.href="../CertificadoMadera/CertificadoMadera?rowid="+data2;
+                    }
+                }else
+                {
+                    window.location = "/CertificadoMadera/ListaCertificadoMadera";
+                    Mensajes('Guardado Satisfactoriamente','success','');
+                }
+                ModalProcesandoHiden();
+            },
+            error: function (request) {
+                debugger
+                Mensajes(request.responseText, 'error', '');
+                ModalProcesandoHiden();
+            }
+        });
+    }
+
+
+</script>
+
+<div class="panel">
+    <div class="row">
+        <div class="row" id="div_menu" style="margin-bottom:20px">
+            <div class="col-md-12">
+                <div class="nav">
+                    <span>
+                        &nbsp;&nbsp;
+                        <a href="@Url.Action("ListaCertificadoMadera","CertificadoMadera",new {  @rih = Request.Params["rih"] })" class="alink">
+                            <i class="glyphicon glyphicon-list-alt"></i>&nbsp;<span class="lang" key="VISTA">Vista&nbsp;&nbsp;</span>
+                        </a>
+                    </span>
+                    <span>
+                        <a href="javascript:guardarCertificadoMadera(1);" class="alink">
+                            <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
+                        </a>
+                    </span>
+                    <span>
+                        &nbsp;&nbsp;
+                        <a href="javascript:guardarCertificadoMadera(2);" class="alink">
+                            <i class="glyphicon glyphicon-floppy-disk"></i><span class="lang" key="GUARDAR_&_CERRAR">&nbsp;Guardar&nbsp;&&nbsp;Cerrar</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="tabbable tabbable-custom tabs-top">
+            <ul class="nav nav-tabs tabs-top">
+                <li id="li_tab1" class="active"><a href="#tab1" data-toggle="tab">Datos generales</a></li>
+            </ul>
+        </div>
+        <div class="tab-content" style="overflow:hidden">
+            <div class="col-md-12">
+                <form id="form" name="form">
+                    <input type="hidden" class="RowID" name="RowID" value="@Model.RowID" />
+                    <input type="hidden" class="RowIDM" name="RowIDM" value="@Model.MotonaveID" />
+                    <input type="hidden" class="RowIDBL" name="RowIDBL" value="@Model.MatrizBLID" />
+                    <input type="hidden" class="RowIDC" name="RowIDC" value="@Model.CiudadID" />
+                    <div class="col-md-5">
+                        <div class="form-group">
+                           <div class="col-md-3">
+                                <label for="para" class="lang">Para</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="para" name="para" style="width: 100%" value="@Model.Para"  />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="autoc_motonave" class="lang" key="MOTONAVE">Motonave</label>
+                            </div>
+                            <div class="col-md-5">
+                                @if (Model.RowID > 0)
+                                {
+                                    <input type="text" id="autoc_motonave" name="autoc_motonave" value="@Model.MotoNave.Nombre" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="autoc_motonave" name="autoc_motonave" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                }
+
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="descripcionB" class="lang">Descripción de bienes</label>
+                            </div>
+                            <div class="col-md-5">
+                                <textarea type="text" id="descripcionB" name="descripcionB" style="width: 100%; resize:none" rows="5">@Model.DescripcionBienes</textarea>
+                            </div>
+                        </div>
+                        <br /><br /><br /><br /><br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="autoc_bl" class="lang" >Documento B/L</label>
+                            </div>
+                            <div class="col-md-5">
+                                @if (Model.RowID > 0)
+                                {
+                                    <input type="text" id="autoc_bl" name="autoc_bl" value="@Model.MatrizBL.NumeroReserva" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="autoc_bl" name="autoc_bl" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                }
+
+
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">Cantidad contenedores</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="cantidadC" name="cantidadC" style="width: 100%; " placeholder="---" disabled />
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="expedidor" class="lang">Expedidor</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="expedidor" name="expedidor" style="width: 100%; " placeholder="---" disabled />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="consignatario" class="lang">Consignatario</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="consignatario" name="consignatario" style="width: 100%; " placeholder="---" disabled />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="puertoc" class="lang">Puerto carga</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="puertoc" name="puertoc" style="width: 100%; " placeholder="---" disabled />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="puertod" class="lang">Puerto descarga</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="puertod" name="puertod" style="width: 100%; " placeholder="---" disabled />
+                            </div>
+                        </div>
+<br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="autoc_bl" class="lang">Lugar inspección</label>
+                            </div>
+                            <div class="col-md-5">
+                                @if (Model.RowID > 0)
+                                {
+                                    <input type="text" id="autoc_lugar" name="autoc_bl" value="@Model.Ciudad.Nombre" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+
+                                }
+                                else
+                                {
+                                    <input type="text" id="autoc_lugar" name="autoc_lugar" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                }
+
+
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="fecha" class="lang">Día inspección</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="fecha" name="fecha" style="width: 100%" value="@Model.DiaInspeccion" readonly="readonly" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="inspector" class="lang">Inspector</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="inspector" name="inspector" value="@Model.Inspector" style="width: 100%; " />
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#fecha').datepicker({
+        dateFormat: 'dd/mm/yy',
+        minDate: 0,
+        maxDate: '+3Y',
+        inline: true
+    });
+
+    function SoloNumeros(e){
+        debugger
+        var key = window.Event ? e.which : e.keyCode
+        return (key >= 48 && key <= 57 || key == 46 )
+    }
+    $('#autoc_motonave').on('keyup keypress', function (e) {
+
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) { //Enter keycode
+            return false;
+        }
+    });
+
+    $("#autoc_motonave").autocomplete({
+        source: "Buscar_Motonaves",
+        minLenght: 3,
+        select: function (evento, ui) {//seleccion al autocompletar
+            debugger
+            if (ui.item != null) {//si hay valor en la seleccion autocompletar
+                debugger
+                $("#autoc_motonave").val(ui.item.label);
+                $(".RowIDM").val(ui.item.RowID);
+            }
+        },
+        change: function (event, ui) {
+
+        }
+    });
+
+    $('#autoc_lugar').on('keyup keypress', function (e) {
+        debugger
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) { //Enter keycode
+            return false;
+        }
+    });
+
+    $("#autoc_lugar").autocomplete({
+        source: "Buscar_Destinos",
+        minLenght: 3,
+        select: function (evento, ui) {//seleccion al autocompletar
+            debugger
+            if (ui.item != null) {//si hay valor en la seleccion autocompletar
+                $("#autoc_lugar").val(ui.item.label);
+                $(".RowIDC").val(ui.item.RowID);
+            }
+        },
+        change: function (event, ui) {
+
+        }
+    });
+
+    $('#autoc_bl').on('keyup keypress', function (e) {
+        debugger
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) { //Enter keycode
+            return false;
+        }
+    });
+
+    $("#autoc_bl").autocomplete({
+        source: "Buscar_MatricesBL",
+        minLenght: 3,
+        select: function (evento, ui) {//seleccion al autocompletar
+            debugger
+            if (ui.item != null) {//si hay valor en la seleccion autocompletar
+                $("#autoc_bl").val(ui.item.label);
+                $(".RowIDBL").val(ui.item.RowID);
+                $("#consignatario").val(ui.item.consignatario);
+                $("#cantidadC").val(ui.item.cantidadC);
+                $("#expedidor").val(ui.item.expedidor);
+                $("#puertoc").val(ui.item.puertoC);
+                $("#puertod").val(ui.item.puertoD);
+            }
+        },
+        change: function (event, ui) {
+
+        }
+    });
+
+    $("#li_tab1").click(function () {
+      
+
+    });
+
+   
+
+    $(document).ready(function () {
+        debugger
+        if (@Model.RowID > 0)
+        {
+            var titulo = $("#autoc_bl").val();
+            $.ajax({
+                type: "GET",
+                url: "/CertificadoMadera/Datos_MatrizBL",
+                data:
+                      {
+                          titulo: titulo
+                      },
+                success: function (data) {
+                    $(".autoc_bl").val(data.Titulo);
+                    $(".RowIDBL").val(data.RowID);
+                    $("#consignatario").val(data.consignatario);
+                    $("#cantidadC").val(data.cantidadC);
+                    $("#expedidor").val(data.expedidor);
+                    $("#puertoc").val(data.puertoC);
+                    $("#puertod").val(data.puertoD);
+                    
+                },
+                error: function (request) {
+                    Mensajes("Se presento un error", 'error', '');
+
+                }
+            });
+
+            
+        }
+    });
+
+
+
+</script>

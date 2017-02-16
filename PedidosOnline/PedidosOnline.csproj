@@ -1,0 +1,2197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CBEEDAE5-DF50-4628-8A60-B23C45B984CD}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PedidosOnline</RootNamespace>
+    <AssemblyName>PedidosOnline</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\..\Windows\assembly\GAC_MSIL\Microsoft.ReportViewer.ProcessingObjectModel\12.0.0.0__89845dcd8080cc91\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Spire.License, Version=1.3.5.40, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Spire.PDF.3.8.173\lib\net40\Spire.License.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Spire.Pdf, Version=3.8.173.5040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\Spire.PDF.3.8.173\lib\net40\Spire.Pdf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <Private>True</Private>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.1.0.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.2.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.0.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.2.0.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.0.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.0.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.2.0.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.2.0.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.2.0.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CalculadoraController.cs" />
+    <Compile Include="Controllers\CartaLlenadoPuertoController.cs" />
+    <Compile Include="Controllers\CertificadoCalidadController.cs" />
+    <Compile Include="Controllers\CertificadoMaderaController.cs" />
+    <Compile Include="Controllers\CompañiaController.cs" />
+    <Compile Include="Controllers\ContratoController.cs" />
+    <Compile Include="Controllers\CRMController.cs" />
+    <Compile Include="Controllers\EmpresaController.cs" />
+    <Compile Include="Controllers\ExportacionController.cs" />
+    <Compile Include="Controllers\Helper.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MaestroController.cs" />
+    <Compile Include="Controllers\MastersController.Export.cs" />
+    <Compile Include="Controllers\MatrizBLController.cs" />
+    <Compile Include="Controllers\OrdenCompraController.cs" />
+    <Compile Include="Controllers\ProformaController.cs" />
+    <Compile Include="Controllers\SolicitudLlenadoController.cs" />
+    <Compile Include="Controllers\SolicitudTransporteController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Actividad.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AgenteNaviera.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Agrupacion.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Calculadora.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CalculadoraItems.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CartaLlenadoPuerto.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CertificadoCalidad.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CertificadoMadera.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ciudad.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Compañia.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CondicionPago.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Contacto.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ContactoERP.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Contrato.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Costo.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAO_PedidosOnline.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DAO_PedidosOnline.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAO_PedidosOnline.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAO_PedidosOnline.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DAO_PedidosOnline.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DCD.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Departamento.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetalleEmpaque.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Empaque.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Empresa.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FEP.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Item.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListaPrecio.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MatrizBL.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Menu.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Modulo.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MotoNave.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\m_plantillas.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Opcion.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrdenCompra.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrdenCompraItem.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Pais.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Planta.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Precio.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proforma.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Puerto.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PuntoEnvio.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RecursosContrato.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RecursosProforma.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rol.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RolMenu.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SolicitudLlenado.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SolicitudTransporte.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spPROFORMA_EXPORTAR_PDF_Result.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sucursal.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tercero.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TerceroPotencial.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoVehiculo.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usuario.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Vehiculo.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VehiculoSolicitudLlenado.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Utilidades\Crypto.cs" />
+    <Compile Include="Utilidades\CryptoV2.cs" />
+    <Compile Include="Utilidades\MailSender.cs" />
+    <Compile Include="Utilidades\PrintLabel.cs" />
+    <Compile Include="Utilidades\SQLBase.cs" />
+    <Compile Include="Utilidades\UtilTool.cs" />
+    <Compile Include="Utilidades\WS_Util.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\accordion.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Comentarios.min.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\nuevopedido.css" />
+    <Content Include="Content\css\shop-homepage.css" />
+    <Content Include="Content\Edex-Responsive.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\img\accent.png" />
+    <Content Include="Content\img\Activities.png" />
+    <Content Include="Content\img\add.png" />
+    <Content Include="Content\img\apk.png" />
+    <Content Include="Content\img\AppStore.png" />
+    <Content Include="Content\img\arrow - Copy.png" />
+    <Content Include="Content\img\arrow.png" />
+    <Content Include="Content\img\autoservicio.jpg" />
+    <Content Include="Content\img\auto_loader.gif" />
+    <Content Include="Content\img\bg-1.jpg" />
+    <Content Include="Content\img\bg.jpg" />
+    <Content Include="Content\img\bullet.png" />
+    <Content Include="Content\img\callinaction - Copy.png" />
+    <Content Include="Content\img\callinaction.png" />
+    <Content Include="Content\img\chart.png" />
+    <Content Include="Content\img\cli_logo.png" />
+    <Content Include="Content\img\cli_logo_.png" />
+    <Content Include="Content\img\cli_logo_2.png" />
+    <Content Include="Content\img\cli_logo_gabrica.png" />
+    <Content Include="Content\img\cli_logo_italcol.png" />
+    <Content Include="Content\img\coins.jpg" />
+    <Content Include="Content\img\coins.png" />
+    <Content Include="Content\img\config.jpg" />
+    <Content Include="Content\img\cosmoagro.apk.png" />
+    <Content Include="Content\img\crm.jpg" />
+    <Content Include="Content\img\delete.png" />
+    <Content Include="Content\img\detail.png" />
+    <Content Include="Content\img\En-construccion.jpg" />
+    <Content Include="Content\img\erp.jpg" />
+    <Content Include="Content\img\excel.png" />
+    <Content Include="Content\img\Google-Play-logo.png" />
+    <Content Include="Content\img\gris.jpg" />
+    <Content Include="Content\img\heroAccent.png" />
+    <Content Include="Content\img\icon.png" />
+    <Content Include="Content\img\icons.png" />
+    <Content Include="Content\img\imagennodisponible.jpg" />
+    <Content Include="Content\img\imagnodisponible.png" />
+    <Content Include="Content\img\inventario.png" />
+    <Content Include="Content\img\inversiones_vadisa_1.jpg" />
+    <Content Include="Content\img\inversiones_vadisa_2.jpg" />
+    <Content Include="Content\img\inversiones_vadisa_3.jpg" />
+    <Content Include="Content\img\loading.gif" />
+    <Content Include="Content\img\Location.png" />
+    <Content Include="Content\img\lock1.png" />
+    <Content Include="Content\img\lock2.png" />
+    <Content Include="Content\img\lock3.png" />
+    <Content Include="Content\img\lock4.png" />
+    <Content Include="Content\img\lock5.png" />
+    <Content Include="Content\img\lock6.png" />
+    <Content Include="Content\img\logo-pangea-Responsive.png" />
+    <Content Include="Content\img\logo-pangea.png" />
+    <Content Include="Content\img\logo_edexa.png" />
+    <Content Include="Content\img\logo_ejemplo.png" />
+    <Content Include="Content\img\logo_pangea.png" />
+    <Content Include="Content\img\menu.jpg" />
+    <Content Include="Content\img\modal-loading.gif" />
+    <Content Include="Content\img\next.png" />
+    <Content Include="Content\img\ok.png" />
+    <Content Include="Content\img\orderedList0.png" />
+    <Content Include="Content\img\orderedList1.png" />
+    <Content Include="Content\img\orderedList2.png" />
+    <Content Include="Content\img\orderedList3.png" />
+    <Content Include="Content\img\orderedList4.png" />
+    <Content Include="Content\img\orderedList5.png" />
+    <Content Include="Content\img\orderedList6.png" />
+    <Content Include="Content\img\orderedList7.png" />
+    <Content Include="Content\img\orderedList8.png" />
+    <Content Include="Content\img\orderedList9.png" />
+    <Content Include="Content\img\Pangea.png" />
+    <Content Include="Content\img\pedidos.png" />
+    <Content Include="Content\img\pedidosonlinelogopeque.jpg" />
+    <Content Include="Content\img\pedidosonlinelogopeque2.png" />
+    <Content Include="Content\img\pedidosonlinelogopeque_.png" />
+    <Content Include="Content\img\portadapedidos.jpg" />
+    <Content Include="Content\img\portadapedidosonline.jpg" />
+    <Content Include="Content\img\proceso.png" />
+    <Content Include="Content\img\profile-icon.png" />
+    <Content Include="Content\img\ruta.png" />
+    <Content Include="Content\img\s-colr.png" />
+    <Content Include="Content\img\save3.png" />
+    <Content Include="Content\img\servicio.jpg" />
+    <Content Include="Content\img\sincronizacion.png" />
+    <Content Include="Content\img\terceros.png" />
+    <Content Include="Content\img\tick.png" />
+    <Content Include="Content\img\ui-anim_basic_16x16.gif" />
+    <Content Include="Content\img\util.png" />
+    <Content Include="Content\img\ventas.jpg" />
+    <Content Include="Content\img\vulto-chunky-puppies1.jpg" />
+    <Content Include="Content\img\vulto2-italcan-plus1.jpg" />
+    <Content Include="Content\InputFile.css" />
+    <Content Include="Content\js\bootstrap.js" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\datatables\colvis\ColVis.js" />
+    <Content Include="Content\js\datatables\colvis\ColVis.min.js" />
+    <Content Include="Content\js\datatables\datatables.css" />
+    <Content Include="Content\js\datatables\datatables_bootstrap.css" />
+    <Content Include="Content\js\datatables\DT_bootstrap.js" />
+    <Content Include="Content\js\datatables\img\sort_asc.png" />
+    <Content Include="Content\js\datatables\img\sort_asc_disabled.png" />
+    <Content Include="Content\js\datatables\img\sort_both.png" />
+    <Content Include="Content\js\datatables\img\sort_desc.png" />
+    <Content Include="Content\js\datatables\img\sort_desc_disabled.png" />
+    <Content Include="Content\js\datatables\jquery.dataTables.js" />
+    <Content Include="Content\js\datatables\jquery.dataTables.min.js" />
+    <Content Include="Content\js\datatables\jquery.dataTables.min1.10.10.js" />
+    <Content Include="Content\js\datatables\jquery.dataTables1.10.min.css" />
+    <Content Include="Content\js\datatables\responsive\datatables.responsive.js" />
+    <Content Include="Content\js\datatables\responsive\img\minus.png" />
+    <Content Include="Content\js\datatables\responsive\img\plus.png" />
+    <Content Include="Content\js\datatables\tabletools\swf\copy_csv_xls.swf" />
+    <Content Include="Content\js\datatables\tabletools\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="Content\js\datatables\tabletools\TableTools.js" />
+    <Content Include="Content\js\datatables\tabletools\TableTools.min.js" />
+    <Content Include="Content\js\datatables\tabletools\ZeroClipboard.js" />
+    <Content Include="Content\js\datatable\css\jquery.dataTables.css" />
+    <Content Include="Content\js\datatable\css\jquery.dataTables.min.css" />
+    <Content Include="Content\js\datatable\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Content\js\datatable\css\jquery.dataTables_themeroller.min.css" />
+    <Content Include="Content\js\datatable\images\back_disabled.png" />
+    <Content Include="Content\js\datatable\images\back_enabled.png" />
+    <Content Include="Content\js\datatable\images\back_enabled_hover.png" />
+    <Content Include="Content\js\datatable\images\favicon.ico" />
+    <Content Include="Content\js\datatable\images\forward_disabled.png" />
+    <Content Include="Content\js\datatable\images\forward_enabled.png" />
+    <Content Include="Content\js\datatable\images\forward_enabled_hover.png" />
+    <Content Include="Content\js\datatable\images\sort_asc.png" />
+    <Content Include="Content\js\datatable\images\sort_asc_disabled.png" />
+    <Content Include="Content\js\datatable\images\sort_both.png" />
+    <Content Include="Content\js\datatable\images\sort_desc.png" />
+    <Content Include="Content\js\datatable\images\sort_desc_disabled.png" />
+    <Content Include="Content\js\datatable\js\jquery.dataTables.js" />
+    <Content Include="Content\js\datatable\js\jquery.dataTables.min.js" />
+    <Content Include="Content\js\datatable\js\jquery.js" />
+    <Content Include="Content\js\datepicker\bootstrap.min.css" />
+    <Content Include="Content\js\datepicker\bootstrap.min.js" />
+    <Content Include="Content\js\datepicker\daterangepicker-bs2.css" />
+    <Content Include="Content\js\datepicker\daterangepicker-bs3.css" />
+    <Content Include="Content\js\datepicker\daterangepicker.js" />
+    <Content Include="Content\js\datepicker\font-awesome.min.css" />
+    <Content Include="Content\js\datepicker\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\js\datepicker\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\js\datepicker\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\js\datepicker\moment.js" />
+    <Content Include="Content\js\datepicker\moment.min.js" />
+    <Content Include="Content\js\datetimepicker\jquery.datetimepicker.css" />
+    <Content Include="Content\js\datetimepicker\jquery.datetimepicker.full.js" />
+    <Content Include="Content\js\datetimepicker\jquery.datetimepicker.full.min.js" />
+    <Content Include="Content\js\datetimepicker\jquery.datetimepicker.js" />
+    <Content Include="Content\js\datetimepicker\jquery.datetimepicker.min.js" />
+    <Content Include="Content\js\Exportexcel\base64.js" />
+    <Content Include="Content\js\Exportexcel\jquery.base64.js" />
+    <Content Include="Content\js\Exportexcel\jquery.table2excel.js" />
+    <Content Include="Content\js\Exportexcel\jquery.table2excel.min.js" />
+    <Content Include="Content\js\Exportexcel\table2download.js" />
+    <Content Include="Content\js\Exportexcel\tableExport.js" />
+    <Content Include="Content\js\fullcalendar\fullcalendar.css" />
+    <Content Include="Content\js\fullcalendar\fullcalendar.js" />
+    <Content Include="Content\js\fullcalendar\fullcalendar.min.css" />
+    <Content Include="Content\js\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Content\js\fullcalendar\fullcalendar.print.css" />
+    <Content Include="Content\js\HighChart\highcharts.js" />
+    <Content Include="Content\js\HighChart\modules\exporting.js" />
+    <Content Include="Content\js\HighChart\modules\exporting.src.js" />
+    <Content Include="Content\js\Images\btn_rest.gif" />
+    <Content Include="Content\js\Images\ButtonNormalGradient.png" />
+    <Content Include="Content\js\Images\ButtonSelectedGradient.png" />
+    <Content Include="Content\js\Images\Calendar.png" />
+    <Content Include="Content\js\Images\favicon.ico" />
+    <Content Include="Content\js\Images\filter_dark.png" />
+    <Content Include="Content\js\Images\GridColumnGradient.png" />
+    <Content Include="Content\js\Images\grid_ctrl_imgs.png" />
+    <Content Include="Content\js\Images\Hazard_Symbol2-1.png" />
+    <Content Include="Content\js\Images\Hazard_Symbol2-2.png" />
+    <Content Include="Content\js\Images\Hazard_Symbol2-3.png" />
+    <Content Include="Content\js\Images\Hazard_Symbol2-4.png" />
+    <Content Include="Content\js\Images\Hazard_Symbol2-5.png" />
+    <Content Include="Content\js\Images\Hazard_Symbol2-6.png" />
+    <Content Include="Content\js\Images\icon-alert.png" />
+    <Content Include="Content\js\Images\menubutton.png" />
+    <Content Include="Content\js\Images\price_alert.png" />
+    <Content Include="Content\js\Images\productpurchaseorderSmall.gif" />
+    <Content Include="Content\js\Images\progressbar.gif" />
+    <Content Include="Content\js\Images\sortasc.png" />
+    <Content Include="Content\js\Images\sortdesc.png" />
+    <Content Include="Content\js\Images\sortremove.png" />
+    <Content Include="Content\js\Images\statusbar_back.gif" />
+    <Content Include="Content\js\Images\ui-icons_3399ff_0.png" />
+    <Content Include="Content\js\Images\ui-icons_525252_0.png" />
+    <Content Include="Content\js\Images\ui-icons_66B3FF_0.png" />
+    <Content Include="Content\js\Images\ui-icons_d4d4d4_0.png" />
+    <Content Include="Content\js\Images\ui-icons_ffffff_0.png" />
+    <Content Include="Content\js\InputFile\bootstrap-filestyle.min.js" />
+    <Content Include="Content\js\jqgrid\grid.addons.js" />
+    <Content Include="Content\js\jqgrid\grid.locale-en.js" />
+    <Content Include="Content\js\jqgrid\grid.locale-es.js" />
+    <Content Include="Content\js\jqgrid\grid.postext.js" />
+    <Content Include="Content\js\jqgrid\grid.setcolumns.js" />
+    <Content Include="Content\js\jqgrid\jqGrid.bootstrap.css" />
+    <Content Include="Content\js\jqgrid\jquery-ui-1.8.2.custom.css" />
+    <Content Include="Content\js\jqgrid\jquery-ui-custom.min.js" />
+    <Content Include="Content\js\jqgrid\jquery.album.js" />
+    <Content Include="Content\js\jqgrid\jquery.contextmenu.js" />
+    <Content Include="Content\js\jqgrid\jquery.jqGrid.min.js" />
+    <Content Include="Content\js\jqgrid\jquery.js" />
+    <Content Include="Content\js\jqgrid\jquery.NEW.js" />
+    <Content Include="Content\js\jqgrid\jquery.searchFilter.js" />
+    <Content Include="Content\js\jqgrid\jquery.tablednd.js" />
+    <Content Include="Content\js\jqgrid\jquery.ui.datepicker.css" />
+    <Content Include="Content\js\jqgrid\jquery.ui.datepicker.js" />
+    <Content Include="Content\js\jqgrid\searchFilter.css" />
+    <Content Include="Content\js\jqgrid\themes\dark-blue.js" />
+    <Content Include="Content\js\jqgrid\themes\dark-green.js" />
+    <Content Include="Content\js\jqgrid\themes\ellipsis-xbl.xml" />
+    <Content Include="Content\js\jqgrid\themes\gray.js" />
+    <Content Include="Content\js\jqgrid\themes\grid.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\css\smoothness\images\animated-overlay.gif" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\css\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\css\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\css\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\css\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\css\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\css\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\css\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\css\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\css\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\css\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\css\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\css\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\css\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\css\smoothness\jquery-ui-1.10.3.custom.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\css\smoothness\jquery-ui-1.10.3.custom.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\AUTHORS.txt" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\accordion\collapsible.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\accordion\custom-icons.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\accordion\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\accordion\fillspace.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\accordion\hoverintent.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\accordion\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\accordion\no-auto-height.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\accordion\sortable.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\categories.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\combobox.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\custom-data.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\folding.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\images\jqueryui_32x32.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\images\jquery_32x32.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\images\sizzlejs_32x32.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\images\transparent_1x1.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\images\ui-anim_basic_16x16.gif" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\london.xml" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\maxheight.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\multiple-remote.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\multiple.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\remote-jsonp.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\remote-with-cache.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\remote.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\xml.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\button\checkbox.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\button\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\button\icons.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\button\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\button\radio.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\button\splitbutton.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\button\toolbar.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\alt-field.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\animation.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\buttonbar.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\date-formats.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\date-range.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\dropdown-month-year.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\icon-trigger.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\images\calendar.gif" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\inline.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\jquery.ui.datepicker-ar.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\jquery.ui.datepicker-fr.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\jquery.ui.datepicker-he.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\jquery.ui.datepicker-zh-TW.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\localization.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\min-max.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\multiple-calendars.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\other-months.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\show-week.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\demos.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\dialog\animated.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\dialog\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\dialog\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\dialog\modal-confirmation.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\dialog\modal-form.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\dialog\modal-message.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\dialog\modal.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\draggable\constrain-movement.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\draggable\cursor-style.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\draggable\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\draggable\delay-start.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\draggable\events.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\draggable\handle.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\draggable\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\draggable\revert.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\draggable\scroll.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\draggable\snap-to.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\draggable\sortable.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\draggable\visual-feedback.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\droppable\accepted-elements.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\droppable\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\droppable\images\high_tatras.jpg" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\droppable\images\high_tatras2.jpg" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\droppable\images\high_tatras2_min.jpg" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\droppable\images\high_tatras3.jpg" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\droppable\images\high_tatras3_min.jpg" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\droppable\images\high_tatras4.jpg" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\droppable\images\high_tatras4_min.jpg" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\droppable\images\high_tatras_min.jpg" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\droppable\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\droppable\photo-manager.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\droppable\propagation.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\droppable\revert.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\droppable\shopping-cart.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\droppable\visual-feedback.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\effect\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\effect\easing.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\effect\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\images\calendar.gif" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\images\demo-config-on-tile.gif" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\images\demo-config-on.gif" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\images\demo-spindown-closed.gif" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\images\demo-spindown-open.gif" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\images\icon-docs-info.gif" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\images\pbar-ani.gif" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\menu\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\menu\icons.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\menu\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\position\cycler.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\position\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\position\images\earth.jpg" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\position\images\flight.jpg" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\position\images\rocket.jpg" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\position\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\progressbar\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\progressbar\images\pbar-ani.gif" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\progressbar\indeterminate.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\progressbar\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\progressbar\label.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\resizable\animate.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\resizable\aspect-ratio.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\resizable\constrain-area.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\resizable\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\resizable\delay-start.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\resizable\helper.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\resizable\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\resizable\max-min.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\resizable\snap-to-grid.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\resizable\synchronous-resize.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\resizable\textarea.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\resizable\visual-feedback.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\selectable\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\selectable\display-grid.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\selectable\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\selectable\serialize.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\slider\colorpicker.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\slider\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\slider\hotelrooms.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\slider\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\slider\multiple-vertical.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\slider\range-vertical.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\slider\range.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\slider\rangemax.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\slider\rangemin.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\slider\side-scroll.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\slider\slider-vertical.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\slider\steps.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\sortable\connect-lists-through-tabs.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\sortable\connect-lists.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\sortable\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\sortable\delay-start.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\sortable\display-grid.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\sortable\empty-lists.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\sortable\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\sortable\items.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\sortable\placeholder.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\sortable\portlets.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\spinner\currency.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\spinner\decimal.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\spinner\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\spinner\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\spinner\latlong.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\spinner\overflow.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\spinner\time.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\ajax.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\ajax\content1.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\ajax\content2.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\bottom.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\collapsible.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\manipulation.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\mouseover.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\sortable.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\vertical.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tooltip\ajax\content1.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tooltip\ajax\content2.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tooltip\custom-animation.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tooltip\custom-content.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tooltip\custom-style.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tooltip\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tooltip\forms.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tooltip\images\st-stephens.jpg" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tooltip\images\tower-bridge.jpg" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tooltip\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tooltip\tracking.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tooltip\video-player.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\widget\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\widget\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\accordion.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\autocomplete.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\blind-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\bounce-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\button.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\clip-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\datepicker.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\dialog.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\draggable.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\drop-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\droppable.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\explode-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\fade-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\fold-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\highlight-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\jQuery.widget.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\menu.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\mouse.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\position.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\progressbar.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\puff-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\pulsate-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\resizable.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\scale-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\selectable.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\shake-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\size-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\slide-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\slider.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\sortable.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\spinner.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\tabs.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\tooltip.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\docs\transfer-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\external\globalize.culture.de-DE.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\external\globalize.culture.ja-JP.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\external\globalize.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\external\jquery.mousewheel.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\external\jshint.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\external\qunit.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\external\qunit.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\Gruntfile.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\jquery-1.9.1.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\MIT-LICENSE.txt" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\images\animated-overlay.gif" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\jquery-ui.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\jquery.ui.menu.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\jquery.ui.spinner.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\jquery.ui.tooltip.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\minified\images\animated-overlay.gif" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\images\animated-overlay.gif" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\jquery-ui.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\jquery.ui.accordion.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\jquery.ui.all.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\jquery.ui.autocomplete.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\jquery.ui.base.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\jquery.ui.button.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\jquery.ui.core.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\jquery.ui.datepicker.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\jquery.ui.dialog.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\jquery.ui.menu.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\jquery.ui.progressbar.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\jquery.ui.resizable.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\jquery.ui.selectable.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\jquery.ui.slider.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\jquery.ui.spinner.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\jquery.ui.tabs.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\jquery.ui.theme.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\jquery.ui.tooltip.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\minified\jquery-ui.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery-ui-i18n.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-af.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-ar-DZ.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-ar.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-az.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-be.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-bg.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-bs.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-ca.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-cs.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-cy-GB.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-da.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-de.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-el.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-en-AU.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-en-GB.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-en-NZ.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-eo.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-es.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-et.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-eu.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-fa.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-fi.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-fo.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-fr-CA.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-fr-CH.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-fr.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-gl.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-he.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-hi.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-hr.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-hu.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-hy.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-id.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-is.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-it.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-ja.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-ka.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-kk.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-km.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-ko.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-ky.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-lb.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-lt.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-lv.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-mk.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-ml.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-ms.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-nb.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-nl-BE.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-nl.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-nn.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-no.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-pl.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-pt-BR.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-pt.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-rm.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-ro.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-ru.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-sk.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-sl.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-sq.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-sr-SR.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-sr.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-sv.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-ta.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-th.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-tj.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-tr.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-uk.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-vi.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-zh-CN.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-zh-HK.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery.ui.datepicker-zh-TW.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery-ui.custom.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.accordion.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.autocomplete.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.button.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.core.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.datepicker.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.dialog.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.draggable.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.droppable.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.effect-blind.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.effect-bounce.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.effect-clip.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.effect-drop.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.effect-explode.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.effect-fade.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.effect-fold.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.effect-highlight.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.effect-pulsate.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.effect-scale.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.effect-shake.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.effect-slide.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.effect-transfer.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.effect.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.menu.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.mouse.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.position.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.progressbar.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.resizable.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.selectable.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.slider.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.sortable.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.spinner.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.tabs.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.tooltip.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.widget.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery-ui-i18n.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-af.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ar-DZ.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ar.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-az.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-be.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-bg.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-bs.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ca.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-cs.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-cy-GB.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-da.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-de.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-el.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-en-AU.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-en-GB.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-en-NZ.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-eo.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-es.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-et.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-eu.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-fa.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-fi.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-fo.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-fr-CA.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-fr-CH.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-fr.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-gl.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-he.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-hi.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-hr.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-hu.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-hy.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-id.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-is.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-it.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ja.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ka.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-kk.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-km.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ko.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ky.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-lb.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-lt.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-lv.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-mk.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ml.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ms.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-nb.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-nl-BE.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-nl.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-nn.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-no.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-pl.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-pt-BR.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-pt.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-rm.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ro.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ru.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-sk.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-sl.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-sq.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-sr-SR.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-sr.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-sv.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-ta.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-th.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-tj.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-tr.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-uk.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-vi.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-zh-CN.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-zh-HK.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\jquery.ui.datepicker-zh-TW.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery-ui.custom.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.accordion.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.autocomplete.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.button.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.core.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.datepicker.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.dialog.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.draggable.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.droppable.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.effect-blind.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.effect-bounce.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.effect-clip.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.effect-drop.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.effect-explode.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.effect-fade.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.effect-fold.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.effect-highlight.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.effect-pulsate.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.effect-scale.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.effect-shake.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.effect-slide.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.effect-transfer.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.effect.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.menu.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.mouse.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.position.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.progressbar.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.resizable.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.selectable.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.slider.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.sortable.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.spinner.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.tabs.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.tooltip.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui\minified\jquery.ui.widget.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\css\custom-theme\images\animated-overlay.gif" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\css\custom-theme\jquery-ui-1.10.3.custom.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\AUTHORS.txt" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\accordion\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\button\checkbox.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\button\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\button\icons.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\button\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\button\radio.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\button\toolbar.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\demos.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\dialog\animated.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\dialog\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\dialog\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\dialog\modal.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\draggable\events.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\draggable\handle.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\draggable\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\draggable\revert.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\draggable\scroll.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\droppable\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\droppable\revert.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\effect\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\effect\easing.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\effect\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\images\calendar.gif" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\images\pbar-ani.gif" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\menu\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\menu\icons.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\menu\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\position\cycler.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\position\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\position\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\resizable\helper.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\resizable\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\selectable\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\slider\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\slider\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\slider\range.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\slider\rangemax.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\slider\rangemin.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\slider\steps.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\sortable\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\sortable\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\sortable\items.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\spinner\currency.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\spinner\decimal.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\spinner\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\spinner\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\spinner\latlong.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\spinner\overflow.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\spinner\time.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\ajax.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\bottom.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\collapsible.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\mouseover.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\sortable.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\vertical.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\tooltip\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\tooltip\forms.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\tooltip\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\tooltip\tracking.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\widget\default.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\widget\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\accordion.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\autocomplete.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\blind-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\bounce-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\button.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\clip-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\datepicker.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\dialog.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\draggable.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\drop-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\droppable.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\explode-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\fade-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\fold-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\highlight-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\jQuery.widget.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\menu.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\mouse.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\position.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\progressbar.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\puff-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\pulsate-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\resizable.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\scale-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\selectable.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\shake-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\size-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\slide-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\slider.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\sortable.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\spinner.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\tabs.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\tooltip.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\docs\transfer-effect.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\external\globalize.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\external\jshint.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\external\qunit.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\external\qunit.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\Gruntfile.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\jquery-1.9.1.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\MIT-LICENSE.txt" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\themes\base\jquery-ui.css" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\i18n\jquery-ui-i18n.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery-ui.custom.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.accordion.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.button.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.core.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.datepicker.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.dialog.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.draggable.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.droppable.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.effect-clip.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.effect-drop.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.effect-fade.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.effect-fold.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.effect.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.menu.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.mouse.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.position.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.progressbar.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.resizable.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.selectable.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.slider.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.sortable.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.spinner.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.tabs.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.tooltip.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\jquery.ui.widget.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\index.html" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\js\jquery-1.9.1.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\js\jquery-ui-1.10.3.custom.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\js\jquery-ui-1.10.3.custom.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\js\jquery-1.9.1.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\js\jquery-ui-1.10.3.custom.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\js\jquery-ui-1.10.3.custom.min.js" />
+    <Content Include="Content\js\jqgrid\themes\jquery.ui.tooltip.css" />
+    <Content Include="Content\js\jqgrid\themes\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\js\jqgrid\themes\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Content\js\jqgrid\themes\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Content\js\jqgrid\themes\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\js\jqgrid\themes\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\js\jqgrid\themes\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\js\jqgrid\themes\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Content\js\jqgrid\themes\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\js\jqgrid\themes\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\redmond\jquery-ui-custom.css" />
+    <Content Include="Content\js\jqgrid\themes\smoothness\images\animated-overlay.gif" />
+    <Content Include="Content\js\jqgrid\themes\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\js\jqgrid\themes\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\js\jqgrid\themes\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\js\jqgrid\themes\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\js\jqgrid\themes\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\js\jqgrid\themes\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\js\jqgrid\themes\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\js\jqgrid\themes\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\js\jqgrid\themes\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\js\jqgrid\themes\smoothness\jquery-ui-1.10.3.custom.css" />
+    <Content Include="Content\js\jqgrid\themes\smoothness\jquery-ui-1.10.3.custom.min.css" />
+    <Content Include="Content\js\jqgrid\themes\ui-anim_basic_16x16_2.gif" />
+    <Content Include="Content\js\jqgrid\themes\ui.jqform.css" />
+    <Content Include="Content\js\jqgrid\themes\ui.jqgrid.css" />
+    <Content Include="Content\js\jqgrid\themes\ui.jqscheduler.css" />
+    <Content Include="Content\js\jqgrid\themes\ui.multiselect.css" />
+    <Content Include="Content\js\jqgrid\ui.jqgrid.css" />
+    <Content Include="Content\js\jqgrid\ui.multiselect.css" />
+    <Content Include="Content\js\jqgrid\ui.multiselect.js" />
+    <None Include="Content\js\jquery-1.10.2.intellisense.js" />
+    <Content Include="Content\js\jquery-1.10.2.js" />
+    <Content Include="Content\js\jquery-1.10.2.min.js" />
+    <Content Include="Content\js\jquery-ui.PORTAL.css" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\ajaxSubmit-integration-demo.html" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\captcha\captcha.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\captcha\images\button.png" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\captcha\style.css" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\css\cmxform.css" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\css\cmxformTemplate.css" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\css\core.css" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\css\reset.css" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\css\screen.css" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\custom-messages-data-demo.html" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\custom-methods-demo.html" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\dynamic-totals.html" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\errorcontainer-demo.html" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\errors-within-labels.html" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\file_input.html" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\images\bg.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\images\checked.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\images\cmxform-divider.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\images\cmxform-fieldset.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\images\loading.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\images\unchecked.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\index.html" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\jquerymobile.html" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\login\images\bg.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\login\images\header1.jpg" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\login\images\page.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\login\images\required_star.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\login\index.html" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\login\screen.css" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\images\backRequiredGray.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\images\back_green-fade.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\images\back_nav_blue.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\images\blank.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\images\button-submit.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\images\favicon.ico" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\images\help.png" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\images\left-nav-callout-long.png" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\images\login-sprite.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\images\logo_marketo.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\images\sf.png" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\images\step1-24.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\images\step2-24.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\images\step3-24.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\images\tab-sprite.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\images\tab_green.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\images\time.png" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\images\toggle.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\images\warning.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\index.html" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\jquery.maskedinput.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\mktSignup.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\step2.htm" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\marketo\stylesheet.css" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\milk\bg.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\milk\index.html" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\milk\left_white.png" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\milk\milk.css" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\milk\milk.png" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\milk\right_white.png" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\multipart\index.html" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\multipart\style.css" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\radio-checkbox-select-demo.html" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\requirejs\app.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\requirejs\index.html" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\site-demos.css" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\themerollered.html" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\tinymce4\index.html" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\tinymce\index.html" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\tinymce\themes\simple\editor_template.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\tinymce\themes\simple\img\icons.gif" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\tinymce\themes\simple\langs\en.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\tinymce\themes\simple\skins\default\ui.css" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\tinymce\tiny_mce.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\additional-methods.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\additional-methods.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\jquery.validate.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\jquery.validate.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_ar.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_ar.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_bg.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_bg.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_bn_BD.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_bn_BD.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_ca.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_ca.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_cs.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_cs.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_da.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_da.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_de.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_de.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_el.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_el.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_es.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_es.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_es_AR.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_es_AR.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_es_PE.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_es_PE.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_et.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_et.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_eu.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_eu.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_fa.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_fa.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_fi.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_fi.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_fr.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_fr.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_ge.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_ge.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_gl.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_gl.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_he.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_he.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_hr.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_hr.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_hu.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_hu.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_hy_AM.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_hy_AM.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_id.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_id.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_is.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_is.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_it.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_it.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_ja.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_ja.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_ka.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_ka.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_kk.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_kk.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_ko.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_ko.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_lt.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_lt.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_lv.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_lv.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_my.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_my.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_nl.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_nl.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_no.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_no.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_pl.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_pl.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_pt_BR.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_pt_BR.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_pt_PT.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_pt_PT.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_ro.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_ro.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_ru.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_ru.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_si.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_si.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_sk.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_sk.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_sl.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_sl.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_sr.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_sr.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_sr_lat.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_sr_lat.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_sv.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_sv.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_th.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_th.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_tj.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_tj.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_tr.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_tr.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_uk.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_uk.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_vi.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_vi.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_zh.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_zh.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_zh_TW.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\messages_zh_TW.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\methods_de.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\methods_de.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\methods_es_CL.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\methods_es_CL.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\methods_fi.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\methods_fi.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\methods_nl.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\methods_nl.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\methods_pt.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\dist\localization\methods_pt.min.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\Gruntfile.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\lib\jquery-1.11.1.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\lib\jquery-1.7.2.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\lib\jquery-1.8.3.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\lib\jquery-1.9.1.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\lib\jquery.form.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\lib\jquery.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\lib\jquery.mockjax.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\lib\jquery.simulate.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\lib\require.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\accept.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\additional.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\alphanumeric.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\bankaccountNL.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\bankorgiroaccountNL.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\bic.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\cifES.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\cpfBR.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\creditcardtypes.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\currency.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\dateFA.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\dateITA.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\dateNL.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\extension.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\giroaccountNL.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\iban.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\integer.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\ipv4.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\ipv6.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\lettersonly.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\letterswithbasicpunc.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\mobileNL.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\mobileUK.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\nieES.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\nifES.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\notEqualTo.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\nowhitespace.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\pattern.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\phoneNL.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\phonesUK.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\phoneUK.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\phoneUS.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\postalcodeBR.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\postalCodeCA.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\postalcodeIT.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\postalcodeNL.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\postcodeUK.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\require_from_group.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\skip_or_fill_minimum.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\statesUS.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\strippedminlength.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\time.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\time12h.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\url2.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\vinUS.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\zipcodeUS.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\additional\ziprange.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\ajax.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\core.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_ar.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_bg.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_bn_BD.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_ca.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_cs.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_da.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_de.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_el.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_es.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_es_AR.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_es_PE.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_et.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_eu.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_fa.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_fi.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_fr.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_ge.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_gl.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_he.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_hr.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_hu.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_hy_AM.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_id.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_is.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_it.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_ja.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_ka.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_kk.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_ko.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_lt.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_lv.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_my.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_nl.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_no.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_pl.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_pt_BR.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_pt_PT.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_ro.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_ru.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_si.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_sk.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_sl.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_sr.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_sr_lat.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_sv.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_th.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_tj.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_tr.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_uk.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_vi.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_zh.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\messages_zh_TW.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\methods_de.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\methods_es_CL.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\methods_fi.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\methods_nl.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\src\localization\methods_pt.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\test\aria.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\test\error-placement.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\test\index.html" />
+    <Content Include="Content\js\jquery-validation-1.14.0\test\messages.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\test\methods.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\test\qunit\qunit.css" />
+    <Content Include="Content\js\jquery-validation-1.14.0\test\qunit\qunit.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\test\rules.js" />
+    <Content Include="Content\js\jquery-validation-1.14.0\test\test.js" />
+    <Content Include="Content\js\jquery.anexgrid.js" />
+    <Content Include="Content\js\jquery\css\custom-theme\images\animated-overlay.gif" />
+    <Content Include="Content\js\jquery\css\custom-theme\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\js\jquery\css\custom-theme\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\js\jquery\css\custom-theme\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\js\jquery\css\custom-theme\images\ui-bg_glass_65_b60e0e_1x400.png" />
+    <Content Include="Content\js\jquery\css\custom-theme\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\js\jquery\css\custom-theme\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\js\jquery\css\custom-theme\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\js\jquery\css\custom-theme\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\js\jquery\css\custom-theme\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\js\jquery\css\custom-theme\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\js\jquery\css\custom-theme\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\js\jquery\css\custom-theme\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\js\jquery\css\custom-theme\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\js\jquery\css\custom-theme\images\ui-icons_fff2f2_256x240.png" />
+    <Content Include="Content\js\jquery\css\custom-theme\jquery-ui-1.10.3.custom.css" />
+    <Content Include="Content\js\jquery\css\custom-theme\jquery-ui-1.10.3.custom.min.css" />
+    <Content Include="Content\js\jquery\css\redmond\images\animated-overlay.gif" />
+    <Content Include="Content\js\jquery\css\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\js\jquery\css\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Content\js\jquery\css\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Content\js\jquery\css\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\js\jquery\css\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\js\jquery\css\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\js\jquery\css\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Content\js\jquery\css\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\js\jquery\css\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Content\js\jquery\css\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\js\jquery\css\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Content\js\jquery\css\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Content\js\jquery\css\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\js\jquery\css\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\js\jquery\css\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\js\jquery\css\redmond\jquery-ui-1.10.3.custom.css" />
+    <Content Include="Content\js\jquery\css\redmond\jquery-ui-1.10.3.custom.min.css" />
+    <Content Include="Content\js\jquery\js\jquery-1.9.1.js" />
+    <Content Include="Content\js\jquery\js\jquery-ui-1.10.3.custom.js" />
+    <Content Include="Content\js\jquery\js\jquery-ui-1.10.3.custom.min.js" />
+    <Content Include="Content\js\jquery\js\JqueryValidation.js" />
+    <Content Include="Content\js\jquery\ui\jquery-ui.js" />
+    <Content Include="Content\js\login.css" />
+    <Content Include="Content\js\Main.css" />
+    <Content Include="Content\js\mainmenuv2\core.css" />
+    <Content Include="Content\js\mainmenuv2\effects\fade.css" />
+    <Content Include="Content\js\mainmenuv2\effects\slide.css" />
+    <Content Include="Content\js\mainmenuv2\styles\lblack.css" />
+    <Content Include="Content\js\mainmenuv2\styles\lblue.css" />
+    <Content Include="Content\js\mainmenuv2\styles\lgray.css" />
+    <Content Include="Content\js\mainmenuv2\styles\mblack.css" />
+    <Content Include="Content\js\mainmenuv2\styles\mblue.css" />
+    <Content Include="Content\js\mainmenuv2\styles\mgray.css" />
+    <Content Include="Content\js\mainmenuv2\styles\sblack.css" />
+    <Content Include="Content\js\mainmenuv2\styles\sblue.css" />
+    <Content Include="Content\js\mainmenuv2\styles\sgray.css" />
+    <Content Include="Content\js\mainmenu\css\menu_animation.css" />
+    <Content Include="Content\js\mainmenu\css\theme_1_animation_1.css" />
+    <Content Include="Content\js\mainmenu\css\theme_1_animation_2.css" />
+    <Content Include="Content\js\mainmenu\css\theme_1_animation_3.css" />
+    <Content Include="Content\js\mainmenu\css\theme_1_animation_4.css" />
+    <Content Include="Content\js\mainmenu\css\theme_2_animation_1.css" />
+    <Content Include="Content\js\mainmenu\css\theme_2_animation_2.css" />
+    <Content Include="Content\js\mainmenu\css\theme_2_animation_3.css" />
+    <Content Include="Content\js\mainmenu\css\theme_2_animation_4.css" />
+    <Content Include="Content\js\mainmenu\css\theme_3_animation_1.css" />
+    <Content Include="Content\js\mainmenu\css\theme_3_animation_2.css" />
+    <Content Include="Content\js\mainmenu\css\theme_3_animation_3.css" />
+    <Content Include="Content\js\mainmenu\css\theme_3_animation_4.css" />
+    <Content Include="Content\js\mainmenu\css\theme_4_animation_1.css" />
+    <Content Include="Content\js\mainmenu\css\theme_4_animation_2.css" />
+    <Content Include="Content\js\mainmenu\css\theme_4_animation_3.css" />
+    <Content Include="Content\js\mainmenu\css\theme_4_animation_4.css" />
+    <Content Include="Content\js\mainmenu\css\theme_5_animation_1.css" />
+    <Content Include="Content\js\mainmenu\css\theme_5_animation_2.css" />
+    <Content Include="Content\js\mainmenu\css\theme_5_animation_3.css" />
+    <Content Include="Content\js\mainmenu\css\theme_5_animation_4.css" />
+    <Content Include="Content\js\mainmenu\font\BebasNeue.svg" />
+    <Content Include="Content\js\mainmenu\font\Dharma Type Font License.txt" />
+    <Content Include="Content\js\mainmenu\javascript\animated_horizontal_submenu.js" />
+    <Content Include="Content\js\mainmenu\javascript\custom.js" />
+    <Content Include="Content\js\mainmenu\javascript\jquery.library.js" />
+    <Content Include="Content\js\mainmenu\javascript\menu_animated.js" />
+    <Content Include="Content\js\menu\img\autoservicio.jpg" />
+    <Content Include="Content\js\menu\img\config.jpg" />
+    <Content Include="Content\js\menu\img\crm.jpg" />
+    <Content Include="Content\js\menu\img\erp.jpg" />
+    <Content Include="Content\js\menu\img\menu.jpg" />
+    <Content Include="Content\js\menu\img\micuenta.jpg" />
+    <Content Include="Content\js\menu\img\servicio.jpg" />
+    <Content Include="Content\js\menu\img\ventas.jpg" />
+    <Content Include="Content\js\menu\Menu.html" />
+    <Content Include="Content\js\menu\script.js" />
+    <Content Include="Content\js\menu\script.OLD.js" />
+    <Content Include="Content\js\menu\styles.css" />
+    <Content Include="Content\js\menu\styles.OLD.css" />
+    <Content Include="Content\js\Mobile.css" />
+    <Content Include="Content\js\modal\ajax-dynamic-content.js" />
+    <Content Include="Content\js\modal\ajax.js" />
+    <Content Include="Content\js\modal\modal-message.css" />
+    <Content Include="Content\js\modal\modal-message.js" />
+    <Content Include="Content\js\modernizr-2.6.2.js" />
+    <Content Include="Content\js\noty\jquery.noty.js" />
+    <Content Include="Content\js\noty\layouts\bottom.js" />
+    <Content Include="Content\js\noty\layouts\bottomCenter.js" />
+    <Content Include="Content\js\noty\layouts\bottomLeft.js" />
+    <Content Include="Content\js\noty\layouts\bottomRight.js" />
+    <Content Include="Content\js\noty\layouts\center.js" />
+    <Content Include="Content\js\noty\layouts\centerLeft.js" />
+    <Content Include="Content\js\noty\layouts\centerRight.js" />
+    <Content Include="Content\js\noty\layouts\inline.js" />
+    <Content Include="Content\js\noty\layouts\top.js" />
+    <Content Include="Content\js\noty\layouts\topCenter.js" />
+    <Content Include="Content\js\noty\layouts\topLeft.js" />
+    <Content Include="Content\js\noty\layouts\topRight.js" />
+    <Content Include="Content\js\noty\promise.js" />
+    <Content Include="Content\js\noty\themes\default.js" />
+    <Content Include="Content\js\ribbon\images\16\align-center.png" />
+    <Content Include="Content\js\ribbon\images\16\align-justify.png" />
+    <Content Include="Content\js\ribbon\images\16\align-left.png" />
+    <Content Include="Content\js\ribbon\images\16\align-right.png" />
+    <Content Include="Content\js\ribbon\images\16\bold.png" />
+    <Content Include="Content\js\ribbon\images\16\bullets.png" />
+    <Content Include="Content\js\ribbon\images\16\case-font.png" />
+    <Content Include="Content\js\ribbon\images\16\copy.png" />
+    <Content Include="Content\js\ribbon\images\16\decrease-font.png" />
+    <Content Include="Content\js\ribbon\images\16\find.png" />
+    <Content Include="Content\js\ribbon\images\16\format.png" />
+    <Content Include="Content\js\ribbon\images\16\go.png" />
+    <Content Include="Content\js\ribbon\images\16\grow-font.png" />
+    <Content Include="Content\js\ribbon\images\16\increase-font.png" />
+    <Content Include="Content\js\ribbon\images\16\italic.png" />
+    <Content Include="Content\js\ribbon\images\16\numbers.png" />
+    <Content Include="Content\js\ribbon\images\16\paste.png" />
+    <Content Include="Content\js\ribbon\images\16\replace.png" />
+    <Content Include="Content\js\ribbon\images\16\select.png" />
+    <Content Include="Content\js\ribbon\images\16\selectall.png" />
+    <Content Include="Content\js\ribbon\images\16\shrink-font.png" />
+    <Content Include="Content\js\ribbon\images\16\strikethrough.png" />
+    <Content Include="Content\js\ribbon\images\16\subscript.png" />
+    <Content Include="Content\js\ribbon\images\16\superscript.png" />
+    <Content Include="Content\js\ribbon\images\16\underline.png" />
+    <Content Include="Content\js\ribbon\images\32\chart.png" />
+    <Content Include="Content\js\ribbon\images\32\clipart.png" />
+    <Content Include="Content\js\ribbon\images\32\paste.png" />
+    <Content Include="Content\js\ribbon\images\32\picture.png" />
+    <Content Include="Content\js\ribbon\images\32\shapes.png" />
+    <Content Include="Content\js\ribbon\images\32\smartart.png" />
+    <Content Include="Content\js\ribbon\images\32\table.png" />
+    <Content Include="Content\js\ribbon\jquery.easyui.min.js" />
+    <Content Include="Content\js\ribbon\jquery.ribbon.js" />
+    <Content Include="Content\js\ribbon\ribbon-icon.css" />
+    <Content Include="Content\js\ribbon\ribbon.css" />
+    <Content Include="Content\js\ribbon\ribbon.html" />
+    <Content Include="Content\js\select2\select2-spinner.gif" />
+    <Content Include="Content\js\select2\select2.css" />
+    <Content Include="Content\js\select2\select2.js" />
+    <Content Include="Content\js\select2\select2.min.js" />
+    <Content Include="Content\js\select2\select2.png" />
+    <Content Include="Content\js\select2\select2EDITADO.css" />
+    <Content Include="Content\js\select2\select2x2.png" />
+    <Content Include="Content\js\select2\select2_locale_ar.js" />
+    <Content Include="Content\js\select2\select2_locale_ca.js" />
+    <Content Include="Content\js\select2\select2_locale_cs.js" />
+    <Content Include="Content\js\select2\select2_locale_da.js" />
+    <Content Include="Content\js\select2\select2_locale_de.js" />
+    <Content Include="Content\js\select2\select2_locale_el.js" />
+    <Content Include="Content\js\select2\select2_locale_es.js" />
+    <Content Include="Content\js\select2\select2_locale_et.js" />
+    <Content Include="Content\js\select2\select2_locale_eu.js" />
+    <Content Include="Content\js\select2\select2_locale_fi.js" />
+    <Content Include="Content\js\select2\select2_locale_fr.js" />
+    <Content Include="Content\js\select2\select2_locale_gl.js" />
+    <Content Include="Content\js\select2\select2_locale_he.js" />
+    <Content Include="Content\js\select2\select2_locale_hr.js" />
+    <Content Include="Content\js\select2\select2_locale_hu.js" />
+    <Content Include="Content\js\select2\select2_locale_id.js" />
+    <Content Include="Content\js\select2\select2_locale_is.js" />
+    <Content Include="Content\js\select2\select2_locale_it.js" />
+    <Content Include="Content\js\select2\select2_locale_ja.js" />
+    <Content Include="Content\js\select2\select2_locale_ko.js" />
+    <Content Include="Content\js\select2\select2_locale_lt.js" />
+    <Content Include="Content\js\select2\select2_locale_lv.js" />
+    <Content Include="Content\js\select2\select2_locale_mk.js" />
+    <Content Include="Content\js\select2\select2_locale_nl.js" />
+    <Content Include="Content\js\select2\select2_locale_no.js" />
+    <Content Include="Content\js\select2\select2_locale_pl.js" />
+    <Content Include="Content\js\select2\select2_locale_pt-BR.js" />
+    <Content Include="Content\js\select2\select2_locale_pt-PT.js" />
+    <Content Include="Content\js\select2\select2_locale_ro.js" />
+    <Content Include="Content\js\select2\select2_locale_ru.js" />
+    <Content Include="Content\js\select2\select2_locale_sk.js" />
+    <Content Include="Content\js\select2\select2_locale_sv.js" />
+    <Content Include="Content\js\select2\select2_locale_tr.js" />
+    <Content Include="Content\js\select2\select2_locale_ua.js" />
+    <Content Include="Content\js\select2\select2_locale_vi.js" />
+    <Content Include="Content\js\select2\select2_locale_zh-CN.js" />
+    <Content Include="Content\js\select2\select2_locale_zh-TW.js" />
+    <Content Include="Content\js\simple-sidebar.css" />
+    <Content Include="Content\js\Site.css" />
+    <Content Include="Content\js\SITE_BASE.css" />
+    <Content Include="Content\js\style.LOGIN.css" />
+    <Content Include="Content\js\tree\dist\jstree.js" />
+    <Content Include="Content\js\tree\dist\jstree.min.js" />
+    <Content Include="Content\js\tree\dist\themes\default-dark\32px.png" />
+    <Content Include="Content\js\tree\dist\themes\default-dark\40px.png" />
+    <Content Include="Content\js\tree\dist\themes\default-dark\style.css" />
+    <Content Include="Content\js\tree\dist\themes\default-dark\style.min.css" />
+    <Content Include="Content\js\tree\dist\themes\default-dark\throbber.gif" />
+    <Content Include="Content\js\tree\dist\themes\default\32px.png" />
+    <Content Include="Content\js\tree\dist\themes\default\40px.png" />
+    <Content Include="Content\js\tree\dist\themes\default\style.css" />
+    <Content Include="Content\js\tree\dist\themes\default\style.min.css" />
+    <Content Include="Content\js\tree\dist\themes\default\throbber.gif" />
+    <Content Include="Content\js\tree\index.html" />
+    <Content Include="Content\js\utils.js" />
+    <Content Include="Content\js\UTIL_PORTAL.js" />
+    <Content Include="Content\Menu-Responsive.css" />
+    <Content Include="Content\Pedidos-Ingresado.min.css" />
+    <Content Include="Content\Responsive-Ecommerce.css" />
+    <Content Include="Content\Responsive-Ecommerce2.css" />
+    <Content Include="Content\SubMenuButton.css" />
+    <Content Include="Content\Tabs.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\Ventas.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Models\DAO_PedidosOnline.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DAO_PedidosOnline.edmx</DependentUpon>
+      <LastGenOutput>DAO_PedidosOnline.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DAO_PedidosOnline.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DAO_PedidosOnline.edmx</DependentUpon>
+      <LastGenOutput>DAO_PedidosOnline.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\Correo.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Home\Grafica_Inicio.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Pagina_No_Disponible.cshtml" />
+    <Content Include="Views\Account\CambiarClave.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\RecuperarCuenta.cshtml" />
+    <Content Include="Views\Account\RestablecerContraseña.cshtml" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Calculadora\Calculadora.cshtml" />
+    <Content Include="Views\Calculadora\Calculadoras.cshtml" />
+    <Content Include="Views\Proforma\Proforma.cshtml" />
+    <Content Include="Views\Proforma\Proformas.cshtml" />
+    <Content Include="Views\OrdenCompra\OrdenCompras.cshtml" />
+    <Content Include="Views\OrdenCompra\OrdenCompra.cshtml" />
+    <Content Include="Views\CRM\ListadoTercerosSucursal.cshtml" />
+    <Content Include="Views\CRM\Tercero.cshtml" />
+    <Content Include="Views\CRM\ListadoContactos.cshtml" />
+    <Content Include="Views\CRM\Contacto.cshtml" />
+    <Content Include="Views\CRM\ListadoActividades.cshtml" />
+    <Content Include="Views\CRM\Actividad.cshtml" />
+    <Content Include="Views\CRM\Activdad_Calendario.cshtml" />
+    <Content Include="Views\CRM\Modal_Referencia.cshtml" />
+    <Content Include="Views\CRM\Cliente_Nuevo.cshtml" />
+    <Content Include="Views\CRM\ListadoPotenciales.cshtml" />
+    <Content Include="Views\CRM\Modal_SeleccionContacto.cshtml" />
+    <Content Include="Views\Contrato\Contrato.cshtml" />
+    <Content Include="Views\Contrato\Contratos.cshtml" />
+    <Content Include="Views\SolicitudLlenado\ModalVehiculo.cshtml" />
+    <Content Include="Views\SolicitudLlenado\SolicitudLlenado.cshtml" />
+    <Content Include="Views\SolicitudLlenado\SolicitudLlenados.cshtml" />
+    <Content Include="Views\SolicitudTransporte\SolicitudTransporte.cshtml" />
+    <Content Include="Views\SolicitudTransporte\SolicitudTransportes.cshtml" />
+    <Content Include="Views\Maestro\AgenteNaviera.cshtml" />
+    <Content Include="Views\Maestro\ListadoPuerto.cshtml" />
+    <Content Include="Views\Maestro\Puerto.cshtml" />
+    <Content Include="Views\CartaLlenadoPuerto\CartaLlenadoPuertos.cshtml" />
+    <Content Include="Views\CartaLlenadoPuerto\CartaLlenadoPuerto.cshtml" />
+    <Content Include="Views\MatrizBL\ListaMatrizBL.cshtml" />
+    <Content Include="Views\MatrizBL\MatrizBL.cshtml" />
+    <Content Include="Views\CertificadoMadera\ListaCertificadoMadera.cshtml" />
+    <Content Include="Views\CertificadoMadera\CertificadoMadera.cshtml" />
+    <Content Include="Views\CertificadoCalidad\ListaCertificadoCalidad.cshtml" />
+    <Content Include="Views\CertificadoCalidad\CertificadoCalidad.cshtml" />
+    <Content Include="RDL_FILES\Proforma.rdl" />
+    <Content Include="RDL_FILES\ReporteAnticipo.rdl" />
+    <Content Include="RDL_FILES\DOCUMENTO_PEDIDO.rdl" />
+    <Content Include="Views\Exportacion\DCD.cshtml" />
+    <Content Include="Views\Exportacion\DatosDCD.cshtml" />
+    <Content Include="Views\Exportacion\ListadoRemisionFEP.cshtml" />
+    <Content Include="Views\Exportacion\DatoFEP.cshtml" />
+    <Content Include="Views\Proforma\ProformaImportacion.cshtml" />
+    <Content Include="Views\Proforma\ProformasImportacion.cshtml" />
+    <Content Include="Views\Proforma\RecursoProformaImportacion.cshtml" />
+    <Content Include="Views\Contrato\ContratoImportacion.cshtml" />
+    <Content Include="Views\Contrato\RecursosContrato.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\themes\smoothness\minified\images\" />
+    <Folder Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\images\" />
+    <Folder Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\datepicker\images\" />
+    <Folder Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\droppable\images\" />
+    <Folder Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\position\images\" />
+    <Folder Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\progressbar\images\" />
+    <Folder Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\ajax\" />
+    <Folder Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\tooltip\ajax\" />
+    <Folder Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\demos\tooltip\images\" />
+    <Folder Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\themes\base\images\" />
+    <Folder Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\themes\base\minified\images\" />
+    <Folder Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\themes\custom-theme\images\" />
+    <Folder Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\themes\custom-theme\minified\images\" />
+    <Folder Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui\minified\i18n\" />
+    <Folder Include="Content\themes\base\minified\images\" />
+    <Folder Include="PRINT\" />
+    <Folder Include="Recurso\ImagenPerfil\" />
+    <Folder Include="RepositorioArchivos\ArchivosContrato\" />
+    <Folder Include="RepositorioArchivos\ArchivosProformas\" />
+    <Folder Include="Views\Compañia\" />
+    <Folder Include="Views\Empresa\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\img\cli_logo.png.COSMO" />
+    <Content Include="Content\js\datatables\colvis\ColVis.min.js.gz" />
+    <Content Include="Content\js\datatables\tabletools\TableTools.min.js.gz" />
+    <Content Include="Content\js\datatable\images\Sorting icons.psd" />
+    <Content Include="Content\js\datepicker\bower.json" />
+    <Content Include="Content\js\datepicker\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\js\datepicker\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\js\datepicker\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\js\datepicker\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Content\js\datepicker\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Content\js\datepicker\font-awesome\less\core.less" />
+    <Content Include="Content\js\datepicker\font-awesome\less\fixed-width.less" />
+    <Content Include="Content\js\datepicker\font-awesome\less\font-awesome.less" />
+    <Content Include="Content\js\datepicker\font-awesome\less\icons.less" />
+    <Content Include="Content\js\datepicker\font-awesome\less\larger.less" />
+    <Content Include="Content\js\datepicker\font-awesome\less\list.less" />
+    <Content Include="Content\js\datepicker\font-awesome\less\mixins.less" />
+    <Content Include="Content\js\datepicker\font-awesome\less\path.less" />
+    <Content Include="Content\js\datepicker\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Content\js\datepicker\font-awesome\less\spinning.less" />
+    <Content Include="Content\js\datepicker\font-awesome\less\stacked.less" />
+    <Content Include="Content\js\datepicker\font-awesome\less\variables.less" />
+    <Content Include="Content\js\datepicker\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Content\js\datepicker\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Content\js\datepicker\font-awesome\scss\_core.scss" />
+    <Content Include="Content\js\datepicker\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Content\js\datepicker\font-awesome\scss\_icons.scss" />
+    <Content Include="Content\js\datepicker\font-awesome\scss\_larger.scss" />
+    <Content Include="Content\js\datepicker\font-awesome\scss\_list.scss" />
+    <Content Include="Content\js\datepicker\font-awesome\scss\_mixins.scss" />
+    <Content Include="Content\js\datepicker\font-awesome\scss\_path.scss" />
+    <Content Include="Content\js\datepicker\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Content\js\datepicker\font-awesome\scss\_spinning.scss" />
+    <Content Include="Content\js\datepicker\font-awesome\scss\_stacked.scss" />
+    <Content Include="Content\js\datepicker\font-awesome\scss\_variables.scss" />
+    <Content Include="Content\js\datepicker\README.md" />
+    <Content Include="Content\js\Exportexcel\tableExport.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\autocomplete\search.php" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\ajax\content3-slow.php" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\demos\tabs\ajax\content4-broken.php" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\package.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\README.md" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.accordion.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.autocomplete.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.button.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.core.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.datepicker.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.dialog.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.draggable.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.droppable.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.effect-blind.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.effect-bounce.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.effect-clip.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.effect-drop.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.effect-explode.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.effect-fade.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.effect-fold.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.effect-highlight.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.effect-pulsate.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.effect-scale.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.effect-shake.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.effect-slide.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.effect-transfer.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.effect.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.menu.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.mouse.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.position.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.progressbar.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.resizable.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.selectable.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.slider.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.sortable.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.spinner.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.tabs.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.tooltip.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\development-bundle\ui.widget.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\package.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\README.md" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.accordion.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.autocomplete.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.button.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.core.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.datepicker.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.dialog.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.draggable.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.droppable.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.effect-blind.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.effect-clip.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.effect-drop.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.effect-fade.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.effect-fold.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.effect-scale.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.effect-shake.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.effect-slide.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.effect.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.menu.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.mouse.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.position.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.progressbar.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.resizable.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.selectable.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.slider.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.sortable.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.spinner.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.tabs.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.tooltip.jquery.json" />
+    <Content Include="Content\js\jqgrid\themes\jquery-ui-1.10.3.custom\jquery-ui-1.10.3.custom\development-bundle\ui.widget.jquery.json" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\captcha\fonts\Anorexia.ttf" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\captcha\images\image.php" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\captcha\image_req.php" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\captcha\index.php" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\captcha\newsession.php" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\captcha\process.php" />
+    <Content Include="Content\js\jquery-validation-1.14.0\demo\captcha\rand.php" />
+    <Content Include="Content\js\jquery-validation-1.14.0\package.json" />
+    <Content Include="Content\js\jquery-validation-1.14.0\README.md" />
+    <Content Include="Content\js\mainmenuv2\.DS_Store" />
+    <Content Include="Content\js\mainmenu\font\BebasNeue.eot" />
+    <Content Include="Content\js\mainmenu\font\BebasNeue.ttf" />
+    <Content Include="Content\js\select2\select2_locale_en.js.template" />
+    <Content Include="Content\js\tree\dist\themes\default\Thumbs.db" />
+    <Content Include="Content\js\tree\root.json" />
+    <EntityDeploy Include="Models\DAO_PedidosOnline.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DAO_PedidosOnline.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DAO_PedidosOnline.edmx.diagram">
+      <DependentUpon>DAO_PedidosOnline.edmx</DependentUpon>
+    </Content>
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>25242</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:25242/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

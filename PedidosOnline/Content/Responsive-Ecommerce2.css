@@ -1,0 +1,147 @@
+﻿.menu_bar {
+    padding-bottom:80px;
+    z-index: 10000;
+    float:right;
+    display:none;
+}
+@media screen and (max-width: 991px){
+
+}
+@media screen and (max-width:915px){
+   /*#panel-right{
+        width: 20%; 
+        position: absolute;
+        right: -11%;
+        top: 60%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+   }
+    #Prod{
+        width: 20%; 
+        position: absolute;
+        right: -11%;
+        top: 60%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+  }*/
+}
+.container .col-md-2 #panel-right{
+    position: fixed;
+    margin-right: 10px;
+    margin-top: 18px;
+}
+.row .menu_bar2{
+    width: 5%;
+    padding-bottom:80px;
+    display:none;
+    z-index: 10;
+}
+@media screen and (max-width:999px){
+    .row .menu_bar2{
+        display:block;
+        margin-left:-25px;
+    }
+    .row .menu_bar{
+        margin-top:-100px;
+        display:block;
+    }
+    .row .col-md-2 #seah{
+        width: 70%;
+        height: calc(100% - 80px);
+        position: fixed;
+        right:100%;
+        margin: 0;
+        z-index:10;
+    }
+    .row .col-md-2 #Prod{
+        width: 100%;
+        height: auto;
+        position: fixed;
+        right:100%;
+        margin: 0;
+        display:block;
+    }
+    #panel-right{
+        width:70%;
+        display:block;
+        margin-left:90px;
+    }
+    #myModal1 .modal-dialog .modal-content .modal-body .row .col-md-12 .tabbable ul.nav{
+        width:10%;
+        font-size:.8em;
+    }
+
+}
+.row .col-md-2 #seah{
+    position:fixed;
+    width:19%;
+    margin-top:-71px;
+    display:block;
+    margin-left:-35px;
+}
+#panel-right .thumbnail img {
+    height: 150px;
+    width: 90%;
+}
+@media screen and (max-width: 448px){
+    .row .col-md-2 #seah{
+        width:70%;
+        overflow: scroll;
+        margin-left:0px;
+        height: calc(100% - 80px);
+        padding-bottom:100px;
+    }
+    .row .menu_bar{
+        display: scroll;
+        position:fixed;
+        bottom:179px;
+        right:0px;
+        padding-bottom:0px;
+    }
+        #panel-right{
+        width:70%;
+        display:block;
+        margin-left:60px;
+    }
+    .row .col-md-2 #Prod {
+        position:fixed;
+        bottom:50px;
+        padding-bottom:0px;
+        margin-right:-100px;
+    }
+}
+.row .col-md-2 #Prod{
+    position: fixed;
+    margin-right: 10px;
+    width: 70%;
+    margin-top: -71px;
+    z-index:10;
+}
+#tab_1_2 #alig #select2-drop-mask{
+    width:100%;
+}
+/*@media screen and (min-width: 670px){
+    .row .col-md-2 #seah{
+        width:70%;
+        overflow: scroll;
+        margin-left:0px;
+    }
+    .row .menu_bar{
+        display: scroll;
+        position:fixed;
+        bottom:780px;
+        right:0px;
+        padding-bottom:0px;
+    }
+        #panel-right{
+        width:70%;
+        display:block;
+        margin-left:60px;
+    }
+    .row .col-md-2 #Prod {
+        position:fixed;
+        bottom:640px;
+        padding-bottom:0px;
+        margin-right:-100px;
+    }
+}*/

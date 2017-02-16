@@ -1,0 +1,79 @@
+﻿@using PedidosOnline.Models;
+@model List<PedidosOnline.Models.DCD>
+@{
+    ViewBag.Title = "Contratos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    a {
+        color: #333;
+    }
+</style>
+<script>
+
+    $(document).ready(function () {
+        $('tblDCD').dataTable({
+            " processing": true,
+            "bFilter": true,
+            "bPaginate": true,
+            "info": false,
+            "bDestroy":true,
+            aLengthMenu: [
+            [15, 25, 50, 100, -1],
+            [15, 25, 50, 100, "All"]
+            ],
+            "iDisplayLength": 15
+
+        });
+
+    });
+</script>
+<div class="panel">
+    <div class="row">
+        <div>
+            <div class="nav">
+                <span>
+                    &nbsp;&nbsp;
+                    <a href="@Url.Action("DatosDCD", "Exportacion")" class="alink">
+                        <i class="glyphicon glyphicon-plus"></i>&nbsp;<span class="lang" key="NUEVO">Nuevo</span>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <table id="tblDCD" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Contrato</th>
+                        <th>Fecha Expedicion</th>
+                        <th>Comprador</th>
+                        <th>Representante legal</th>
+                        <th>Vendedor</th>
+                        <th>No Convenio</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (PedidosOnline.Models.DCD contratos in ViewBag.ListaDCD)
+                    {
+                        <tr>
+                            <td>@contratos.RowID</td>
+                            <td>@contratos.Contrato.RowID</td>
+                            <td>@contratos.FechaExpedicion</td>
+                            <td>@contratos.Contrato.Proforma.Tercero.RazonSocial</td>
+                            <td>@contratos.RepresentanteLegal</td>
+                            <td>@contratos.Contrato.Proforma.Tercero1.RazonSocial</td>
+                            <td>@contratos.NroConvenio</td>
+                            <td><a href="@Url.Action("DatosDCD", "Exportacion", new { RowID = contratos.RowID })"><i class="glyphicon glyphicon-pencil"></i></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

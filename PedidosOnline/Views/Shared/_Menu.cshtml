@@ -1,0 +1,138 @@
+﻿
+<link href="~/Content/js/menu/styles.css" rel="stylesheet" />
+<script src="~/Content/js/menu/script.js"></script>
+
+@using PedidosOnline.Models
+
+<script>
+    function MostrarSubOpcionesMenu(rowid_opcion_padre) {
+        $(".subopcionesmenu").hide();
+        $(".subopciones").hide();
+        $(".subopcionesmenu").show();
+        $("#DivSubOpciones_" + rowid_opcion_padre).show();
+    }
+</script>
+<!-- Static navbar -->
+<nav class="navbar navbar-default navbar-static-top" id="LayoutMenu">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <i class="glyphicon glyphicon-th" id="menu" style="padding: 15px 15px;" title="Menú"></i>
+            <a class="navbar-brand lang" href="/Home/Grafica_Inicio" key="PEDIDOSONLINE">PedidosOnline</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#">
+
+                    </a>
+                </li>
+
+                <li>
+                    <i id="cuenta" class="glyphicon glyphicon-cog" style="padding: 15px 15px;"></i>
+                </li>
+                <li>
+                    <i onclick="window.open('http://help.ordersonline.co');" class="glyphicon glyphicon-question-sign" title="Ayuda" style="padding: 15px 15px;"></i>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+
+@*<div style=" width 100%;   /* padding: 10px 10px; */   background: #fff;   background-color: whitesmoke;">*@
+<div id="cssmenu" class="navbar" style="display:none;position: absolute;">
+    <ul>
+        @foreach (Modulo item in ((List<Modulo>)Session["Modulo"]).ToList())
+        {
+            <li class='has-sub' style="background-image:url('@item.Icono')">
+                <a onclick="MostrarSubOpcionesMenu(@item.RowID)">
+                    <span>@item.Nombre</span>
+                </a>
+            </li>
+
+        }
+    </ul>
+</div>
+
+<div class="subopcionesmenu" style="display:none;">
+    @foreach (Modulo modulo in ((List<Modulo>)Session["Modulo"]).OrderBy(o => o.Orden))
+    {
+        <div class="row subopciones" id="DivSubOpciones_@modulo.RowID" style="display:none;">
+            <div class="col-md-12">
+                @foreach (Menu menu in ((List<Menu>)Session["Menu"]).Where(f => f.Modulo.RowID == modulo.RowID).OrderBy(f => f.Orden))
+                {
+                    <div class="col-md-2" style="margin:10px;">
+                        <nobr>
+                            <img src="@menu.Icono" style="background-color:@menu.BgColor" />
+                            <a href="@Url.Action(@menu.Metodo, @menu.Controlador)">@menu.Nombre</a>
+                        </nobr>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+
+<style>
+    .menuconfiguracion {
+        text-align: center !important;
+    }
+</style>
+<script>
+    function CerrarSession() {
+        window.localStorage.clear();
+        eraseCookie('p')
+        eraseCookie('p2')
+        eraseCookie('p3')
+    }
+    function createCookie(name, value, days) {
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            var expires = "; expires=" + date.toGMTString();
+        }
+        else var expires = "";
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+    function eraseCookie(name) {
+        createCookie(name, "", -1);
+    }
+</script>
+
+<!-- :: INFORMACION DE LA CUENTE :: -->
+<div id="info_cuenta" style="width:auto;z-index:9999999999">
+    <ul style="width:100%">
+        @if ((Usuario)Session["curUser"] !=null)
+        {
+            <li class="menuconfiguracion"><h4>@(((Usuario)Session["curUser"]).Tercero.RazonSocial)</h4></li>
+        }
+        @*<li class="menuconfiguracion"><h6 class="info">@DatosCliente.UsuarioLogeado.Tercero.email )</h6></li>*@
+        <li style="height:5px"><hr style="margin:0px" />&nbsp;</li>
+        <li class="menuconfiguracion"><h6><a href="@Url.Action("CambiarClave","Masters", new { @nm = "Cambiar Clave", @rih="1135" })">CAMBIAR CONTRASEÑA</a></h6></li>
+        <li class="menuconfiguracion"><h6><a href="@Url.Action("PerfilUsuario","Masters", new { @nm = "Mi Perfil", @rih = "1155"})">EDITAR DATOS PERSONALES</a></h6></li>
+        @*@if (((s_role)Session["rol"]).ind_controltotal == 1)
+            {
+                <li class="menuconfiguracion"><h6><a href="@Url.Action("Listado_Soportes","Soporte", new { @nm = "Soporte",@rih="1156"})">SOLICITAR SOPORTE A PANGEA</a></h6></li>
+            }*@
+        <li class="menuconfiguracion"><h6><a href="http://help.ordersonline.co/es/bienvenidos/" target="_blank">VISITA EL CENTRO DE CAPACITACI&Oacute;N</a></h6></li>
+        <li class="menuconfiguracion"><h6><a href="/Account/CloseSession" onclick="javascript:CerrarSession()">CERRAR DE FORMA SEGURA PEDIDOSONLINE</a></h6></li>
+    </ul>
+</div>

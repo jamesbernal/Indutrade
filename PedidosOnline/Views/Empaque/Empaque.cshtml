@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Empaque";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="tabbable tabbable-custom tabs-top">
+        <ul class="nav nav-tabs tabs-top">
+            <li id="proforma" class="active"><a href="#tab_1" id="litab_1" data-toggle="tab" class="lang" key="">Empaque</a></li>
+        </ul>
+    </div>
+
+    <div class="tab-content" style="overflow:hidden">
+        <div class="tab-pane active" id="tab_1">
+
+            <div class="col-md-12" style="margin-top:20px;">
+                <form id="formPrincial" name="formPrincial" method="post" onsubmit="return false">
+                    <input type="hidden" name="rowid" id="rowid" value="" />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                               <label class="control-label">Para</label>
+                                <input type="text" id="para" name="para" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Puerto carga</label>
+                                <input type="text" id="puerto_carga" name="puerto_carga" class="form-control" placeholder="---"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Expedidor</label>
+                                <input type="text" id="expedidor" name="expedidor" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Puerto Descarga</label>
+                                <input type="text" id="puerto_descarga" name="puerto_descarga" class="form-control" placeholder="---" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+</div>
+

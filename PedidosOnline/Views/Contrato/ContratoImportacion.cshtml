@@ -1,0 +1,498 @@
+﻿@model PedidosOnline.Models.Contrato
+@{
+    ViewBag.Title = "Contrato";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    a {
+        color: #333;
+    }
+</style>
+
+<link href="~/Content/Tabs.css" rel="stylesheet" />
+<script type="text/javascript">
+    function guardarContrato(a)
+    {
+        //debugger
+        ModalProcesandoShow();
+        var RowID = $(".RowID").val();
+        var RowIDPro = $(".RowIDPro").val();
+
+        if(RowIDPro == ""){
+            Mensajes('El campo proforma es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+        if($(".autoc_inspector").val()== ""){
+            Mensajes('El campo inspector es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+        if($("#fecha").val()== ""){
+            Mensajes('El campo fecha es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+        if($("#periodoE").val()== ""){
+            Mensajes('El campo periodo embarque es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+        if($("#transporte").val()== ""){
+            Mensajes('El campo transporte es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Contrato/RegistrarContrato",
+            data: {
+                formulario: $("#form").serialize(),
+                RowID: RowID,
+                RowIDPro: RowIDPro
+            },
+            success: function (data2) {
+                if(a == 1){
+                    if (@Model.RowID >0) {
+                        Mensajes('Guardado Satisfactoriamente','success','');
+                    }
+                    else
+                    {
+                        location.href="../Contrato/Contrato?rowid="+data2;
+                    }
+                    ModalProcesandoHiden();
+                }
+                else
+                {
+                    location.href="../Contrato/Contratos";
+                }
+            },
+            error: function (request) {
+                Mensajes(request.responseText, 'error', '');
+                ModalProcesandoHiden();
+            }
+        });
+    }
+
+    function cargarItemsContrato(rowid_proforma) {
+        $.ajax({
+            type: "GET",
+            url: "/Contrato/ItemsContrato",
+            data: {
+                RowID: rowid_proforma
+            },
+            success: function (data) {
+                $('#tblProductos tbody').empty();
+                $('#tblProductos tbody').append(data);
+            },
+            error: function (request) {
+                Mensajes("Se presento un error", 'error', '');
+
+            }
+        });
+    }
+
+
+
+</script>
+
+<div class="panel">
+    <div class="row">
+        <div class="row" id="div_menu" style="margin-bottom:20px">
+            <div class="col-md-12">
+                <div class="nav">
+                    <span>
+                        &nbsp;&nbsp;
+                        <a href="@Url.Action("ContratosImportacion  ","Contrato",new {  @rih = Request.Params["rih"] })" class="alink">
+                            <i class="glyphicon glyphicon-list-alt"></i>&nbsp;<span class="lang" key="VISTA">Vista&nbsp;&nbsp;</span>
+                        </a>
+                    </span>
+                    <span>
+                        <a href="javascript:guardarContrato(1);" class="alink">
+                            <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
+                        </a>
+                    </span>
+                    <span>
+                        &nbsp;&nbsp;
+                        <a href="javascript:guardarContrato(2);" class="alink">
+                            <i class="glyphicon glyphicon-floppy-disk"></i><span class="lang" key="GUARDAR_&_CERRAR">&nbsp;Guardar&nbsp;&&nbsp;Cerrar</span>
+                        </a>
+                    </span>
+
+                    @if (Model.RowID != 0)
+                    {
+                        <span>
+                            &nbsp;&nbsp;
+                            <a href="~/OrdenCompra/OrdenCompra" class="alink">
+                                <i class="glyphicon glyphicon-arrow-right"></i><span class="lang" key="Siguiente">Siguiente</span>
+                            </a>
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="tabbable tabbable-custom tabs-top">
+            <ul class="nav nav-tabs tabs-top">
+                <li id="li_tab1" class="active"><a href="#tab1" data-toggle="tab">Datos generales</a></li>
+                <li id="li_tab2"><a href="#tab2" data-toggle="tab">Items</a></li>
+                @*<li class="active" id="li_tab1"><a href="#tab_1" id="litab_1" data-toggle="tab" class="lang" key="">Datos generales</a></li>*@
+                @*<li class="item" id="li_tab2"><a href="#tab_2" id="litab_2" data-toggle="tab" class="lang" key="">Items </a></li>*@
+            </ul>
+        </div>
+        <div class="tab-content" style="overflow:hidden">
+            <div class="col-md-12">
+                <form id="form" name="form" onsubmit="return false">
+                    <input type="hidden" class="RowID" id="RowID" name="RowID" value="@Model.RowID" />
+                    <input type="hidden" class="RowIDPro" name="RowIDPro" />
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="autoc_proforma" class="lang" key="PROFORMA">Proforma</label>
+                            </div>
+                            <div class="col-md-5">
+                                @if (/*Model.RowID != null ||*/ Model.RowID > 0)
+                                {
+                                    <input type="text" id="autoc_proforma" name="autoc_proforma" value="@Model.Proforma.Titulo" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                }
+                                else
+                                {
+                                    <input type="text" id="autoc_proforma" name="autoc_proforma" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                }
+
+
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="titulo" class="lang">Titulo</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="titulo" name="titulo" value="@Model.Titulo" style="width: 100%" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="fecha" class="lang">Fecha</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="fecha" name="fecha" style="width: 100%" value="@Model.Fecha" readonly="readonly" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="intermediario" class="lang">Intermediario</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="intermediario" name="intermediario" value="@Model.Intermediario" style="width: 100%" />
+                            </div>
+                        </div>
+                        <br />
+                        @*<div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="fecha" class="lang">Fecha</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" id="fecha" name="fecha" style="width: 100%"/>
+                                </div>
+                            </div>
+                            <br />*@
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="calidad" class="lang">Calidad</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="calidad" name="calidad" value="@Model.Calidad" style="width: 100%" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="periodoE" class="lang">Per. embarque</label>
+                            </div>
+                            <div class="col-md-5">
+                                <select id="periodoE" name="periodoE" style="width: 100%" required>
+                                    <option value="">---</option>
+                                    @foreach (var periodo in ViewBag.periodoE)
+                                    {
+                                        if (/*Model.RowID != null ||*/ Model.RowID > 0)
+                                        {
+                                            if (Model.Opcion.RowID == periodo.RowID)
+                                            {
+                                                <option value="@Model.Opcion.RowID" selected>@Model.Opcion.Descripcion</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@periodo.RowID">@periodo.Descripcion</option>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <option value="@periodo.RowID">@periodo.Descripcion</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="transporte" class="lang">Transporte</label>
+                            </div>
+                            <div class="col-md-5">
+                                <select id="transporte" name="transporte" style="width: 100%" required>
+                                    <option value="">---</option>
+
+                                    @foreach (var trn in ViewBag.transporte)
+                                    {
+                                        if (/*Model.RowID != null ||*/ Model.RowID > 0)
+                                        {
+                                            if (Model.Opcion1.RowID == trn.RowID)
+                                            {
+                                                <option value="@Model.Opcion1.RowID" selected>@Model.Opcion1.Descripcion</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@trn.RowID">@trn.Descripcion</option>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <option value="@trn.RowID">@trn.Descripcion</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="calidad" class="lang">Seguro</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="seguro" name="seguro" value="@Model.Seguro" style="width: 100%" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="autoc_inspector" class="lang">Inspector</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="autoc_inspector" name="autoc_inspector" value="@Model.Inspector" placeholder="---" style="width: 100%" />
+                            </div>
+
+
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="embarqueP" class="lang">Embarque parcial</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="embarqueP" name="embarqueP" value="@Model.EmbarqueParcial" style="width: 100%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="vendedor" class="lang">Vendedor</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" id="vendedor" name="vendedor" placeholder="---" disabled />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="vendedor" class="lang">Comprador</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" id="comprador" name="comprador" placeholder="---" disabled />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="origen" class="lang">Origen</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" id="origen" name="origen" placeholder="---" disabled />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="empaque" class="lang">Destino</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" id="destino" name="destino" placeholder="---" disabled />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="formaP" class="lang">Forma de pago</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" id="formaP" name="formaP" placeholder="---" disabled />
+                            </div>
+                        </div>
+                        <br />
+
+                        @*<div class="form-group">
+                                <label for="producto" class="lang">Producto</label>
+                                <input type="text" id="producto" name="producto" placeholder="---" disabled />
+                            </div>
+                            <div class="form-group">
+                                <label for="producto" class="lang">Cantidad</label>
+                                <input type="text" id="cantidad" name="cantidad" placeholder="---" disabled />
+                            </div>
+                            <div class="form-group">
+                                <label for="precio" class="lang">Precio</label>
+                                <input type="text" id="precio" name="precio" placeholder="---" disabled />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="empaque" class="lang">Empaque</label>
+                                <input type="text" id="empaque" name="empaque" placeholder="---" disabled />
+                            </div>
+                            <div class="form-group">
+                                <label for="empaque" class="lang">Peso</label>
+                                <input type="text" id="peso" name="peso" placeholder="---" disabled />
+                            </div>*@
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="tab_2" class="tab-pane">
+            <div class="col-md-12" style="margin-top:10px;">
+                <table id="tblProductos" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Ref.</th>
+                            <th>Descripcion</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Und. empaque</th>
+                            <th>Peso</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#fecha').datepicker({
+        dateFormat: 'dd/mm/yy',
+        minDate: 0,
+        maxDate: '+3Y',
+        inline: true
+    });
+
+    $('#autoc_inspector').on('keyup keypress', function (e) {
+        //debugger
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) { //Enter keycode
+            return false;
+        }
+    });
+
+    $("#autoc_inspector").autocomplete({
+        source: "Contrato_Buscar_Inspector",
+        minLenght: 3,
+        select: function (evento, ui) {//seleccion al autocompletar
+            //debugger
+            if (ui.item != null) {//si hay valor en la seleccion autocompletar
+                $("#autoc_inspector").val(ui.item.label);
+            }
+        },
+        change: function (event, ui) {
+
+        }
+    });
+
+    $('#autoc_proforma').on('keyup keypress', function (e) {
+        //debugger
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) { //Enter keycode
+            return false;
+        }
+    });
+
+
+
+
+    $("#autoc_proforma").autocomplete({
+        source: "Proforma_Buscar_Todos?tipo_proforma=EXPORTACION",
+        minLenght: 3,
+        select: function (evento, ui) {//seleccion al autocompletar
+            //debugger
+            if (ui.item != null) {//si hay valor en la seleccion autocompletar
+                $("#autoc_proforma").val(ui.item.label);
+                $("#vendedor").val(ui.item.vendedor);
+                $("#comprador").val(ui.item.comprador);
+                $("#origen").val(ui.item.origen);
+                $("#destino").val(ui.item.destino);
+                $("#formaP").val(ui.item.formaPago);
+                $(".RowIDPro").val(ui.item.RowID);
+                cargarItemsContrato(ui.item.RowID);
+            }
+        },
+        change: function (event, ui) {
+
+        }
+    });
+    $("#li_tab1").click(function () {
+        //debugger
+        $("#tblProductos").hide();
+        $("#form").show();
+
+    });
+
+    $("#li_tab2").click(function () {
+        //debugger
+        $("#tblProductos").show();
+        $("#form").hide();
+    });
+
+
+    $(document).ready(function () {
+        $("#tblProductos").hide();
+        //debugger
+        if (@Model.RowID > 0)
+        {
+            var titulo = $("#autoc_proforma").val();
+            $.ajax({
+                type: "GET",
+                url: "/Contrato/Datos_Proforma",
+                data:
+                      {
+                          titulo: titulo
+                      },
+                success: function (data) {
+                    $("#vendedor").val(data.vendedor);
+                    $("#comprador").val(data.comprador);
+                    $("#origen").val(data.origen);
+                    $("#destino").val(data.destino);
+                    $("#formaP").val(data.formaPago);
+                    $(".RowIDPro").val(data.RowID);
+                    cargarItemsContrato(data.RowID);
+                },
+                error: function (request) {
+                    Mensajes("Se presento un error", 'error', '');
+
+                }
+            });
+        }
+    });
+
+
+
+</script>

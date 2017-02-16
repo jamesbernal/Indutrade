@@ -1,0 +1,196 @@
+﻿body {
+    background:url(img/portadaindutrade.jpg);
+    /*background-attachment:fixed;
+    background-size:62% auto;
+    background-repeat: no-repeat;
+    background-color: #6f6f6f;*/
+	height:100%;
+	background-repeat: no-repeat;
+    -webkit-background-size: 65% 100%;
+    -moz-background-size: 65% 100%;
+    -o-background-size: 65% 100%;
+    background-size: 65% 100%;
+    overflow-x:hidden;
+
+}
+.pangea img{
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+    padding-right: 100px;
+    width:95%;
+    margin-bottom:5%;
+}
+/*#color{
+    border-left:1px solid #000;
+}*/
+.logo-Respon{
+    display:none;
+}
+#DivDad hr{
+    margin:0px;
+    width: 70%;
+}
+#formulario form .col-md-9 #vali p a{
+     color: #428bca;
+     cursor:pointer;
+}
+::-webkit-input-placeholder{
+    opacity:0;
+}
+@media screen and (max-width:991px){
+    body{
+        background:url();
+        overflow-y:scroll;
+        margin-bottom:90px;
+
+    }
+    .vid-container{
+       background:url();
+        position:relative;
+        height:100vh;
+        overflow:hidden;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        background-color: #f2f2f2;
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
+
+    #formulario form{
+        width:80%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, 20%);
+        -webkit-transform: translate(-50%, 20%);
+        overflow-y:hidden;
+    }
+    #formulario form input[type="submit"]{
+        width:100%;
+        line-height: 25px;
+        font-size:1.3em;
+    }
+    #footer{
+        margin-top:490px;
+    }
+    #formulario form{
+    }
+    #formulario form input[type="text"], #formulario form input[type="password"]{
+        border:1px solid rgba(97, 97, 97, 0.41);
+        line-height:35px;
+        border-radius: 1px;
+        text-align:center;
+        -moz-transition: all 200ms ease-in-out;
+        -o-transition: all 200ms ease-in-out;
+        -webkit-transition: all 200ms ease-in-out;
+        transition: all 200ms ease-in-out;
+        font-size:1.5em;
+        color:#616161;
+    }
+        #formulario form input[type="text"]:focus, #formulario form input[type="password"]:focus {
+            border: 1px solid #0b334b;
+            -moz-transition: all 200ms ease-in-out;
+            -o-transition: all 200ms ease-in-out;
+            -webkit-transition: all 200ms ease-in-out;
+            transition: all 200ms ease-in-out;
+            -moz-box-shadow: 0px 4px 15px 4px rgba(0,0,0,0.5);
+            -webkit-box-shadow: 0px 4px 15px 0px rgba(0,0,0,0.5);
+            box-shadow: 0px 4px 15px 0px rgba(0,0,0,0.5);
+        }
+        #formulario form .field-validation-error{
+            color:#fff;
+            text-align:center;
+        }
+        #formulario form .col-md-9 #vali .validation-summary-errors ul li{
+            color:#fff;
+            
+        }
+        #formulario form .col-md-9 #vali p a{
+            color:#333;
+            font-weight:bold;
+        }
+    #formulario form input[type="password"]{
+        text-security: disc;
+    }
+    #formulario form #label label{
+        text-align:center;
+        font-size:1.1em;
+        display:none;
+        color: rgba(26, 25, 25, 0.69);
+    }
+    #formulario form #recordar label{
+    }
+    #footer table tr td #app img{
+        display:inline-block;
+    }
+     #DivDad{
+        width:100%;
+        /*border-bottom: 1px solid rgba(158, 158, 158, 0.28);*/
+        margin-bottom:10px;
+    }
+    #DivDad hr{
+        display:none;
+    }
+    .logo-Respon{
+        display:block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left:-30px;
+        margin-top:10px;
+        -webkit-transform: translate(-50%, 10%);
+    }
+    hr{
+        display:none;
+    }
+    .logo-Respon img{
+        width:120%;
+        
+    }
+
+    .pangea img{
+        display:none;
+    }
+    ::-webkit-input-placeholder{
+        opacity:.7;
+        font-family:'Segoe UI', sans-serif;
+        font-size:.9em;
+    }
+    #formulario form #logins{
+        margin-left:35%;
+    }
+    /*.reymon , .pangea{
+        display: table-cell;
+    }*/
+}
+@media screen and (max-width:480px){
+    /*.pangea img{
+        width:150%;
+        position: relative;
+        top: 1.5em;
+    }*/
+    body,
+    .vid-container{
+        overflow-y:scroll;
+    }
+}
+#footer table tr td{
+    text-align: left;
+     margin-right:10px; 
+     margin-left:20px;
+}
+#footer table{
+     /*width="90%" /*border="0" align="center";*/
+     width:90%;
+     border:0px;
+}
+#footer table tr td #app img{
+     width:150px;
+     margin-left: auto;
+     margin-right:auto;
+     display:block;
+}

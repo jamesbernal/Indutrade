@@ -1,0 +1,532 @@
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\PedidosOnline.dll.config
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\PedidosOnline.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\PedidosOnline.pdb
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Antlr3.Runtime.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\EntityFramework.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\EntityFramework.SqlServer.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Newtonsoft.Json.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Owin.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\System.Web.Helpers.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\System.Web.Mvc.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\System.Web.Optimization.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\System.Web.Razor.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Razor.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\WebGrease.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\System.Web.Helpers.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\System.Web.Mvc.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\System.Web.Optimization.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\System.Web.Razor.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Razor.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Newtonsoft.Json.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Antlr3.Runtime.pdb
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\EntityFramework.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\EntityFramework.SqlServer.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\es\System.Web.Helpers.resources.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\es\System.Web.Mvc.resources.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\es\System.Web.Optimization.resources.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\es\System.Web.Razor.resources.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.resources.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.Deployment.resources.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\es\EntityFramework.resources.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\es\EntityFramework.SqlServer.resources.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.resources.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Host.SystemWeb.resources.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.resources.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Facebook.resources.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Google.resources.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.dll
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.pdb
+C:\Users\Andres\Documents\asd\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.csprojResolveAssemblyReference.cache
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.pdb
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\PedidosOnline.dll.config
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\PedidosOnline.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\PedidosOnline.pdb
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Antlr3.Runtime.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\EntityFramework.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\EntityFramework.SqlServer.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Google.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.Web.Infrastructure.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Newtonsoft.Json.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Owin.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\System.Web.Helpers.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\System.Web.Mvc.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\System.Web.Optimization.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\System.Web.Razor.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Deployment.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Razor.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\WebGrease.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\System.Web.Helpers.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\System.Web.Mvc.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\System.Web.Optimization.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\System.Web.Razor.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Deployment.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Razor.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Newtonsoft.Json.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Antlr3.Runtime.pdb
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\EntityFramework.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\EntityFramework.SqlServer.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Google.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\es\System.Web.Helpers.resources.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\es\System.Web.Mvc.resources.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\es\System.Web.Optimization.resources.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\es\System.Web.Razor.resources.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.resources.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.Deployment.resources.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\es\EntityFramework.resources.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\es\EntityFramework.SqlServer.resources.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.resources.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Host.SystemWeb.resources.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.resources.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Facebook.resources.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Google.resources.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
+C:\Group_Pangea\INDUTRADE\Nueva carpeta\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.csprojResolveAssemblyReference.cache
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\PedidosOnline.dll.config
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\PedidosOnline.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\PedidosOnline.pdb
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Antlr3.Runtime.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\EntityFramework.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\EntityFramework.SqlServer.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Google.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.Web.Infrastructure.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Newtonsoft.Json.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Owin.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\System.Web.Helpers.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\System.Web.Mvc.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\System.Web.Optimization.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\System.Web.Razor.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Deployment.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Razor.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\WebGrease.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\System.Web.Helpers.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\System.Web.Mvc.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\System.Web.Optimization.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\System.Web.Razor.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Deployment.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Razor.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Newtonsoft.Json.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Antlr3.Runtime.pdb
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\EntityFramework.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\EntityFramework.SqlServer.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Google.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\es\System.Web.Helpers.resources.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\es\System.Web.Mvc.resources.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\es\System.Web.Optimization.resources.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\es\System.Web.Razor.resources.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.resources.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.Deployment.resources.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\es\EntityFramework.resources.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\es\EntityFramework.SqlServer.resources.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.resources.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Host.SystemWeb.resources.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.resources.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Facebook.resources.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Google.resources.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.pdb
+C:\Pangea\INDUTRADE\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.csprojResolveAssemblyReference.cache
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.pdb
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\PedidosOnline.dll.config
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\PedidosOnline.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\PedidosOnline.pdb
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Antlr3.Runtime.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\EntityFramework.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\EntityFramework.SqlServer.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Core.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Owin.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Host.SystemWeb.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Cookies.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Facebook.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Google.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.OAuth.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Twitter.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.Web.Infrastructure.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Newtonsoft.Json.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Owin.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\System.Web.Helpers.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\System.Web.Mvc.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\System.Web.Optimization.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\System.Web.Razor.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Deployment.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Razor.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\WebGrease.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\System.Web.Helpers.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\System.Web.Mvc.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\System.Web.Optimization.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\System.Web.Razor.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Deployment.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Razor.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Newtonsoft.Json.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Antlr3.Runtime.pdb
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\EntityFramework.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\EntityFramework.SqlServer.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Core.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Owin.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Host.SystemWeb.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Facebook.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Cookies.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.OAuth.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Google.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Twitter.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\es\System.Web.Helpers.resources.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\es\System.Web.Mvc.resources.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\es\System.Web.Optimization.resources.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\es\System.Web.Razor.resources.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.resources.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.Deployment.resources.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.Razor.resources.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\es\EntityFramework.resources.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\es\EntityFramework.SqlServer.resources.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.resources.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Host.SystemWeb.resources.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.resources.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Facebook.resources.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Google.resources.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
+I:\Pangea\Documents\Pangea Group\Indutrade 10 Ene\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\PedidosOnline.dll.config
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\PedidosOnline.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\PedidosOnline.pdb
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Antlr3.Runtime.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\EntityFramework.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\EntityFramework.SqlServer.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Newtonsoft.Json.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Owin.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Helpers.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Mvc.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Optimization.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Razor.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Razor.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\WebGrease.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Helpers.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Mvc.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Optimization.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Razor.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Razor.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Newtonsoft.Json.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Antlr3.Runtime.pdb
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\EntityFramework.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\EntityFramework.SqlServer.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.Helpers.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.Mvc.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.Optimization.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.Razor.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.Deployment.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\EntityFramework.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\EntityFramework.SqlServer.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Host.SystemWeb.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Facebook.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Google.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.csprojResolveAssemblyReference.cache
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.dll
+C:\Users\Pangea\Desktop\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.pdb
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\PedidosOnline.dll.config
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\PedidosOnline.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\PedidosOnline.pdb
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Antlr3.Runtime.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\EntityFramework.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\EntityFramework.SqlServer.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Newtonsoft.Json.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Owin.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Helpers.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Mvc.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Optimization.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Razor.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Razor.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\WebGrease.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Helpers.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Mvc.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Optimization.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Razor.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Razor.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Newtonsoft.Json.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Antlr3.Runtime.pdb
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\EntityFramework.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\EntityFramework.SqlServer.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.Helpers.resources.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.Mvc.resources.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.Optimization.resources.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.Razor.resources.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.resources.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.Deployment.resources.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\EntityFramework.resources.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\EntityFramework.SqlServer.resources.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.resources.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Host.SystemWeb.resources.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.resources.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Facebook.resources.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Google.resources.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.pdb
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.ReportViewer.Common.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.ReportViewer.WebForms.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.ReportViewer.ProcessingObjectModel.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Spire.License.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Spire.Pdf.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.mshtml.dll
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Spire.License.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Spire.Pdf.xml
+C:\Users\Pangea\Documents\PANGEA GROUP\INDUTRADE\Indutrade 13 Ene 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.csprojResolveAssemblyReference.cache
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\PedidosOnline.dll.config
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\PedidosOnline.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\PedidosOnline.pdb
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Antlr3.Runtime.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\EntityFramework.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\EntityFramework.SqlServer.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Core.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Cookies.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Facebook.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Google.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.OAuth.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Twitter.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.ReportViewer.Common.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.ReportViewer.WebForms.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Web.Infrastructure.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Newtonsoft.Json.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Owin.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Spire.License.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Spire.Pdf.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Helpers.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Mvc.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Optimization.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Razor.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Deployment.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Razor.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\WebGrease.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.mshtml.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Spire.License.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Spire.Pdf.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Helpers.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Mvc.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Optimization.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.Razor.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Deployment.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\System.Web.WebPages.Razor.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Newtonsoft.Json.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Antlr3.Runtime.pdb
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\EntityFramework.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\EntityFramework.SqlServer.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Core.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Facebook.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Cookies.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.OAuth.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Google.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.Twitter.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.Helpers.resources.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.Mvc.resources.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.Optimization.resources.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.Razor.resources.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.resources.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.Deployment.resources.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\System.Web.WebPages.Razor.resources.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\EntityFramework.resources.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\EntityFramework.SqlServer.resources.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.resources.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Host.SystemWeb.resources.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.resources.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Facebook.resources.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Google.resources.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.csprojResolveAssemblyReference.cache
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.dll
+D:\Indutrade 16 Feb 2017\Indutrade 13 Ene 2017\PedidosOnline\PedidosOnline\obj\Debug\PedidosOnline.pdb

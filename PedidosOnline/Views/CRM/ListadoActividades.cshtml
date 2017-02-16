@@ -1,0 +1,130 @@
+﻿@model IEnumerable<PedidosOnline.Models.Actividad>
+@{
+    ViewBag.Title = "ListadoActividades";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/js/select2/select2.css" rel="stylesheet" />
+<script type="text/javascript" src="~/js/select2/select2.min.js?v=166"></script> <!-- Styled select boxes -->
+
+<script>
+    $(document).ready(function () {
+
+        $('table').dataTable({
+            " processing": true,
+            "bFilter": true,
+            "bPaginate": true,
+            "info": false,
+            "bDestroy": true,
+            aLengthMenu: [
+            [11, 25, 50, 100, -1],
+            [11, 25, 50, 100, "All"]
+            ],
+            "iDisplayLength": 11
+        });
+    });
+
+    function ExportarExcel() {//permite exportar desde el data procedure con la palabra clave
+        UtilExportarExcel('ACTIVIDADES', $("#table_filter").find("input").val());
+    }
+</script>
+
+<div class="nav">
+    <span>
+        <a href="@Url.Action( "Actividad","CRM",new { @rih=Request.Params["rih"] })" style="text-decoration: none; color: black; font-size: 12px; ">
+            <i class="glyphicon glyphicon-plus"></i>&nbsp;Nuevo
+        </a>
+    </span>
+    <span>
+        &nbsp;&nbsp;
+        <a href="javascript:ExportarExcel();" class="alink">
+            <i class="glyphicon glyphicon-export"></i>&nbsp;<span class="lang" key="EXPORTAR">Exportar</span>
+        </a>
+    </span>
+</div>
+<br />
+<div class="row ">
+    <div class="col-md-12">
+        <table id="table" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="lang" key="TIPO">Tipo</th>
+                    <th class="lang" key="ASUNTO">Asunto</th>
+                    <th class="lang" key="PRIORIDAD">Prioridad</th>
+                    <th class="lang" key="TIPO_REFERENCIA">Tipo Referencia</th>
+                    <th class="lang" key="REFERENCIADO_A">Referenciado a</th>
+                    <th class="lang" key="DESCRIPCION">Descripción</th>
+                    <th class="lang" key="INICIO">Inicio</th>
+                    <th class="lang" key="FIN">Fin</th>
+                    <th class="lang" key="ESTADO">Estado</th>
+                    <th class="lang" key="USUARIO_CREACION">Usuario</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @foreach (PedidosOnline.Models.Actividad actividad in ((List<PedidosOnline.Models.Actividad>)@Model).ToList())
+                {
+                    if (actividad.Contacto==null)
+                    {
+                        actividad.Contacto = new PedidosOnline.Models.Contacto();
+                    }
+                    if (actividad.Tercero==null)
+                    {
+                        actividad.Tercero = new PedidosOnline.Models.Tercero();
+                    }
+                    <tr>
+                        <td>
+                            <!--Se debe descomentar cuando se cree la tabla contacto-->
+                            <a href="@Url.Action("Actividad", "CRM", new { @rowid = @actividad.RowID,   @rih = Request.Params["rih"]   })"><i class="glyphicon glyphicon-pencil"> </i></a>
+                        </td>
+                        <td>
+                            @actividad.Opcion2.Nombre  @*opcion*@
+                        </td>
+                        <td>
+                            @actividad.Tema
+                        </td>
+                        <td>
+                            @actividad.Opcion1.Nombre @*opcion*@
+                        </td>
+                        <td>
+                            @actividad.Opcion3.Nombre
+                        </td>
+                        @*<td>
+                                @actividad.Tercero.NombreComercial   @actividad.Contacto.Nombres @actividad.Contacto.Apellidos
+                            </td>*@
+                        <td>
+                            @if (actividad.TerceroERPID != null)
+                            {
+                                @actividad.Tercero.RazonSocial
+
+                            }
+                            else if (actividad.ContactoID != null)
+                            {
+                                @actividad.Contacto.Apellido
+
+                            }
+                        </td>
+                        <td>
+                            @actividad.Descripcion
+                        </td>
+                        <td>
+                            @actividad.FechaInicial
+                        </td>
+                        <td>
+                            @actividad.FechaFinal
+                        </td>
+                        <td>
+                            @actividad.Opcion2.Nombre @*opcion*@
+                        </td>
+                        <td>
+                            @actividad.UsuarioCreacion
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

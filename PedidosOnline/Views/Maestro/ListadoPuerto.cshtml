@@ -1,0 +1,54 @@
+﻿@model PedidosOnline.Models.Puerto
+@{
+    ViewBag.Title = "ListadoPuerto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    a {
+        color: #333;
+    }
+</style>
+<div class="panel">
+    <div class="panel-heading">
+        <div>
+            <div class="nav">
+                <span>
+                    &nbsp;&nbsp;
+                    <a href="@Url.Action("Puerto", "Maestro")" class="alink">
+                        <i class="glyphicon glyphicon-plus"></i>&nbsp;<span class="lang" key="NUEVO">Nuevo</span>
+                    </a>
+                </span>
+            </div>
+        </div>
+        @*<a class="btn btn-success" href='@Url.Action("Puerto", "Maestro")' style="float: right">+ Adicionar Puerto</a><br />*@
+
+    </div>
+    <div class="panel-body">
+        <table id="demo-dt-basic" class="table table-striped table-bordered table-funcion">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Ciudad</th>
+                    <th>Usuario creación</th>
+                    <th>Fecha creación</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (PedidosOnline.Models.Puerto listaPuerto in ViewBag.Puerto)
+                {
+                    <tr>
+                        <td>@listaPuerto.RowID</td>
+                        <td>@listaPuerto.Nombre</td>
+                        <td>@listaPuerto.Ciudad.Nombre</td>
+                        <td>@listaPuerto.UsuarioCreacion</td>
+                        <td>@listaPuerto.FechaCreacion</td>
+                        <td><a href="@Url.Action("Puerto", "Maestro", new { RowID_Lista = listaPuerto.RowID })"><i class="glyphicon glyphicon-pencil"></i></a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

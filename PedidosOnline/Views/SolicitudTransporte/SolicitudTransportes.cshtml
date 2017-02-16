@@ -1,0 +1,87 @@
+﻿@using PedidosOnline.Models;
+@model List<PedidosOnline.Models.SolicitudTransporte>
+@{
+    ViewBag.Title = "SolicitudTransportes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    a {
+        color: #333;
+    }
+</style>
+<script>
+
+    $(document).ready(function () {
+        $('tblTransportes').dataTable({
+            " processing": true,
+            "bFilter": true,
+            "bPaginate": true,
+            "info": false,
+            "bDestroy":true,
+            aLengthMenu: [
+            [15, 25, 50, 100, -1],
+            [15, 25, 50, 100, "All"]
+            ],
+            "iDisplayLength": 15
+
+        });
+
+    });
+</script>
+<div class="panel">
+    <div class="row">
+        <div>
+            <div class="nav">
+                <span>
+                    &nbsp;&nbsp;
+                    <a href="@Url.Action("SolicitudTransporte", "SolicitudTransporte")" class="alink">
+                        <i class="glyphicon glyphicon-plus"></i>&nbsp;<span class="lang" key="NUEVO">Nuevo</span>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <table id="tblTransportes" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Proveedor</th>
+                        <th>Cant. Vehiculos</th>
+                        <th>Flete</th>
+                        <th>Planta Cargue</th>
+                        <th>Fecha Cargue</th>
+                        <th>Planta Descargue</th>
+                        <th>Fecha Entrega</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (PedidosOnline.Models.SolicitudTransporte transporte in ViewBag.transportes)
+                    {
+                        <tr>
+                            <td>@transporte.RowID</td>
+                            @if(@transporte.Tercero.ContactoERP != null){
+                            <td>@transporte.Tercero.ContactoERP.Nombre</td>
+                            }
+                            else
+                            {
+                                <td>@transporte.Tercero.RazonSocial</td>
+                            }
+                            <td>@transporte.Cantidad</td>
+                            <td>@transporte.Flete</td>
+                            <td>@transporte.Planta.Nombre</td>
+                            <td>@transporte.FechaCargue</td>
+                            <td>@transporte.Planta1.Nombre</td>
+                            <td>@transporte.FechaEntrega</td>
+                            <td><a href="@Url.Action("SolicitudTransporte", "SolicitudTransporte", new { RowID = transporte.RowID })"><i class="glyphicon glyphicon-pencil"></i></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,24 @@
+﻿@media screen and (max-width: 480px){
+    #cssmenu ul > li.has-sub{
+        width:10%;
+        background-size: 100%;
+        display: inline-flex;
+        -moz-transition: all 100ms ease-in-out;
+        -o-transition: all 100ms ease-in-out;
+        -webkit-transition: all 100ms ease-in-out;
+        transition: all 100ms ease-in-out;
+    }
+    #cssmenu ul > li.has-sub a span{
+        display: none;
+    }
+    .subopcionesmenu {
+        margin-top: -80px;
+        -moz-transition: all 100ms ease-in-out;
+        -o-transition: all 100ms ease-in-out;
+        -webkit-transition: all 100ms ease-in-out;
+        transition: all 100ms ease-in-out;
+    }
+    #subopcionesmenu{
+        margin-top:20%;
+     }
+}
