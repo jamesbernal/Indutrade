@@ -1,0 +1,1993 @@
+﻿@using PedidosOnline.Models
+@model PedidosOnline.Utilidades.reg_calculadora
+@{
+    ViewBag.Title = "Calculadora";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Styled select boxes -->
+<link href="~/Content/Tabs.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=2.0, maximum-scale=1.0, minimum-scale=1.0">
+<script type="text/javascript" src="~/Content/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
+<link href="~/Content/js/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">
+<style>
+    a {
+        color: #333;
+    }
+</style>
+<style>
+    label {
+        width: 100%;
+    }
+
+    form input {
+        width: 100%;
+    }
+
+    form select {
+        width: 100%;
+    }
+
+    .row {
+        margin-bottom: 3px;
+    }
+</style>
+
+<script>
+    $.extend($.validator.defaults, {
+        invalidHandler: function (form, validator) {
+            var errors = validator.numberOfInvalids();
+            if (errors) {
+                var message = errors == 1
+                ? 'Completar Campo Vacio.'
+                : 'Completar ' + errors + ' Campos que se encuentran vacios.';
+                Mensajes(message, 'error', '');
+            }
+        }
+    });
+    $.validator.messages.required = 'Campo requerido';
+
+    function loadPage()
+    {
+        if (@Model.Calculadora.RowID>0) {
+            $('.item').css("display","block");
+            $('#DateDetalle').val("@Model.Calculadora.Fecha");
+        }
+    }
+    $(document).ready(function () {
+
+        $('#DateDetalle').datetimepicker(
+           {
+               dayOfWeekStart: 1,
+               timepicker: true,
+               lang: 'es',
+               timepicker: false
+           });
+        loadPage()
+    });
+    function Guardar(accion)
+    {
+        var validator = $("#formPrincial").validate();
+        //$('.deshabilitar').attr("disabled",false);
+        if (validator.form())
+        {
+            var formData = new FormData(document.getElementById("formPrincial"));
+            $.ajax({
+                url:"GuardarCalculadora",
+                type:"post",
+                contentType: false,
+                processData: false,
+                data: formData,
+                success:function(data)
+                {
+                    location.href="../Exportacion/Calculadora?rowid="+data;
+                    $('.deshabilitar').attr("disabled",true);
+                },
+                error:function(error)
+                {
+                    Mensajes(error,'error','');
+                    $('.deshabilitar').attr("disabled",true);
+                }
+            })
+        }
+    }
+</script>
+
+<div class="row">
+    <div class="row" id="div_menu" style="margin-bottom:20px">
+        <div class="col-md-12">
+            <div class="nav">
+                <span>
+                    &nbsp;&nbsp;
+                    <a href="@Url.Action("Calculadoras","Exportacion",new {  @rih = Request.Params["rih"] })" class="alink">
+                        <i class="glyphicon glyphicon-list-alt"></i>&nbsp;<span class="lang" key="VISTA">Vista</span>
+                    </a>
+                </span>
+                <span>
+                    <a href="javascript:Guardar(1);" class="alink">
+                        <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
+                    </a>
+                </span>
+                <span>
+                    &nbsp;&nbsp;
+                    <a href="javascript:Guardar(2);" class="alink">
+                        <i class="glyphicon glyphicon-floppy-disk"></i><span class="lang" key="GUARDAR_&_CERRAR">&nbsp;Guardar&nbsp;&&nbsp;Cerrar</span>
+                    </a>
+                </span>
+                @if (Model.Calculadora.RowID != 0)
+                {
+                    <span>
+                        &nbsp;&nbsp;
+                        <a href="javascript:Siguiente()" class="alink">
+
+                            <i class="glyphicon glyphicon-arrow-right"></i><span class="lang" key="Siguiente">Siguiente</span>
+                        </a>
+                    </span>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="tabbable tabbable-custom tabs-top">
+        <ul class="nav nav-tabs tabs-top">
+            <li class="active"><a href="#tab_1" id="litab_1" data-toggle="tab" class="lang" key="">Informacion General Calculadora</a></li>
+            <li class="item" style="display:none"><a href="#tab_2" id="litab_2" data-toggle="tab" class="lang" key="">Items </a></li>
+            <li class="item" style="display:none"><a href="#tab_3" id="litab_3" data-toggle="tab" class="lang" key="">Balance </a></li>
+        </ul>
+    </div>
+    <div class="tab-content" style="overflow:hidden">
+        <div class="tab-pane active" id="tab_1">
+            <div class="col-md-12" style="margin-top:20px;">
+                <form id="formPrincial" name="formPrincial" method="post" onsubmit="return false">
+                    <input type="hidden" name="rowid" id="rowid" value="@Model.Calculadora.RowID" />
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="lang">Cliente</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select name="cliente" id="cliente" required>
+                                    <option value="">-Seleccionar-</option>
+                                    @foreach (Tercero tercero in ((List<Tercero>)ViewBag.Terceros).ToList())
+                                    {
+                                        if (Model.Calculadora.RowID > 0)
+                                        {
+                                            if (Model.Calculadora.TerceroID == tercero.RowID)
+                                            {
+                                                <option value="@tercero.RowID" selected="selected">@tercero.RowIDERP - @tercero.Identificacion - @tercero.NombreComercial</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@tercero.RowID">@tercero.RowIDERP - @tercero.Identificacion - @tercero.NombreComercial</option>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <option value="@tercero.RowID">@tercero.RowIDERP - @tercero.Identificacion - @tercero.NombreComercial</option>
+                                        }
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="lang">Ciudad - Destino</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select name="ciudadID" id="ciudadID" required>
+                                    <option value="">-Seleccionar-</option>
+                                    @foreach (Ciudad Cuid in ((List<Ciudad>)ViewBag.Ciudad).ToList())
+                                    {
+                                        if (Model.Calculadora.RowID > 0)
+                                        {
+                                            if (Model.Calculadora.DestinoID == Cuid.RowID)
+                                            {
+                                                <option value="@Cuid.RowID" selected="selected">@Cuid.Nombre</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@Cuid.RowID">@Cuid.Nombre</option>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <option value="@Cuid.RowID">@Cuid.Nombre</option>
+                                        }
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="lang">
+                                    Observacion
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <textarea style="resize:none;width:100%;" name="observa" id="observa">@Model.Calculadora.observacion</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @*<div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Agencia Naviera</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select name="agenciaNav" id="agenciaNav" required>
+                                        <option value="">-Seleccionar-</option>
+                                        @foreach (PedidosOnline.Models.AgenteNaviera AgenciaN in ((List<AgenteNaviera>)ViewBag.AgenciaNaviera).ToList())
+                                        {
+                                            if (Model.Calculadora.RowID > 0)
+                                            {
+                                                if (Model.Calculadora.AgenteNavieraID == AgenciaN.RowID)
+                                                {
+                                                    <option value="@AgenciaN.RowID" selected="selected">@AgenciaN.Nombre</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@AgenciaN.RowID">@AgenciaN.Nombre</option>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <option value="@AgenciaN.RowID">@AgenciaN.Nombre</option>
+                                            }
+
+                                        }
+                                    </select>
+                                </div>
+                            </div>*@
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="lang">Broker</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input id="NombreBroker" name="NombreBroker" style="width:100%;" value="@Model.Calculadora.NombreBroker" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="lang">Fecha Programada</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" value="" style="width:100%;" name="DateDetalle" id="DateDetalle" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="lang">InCortems</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select name="InCortems" id="InCortems" required>
+                                    <option value="">-Seleccionar-</option>
+                                    @foreach (Opcion item in ((List<Opcion>)ViewBag.Incoterms).ToList())
+                                    {
+                                        if (Model.Calculadora.RowID > 0)
+                                        {
+                                            if (Model.Calculadora.IncotermID == item.RowID)
+                                            {
+                                                <option value="@item.RowID" selected="selected">@item.Nombre</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.RowID">@item.Nombre</option>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.RowID">@item.Nombre</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="tab_2" class="tab-pane">
+            <div class="col-md-12" style="margin-top:20px;">
+                <form id="formItem" name="formItem" method="post" onsubmit="return false">
+                    <input type="hidden" name="rowid_calculadora" id="rowid_calculadora" value="@Model.Calculadora.RowID" />
+                    <input type="hidden" name="rowid_detalle" id="rowid_detalle" value="0" />
+                    <div class="col-md-12">
+                        <div style="margin-bottom: 20px">
+                            <h4 class="lang" key=" ">Informacion General</h4>
+                            <hr style="margin:0px">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="lang">Item</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="text" id="item" name="item" />
+                                        <input type="hidden" id="rowid_item" name="rowid_item" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="lang">Embalaje</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <select id="embalaje" name="embalaje" onchange="GroupFunctions()" required>
+                                            <option value="">
+                                                -Seleccionar-
+                                            </option>
+                                            @foreach (Opcion item in ((List<Opcion>)ViewBag.ListaEmbalajes).ToList())
+                                            {
+                                                <option value="@item.RowID">@item.Nombre</option>
+
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="lang">Cantidad Ton por BL</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="number" step="any" style="background: rgba(0, 114, 199, 0.55); color: white" name="cantidadton" id="cantidadton" onkeyup="ForzarReCalcular(event)" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="lang">Numero Envios</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="number" step="any" style="background: rgba(0, 114, 199, 0.55); color: white" name="numeroenvios" id="numeroenvios" onkeyup="ReCalcular" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="lang">Tonelada por Contenedor</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="number" step="any" style="background: rgba(0, 114, 199, 0.55); color: white" name="toneladacont" id="toneladacont" onkeyup="ForzarReCalcular(event)" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="lang">Numero de Contenedores</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="number" step="any" class="deshabilitar" name="numcontenedores" id="numcontenedores" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="lang">Agencia Naviera</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <select name="agentenaviera" id="agentenaviera" required>
+                                            <option value="">-Seleccionar-</option>
+                                            @foreach (PedidosOnline.Models.AgenteNaviera AgenciaN in ((List<AgenteNaviera>)ViewBag.AgenciaNaviera).ToList())
+                                            {
+                                                if (Model.Calculadora.RowID > 0)
+                                                {
+                                                    if (Model.Calculadora.AgenteNavieraID == AgenciaN.RowID)
+                                                    {
+                                                        <option value="@AgenciaN.RowID" selected="selected">@AgenciaN.Nombre</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@AgenciaN.RowID">@AgenciaN.Nombre</option>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <option value="@AgenciaN.RowID">@AgenciaN.Nombre</option>
+                                                }
+
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12">
+                        <div style="margin-bottom: 20px">
+                            <h4 class="lang" key="">TRM</h4>
+                            <hr style="margin:0px">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="lang">TRM Actual</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="number" step="any" style="background: rgba(0, 114, 199, 0.55); color: white" name="trmactual" id="trmactual" onkeyup="ForzarReCalcular(event)" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="lang">TRM Compra(COP)</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="number" step="any" class="deshabilitar" name="trmcompra" id="trmcompra" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="lang">TRM Venta (COP)</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="number" step="any" class="deshabilitar" name="trmventa" id="trmventa" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div style="margin-bottom: 20px">
+                            <h4 class="lang" key="">Materia Prima</h4>
+                            <hr style="margin:0px">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label class="lang">Precio Compra COP/TON</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="number" step="any" style="background: rgba(0, 114, 199, 0.55); color: white" onkeyup="CalcularPrecioCompra(event)" name="preciocompraCOP" id="preciocompraCOP" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>Precio Compra USD/TON</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="number" step="any" style="background: rgba(0, 114, 199, 0.55); color: white" name="preciocompraUSD" onkeyup="CalcularPrecioCompra(event)" id="preciocompraUSD" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>USD/TON</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="number" step="any" class="deshabilitar" name="preciocompraUSD1" id="preciocompraUSD1" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>COP/TON</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="number" step="any" class="deshabilitar" name="preciocompraCOP1" id="preciocompraCOP1" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div style="margin-bottom: 20px">
+                            <h4 class="lang" key="">Costos Logisticos</h4>
+                            <hr style="margin:0px">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table id="tablaCostoLogistico" class="table table-responsive table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Costos Logisticos</th>
+                                        <th></th>
+                                        <th>Costo (USD/Contenedor)</th>
+                                        <th>Costo(USD/Ton)</th>
+                                        <th>Costo Total(USD)</th>
+                                        <th>%Part</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @*@foreach (ErpPortal.WebApp.Models.CostoLogitistico item in ((List<ErpPortal.WebApp.Models.CostoLogitistico>)ViewBag.CostoLogistico).ToList())
+                                        {
+                                            <tr>
+                                                <td>@item.Nombre</td>
+                                                <td>@item.Opcion.Nombre</td>
+                                                <td><input type="number" id="costoContenedor@item.RowID" /></td>
+                                                <td><input type="number" id="costoTonelada'@item.RowID'" /></td>
+                                                <td><input type="number"  id="costoTotal'@item.RowID'"/></td>
+                                                <td><input type="number" id="costoTotal'@item.RowID'"   /></td>
+                                            </tr>
+                                        }*@
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div style="margin-bottom: 20px">
+                            <h4 class="lang" key="">Costos Materia Prima</h4>
+                            <hr style="margin:0px">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table id="tablaCostoMateriaPrima" class="table table-responsive table-striped table-hover">
+                                <tr>
+                                    <td>Costo Producto</td>
+                                    <td>USD/Ton</td>
+                                    <td><input type="number" class="deshabilitar" step="any" id="costoContenedorMateriaPrima" name="costoContenedorMateriaPrima" /></td>
+                                    <td><input type="number" class="deshabilitar" step="any" id="costoToneladaMateriaPrima" name="costoToneladaMateriaPrima" /></td>
+                                    <td><input type="number" class="deshabilitar" step="any" id="costoTotalMateriaPrima" name="costoTotalMateriaPrima" /></td>
+                                    <td><input type="number" class="deshabilitar" step="any" id="partMateriaPrima" name="partMateriaPrima" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Costo Total</td>
+                                    <td>USD</td>
+                                    <td><input type="number" class="deshabilitar" step="any" id="costoTotalUSDContenedor" name="costoTotalUSDContenedor" /></td>
+                                    <td><input type="number" class="deshabilitar" step="any" id="costoTotalUSDTonelada" name="costoTotalUSDTonelada" /></td>
+                                    <td><input type="number" class="deshabilitar" step="any" id="costoTotalUSDTotal" name="costoTotalUSDTotal" /></td>
+                                    <td><input type="number" class="deshabilitar" step="any" id="costoTotalUSDPorcentaje" name="costoTotalUSDPorcentaje" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Costo Total</td>
+                                    <td>COP</td>
+                                    <td><input type="number" class="deshabilitar" step="any" id="costoTotalCOPContenedor" name="costoTotalCOPContenedor" /></td>
+                                    <td><input type="number" class="deshabilitar" step="any" id="costoTotalCOPTonelada" name="costoTotalCOPTonelada" /></td>
+                                    <td><input type="number" class="deshabilitar" step="any" id="costoTotalCOPTotal" name="costoTotalCOPTotal" /></td>
+                                    <td><input type="number" class="deshabilitar" step="any" id="costoTotalCOPPorcentaje" name="costoTotalCOPPorcentaje" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div style="margin-bottom: 20px">
+                            <h4 class="lang" key="">Precio Venta Exterior</h4>
+                            <hr style="margin:0px">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-resposive table-hover table-striped">
+                                <tr>
+                                    <td>Basado en rentabilidad</td>
+                                    <td>USD/ton</td>
+                                    <td><input type="number" step="any" style="background: rgba(0, 114, 199, 0.55); color: white" name="rentabilidadPorcentaje" id="rentabilidadPorcentaje" onkeyup="ReCalcular()" step="any" /></td>
+                                    <td><input type="number" step="any" class="deshabilitar" name="rentabilidadValor" id="rentabilidadValor" /></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Precio Venta Exterior</td>
+                                    <td>COP/ton</td>
+                                    <td><input type="number" step="any" class="deshabilitar" name="precioVentaExteriorProcentaje" id="precioVentaExteriorProcentaje" step="any" /></td>
+                                    <td><input type="number" step="any" style="background: rgba(0, 114, 199, 0.55); color: white" name="precioVentaExteriorValor" onkeyup="ReCalcular()" id="precioVentaExteriorValor" /></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div style="margin-bottom: 20px">
+                            <h4 class="lang" key="">Datos de Venta</h4>
+                            <hr style="margin:0px">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table id="TableCostosVenta" class="table table-resposive table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <td>Venta</td>
+                                        <td>USD</td>
+                                        <td><input type="number" step="any" class="deshabilitar" step="any" name="VentaContenedorUSD" id="VentaContenedorUSD" /></td>
+                                        <td><input type="number" step="any" class="deshabilitar" step="any" name="VentaToneladaUSD" id="VentaToneladaUSD" /></td>
+                                        <td><input type="number" step="any" class="deshabilitar" step="any" name="VentaTotalUSD" id="VentaTotalUSD" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Venta</td>
+                                        <td>COP</td>
+                                        <td><input type="number" step="any" class="deshabilitar" step="any" name="VentaContenedorCOP" id="VentaContenedorCOP" /></td>
+                                        <td><input type="number" step="any" class="deshabilitar" step="any" name="VentaToneladaCOP" id="VentaToneladaCOP" /></td>
+                                        <td><input type="number" step="any" class="deshabilitar" step="any" name="VentaTotalCOP" id="VentaTotalCOP" /></td>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-primary" onclick="GuardarItem()">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="tab_3" class="tab-pane">
+            <div class="row">
+                <div class="col-md-12">
+                    <table id="tableBalance" class="table table-resposive table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <td>Item</td>
+                                <td>Empaque</td>
+                                <td>Cantidad</td>
+                                <td>Envio</td>
+                                <td>Cantidad Contenedores</td>
+                                <td>TRM</td>
+                                <td>Valor Compra</td>
+                                <td>Valor Total</td>
+                                <td>Accion</td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--TAB ITEMS -->
+<script>
+    $(document).ready(function(){
+
+        ArmarTablaCostoLogistico()
+
+        ArmarTablaCostoVenta()
+        $('input[type=number]').addClass("currency");
+        $('#item').autocomplete({
+            source:"ItemsAutocomplete",
+            minlength:2,
+            select:function(evento,ui)
+            {
+                $('#rowid_item').val(ui.item.rowid);
+                $('#item').val(ui.item.nombre);
+                GroupFunctions();
+            }
+        })
+
+    });
+    function ForzarReCalcular(event) {
+        ReCalcular();
+    }
+
+    function ReCalcular() {
+        var ctonelada = parseFloat(document.getElementById('cantidadton').value) || 0;
+        var toneladacontenedor = parseFloat(document.getElementById('toneladacont').value) || 1;
+        document.getElementById('numcontenedores').value = parseFloat(ctonelada / toneladacontenedor).toFixed(4)|| 0;
+        var trm = parseFloat(document.getElementById('trmactual').value) || 0;
+        document.getElementById('trmcompra').value =  trm + 50;
+        document.getElementById('trmventa').value = trm - 50;
+        GroupFunctions();
+        CalcularPrecioCompra();
+
+    }
+    function GroupFunctions()
+    {
+        CalcularBrokerCostoContenedor();
+        CalcularBrokerCostoTotal();
+        CalcularCerficadoSGSCostoTotal();
+        CalcularCerficadoCalidadCostoTonelada();
+        CalcularCerficadoCalidadCostoTotal()
+        CalcularCerficadoCalidadCostoContenedor();
+        CalcularTrasiegoCostoTotal();
+        CalcularTrasiegoCostoContenedor();
+        CalcularTrasiegoCostoTonelada()
+        CalcularFlexitanqueCostoContenedor();
+        CalcularFlexitanqueCostoTonelada();
+        CalcularFlexitanqueCostoTotal();
+        CalcularMovilizaciondePuertoCostoContenedor();
+        CalcularMovilizaciondePuertoCostoTotal();
+        CalcularMovilizaciondePuertoCostoTonelada();
+        CalcularLlenadoCostoContenedor();
+        CalcularLlenadoCostoContenedor();
+        CalcularLlenadoCostoTonelada();
+        CalcularLlenadoCostoTotal();
+        CalcularUIOPTContenedorCostoContenedor();
+        CalcularUIOPTContenedorCostoTonelada();
+        CalcularUIOPTContenedorCostoTotal();
+        CalcularInstalacionesCostoContenedor()
+        CalcularInstalacionesCostoTonelada();
+        CalcularInstalacionesCostoTotal();
+        CalcularSerpetinCostoContenedor()
+        CalcularSerpetinCostoTonelada();
+        CalcularSerpetinCostoTotal();
+        CalcularHandlingFeeCostoContenedor();
+        CalcularHandlingFeeCostoTonelada();
+        CalcularHandlingFeeCostoTotal();
+        CalcularDocFeeCostoTotal();
+        CalcularDocFeeCostoTonelada();
+        CalcularDocFeeCostoContenedor();
+        CalcularBLFeeCostoTotal();
+        CalcularBLFeeCostoTonelada();
+        CalcularBLFeeCostoContenedor();
+        CalcularOrigenTerminalCostoContenedor();
+        CalcularOrigenTerminalCostoTonelada();
+        CalcularOrigenTerminalCostoTotal();
+        CalcularHandlingLogisticCostoContenedor();
+        CalcularHandlingLogisticCostoTonelada();
+        CalcularHandlingLogisticCostoTotal();
+        CalcularDiasAlmacenajeCostoTonelada();
+        CalcularDiasAlmacenajeCostoTotal();
+        CalcularDiasAlmacenajeCostoContenedor();
+        CalcularGastosOperativosCostoTonelada();
+        CalcularGastosOperativosCostoTotal();
+        CalcularGastosOperativosCostoContenedor();
+        CalcularFleteTerrestreCostoTotal();
+        CalcularFleteTerrestreCostoTonelada();
+        CalcularFleteTerrestreCostoContenedor();
+        CalcularEnvioDocumentosCostoTotal()
+        CalcularEnvioDocumentosCostoContenedor()
+        CalcularEnvioDocumentosCostoTonelada()
+        CalcularFleteMaritimoCostoContenedor()
+        CalcularFleteMaritimoTonelada()
+        CalcularFleteMaritimoCostoTotal()
+
+        CalcularComisionAgenteCargaCostoContenedor();
+        CalcularComisionAgenteCargaCostoTonelada();
+        CalcularComisionAgenteCargaCostoTotal();
+        CalcularGastosPortuariosCostoContenedor();
+        CalcularGastosPortuariosCostoTonelada();
+        CalcularGastosPortuariosCostoTotal();
+        CalcularCostoTotalCostoCostoTotal();
+        CalcularCostoTotalCostoContenedor();
+        CalcularCostoTotalCostoTonelada();
+        /*          MATERIA PRIMA                      */
+        CalcularTotalMateriaPrimaCostoTonelada();
+        CalcularTotalMateriaPrimaCostoContenedor();
+        CalcularTotalMateriaPrimaCostoTotal();
+        /*          MATERIA PRIMA                      */
+        /** *************************************** **/
+        CalcularTotalToneladaUSD();
+        CalcularTotalContenedorUSD();
+        CalcularTotalTotalUSD();
+        CalcularTotalToneladaCOP();
+        CalcularTotalContenedorCOP();
+        CalcularTotalTotalCOP();
+
+        /*        PORCENTAJES TABLA COSTOS LOGISTICOS             */
+        ejecutarProcentajesLogisticos();
+        /*        PORCENTAJES TABLA COSTOS LOGISTICOS             */
+        EjecutarCalculosVenta();
+    }
+    function CalcularPrecioCompra()
+    {
+        var preciocompraCOP = parseFloat(document.getElementById('preciocompraCOP').value) || 0;
+        var preciocompraUSD = parseFloat(document.getElementById('preciocompraUSD').value) || 0;
+        var trm = parseFloat(document.getElementById('trmcompra').value) || 0;
+        document.getElementById('preciocompraCOP1').value =parseFloat(preciocompraUSD * trm).toFixed(4);
+        document.getElementById('preciocompraUSD1').value = parseFloat(preciocompraCOP/ trm).toFixed(4);
+    }
+    function ArmarTablaCostoLogistico()
+    {
+        $.ajax({
+            url:"CostoLogistico",
+            asyn:false,
+            success:function(data){
+                $('#tablaCostoLogistico tbody').empty();
+                $('#tablaCostoLogistico tbody').append(data);
+                ReCalcular();
+            }
+        })
+
+    }
+    function ArmarTablaCostoVenta()
+    {
+        $.ajax({
+            url:"CostoVentas",
+            asyn:false,
+            success:function(data){
+                $('#TableCostosVenta tbody').empty();
+                $('#TableCostosVenta tbody').append(data);
+                ReCalcular();
+                $('.deshabilitar').attr("disabled",true);
+            }
+        })
+
+    }
+
+    /* BROKER  */
+    function CalcularBrokerCostoContenedor()
+    {
+        var numeroContenedores = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        var costoTotal1 = parseFloat(document.getElementById('costoTotal1').value) || 0;
+        document.getElementById('costoContenedor1').value = parseFloat(costoTotal1 / numeroContenedores).toFixed(4);
+    }
+    function CalcularBrokerCostoTotal()
+    {
+        var cantidadTonelada = parseFloat(document.getElementById('cantidadton').value) || 0;
+        var costoTonelada = parseFloat(document.getElementById('costoTonelada1').value) || 0;
+        document.getElementById('costoTotal1').value = parseFloat(costoTonelada * cantidadTonelada).toFixed(4);
+        CalcularBrokerCostoContenedor();
+    }
+    /* BROKER  */
+    /* CERTIFICAGO SGS  */
+    function CalcularCerficadoSGSCostoContenedor()
+    {
+
+        var numeroContenedores = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        var costoTotal = parseFloat(document.getElementById('costoTotal2').value) || 0;
+        document.getElementById('costoContenedor2').value =parseFloat(costoTotal / numeroContenedores).toFixed(4);
+    }
+    function CalcularCerficadoSGSCostoTonelada()
+    {
+        var cantidadTonelada = parseFloat(document.getElementById('cantidadton').value) || 0;
+        var costoTotal = parseFloat(document.getElementById('costoTotal2').value) || 0;
+        document.getElementById('costoTonelada2').value =parseFloat(costoTotal / cantidadTonelada).toFixed(4);
+    }
+    function CalcularCerficadoSGSCostoTotal()
+    {
+
+        var trm = parseFloat(document.getElementById('trmactual').value) || 0;
+        var item=$('#item').val();
+        if ($('#item').val().includes("GLICERINA CRUDA")) {
+            document.getElementById('costoTotal2').value =  parseFloat(400000 / trm).toFixed(4);
+        }
+        else
+        {
+            document.getElementById('costoTotal2').value = 0;
+        }
+        CalcularCerficadoSGSCostoTonelada();
+        CalcularCerficadoSGSCostoContenedor();
+
+    }
+    /* CERTIFICAGO SGS  */
+    /* CERTIFICAGO CALIDAD  */
+    function  CalcularCerficadoCalidadCostoContenedor()
+    {
+        var numeroContenedores = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        var costoTotal = parseFloat(document.getElementById('costoTotal3').value) || 0;
+        document.getElementById('costoContenedor3').value =  parseFloat(costoTotal / numeroContenedores).toFixed(4);
+    }
+    function  CalcularCerficadoCalidadCostoTonelada()
+    {
+        var trmcompra = parseFloat(document.getElementById('trmcompra').value) || 0;
+        document.getElementById('costoTonelada3').value =  parseFloat((3076000 /(40*23) /trmcompra)).toFixed(4);
+    }
+    function  CalcularCerficadoCalidadCostoTotal()
+    {
+        var toneladas = parseFloat(document.getElementById('costoTonelada3').value) || 0;
+        var cantidadTonelada = parseFloat(document.getElementById('cantidadton').value) || 0;
+        document.getElementById('costoTotal3').value =  parseFloat(cantidadTonelada*toneladas).toFixed(4);
+    }
+    /* CERTIFICAGO CALIDAD  */
+    /* TRASIEGO  */
+    function  CalcularTrasiegoCostoContenedor()
+    {
+        var numeroContenedores = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        var costoTotal = parseFloat(document.getElementById('costoTotal4').value) || 0;
+        document.getElementById('costoContenedor4').value =  parseFloat(costoTotal / numeroContenedores).toFixed(4);
+    }
+    function  CalcularTrasiegoCostoTonelada()
+    {
+
+        document.getElementById('costoTonelada4').value =  5.8;
+    }
+    function  CalcularTrasiegoCostoTotal()
+    {
+        var toneladas = parseFloat(document.getElementById('costoTonelada4').value) || 0;
+        var cantidadTonelada = parseFloat(document.getElementById('cantidadton').value) || 0;
+        document.getElementById('costoTotal4').value =  parseFloat(cantidadTonelada*toneladas).toFixed(4);
+    }
+    /* TRASIEGO  */
+    /* FLEXITANQUE  */
+    function  CalcularFlexitanqueCostoContenedor()
+    {
+        var empaque=$('#embalaje option:selected').text();
+
+        if (empaque.includes("FLEXI")) {
+            document.getElementById('costoContenedor5').value = 500;
+        }else
+        {
+            document.getElementById('costoContenedor5').value = 0;
+        }
+    }
+    function  CalcularFlexitanqueCostoTonelada()
+    {
+        var costocontenedor = parseFloat(document.getElementById('costoContenedor5').value) || 0;
+        var toneladaCont = parseFloat(document.getElementById('toneladacont').value) || 0;
+        document.getElementById('costoTonelada5').value = parseFloat(costocontenedor/toneladaCont).toFixed(4);
+    }
+    function  CalcularFlexitanqueCostoTotal()
+    {
+        var toneladas = parseFloat(document.getElementById('costoContenedor5').value) || 0;
+        var cantidadcont = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoTotal5').value =  parseFloat(toneladas*cantidadcont).toFixed(4);
+    }
+    /* FLEXITANQUE  */
+    /* GASTOSPORTUARIOS  */
+    function CalcularGastosPortuariosCostoContenedor()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor7').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoContenedor8').value) || 0;
+        var costo3 = parseFloat(document.getElementById('costoContenedor9').value) || 0;
+        var costo4 = parseFloat(document.getElementById('costoContenedor10').value) || 0;
+        var a=costo1+costo2+costo3+costo4;
+        debugger
+        document.getElementById('costoContenedor6').value =  costo1+costo2+costo3+costo4;
+    }
+    function CalcularGastosPortuariosCostoTonelada()
+    {
+        var costoContenedor6 = parseFloat(document.getElementById('costoContenedor6').value) || 0;
+        var toneladaCont = parseFloat(document.getElementById('toneladacont').value) || 0;
+        document.getElementById('costoTonelada6').value =  parseFloat(costoContenedor6/toneladaCont).toFixed(4);
+
+    }
+    function CalcularGastosPortuariosCostoTotal()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal7').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotal8').value) || 0;
+        var costo3 = parseFloat(document.getElementById('costoTotal9').value) || 0;
+        var costo4 = parseFloat(document.getElementById('costoTotal10').value) || 0;
+        document.getElementById('costoTotal6').value =  parseFloat(costo1+costo2+costo3+costo4).toFixed(4);
+    }
+    /* GASTOSPORTUARIOS  */
+    /* MOVILIZACION DE PUERTO  */
+    function CalcularMovilizaciondePuertoCostoContenedor()
+    {
+        var costo1 = parseFloat(document.getElementById('trmcompra').value) || 0;
+        document.getElementById('costoContenedor7').value =  parseFloat(200000/costo1).toFixed(4);
+    }
+    function CalcularMovilizaciondePuertoCostoTonelada()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor7').value) || 0;
+        var toneladaCont = parseFloat(document.getElementById('toneladacont').value) || 0;
+        document.getElementById('costoTonelada7').value =  parseFloat(costo1/toneladaCont).toFixed(4);
+    }
+    function CalcularMovilizaciondePuertoCostoTotal()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor7').value) || 0;
+        var numcontenedores = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoTotal7').value =  parseFloat(costo1*numcontenedores).toFixed(4);
+    }
+    /* MOVILIZACION DE PUERTO  */
+    /*   LLENADO       */
+    function CalcularLlenadoCostoContenedor()
+    {
+        var costo1 = parseFloat(document.getElementById('trmcompra').value) || 0;
+        document.getElementById('costoContenedor8').value =  parseFloat(100000/costo1).toFixed(4);
+    }
+    function CalcularLlenadoCostoTonelada()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor8').value) || 0;
+        var toneladaCont = parseFloat(document.getElementById('toneladacont').value) || 0;
+        document.getElementById('costoTonelada8').value =  parseFloat(costo1/toneladaCont).toFixed(4);
+    }
+    function CalcularLlenadoCostoTotal()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor8').value) || 0;
+        var numcontenedores = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoTotal8').value =  parseFloat(costo1*numcontenedores).toFixed(4);
+    }
+    /*   LLENADO       */
+    /*   CONTENEDOR       */
+    function CalcularUIOPTContenedorCostoContenedor()
+    {
+        document.getElementById('costoContenedor9').value =2;
+    }
+    function CalcularUIOPTContenedorCostoTonelada()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor9').value) || 0;
+        var toneladaCont = parseFloat(document.getElementById('toneladacont').value) || 0;
+        document.getElementById('costoTonelada9').value =  parseFloat(costo1/toneladaCont).toFixed(4);
+    }
+    function CalcularUIOPTContenedorCostoTotal()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor9').value) || 0;
+        var numcontenedores = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoTotal9').value =  parseFloat(costo1*numcontenedores).toFixed(4);
+    }
+    /*   CONTENEDOR       */
+    /*   INTALACIONES       */
+    function CalcularInstalacionesCostoContenedor()
+    {
+
+        var costo1 = parseFloat(document.getElementById('costoContenedor5').value) || 0;
+        if (costo1>0) {
+            document.getElementById('costoContenedor10').value =76;
+        }
+        else
+        {
+            document.getElementById('costoContenedor10').value =88;
+        }
+    }
+    function CalcularInstalacionesCostoTonelada()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor10').value) || 0;
+        var toneladaCont = parseFloat(document.getElementById('toneladacont').value) || 0;
+        document.getElementById('costoTonelada10').value =  parseFloat(costo1/toneladaCont).toFixed(4);
+    }
+    function CalcularInstalacionesCostoTotal()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor10').value) || 0;
+        var numcontenedores = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoTotal10').value =  parseFloat(costo1*numcontenedores).toFixed(4);
+    }
+    /*   INTALACIONES       */
+    /*   SERPETIN       */
+    function CalcularSerpetinCostoContenedor()
+    {
+
+        var costo1 = parseFloat(document.getElementById('costoContenedor5').value) || 0;
+        if (costo1==0 || $('#item').val().includes("GLICERINA CRUDA")) {
+            document.getElementById('costoContenedor11').value =0;
+        }
+        else
+        {
+            document.getElementById('costoContenedor11').value =175;
+        }
+    }
+    function CalcularSerpetinCostoTonelada()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor11').value) || 0;
+        var toneladaCont = parseFloat(document.getElementById('toneladacont').value) || 0;
+        document.getElementById('costoTonelada11').value =  parseFloat(costo1/toneladaCont).toFixed(4);
+    }
+    function CalcularSerpetinCostoTotal()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor11').value) || 0;
+        var numcontenedores = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoTotal11').value =  parseFloat(costo1*numcontenedores).toFixed(4);
+    }
+    /*   SERPETIN       */
+    /*   COMISION AGENTE DE CARGA       */
+    function CalcularComisionAgenteCargaCostoContenedor()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor13').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoContenedor14').value) || 0;
+        var costo3 = parseFloat(document.getElementById('costoContenedor15').value) || 0;
+        var costo4 = parseFloat(document.getElementById('costoContenedor16').value) || 0;
+        var costo4 = parseFloat(document.getElementById('costoContenedor17').value) || 0;
+        document.getElementById('costoContenedor12').value =  parseFloat(costo1+costo2+costo3+costo4).toFixed(4);
+    }
+    function CalcularComisionAgenteCargaCostoTonelada()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTonelada13').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTonelada14').value) || 0;
+        var costo3 = parseFloat(document.getElementById('costoTonelada15').value) || 0;
+        var costo4 = parseFloat(document.getElementById('costoTonelada16').value) || 0;
+        var costo4 = parseFloat(document.getElementById('costoTonelada17').value) || 0;
+        document.getElementById('costoTonelada12').value =  parseFloat(costo1+costo2+costo3+costo4).toFixed(4);
+    }
+    function CalcularComisionAgenteCargaCostoTotal()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal13').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotal14').value) || 0;
+        var costo3 = parseFloat(document.getElementById('costoTotal15').value) || 0;
+        var costo4 = parseFloat(document.getElementById('costoTotal16').value) || 0;
+        var costo4 = parseFloat(document.getElementById('costoTotal17').value) || 0;
+        document.getElementById('costoTotal12').value =  parseFloat(costo1+costo2+costo3+costo4).toFixed(4);
+    }
+    /*   COMISION AGENTE DE CARGA       */
+    /*   HANDLING FEE       */
+    function CalcularHandlingFeeCostoContenedor()
+    {
+        document.getElementById('costoContenedor13').value = 50;
+    }
+    function CalcularHandlingFeeCostoTonelada()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor13').value) || 0;
+        var costo2 = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        var costo3 = parseFloat(document.getElementById('cantidadton').value) || 0;
+        document.getElementById('costoTonelada13').value =  parseFloat(costo1*costo2/costo3).toFixed(4);
+    }
+    function CalcularHandlingFeeCostoTotal()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor13').value) || 0;
+        var numcontenedores = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoTotal13').value =  parseFloat(costo1*numcontenedores).toFixed(4);
+    }
+    /*   HANDLING FEE       */
+    /*   DOC FEE       */
+    function CalcularDocFeeCostoContenedor()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal14').value) || 0;
+        var numcontenedores = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoContenedor14').value =  parseFloat(costo1/numcontenedores).toFixed(4);
+    }
+    function CalcularDocFeeCostoTonelada()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal14').value) || 0;
+        var costo2 = parseFloat(document.getElementById('cantidadton').value) || 0;
+        document.getElementById('costoTonelada14').value = parseFloat( costo1/costo2).toFixed(4);
+    }
+    function CalcularDocFeeCostoTotal()
+    {
+        if ($('#agenciaNav option:selected').text().includes("WOW")) {
+            document.getElementById('costoTotal14').value = 50;
+        }
+        else
+        {
+            document.getElementById('costoTotal14').value = 0;
+        }
+    }
+    /*   DOC FEE       */
+    /*   BL FEE       */
+    function CalcularBLFeeCostoContenedor()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal15').value) || 0;
+        var numcontenedores = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoContenedor15').value =  parseFloat(costo1/numcontenedores).toFixed(4);
+    }
+    function CalcularBLFeeCostoTonelada()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal15').value) || 0;
+        var costo2 = parseFloat(document.getElementById('cantidadton').value) || 0;
+        document.getElementById('costoTonelada15').value =  parseFloat(costo1/costo2).toFixed(4);
+    }
+    function CalcularBLFeeCostoTotal()
+    {
+        if ($('#agenciaNav option:selected').text().includes("WOW")) {
+            document.getElementById('costoTotal15').value = 50;
+        }
+        else
+        {
+            document.getElementById('costoTotal15').value = 0;
+        }
+    }
+    /*   BL FEE       */
+    /*   ORIGEN TERMINAL HANDLING       */
+    function CalcularOrigenTerminalCostoContenedor()
+    {
+        if ($('#agenciaNav option:selected').text().includes("WOW")) {
+            document.getElementById('costoContenedor16').value = 50;
+        }
+        else
+        {
+            document.getElementById('costoContenedor16').value = 0;
+        }
+    }
+    function CalcularOrigenTerminalCostoTonelada()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor16').value) || 0;
+        var costo2 = parseFloat(document.getElementById('toneladacont').value) || 0;
+        document.getElementById('costoTonelada17').value =  parseFloat(costo1/costo2).toFixed(4);
+    }
+    function CalcularOrigenTerminalCostoTotal()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor16').value) || 0;
+        var costo2 = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoTonelada16').value =  parseFloat(costo1*costo2).toFixed(4);
+    }
+    /*   ORIGEN TERMINAL HANDLING       */
+    /*   HANDLING LOGISTIC FEE       */
+    function CalcularHandlingLogisticCostoContenedor()
+    {
+        if ($('#agenciaNav option:selected').text().includes("WOW")) {
+            document.getElementById('costoContenedor17').value = 50;
+        }
+        else
+        {
+            document.getElementById('costoContenedor17').value = 0;
+        }
+    }
+    function CalcularHandlingLogisticCostoTonelada()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor17').value) || 0;
+        var costo2 = parseFloat(document.getElementById('toneladacont').value) || 0;
+        document.getElementById('costoTonelada17').value =  parseFloat(costo1/costo2).toFixed(4);
+    }
+    function CalcularHandlingLogisticCostoTotal()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor17').value) || 0;
+        var costo2 = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoTonelada17').value =  parseFloat(costo1*costo2).toFixed(4);
+    }
+    /*   HANDLING LOGISTIC FEE       */
+    /*   DIAS DE ALMACENAJE       */
+    function CalcularDiasAlmacenajeCostoContenedor()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal18').value) || 0;
+        var costo2 = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoContenedor18').value =  parseFloat(costo1/costo2).toFixed(4);
+    }
+    function CalcularDiasAlmacenajeCostoTonelada()
+    {
+        document.getElementById('costoTonelada18').value =  15;
+    }
+    function CalcularDiasAlmacenajeCostoTotal()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTonelada18').value) || 0;
+        var costo2 = parseFloat(document.getElementById('cantidadton').value) || 0;
+        document.getElementById('costoTotal18').value =  parseFloat(costo1*costo2).toFixed(4);
+    }
+    /*   DIAS DE ALMACENAJE       */
+    /*   GASTOS OPERATIVOS       */
+    function CalcularGastosOperativosCostoContenedor()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal19').value) || 0;
+        var costo2 = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoContenedor19').value =  parseFloat(costo1/costo2).toFixed(4);
+    }
+    function CalcularGastosOperativosCostoTonelada()
+    {
+
+        var costo1 = parseFloat(document.getElementById('costoTotal19').value) || 0;
+        var costo2 = parseFloat(document.getElementById('cantidadton').value) || 0;
+        document.getElementById('costoTonelada19').value =  parseFloat(costo1/costo2).toFixed(4);
+    }
+    function CalcularGastosOperativosCostoTotal()
+    {
+        var costo1 = parseFloat(document.getElementById('numeroenvios').value) || 0;
+        var costo2 = parseFloat(document.getElementById('trmcompra').value) || 0;
+        document.getElementById('costoTotal19').value = parseFloat(((15000*costo1)/costo2)+(96000/costo2)).toFixed(4);
+    }
+    /*   GASTOS OPERATIVOS       */
+    /*   FLETE TERRESTRE       */
+    function CalcularFleteTerrestreCostoContenedor()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTonelada20').value) || 0;
+        var costo2 = parseFloat(document.getElementById('cantidadton').value) || 0;
+        var costo3 = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoContenedor20').value =parseFloat(costo1*costo2/costo3).toFixed(4);
+    }
+    function CalcularFleteTerrestreCostoTonelada()
+    {
+        //valor manual
+    }
+    function CalcularFleteTerrestreCostoTotal()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTonelada20').value) || 0;
+        var costo2 = parseFloat(document.getElementById('cantidadton').value) || 0;
+        document.getElementById('costoTotal20').value =parseFloat(costo1*costo2).toFixed(4);
+    }
+    /*   FLETE TERRESTRE       */
+    /*   ENVIO DE DOCUMENTOS       */
+
+    function CalcularEnvioDocumentosCostoContenedor()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal21').value) || 0;
+        var costo2 = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoContenedor21').value =parseFloat(costo1/costo2).toFixed(4);
+    }
+    function CalcularEnvioDocumentosCostoTonelada()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal21').value) || 0;
+        var costo2 = parseFloat(document.getElementById('cantidadton').value) || 0;
+        document.getElementById('costoTonelada21').value =parseFloat(costo1/costo2).toFixed(4);
+    }
+    function CalcularEnvioDocumentosCostoTotal()
+    {
+        var costo1 = parseFloat(document.getElementById('numeroenvios').value) || 0;
+        document.getElementById('costoTotal21').value =parseFloat(50/costo1).toFixed(4);
+    }
+    /*   ENVIO DE DOCUMENTOS       */
+    /*   FLETE MARITIMO       */
+
+    function CalcularFleteMaritimoCostoContenedor()
+    {
+        //VALOR POR  INGRESAR
+    }
+    function CalcularFleteMaritimoTonelada()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor22').value) || 0;
+        var costo2 = parseFloat(document.getElementById('toneladacont').value) || 0;
+        document.getElementById('costoTonelada22').value =parseFloat(costo1/costo2).toFixed(4);
+    }
+    function CalcularFleteMaritimoCostoTotal()
+    {
+
+        var costo1 = parseFloat(document.getElementById('costoContenedor22').value) || 0;
+        var costo2 = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoTotal22').value =parseFloat(costo1*costo2).toFixed(4);
+    }
+    /*   FLETE MARITIMO       */
+    /*   COSTO TOTAL CALCULADORA */
+
+    function CalcularCostoTotalCostoContenedor()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedor1').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoContenedor2').value) || 0;
+        var costo3 = parseFloat(document.getElementById('costoContenedor3').value) || 0;
+        var costo4 = parseFloat(document.getElementById('costoContenedor4').value) || 0;
+        var costo5 = parseFloat(document.getElementById('costoContenedor5').value) || 0;
+        var costo6 = parseFloat(document.getElementById('costoContenedor6').value) || 0;
+        var costo7 = parseFloat(document.getElementById('costoContenedor11').value) || 0;
+        var costo8 = parseFloat(document.getElementById('costoContenedor12').value) || 0;
+        var costo9 = parseFloat(document.getElementById('costoContenedor18').value) || 0;
+        var costo10 = parseFloat(document.getElementById('costoContenedor19').value) || 0;
+        var costo11 = parseFloat(document.getElementById('costoContenedor20').value) || 0;
+        var costo12 = parseFloat(document.getElementById('costoContenedor21').value) || 0;
+        var costo13= parseFloat(document.getElementById('costoContenedor22').value) || 0;
+        document.getElementById('costoContenedorTotal').value =parseFloat(costo1+costo2+costo3+costo4+costo5+costo6+costo7+costo8+costo9+costo10+costo11+costo12+costo13).toFixed(4);
+    }
+    function CalcularCostoTotalCostoTonelada()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTonelada1').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTonelada2').value) || 0;
+        var costo3 = parseFloat(document.getElementById('costoTonelada3').value) || 0;
+        var costo4 = parseFloat(document.getElementById('costoTonelada4').value) || 0;
+        var costo5 = parseFloat(document.getElementById('costoTonelada5').value) || 0;
+        var costo6 = parseFloat(document.getElementById('costoTonelada6').value) || 0;
+        var costo7 = parseFloat(document.getElementById('costoTonelada12').value) || 0;
+        var costo9 = parseFloat(document.getElementById('costoTonelada18').value) || 0;
+        var costo10 = parseFloat(document.getElementById('costoTonelada19').value) || 0;
+        var costo11 = parseFloat(document.getElementById('costoTonelada20').value) || 0;
+        var costo12 = parseFloat(document.getElementById('costoTonelada21').value) || 0;
+        var costo13= parseFloat(document.getElementById('costoTonelada22').value) || 0;
+        document.getElementById('costoToneladaTotal').value =parseFloat(costo1+costo2+costo3+costo4+costo5+costo6+costo9+costo10+costo11+costo12+costo13+costo7).toFixed(4);
+    }
+    function CalcularCostoTotalCostoCostoTotal()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal1').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotal2').value) || 0;
+        var costo3 = parseFloat(document.getElementById('costoTotal3').value) || 0;
+        var costo4 = parseFloat(document.getElementById('costoTotal4').value) || 0;
+        var costo5 = parseFloat(document.getElementById('costoTotal5').value) || 0;
+        var costo6 = parseFloat(document.getElementById('costoTotal6').value) || 0;
+        var costo7 = parseFloat(document.getElementById('costoTotal11').value) || 0;
+        var costo8 = parseFloat(document.getElementById('costoTotal12').value) || 0;
+        var costo9 = parseFloat(document.getElementById('costoTotal18').value) || 0;
+        var costo10 = parseFloat(document.getElementById('costoTotal19').value) || 0;
+        var costo11 = parseFloat(document.getElementById('costoTotal20').value) || 0;
+        var costo12 = parseFloat(document.getElementById('costoTotal21').value) || 0;
+        var costo13= parseFloat(document.getElementById('costoTotal22').value) || 0;
+        document.getElementById('costoTotal').value = parseFloat(costo1+costo2+costo3+costo4+costo5+costo6+costo7+costo8+costo9+costo10+costo11+costo12+costo13).toFixed(4);
+    }
+    /*   COSTO TOTAL CALCULADORA */
+    /*             ---------------------------------------------------------    */
+    /*   MATERIA PRIMA    */
+
+    function CalcularTotalMateriaPrimaCostoContenedor()
+    {
+        var costo1 = parseFloat(document.getElementById('costoToneladaMateriaPrima').value) || 0;
+        var costo2 = parseFloat(document.getElementById('toneladacont').value) || 0;
+        document.getElementById('costoContenedorMateriaPrima').value = parseFloat(costo1*costo2).toFixed(4);
+    }
+    function CalcularTotalMateriaPrimaCostoTonelada()
+    {
+        var costo1 = parseFloat(document.getElementById('preciocompraUSD1').value) || 0;
+        document.getElementById('costoToneladaMateriaPrima').value = parseFloat(costo1).toFixed(4);
+    }
+    function CalcularTotalMateriaPrimaCostoTotal()
+    {
+        var costo1 = parseFloat(document.getElementById('costoToneladaMateriaPrima').value) || 0;
+        var costo2 = parseFloat(document.getElementById('cantidadton').value) || 0;
+        document.getElementById('costoTotalMateriaPrima').value = parseFloat(costo1*costo2).toFixed(4);
+    }
+    /*   MATERIA PRIMA    */
+    /*             ---------------------------------------------------------    */
+
+    /*             ---------------------------------------------------------    */
+    /*   TOTAL CALCULADORA    */
+
+    function CalcularTotalToneladaUSD()
+    {
+        var costo1 = parseFloat(document.getElementById('costoToneladaTotal').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoToneladaMateriaPrima').value) || 0;
+        document.getElementById('costoTotalUSDTonelada').value = parseFloat(costo1+costo2).toFixed(4);
+    }
+    function CalcularTotalContenedorUSD()
+    {
+        var costo1 = parseFloat(document.getElementById('costoContenedorTotal').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoContenedorMateriaPrima').value) || 0;
+        document.getElementById('costoTotalUSDContenedor').value = parseFloat(costo1+costo2).toFixed(4);
+    }
+    function CalcularTotalTotalUSD()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalMateriaPrima').value) || 0;
+        document.getElementById('costoTotalUSDTotal').value = parseFloat(costo1+costo2).toFixed(4);
+    }
+    function CalcularTotalToneladaCOP()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotalUSDTonelada').value) || 0;
+        var costo2 = parseFloat(document.getElementById('trmcompra').value) || 0;
+        document.getElementById('costoTotalCOPTonelada').value = parseFloat(costo1*costo2).toFixed(4);
+    }
+    function CalcularTotalContenedorCOP()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotalUSDContenedor').value) || 0;
+        var costo2 = parseFloat(document.getElementById('trmcompra').value) || 0;
+        document.getElementById('costoTotalCOPContenedor').value = parseFloat(costo1*costo2).toFixed(4);
+    }
+    function CalcularTotalTotalCOP()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        var costo2 = parseFloat(document.getElementById('trmcompra').value) || 0;
+        document.getElementById('costoTotalCOPTotal').value = parseFloat(costo1*costo2).toFixed(4);
+    }
+    /*   TOTAL CALCULADORA    */
+    /*             ---------------------------------------------------------    */
+    /*             ---------------------------------------------------------    */
+    /*   PORCENTAJES    */
+
+
+    function PorcentajeBroker()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal1').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part1').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeCertificadoSGS()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal2').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part2').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeCertificadoCalidad()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal3').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part3').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeTrasiego()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal4').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part4').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeFlexitanque()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal5').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part5').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeGastosPortuarios()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal6').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part6').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeMovilizacion()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal7').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part7').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeLlenado()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal8').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part8').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeUIOPTContenedor()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal9').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part9').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeInstalaciones()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal10').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part10').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeSerpetin()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal11').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part11').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeComisionAgente()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal12').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part12').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeHandlingFee()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal13').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part13').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeDocFee()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal14').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part14').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+
+    function PorcentajeBLFee()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal15').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part15').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeOrigenTerminal()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal16').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part16').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+
+    function PorcentajeHandlingLogistic()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal17').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part17').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+
+    function PorcentajeDiasAlmacenaje()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal18').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part18').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeGastosOperativos()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal19').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part19').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeFleteTerrestre()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal20').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part20').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeEnvioDocumentos()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal21').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part21').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeFleteMaritimo()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal22').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('part22').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeTotalMateriaPrima()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotalMateriaPrima').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        document.getElementById('partMateriaPrima').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    function PorcentajeTotalCostoLogistico()
+    {
+        var costo1 = parseFloat(document.getElementById('part4').value) || 0;
+        var costo2 = parseFloat(document.getElementById('part5').value) || 0;
+        var costo3 = parseFloat(document.getElementById('part6').value) || 0;
+        var costo4 = parseFloat(document.getElementById('part12').value) || 0;
+        var costo5 = parseFloat(document.getElementById('part18').value) || 0;
+        var costo6 = parseFloat(document.getElementById('part19').value) || 0;
+        var costo7 = parseFloat(document.getElementById('part20').value) || 0;
+        var costo8 = parseFloat(document.getElementById('part21').value) || 0;
+        document.getElementById('partTotal').value = parseFloat(costo1+costo2+costo3+costo4+costo5+costo6+costo7+costo8).toFixed(4);
+    }
+    function ejecutarProcentajesLogisticos()
+    {
+        PorcentajeFleteMaritimo()
+        PorcentajeEnvioDocumentos()
+        PorcentajeFleteTerrestre()
+        PorcentajeGastosOperativos()
+        PorcentajeDiasAlmacenaje()
+        PorcentajeHandlingLogistic()
+        PorcentajeOrigenTerminal()
+        PorcentajeBLFee()
+        PorcentajeDocFee()
+        PorcentajeHandlingFee()
+        PorcentajeComisionAgente()
+        PorcentajeSerpetin()
+        PorcentajeInstalaciones()
+        PorcentajeUIOPTContenedor()
+        PorcentajeLlenado()
+        PorcentajeMovilizacion()
+        PorcentajeGastosPortuarios()
+        PorcentajeFlexitanque()
+        PorcentajeTrasiego()
+        PorcentajeCertificadoCalidad()
+        PorcentajeCertificadoSGS()
+        PorcentajeBroker()
+        PorcentajeTotalMateriaPrima()
+        PorcentajeTotalCostoLogistico()
+    }
+
+    /*   PORCENTAJES    */
+    /*             ---------------------------------------------------------    */
+
+    /*                  DATOS DE VENTA                                */
+    function EjecutarCalculosVenta()
+    {
+        CalcularRentabilidadValor();
+        CalcularPorcentajeVenta();
+        CalcularVentaToneladaTotal();
+        CalcularVentaContenedorTotal();
+        CalcularVentaTotal();
+        CalcularTotalAgenciamiento();
+        CalcularTotalToneladaAgenciamiento();
+        CalcularTotalContenedorAgenciamiento();
+        CalcularTotalSeguro();
+        CalcularTotalToneladaSeguro();
+        CalcularTotalContenedorSeguro();
+        CalcularTotalTramiteAduanero();
+        CalcularTotalToneladaAduanero();
+        CalcularTotalContenedorAduanero();
+        CalcularTotalTransporteDestino();
+        CalcularTotalToneladaTransporteDestino();
+        CalcularTotalContenedorTransporteDestino();
+        CalcularTotalUtilidad();
+        CalcularTotalToneladaUtilidad();
+        CalcularTotalContenedorUtilidad();
+        CalcularTotalContenedorMargen();
+        CalcularTotalToneladaMargen();
+        CalcularTotalMargen();
+    }
+    function CalcularRentabilidadValor()
+    {
+        debugger
+        var costo1 = parseFloat(document.getElementById('costoTotalUSDTonelada').value) || 0;
+        var costo2 = parseFloat(document.getElementById('rentabilidadPorcentaje').value) || 0;
+        document.getElementById('rentabilidadValor').value = parseFloat(costo1/(1-(costo2/100))).toFixed(4);
+    }
+    function CalcularPorcentajeVenta()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotalUSDTonelada').value) || 0;
+        var costo2 = parseFloat(document.getElementById('precioVentaExteriorValor').value) || 0;
+        document.getElementById('precioVentaExteriorProcentaje').value = parseFloat((costo2-costo1)/costo2).toFixed(4);
+    }
+
+    function CalcularVentaToneladaTotal()
+    {
+        var trmventa = parseFloat(document.getElementById('trmventa').value) || 0;
+        var costo1 = parseFloat(document.getElementById('rentabilidadValor').value) || 0;
+        var costo2 = parseFloat(document.getElementById('precioVentaExteriorValor').value) || 0;
+        if (costo1>costo2) {
+            document.getElementById('VentaToneladaUSD').value = parseFloat(costo1).toFixed(4);
+        }
+        else
+        {
+            document.getElementById('VentaToneladaUSD').value = parseFloat(costo2).toFixed(4);
+        }
+        var costo3 = parseFloat(document.getElementById('VentaToneladaUSD').value) || 0;
+        document.getElementById('VentaToneladaCOP').value = parseFloat(costo3*trmventa).toFixed(4);
+
+    }
+    function CalcularVentaContenedorTotal()
+    {
+        var trmventa = parseFloat(document.getElementById('trmventa').value) || 0;
+        var costo1 = parseFloat(document.getElementById('VentaToneladaUSD').value) || 0;
+        var costo2 = parseFloat(document.getElementById('toneladacont').value) || 0;
+        document.getElementById('VentaContenedorUSD').value = parseFloat(costo1*costo2).toFixed(4);
+        var costo3 = parseFloat(document.getElementById('VentaContenedorUSD').value) || 0;
+        document.getElementById('VentaContenedorCOP').value = parseFloat(costo3*trmventa).toFixed(4);
+    }
+    function CalcularVentaTotal()
+    {
+        var trmventa = parseFloat(document.getElementById('trmventa').value) || 0;
+        var costo1 = parseFloat(document.getElementById('VentaToneladaUSD').value) || 0;
+        var costo2 = parseFloat(document.getElementById('cantidadton').value) || 0;
+        document.getElementById('VentaTotalUSD').value = parseFloat(costo1*costo2).toFixed(4);
+        var costo3 = parseFloat(document.getElementById('VentaTotalUSD').value) || 0;
+        document.getElementById('VentaTotalCOP').value = parseFloat(costo3*trmventa).toFixed(4);
+    }
+    /*             AGENCIAMIENTO                                 */
+    function CalcularTotalAgenciamiento()
+    {
+
+        var trmcompra = parseFloat(document.getElementById('trmcompra').value) || 0;
+        var totalventa = parseFloat(document.getElementById('VentaTotalUSD').value) || 0;
+        var fletemaritimo = parseFloat(document.getElementById('costoTotal22').value) || 0;
+        if ((totalventa-fletemaritimo)*0.019<(300000/trmcompra)) {
+            document.getElementById('costoTotal23').value = parseFloat(300000/trmcompra).toFixed(4);
+        }else
+        {
+            document.getElementById('costoTotal23').value = parseFloat((totalventa-fletemaritimo)*0.019).toFixed(4)
+        }
+
+    }
+    function CalcularTotalToneladaAgenciamiento()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal23').value) || 0;
+        var costo2 = parseFloat(document.getElementById('cantidadton').value) || 0;
+        document.getElementById('costoTonelada23').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+
+    function CalcularTotalContenedorAgenciamiento()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal23').value) || 0;
+        var costo2 = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoContenedor23').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    /*             AGENCIAMIENTO                                 */
+    /*             SEGURO                                 */
+    function CalcularTotalSeguro()
+    {
+
+        var totalventa = parseFloat(document.getElementById('VentaTotalUSD').value) || 0;
+        document.getElementById('costoTotal24').value = parseFloat(totalventa*0.005).toFixed(4);
+
+    }
+    function CalcularTotalToneladaSeguro()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal24').value) || 0;
+        var costo2 = parseFloat(document.getElementById('cantidadton').value) || 0;
+        document.getElementById('costoTonelada24').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+
+    function CalcularTotalContenedorSeguro()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal24').value) || 0;
+        var costo2 = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoContenedor24').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    /*             SEGURO                                 */
+    /*                    MANIPULACION EN DESTINO NO CONTIEN NINGUNA FORMULA                 */
+    /*             MANIPULACION                                 */
+
+    /*             MANIPULACION                                 */
+    /*                    MANIPULACION EN DESTINO NO CONTIEN NINGUNA FORMULA                 */
+    /*             TRAMITES ADUANEROS                                 */
+
+    function CalcularTotalTramiteAduanero()
+    {
+        //REVISAR FORMULA CON EL CLIENTE
+    }
+    function CalcularTotalToneladaAduanero()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal26').value) || 0;
+        var costo2 = parseFloat(document.getElementById('cantidadton').value) || 0;
+        document.getElementById('costoTonelada26').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+
+    function CalcularTotalContenedorAduanero()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal26').value) || 0;
+        var costo2 = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoContenedor26').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    /*             TRAMITES ADUANEROS                                 */
+    /*             TRANSPORTE DE DESTINO                                 */
+
+    function CalcularTotalTransporteDestino()
+    {
+
+        var costo1 = parseFloat(document.getElementById('costoTotal23').value) || 0;
+        document.getElementById('costoTotal27').value = parseFloat(costo1*0.005).toFixed(4);
+    }
+    function CalcularTotalToneladaTransporteDestino()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal27').value) || 0;
+        var costo2 = parseFloat(document.getElementById('cantidadton').value) || 0;
+        document.getElementById('costoTonelada27').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+
+    function CalcularTotalContenedorTransporteDestino()
+    {
+        var costo1 = parseFloat(document.getElementById('costoTotal27').value) || 0;
+        var costo2 = parseFloat(document.getElementById('numcontenedores').value) || 0;
+        document.getElementById('costoContenedor27').value = parseFloat(costo1/costo2).toFixed(4);
+    }
+    /*             TRANSPORTE DE DESTINO                                 */
+    /*             MARGEN                                 */
+    function CalcularTotalMargen()
+    {
+        var costo1 = parseFloat(document.getElementById('VentaTotalUSD').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotal29').value) || 0;
+        document.getElementById('costoTotal28').value = parseFloat(costo2/costo1).toFixed(4);
+    }
+    function CalcularTotalToneladaMargen()
+    {
+        var costo1 = parseFloat(document.getElementById('VentaToneladaUSD').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTonelada29').value) || 0;
+        document.getElementById('costoTonelada28').value = parseFloat(costo2/costo1).toFixed(4);
+    }
+
+    function CalcularTotalContenedorMargen()
+    {
+        var costo1 = parseFloat(document.getElementById('VentaContenedorUSD').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoContenedor29').value) || 0;
+        document.getElementById('costoContenedor28').value = parseFloat(costo2/costo1).toFixed(4);
+    }
+    /*             MARGEN                                   */
+    /*             UTILIDAD                                 */
+
+    function CalcularTotalUtilidad()
+    {
+        var costo1 = parseFloat(document.getElementById('VentaTotalUSD').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTotal').value) || 0;
+        var costo3 = parseFloat(document.getElementById('costoTotal23').value) || 0;
+        var costo4 = parseFloat(document.getElementById('costoTotal24').value) || 0;
+        document.getElementById('costoTotal29').value = parseFloat(costo1-costo2-costo3-costo4).toFixed(4);
+    }
+    function CalcularTotalToneladaUtilidad()
+    {
+        var costo1 = parseFloat(document.getElementById('VentaToneladaUSD').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDTonelada').value) || 0;
+        var costo3 = parseFloat(document.getElementById('costoTonelada23').value) || 0;
+        var costo4 = parseFloat(document.getElementById('costoTonelada24').value) || 0;
+        document.getElementById('costoTonelada29').value = parseFloat(costo1-costo2-costo3-costo4).toFixed(4);
+    }
+
+    function CalcularTotalContenedorUtilidad()
+    {
+        var costo1 = parseFloat(document.getElementById('VentaContenedorUSD').value) || 0;
+        var costo2 = parseFloat(document.getElementById('costoTotalUSDContenedor').value) || 0;
+        var costo3 = parseFloat(document.getElementById('costoContenedor23').value) || 0;
+        var costo4 = parseFloat(document.getElementById('costoContenedor24').value) || 0;
+        document.getElementById('costoContenedor29').value = parseFloat(costo1-costo2-costo3-costo4).toFixed(4);
+    }
+    /*             UTILIDAD                                   */
+    function GuardarItem()
+    {
+        debugger
+        ModalProcesandoShow();
+        $('.deshabilitar').attr("disabled",false);
+        var formData = new FormData(document.getElementById("formItem"));
+
+        $.ajax({
+            url:"GuardarItem",
+            type:"post",
+            contentType: false,
+            processData: false,
+            data: formData,
+            success:function(data)
+            {
+                document.getElementById("formItem").reset();
+                $('#rowid_detalle').val(0);
+                $('#rowid_item').val('');
+                TablaBalance()
+                ModalProcesandoHiden();
+                $('.deshabilitar').attr("disabled",true);
+            },
+            error:function(error)
+            {
+                ModalProcesandoHiden();
+            }
+        });
+    }
+
+
+    /*                  DATOS DE VENTA                                */
+
+
+
+</script>
+<!--TAB ITEMS -->
+<!--TAB BALANCE -->
+<script>
+    function TablaBalance()
+    {
+        $.ajax({
+            url:"BalanceCalculadoraI",
+            asyn:false,
+            data:{rowid:@Model.Calculadora.RowID},
+            success:function(data){
+                $('#tableBalance tbody').empty();
+                $('#tableBalance tbody').append(data);
+                ReCalcular();
+            }
+        })
+
+    }
+    function ActualizarItem(rowid)
+    {
+        if (confirm("Desea Editar este Registro")==false) {
+            return;
+        }
+        ModalProcesandoShow();
+        $.ajax({
+            url:"ActualizarItem",
+            data:{rowid:rowid},
+            success:function(data)
+            {
+                debugger
+                $('#agentenaviera').val(data.agencia);
+                $('#rowid_detalle').val(data.rowid);
+                $('#rowid_item').val(data.nombre_item);
+                ReCalcular()
+                $('#embalaje').val(data.embalaje);
+                ReCalcular()
+                $('#numeroenvios').val(data.numero_envios);
+                ReCalcular()
+                $('#cantidadton').val(data.cantidad);
+                ReCalcular()
+                $('#toneladacont').val(data.toneladaContenedor);
+                ReCalcular()
+                $('#trmactual').val(data.trm);
+                ReCalcular()
+                $('#preciocompraCOP').val(data.precioCompraCOP);
+                ReCalcular()
+                $('#preciocompraUSD').val(data.precioCompraUSD);
+                ReCalcular()
+                $('#costoTonelada1').val(data.brokerTonelada);
+                ReCalcular()
+                $('#costoTonelada20').val(data.fleteTerrestreTonelada);
+                ReCalcular()
+                $('#costoContenedor22').val(data.fleteMaritimoCon);
+                ReCalcular()
+                $('#rentabilidadPorcentaje').val(data.pvexteriorb);
+                ReCalcular()
+                $('#precioVentaExteriorValor').val(data.pvexteriorp);
+                $('#item').val(data.nombre_item);
+                ReCalcular();
+                $('#litab_2').click();
+                ModalProcesandoHiden();
+            },
+            error:function(error)
+            {
+                ModalProcesandoHiden();
+            }
+        })
+    }
+    function EliminarItem(rowid)
+    {
+        if (confirm("Desea Eliminar el Item")==false) {
+            return;
+        }
+        ModalProcesandoShow();
+        $.ajax({
+            url:"EliminarItem",
+            data:{rowid:rowid},
+            success:function(data)
+            {
+                TablaBalance();
+                ModalProcesandoHiden();
+                Mensajes('Item Eliminado Correctamente','success','');
+            },
+            error:function(error)
+            {
+                TablaBalance();
+                ModalProcesandoHiden();
+                Mensajes('Error Itentando eliminar item','error','');
+            }
+        })
+    }
+    $(document).ready(function(){
+        if (@Model.Calculadora.RowID>0) {
+            TablaBalance()
+        }
+    });
+
+</script>
+<script>
+    function Siguiente(){
+        debugger
+            $.ajax({
+                url:"Siguiente",
+                type:"post",
+                data:{ rowid : $("#cliente").val(),},
+                success:function(data)
+
+                {
+                    debugger
+                    location.href="../Proforma/Proforma";
+                    var Proforma = new Object();
+                },
+                error:function(error)
+                {
+                    Mensajes(error,'error','');
+                }
+            })
+        }
+</script>
+<!--TAB BALANCE -->
+>

@@ -1,0 +1,100 @@
+﻿@using PedidosOnline.Models;
+@model List<PedidosOnline.Models.Proforma>
+@{
+    ViewBag.Title = "ListCalculadoras";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<system.web>
+    <compilation debug="true" targetFramework="4.0">
+        <assemblies>
+            <add assembly="System.Data.Entity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+        </assemblies>
+    </compilation>
+</system.web>
+<style>
+    a {
+        color: #333;
+    }
+</style>
+<script>
+
+    $(document).ready(function () {
+        $('table').dataTable({
+            " processing": true,
+            "bFilter": true,
+            "bPaginate": true,
+            "info": false,
+            "bDestroy":true,
+            aLengthMenu: [
+            [15, 25, 50, 100, -1],
+            [15, 25, 50, 100, "All"]
+            ],
+            "iDisplayLength": 15
+
+        });
+
+    });
+</script>
+
+<br />
+<div class="row ">
+    <div style="margin-bottom:20px">
+        <div class="col-md-12">
+            <div class="nav">
+                <span>
+                    <a href="@Url.Action( "Proforma","Exportacion",new {   @rih = Request.Params["rih"] })" class="alink">
+                        <i class="glyphicon glyphicon-plus"></i>&nbsp;<SPAN class="lang" key="NUEVO">Nuevo</SPAN>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <table id="table" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th class="lang">Id</th>
+                    <th class="lang">Titulo</th>
+                    <th class="lang">Vendedor</th>
+                    <th class="lang">Comprador</th>
+                    <th class="lang">Tipo de Pago</th>
+                </tr>
+            </thead>
+            <tbody style="text-align:center;">
+                @foreach (Proforma cal in Model.ToList())
+                {
+
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Proforma", "Exportacion", new { @rowid = @cal.RowID, @rih = Request.Params["rih"] })"><i class="glyphicon glyphicon-search"> </i></a>
+                        </td>
+                        <td>
+                            <a href="javascript:UtilExportarPDF('Proforma',@cal.RowID)" class="alink" ata-toggle="tooltip" data-placement="bottom" title="Exportar PDF">
+                                <i class="glyphicon glyphicon-file"></i>
+                            </a>
+                            @*<a href="@Url.Action("Export", "Proforma", new { @rowid = @cal.RowID, @rih = Request.Params["rih"] })"><i class="glyphicon glyphicon-export"></i></a>*@
+                        </td>
+                        <td>
+                            #@cal.RowID
+                        </td>
+                        <td>
+                            @cal.Titulo
+                        </td>
+                        <td>
+                            @cal.Tercero1.RazonSocial
+                        </td>
+                        <td>
+                            @cal.Tercero.RazonSocial
+                        </td>
+                        <td>
+                            @cal.Opcion.Nombre
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

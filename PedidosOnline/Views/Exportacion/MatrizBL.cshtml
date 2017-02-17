@@ -1,0 +1,448 @@
+﻿@model PedidosOnline.Models.MatrizBL
+@{
+    ViewBag.Title = "MatrizBL";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    a {
+        color: #333;
+    }
+</style>
+<link href="~/Content/Tabs.css" rel="stylesheet" />
+<script type="text/javascript">
+    function guardarMatrizBL(a)
+    {
+        debugger
+        ModalProcesandoShow();
+        var RowID = $(".RowID").val();
+        var RowIDPro = $(".RowIDCon").val();
+        var RowIDE =  $(".RowIDE").val();
+
+        if(RowIDPro == ""){
+            Mensajes('El campo contrato es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/MatrizBL/RegistrarMatrizBL",
+            data: {
+                formulario: $("#form").serialize(),
+                RowID: RowID,
+                RowIDCon: RowIDPro,
+                RowIDE: RowIDE
+            },
+            success: function (data2) {
+                debugger
+                if(a == 1){
+                    if(@Model.RowID > 0){
+                        Mensajes('Guardado Satisfactoriamente','success','');
+                    }else{
+                        location.href="../MatrizBL/MatrizBL?rowid="+data2;
+                    }
+                }else{
+                    Mensajes('Guardado Satisfactoriamente','success','');
+                    window.location = "/MatrizBL/ListaMatrizBL";
+                }
+                ModalProcesandoHiden();
+            },
+            error: function (request) {
+                debugger
+                Mensajes(request.responseText, 'error', '');
+                ModalProcesandoHiden();
+            }
+        });
+
+    }
+
+    function cargarItemsContrato(rowid_proforma) {
+        $.ajax({
+            type: "GET",
+            url: "/MatrizBL/ItemsContrato",
+            data: {
+                RowID: rowid_proforma
+            },
+            success: function (data) {
+                $('#tblProductos tbody').empty();
+                $('#tblProductos tbody').append(data);
+            },
+            error: function (request) {
+                Mensajes("Se presento un error", 'error', '');
+
+            }
+        });
+    }
+
+
+
+</script>
+<div class="panel">
+    <div class="row">
+        <div class="row" id="div_menu" style="margin-bottom:20px">
+            <div class="col-md-12">
+                <div class="nav">
+                    <span>
+                        &nbsp;&nbsp;
+                        <a href="@Url.Action("ListaMatrizBL","Exportacion",new {  @rih = Request.Params["rih"] })" class="alink">
+                            <i class="glyphicon glyphicon-list-alt"></i>&nbsp;<span class="lang" key="VISTA">Vista&nbsp;&nbsp;</span>
+                        </a>
+                    </span>
+                    <span>
+                        <a href="javascript:guardarMatrizBL(1);" class="alink">
+                            <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
+                        </a>
+                    </span>
+                    <span>
+                        &nbsp;&nbsp;
+                        <a href="javascript:guardarMatrizBL(2);" class="alink">
+                            <i class="glyphicon glyphicon-floppy-disk"></i><span class="lang" key="GUARDAR_&_CERRAR">&nbsp;Guardar&nbsp;&&nbsp;Cerrar</span>
+                        </a>
+                    </span>
+                    @if (Model.RowID != 0)
+                    {
+                        <span>
+                            &nbsp;&nbsp;
+                            <a href="~/CertificadoMadera/CertificadoMadera" class="alink">
+                                <i class="glyphicon glyphicon-arrow-right"></i><span class="lang" key="Siguiente">Siguiente</span>
+                            </a>
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="tabbable tabbable-custom tabs-top">
+            <ul class="nav nav-tabs tabs-top">
+                <li id="li_tab1" class="active"><a href="#tab1" data-toggle="tab">Datos generales</a></li>
+                <li id="li_tab2"><a href="#tab2" data-toggle="tab">Items</a></li>
+                @*<li class="active" id="li_tab1"><a href="#tab_1" id="litab_1" data-toggle="tab" class="lang" key="">Datos generales</a></li>*@
+                @*<li class="item" id="li_tab2"><a href="#tab_2" id="litab_2" data-toggle="tab" class="lang" key="">Items </a></li>*@
+            </ul>
+        </div>
+        <div class="tab-content" style="overflow:hidden">
+            <div class="col-md-12">
+                <form id="form" name="form" onsubmit="return false">
+                    <input type="hidden" class="RowID" name="RowID" value="@Model.RowID" />
+                    <input type="hidden" class="RowIDCon" name="RowIDCon" value="@Model.ContratoID" />
+                    <input type="hidden" class="RowIDE" name="RowIDE" value="@Model.EmpresaID" />
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="fecha" class="lang">Fecha</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="fecha" name="fecha" style="width: 100%" value="@Model.Fecha" readonly="readonly" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="titulo" class="lang">Número reserva</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="number" id="numReserva" name="numReserva" onkeypress="return SoloNumeros(event)" value="@Model.NumeroReserva" style="width: 100%" />
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="intermediario" class="lang">Expedidor</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="expedidor" name="expedidor" value="@Model.Expedidor" style="width: 100%" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="autoc_empresa" class="lang">Empresa</label>
+                            </div>
+                            <div class="col-md-5">
+                                @if (Model.RowID > 0)
+                                {
+                                    <input type="text" id="autoc_empresa" name="autoc_empresa" value="@Model.Tercero.RazonSocial" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                }
+                                else
+                                {
+                                    <input type="text" id="autoc_empresa" name="autoc_empresa" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                }
+
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">Nit</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="nit" name="nit" style="width: 100%; " placeholder="---" disabled />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="direccion" class="lang">Dirección</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="direccion" name="direccion" style="width: 100%; " placeholder="---" disabled />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="direccion" class="lang">Ciudad</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="ciudad" name="ciudad" style="width: 100%; " placeholder="---" disabled />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="telefono" class="lang">Teléfono</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="telefono" name="telefono" style="width: 100%; " placeholder="---" disabled />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="consignee" class="lang">Consignatario</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="consignee" name="consignee" value="@Model.Consignee" style="width: 100%" />
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="ncm" class="lang">NCM</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="number" id="ncm" name="ncm" onkeypress="return SoloNumeros(event)" value="@Model.NCM" style="width: 100%" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="notificacion" class="lang">Notificación</label>
+                            </div>
+                            <div class="col-md-5">
+                                <textarea type="text" id="notificacion" name="notificacion" style="width: 100%; resize:none" rows="5">@Model.Notificacion</textarea>
+                            </div>
+                        </div>
+                        <br /><br /><br /><br /><br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="autoc_contrato" class="lang" key="CONTRATO">Contrato</label>
+                            </div>
+                            <div class="col-md-5">
+                                @if (/*Model.RowID != null ||*/ Model.RowID > 0)
+                                {
+                                    <input type="text" id="autoc_contrato" name="autoc_contrato" value="@Model.Contrato.Titulo" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                }
+                                else
+                                {
+                                    <input type="text" id="autoc_contrato" name="autoc_contrato" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                }
+
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="puertoC" class="lang">Puerto carga</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="puertoC" name="puertoC" style="width: 100%; " placeholder="---" disabled />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="puertoD" class="lang">Puerto descarga</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="puertoD" name="puertoD" style="width: 100%; " placeholder="---" disabled />
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="tab_2" class="tab-pane">
+            <div class="col-md-12" style="margin-top:10px;">
+                <table id="tblProductos" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Ref.</th>
+                            <th>Descripcion</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Und. empaque</th>
+                            <th>Peso</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#fecha').datepicker({
+        dateFormat: 'dd/mm/yy',
+        minDate: 0,
+        maxDate: '+3Y',
+        inline: true
+    });
+
+    function SoloNumeros(e){
+        debugger
+        var key = window.Event ? e.which : e.keyCode
+        return (key >= 48 && key <= 57 || key == 46 )
+    }
+    //function cargarItemsContrato(rowid_contrato) {
+    //    $.ajax({
+    //        type: "GET",
+    //        url: "/MatrizBL/ItemsContrato",
+    //        data: {
+    //            RowID: rowid_contrato
+    //        },
+    //        success: function (data) {
+    //            $('#tblProductos tbody').empty();
+    //            $('#tblProductos tbody').append(data);
+    //        },
+    //        error: function (request) {
+    //            Mensajes("Se presento un error", 'error', '');
+
+    //        }
+    //    });
+    //}
+
+    $('#autoc_contrato').on('keyup keypress', function (e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) { //Enter keycode
+            return false;
+        }
+    });
+
+    $("#autoc_contrato").autocomplete({
+        source: "Contrato_Buscar_Todos",
+        minLenght: 3,
+        select: function (evento, ui) {//seleccion al autocompletar
+            debugger
+            if (ui.item != null) {//si hay valor en la seleccion autocompletar
+                $("#autoc_contrato").val(ui.item.label);
+                $(".RowIDCon").val(ui.item.RowID);
+                $("#puertoC").val(ui.item.puertoc);
+                $("#puertoD").val(ui.item.puertod);
+                cargarItemsContrato(ui.item.RowID);
+            }
+        },
+        change: function (event, ui) {
+
+        }
+    });
+
+    $('#autoc_empresa').on('keyup keypress', function (e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) { //Enter keycode
+            return false;
+        }
+    });
+
+    $("#autoc_empresa").autocomplete({
+        source: "Buscar_Empresas",
+        minLenght: 3,
+        select: function (evento, ui) {//seleccion al autocompletar
+            debugger
+            if (ui.item != null) {//si hay valor en la seleccion autocompletar
+                $("#autoc_empresa").val(ui.item.label);
+                $(".RowIDE").val(ui.item.RowID);
+                $("#nit").val(ui.item.Nit);
+                $("#direccion").val(ui.item.Direccion);
+                $("#ciudad").val(ui.item.Ciudad);
+                $("#telefono").val(ui.item.Telefono);
+
+            }
+        },
+        change: function (event, ui) {
+
+        }
+    });
+
+    $("#li_tab1").click(function () {
+        debugger
+        $("#tblProductos").hide();
+        $("#form").show();
+
+    });
+
+    $("#li_tab2").click(function () {
+        debugger
+        $("#tblProductos").show();
+        $("#form").hide();
+    });
+
+
+    $(document).ready(function () {
+        $("#tblProductos").hide();
+        debugger
+        if (@Model.RowID > 0)
+        {
+            var titulo = $("#autoc_contrato").val();
+            $.ajax({
+                type: "GET",
+                url: "/MatrizBL/Datos_Contrato",
+                data:
+                      {
+                          titulo: titulo
+                      },
+                success: function (data) {
+                    $(".autoc_contrato").val(data.Titulo);
+                    $(".RowIDCon").val(data.RowID);
+                    $("#puertoC").val(data.puertoc);
+                    $("#puertoD").val(data.puertod);
+                    cargarItemsContrato(data.RowID);
+                },
+                error: function (request) {
+                    Mensajes("Se presento un error", 'error', '');
+
+                }
+            });
+
+            var titulo1 = $("#autoc_empresa").val();
+            $.ajax({
+                type: "GET",
+                url: "/MatrizBL/Datos_Empresa",
+                data:
+                      {
+                          titulo: titulo1
+                      },
+                success: function (data) {
+                    $("#autoc_empresa").val(data.Titulo);
+                    $(".RowIDE").val(data.RowID);
+                    $("#nit").val(data.Nit);
+                    $("#direccion").val(data.Direccion);
+                    $("#ciudad").val(data.Ciudad);
+                    $("#telefono").val(data.Telefono);
+                },
+                error: function (request) {
+                    Mensajes("Se presento un error", 'error', '');
+
+                }
+            });
+        }
+    });
+
+
+
+</script>
