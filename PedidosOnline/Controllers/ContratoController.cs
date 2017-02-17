@@ -341,7 +341,7 @@ namespace PedidosOnline.Controllers
         public string ItemsContrato(int RowID)
         {
             string result = "";
-            Proforma proforma = db.Proforma.Where(p => p.RowID == RowID).FirstOrDefault();
+            Proforma proforma = db.Proforma.Where(p => p.RowID == RowID).FirstOrDefault();        
             List<CalculadoraItems> itemsC = db.CalculadoraItems.Where(c => c.CalculadoraID == proforma.CalculadoraID).ToList();
             double subtotal = 0;
             foreach (var item in itemsC)
