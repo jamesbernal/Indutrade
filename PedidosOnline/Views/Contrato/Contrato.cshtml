@@ -59,7 +59,7 @@
                     else
                     {
                         location.href="../Contrato/Contrato?rowid="+data2;
-                    } 
+                    }
                     ModalProcesandoHiden();
                 }
                 else
@@ -142,7 +142,7 @@
         <div class="tab-content" style="overflow:hidden">
             <div class="col-md-12">
                 <form id="form" name="form" onsubmit="return false">
-                    <input type="hidden" class="RowID"  id="RowID" name="RowID" value="@Model.RowID" />
+                    <input type="hidden" class="RowID" id="RowID" name="RowID" value="@Model.RowID" />
                     <input type="hidden" class="RowIDPro" name="RowIDPro" />
                     <div class="col-md-5">
                         <div class="form-group">
@@ -201,15 +201,6 @@
                             <br />*@
                         <div class="form-group">
                             <div class="col-md-3">
-                                <label for="calidad" class="lang">Calidad</label>
-                            </div>
-                            <div class="col-md-5">
-                                <input type="text" id="calidad" name="calidad" value="@Model.Calidad" style="width: 100%" />
-                            </div>
-                        </div>
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-3">
                                 <label for="periodoE" class="lang">Per. embarque</label>
                             </div>
                             <div class="col-md-5">
@@ -242,28 +233,7 @@
                                 <label for="transporte" class="lang">Transporte</label>
                             </div>
                             <div class="col-md-5">
-                                <select id="transporte" name="transporte" style="width: 100%" required>
-                                    <option value="">---</option>
-
-                                    @foreach (var trn in ViewBag.transporte)
-                                    {
-                                        if (/*Model.RowID != null ||*/ Model.RowID > 0)
-                                        {
-                                            if (Model.Opcion1.RowID == trn.RowID)
-                                            {
-                                                <option value="@Model.Opcion1.RowID" selected>@Model.Opcion1.Descripcion</option>
-                                            }
-                                            else
-                                            {
-                                                <option value="@trn.RowID">@trn.Descripcion</option>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <option value="@trn.RowID">@trn.Descripcion</option>
-                                        }
-                                    }
-                                </select>
+                                <input type="text" id="transporte" name="transporte" value="@Model.Transporte" style="width: 100%" />
                             </div>
                         </div>
                         <br />
@@ -342,7 +312,25 @@
                             </div>
                         </div>
                         <br />
-                       
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="formaP" class="lang">Calidad 1</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" id="calidad1" name="calidad1" value="@Model.Calidad" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="formaP" class="lang">Calidad 2 </label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" id="calidad2" name="calidad2" value="@Model.Calidad2" />
+                            </div>
+                        </div>
+                        <br />
+
                         @*<div class="form-group">
                                 <label for="producto" class="lang">Producto</label>
                                 <input type="text" id="producto" name="producto" placeholder="---" disabled />
@@ -430,7 +418,7 @@
 
 
     $("#autoc_proforma").autocomplete({
-        source: "Proforma_Buscar_Todos",
+        source: "Proforma_Buscar_Todos?tipo_proforma=EXPORTACION",
         minLenght: 3,
         select: function (evento, ui) {//seleccion al autocompletar
             //debugger

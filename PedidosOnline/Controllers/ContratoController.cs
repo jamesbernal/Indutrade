@@ -146,7 +146,9 @@ namespace PedidosOnline.Controllers
                     ObjContrato.Seguro = form["seguro"];
                     ObjContrato.Calidad = form["calidad"];
                     ObjContrato.EmbarqueID = Convert.ToInt32(form["periodoE"]);
-                    ObjContrato.TransporteID = Convert.ToInt32(form["transporte"]);
+                    ObjContrato.Transporte = form["transporte"];
+                    ObjContrato.Calidad = form["calidad1"];
+                    ObjContrato.Calidad2 = form["calidad2"];
                     ObjContrato.Inspector = form["autoc_inspector"];
                     ObjContrato.EmbarqueParcial = form["EmbarqueP"];
                     ObjContrato.FechaCreacion = UtilTool.GetDateTime();
@@ -168,11 +170,14 @@ namespace PedidosOnline.Controllers
                     ObjContrato.Seguro = form["seguro"];
                     ObjContrato.Calidad = form["calidad"];
                     ObjContrato.EmbarqueID = Convert.ToInt32(form["periodoE"]);
-                    ObjContrato.TransporteID = Convert.ToInt32(form["transporte"]);
-                    ObjContrato.Inspector = form["inspector"];
+                    ObjContrato.Transporte = form["transporte"];
+                    ObjContrato.Calidad = form["calidad1"];
+                    ObjContrato.Calidad2 = form["calidad2"];
+                    ObjContrato.Inspector = form["autoc_inspector"];
                     ObjContrato.EmbarqueParcial = form["EmbarqueP"];
-                    ObjContrato.FechaActualizacion = UtilTool.GetDateTime();
-                    ObjContrato.UsuarioActualizacion = ((Usuario)Session["CurUser"]).NombreUsuario;
+                    ObjContrato.FechaCreacion = UtilTool.GetDateTime();
+                    ObjContrato.TipoContratoID = db.Opcion.Where(op => op.Agrupacion.Nombre == "TIPOPROFORMA" && op.Codigo == "EXPORTACION").FirstOrDefault().RowID;
+                    ObjContrato.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
                     db.SaveChanges();
                     mensaje = "Se ha actualizado correctamente";
                 }
@@ -288,11 +293,13 @@ namespace PedidosOnline.Controllers
                     ObjContrato.Seguro = form["seguro"];
                     ObjContrato.Calidad = form["calidad"];
                     ObjContrato.EmbarqueID = Convert.ToInt32(form["periodoE"]);
-                    ObjContrato.TransporteID = Convert.ToInt32(form["transporte"]);
+                    ObjContrato.Transporte = form["transporte"];
+                    ObjContrato.Calidad = form["calidad1"];
+                    ObjContrato.Calidad2 = form["calidad2"];
                     ObjContrato.Inspector = form["autoc_inspector"];
                     ObjContrato.EmbarqueParcial = form["EmbarqueP"];
                     ObjContrato.FechaCreacion = UtilTool.GetDateTime();
-                    ObjContrato.TipoContratoID = db.Opcion.Where(op => op.Agrupacion.Nombre == "TIPOPROFORMA" && op.Codigo == "IMPORTACION").FirstOrDefault().RowID;
+                    ObjContrato.TipoContratoID = db.Opcion.Where(op => op.Agrupacion.Nombre == "TIPOPROFORMA" && op.Codigo == "EXPORTACION").FirstOrDefault().RowID;
                     ObjContrato.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
                     db.Contrato.Add(ObjContrato);
                     db.SaveChanges();
@@ -309,11 +316,14 @@ namespace PedidosOnline.Controllers
                     ObjContrato.Seguro = form["seguro"];
                     ObjContrato.Calidad = form["calidad"];
                     ObjContrato.EmbarqueID = Convert.ToInt32(form["periodoE"]);
-                    ObjContrato.TransporteID = Convert.ToInt32(form["transporte"]);
-                    ObjContrato.Inspector = form["inspector"];
+                    ObjContrato.Transporte = form["transporte"];
+                    ObjContrato.Calidad = form["calidad1"];
+                    ObjContrato.Calidad2 = form["calidad2"];
+                    ObjContrato.Inspector = form["autoc_inspector"];
                     ObjContrato.EmbarqueParcial = form["EmbarqueP"];
-                    ObjContrato.FechaActualizacion = UtilTool.GetDateTime();
-                    ObjContrato.UsuarioActualizacion = ((Usuario)Session["CurUser"]).NombreUsuario;
+                    ObjContrato.FechaCreacion = UtilTool.GetDateTime();
+                    ObjContrato.TipoContratoID = db.Opcion.Where(op => op.Agrupacion.Nombre == "TIPOPROFORMA" && op.Codigo == "EXPORTACION").FirstOrDefault().RowID;
+                    ObjContrato.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
                     db.SaveChanges();
                     mensaje = "Se ha actualizado correctamente";
                 }

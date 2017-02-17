@@ -345,7 +345,13 @@
     <Compile Include="Models\SolicitudTransporte.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spPROFORMA_EXPORTAR_PDF1_Result.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\spPROFORMA_EXPORTAR_PDF_Result.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spSOLICITUD_TRASNPORTE_EXPORTAR_PDF_Result.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">

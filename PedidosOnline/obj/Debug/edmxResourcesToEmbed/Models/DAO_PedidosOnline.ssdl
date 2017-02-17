@@ -100,6 +100,7 @@
     <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaModificacion" Type="date" />
     <Property Name="Terminada" Type="bit" Nullable="false" />
+    <Property Name="NombreBroker" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="CalculadoraItems">
     <Key>
@@ -257,6 +258,7 @@
     <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaModificacion" Type="date" />
     <Property Name="CalculadoraID" Type="int" />
+    <Property Name="AgenteNavieraID" Type="int" />
   </EntityType>
   <EntityType Name="DCD">
     <Key>
@@ -314,8 +316,8 @@
     <Property Name="Dex" Type="varchar" MaxLength="30" />
     <Property Name="NCertificadoCP" Type="varchar" MaxLength="30" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.dbo.m_plantillas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_9CAC35_indutrade.dbo.m_plantillas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="m_plantillas">
     <Key>
       <PropertyRef Name="RowID" />
@@ -573,8 +575,8 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.dbo.m_plantillas' no tie
     <Property Name="FechaModificacion" Type="date" />
     <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_9CAC35_indutrade.Erp.PuntoEnvio' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="PuntoEnvio">
     <Key>
       <PropertyRef Name="RowID" />
@@ -868,7 +870,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
     <Property Name="Calidad" Type="varchar" MaxLength="50" />
     <Property Name="EmbarqueID" Type="int" Nullable="false" />
     <Property Name="Seguro" Type="varchar" MaxLength="50" />
-    <Property Name="TransporteID" Type="int" Nullable="false" />
     <Property Name="Inspector" Type="varchar" MaxLength="50" />
     <Property Name="EmbarqueParcial" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Titulo" Type="varchar" MaxLength="50" />
@@ -878,6 +879,8 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
     <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaActualizacion" Type="date" />
     <Property Name="TipoContratoID" Type="int" />
+    <Property Name="Transporte" Type="varchar" MaxLength="100" />
+    <Property Name="Calidad2" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="MatrizBL">
     <Key>
@@ -1042,6 +1045,18 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
         <PropertyRef Name="RowID" />
       </Principal>
       <Dependent Role="Calculadora">
+        <PropertyRef Name="AgenteNavieraID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Calculado__Agent__3BB5CE82">
+    <End Role="AgenteNaviera" Type="Self.AgenteNaviera" Multiplicity="0..1" />
+    <End Role="CalculadoraItems" Type="Self.CalculadoraItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AgenteNaviera">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="CalculadoraItems">
         <PropertyRef Name="AgenteNavieraID" />
       </Dependent>
     </ReferentialConstraint>
@@ -2222,18 +2237,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Contrato_Opcion2">
-    <End Role="Opcion" Type="Self.Opcion" Multiplicity="1" />
-    <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Opcion">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="Contrato">
-        <PropertyRef Name="TransporteID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Contrato_Proforma">
     <End Role="Proforma" Type="Self.Proforma" Multiplicity="1" />
     <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
@@ -2438,6 +2441,9 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="contratos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="rowid_contrato" Type="int" Mode="In" />
+  </Function>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
   <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -2469,6 +2475,10 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
     <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spPROFORMA_EXPORTAR_PDF" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="rowid_proforma" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spSOLICITUD_TRASNPORTE_EXPORTAR_PDF" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="DB_9CAC35_indutradeModelStoreContainer">
     <EntitySet Name="Actividad" EntityType="Self.Actividad" Schema="Crm" store:Type="Tables" />
     <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="Crm" store:Type="Tables" />
@@ -2575,6 +2585,10 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
     <AssociationSet Name="FK__Calculado__Agent__2B947552" Association="Self.FK__Calculado__Agent__2B947552">
       <End Role="AgenteNaviera" EntitySet="AgenteNaviera" />
       <End Role="Calculadora" EntitySet="Calculadora" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Calculado__Agent__3BB5CE82" Association="Self.FK__Calculado__Agent__3BB5CE82">
+      <End Role="AgenteNaviera" EntitySet="AgenteNaviera" />
+      <End Role="CalculadoraItems" EntitySet="CalculadoraItems" />
     </AssociationSet>
     <AssociationSet Name="FK__Calculado__Calcu__05F8DC4F" Association="Self.FK__Calculado__Calcu__05F8DC4F">
       <End Role="Calculadora" EntitySet="Calculadora" />
@@ -2965,10 +2979,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       <End Role="CertificadoMadera" EntitySet="CertificadoMadera" />
     </AssociationSet>
     <AssociationSet Name="FK_Contrato_Opcion" Association="Self.FK_Contrato_Opcion">
-      <End Role="Opcion" EntitySet="Opcion" />
-      <End Role="Contrato" EntitySet="Contrato" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Contrato_Opcion2" Association="Self.FK_Contrato_Opcion2">
       <End Role="Opcion" EntitySet="Opcion" />
       <End Role="Contrato" EntitySet="Contrato" />
     </AssociationSet>

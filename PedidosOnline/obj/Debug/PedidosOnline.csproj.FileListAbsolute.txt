@@ -609,6 +609,5 @@ C:\Indutrade\PedidosOnline\bin\es\Microsoft.Owin.Security.Facebook.resources.dll
 C:\Indutrade\PedidosOnline\bin\es\Microsoft.Owin.Security.Google.resources.dll
 C:\Indutrade\PedidosOnline\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
 C:\Indutrade\PedidosOnline\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-C:\Indutrade\PedidosOnline\obj\Debug\PedidosOnline.csprojResolveAssemblyReference.cache
 C:\Indutrade\PedidosOnline\obj\Debug\PedidosOnline.dll
 C:\Indutrade\PedidosOnline\obj\Debug\PedidosOnline.pdb

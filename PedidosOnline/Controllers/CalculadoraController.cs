@@ -15,6 +15,9 @@ namespace PedidosOnline.Controllers
         {
             return View();
         }
+        #region ::::CALCULADORA::::
+
+        
         PedidosOnlineEntities db = new PedidosOnlineEntities();
 
         [CheckSessionOut]
@@ -66,7 +69,8 @@ namespace PedidosOnline.Controllers
             obj.IncotermID = int.Parse(Request.Params["InCortems"]);
             obj.Fecha = DateTime.Parse(Request.Params["DateDetalle"]);
             obj.DestinoID = int.Parse(Request.Params["ciudadID"]);
-            obj.AgenteNavieraID = int.Parse(Request.Params["agenciaNav"]);
+            //obj.AgenteNavieraID = int.Parse(Request.Params["agenciaNav"]);
+            obj.NombreBroker = Request.Params["NombreBroker"];
             obj.observacion = Request.Params["observa"];
             if (obj.RowID == 0)
             {
@@ -153,6 +157,7 @@ namespace PedidosOnline.Controllers
             try { obj.CalculadoraID = int.Parse(Request.Params["rowid_calculadora"]); } catch { }
             try { obj.ItemID = int.Parse(Request.Params["rowid_item"]); } catch { }
             try { obj.EmbalajeID = int.Parse(Request.Params["embalaje"]); } catch { }
+            try { obj.AgenteNavieraID = int.Parse(Request.Params["agentenaviera"]); } catch { }
             try { obj.CantidadTonelada = double.Parse(Request.Params["cantidadton"]); } catch { }
             try { obj.NumeroEnvio = int.Parse(Request.Params["numeroenvios"]); } catch { }
             try { obj.ToneladaContenedor = decimal.Parse(Request.Params["toneladacont"]); } catch { }
@@ -459,7 +464,7 @@ namespace PedidosOnline.Controllers
                 fleteMaritimoCon = reg.FleteMaritimoUSDCON,
 
                 pvexteriorb = reg.PVEBRentabilidadporcentaje,
-
+                agencia=reg.AgenteNavieraID,
                 pvexteriorp = reg.PVE,
             };
             var jsonResult = Json(jsonData, JsonRequestBehavior.AllowGet);
@@ -467,5 +472,6 @@ namespace PedidosOnline.Controllers
 
             return jsonResult;
         }
+        #endregion
     }
 }

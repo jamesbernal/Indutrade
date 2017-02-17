@@ -105,6 +105,7 @@
           <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
           <Property Name="FechaModificacion" Type="date" />
           <Property Name="Terminada" Type="bit" Nullable="false" />
+          <Property Name="NombreBroker" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="CalculadoraItems">
           <Key>
@@ -262,6 +263,7 @@
           <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
           <Property Name="FechaModificacion" Type="date" />
           <Property Name="CalculadoraID" Type="int" />
+          <Property Name="AgenteNavieraID" Type="int" />
         </EntityType>
         <EntityType Name="DCD">
           <Key>
@@ -319,8 +321,8 @@
           <Property Name="Dex" Type="varchar" MaxLength="30" />
           <Property Name="NCertificadoCP" Type="varchar" MaxLength="30" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.dbo.m_plantillas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_9CAC35_indutrade.dbo.m_plantillas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="m_plantillas">
           <Key>
             <PropertyRef Name="RowID" />
@@ -578,8 +580,8 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.dbo.m_plantillas' no tie
           <Property Name="FechaModificacion" Type="date" />
           <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_9CAC35_indutrade.Erp.PuntoEnvio' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PuntoEnvio">
           <Key>
             <PropertyRef Name="RowID" />
@@ -873,7 +875,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
           <Property Name="Calidad" Type="varchar" MaxLength="50" />
           <Property Name="EmbarqueID" Type="int" Nullable="false" />
           <Property Name="Seguro" Type="varchar" MaxLength="50" />
-          <Property Name="TransporteID" Type="int" Nullable="false" />
           <Property Name="Inspector" Type="varchar" MaxLength="50" />
           <Property Name="EmbarqueParcial" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Titulo" Type="varchar" MaxLength="50" />
@@ -883,6 +884,8 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
           <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="50" />
           <Property Name="FechaActualizacion" Type="date" />
           <Property Name="TipoContratoID" Type="int" />
+          <Property Name="Transporte" Type="varchar" MaxLength="100" />
+          <Property Name="Calidad2" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="MatrizBL">
           <Key>
@@ -1047,6 +1050,18 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
               <PropertyRef Name="RowID" />
             </Principal>
             <Dependent Role="Calculadora">
+              <PropertyRef Name="AgenteNavieraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Calculado__Agent__3BB5CE82">
+          <End Role="AgenteNaviera" Type="Self.AgenteNaviera" Multiplicity="0..1" />
+          <End Role="CalculadoraItems" Type="Self.CalculadoraItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgenteNaviera">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="CalculadoraItems">
               <PropertyRef Name="AgenteNavieraID" />
             </Dependent>
           </ReferentialConstraint>
@@ -2227,18 +2242,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Contrato_Opcion2">
-          <End Role="Opcion" Type="Self.Opcion" Multiplicity="1" />
-          <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Opcion">
-              <PropertyRef Name="RowID" />
-            </Principal>
-            <Dependent Role="Contrato">
-              <PropertyRef Name="TransporteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Contrato_Proforma">
           <End Role="Proforma" Type="Self.Proforma" Multiplicity="1" />
           <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
@@ -2443,6 +2446,9 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="contratos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="rowid_contrato" Type="int" Mode="In" />
+        </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -2474,6 +2480,10 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spPROFORMA_EXPORTAR_PDF" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="rowid_proforma" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spSOLICITUD_TRASNPORTE_EXPORTAR_PDF" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="DB_9CAC35_indutradeModelStoreContainer">
           <EntitySet Name="Actividad" EntityType="Self.Actividad" Schema="Crm" store:Type="Tables" />
           <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="Crm" store:Type="Tables" />
@@ -2580,6 +2590,10 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
           <AssociationSet Name="FK__Calculado__Agent__2B947552" Association="Self.FK__Calculado__Agent__2B947552">
             <End Role="AgenteNaviera" EntitySet="AgenteNaviera" />
             <End Role="Calculadora" EntitySet="Calculadora" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Calculado__Agent__3BB5CE82" Association="Self.FK__Calculado__Agent__3BB5CE82">
+            <End Role="AgenteNaviera" EntitySet="AgenteNaviera" />
+            <End Role="CalculadoraItems" EntitySet="CalculadoraItems" />
           </AssociationSet>
           <AssociationSet Name="FK__Calculado__Calcu__05F8DC4F" Association="Self.FK__Calculado__Calcu__05F8DC4F">
             <End Role="Calculadora" EntitySet="Calculadora" />
@@ -2973,10 +2987,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
             <End Role="Opcion" EntitySet="Opcion" />
             <End Role="Contrato" EntitySet="Contrato" />
           </AssociationSet>
-          <AssociationSet Name="FK_Contrato_Opcion2" Association="Self.FK_Contrato_Opcion2">
-            <End Role="Opcion" EntitySet="Opcion" />
-            <End Role="Contrato" EntitySet="Contrato" />
-          </AssociationSet>
           <AssociationSet Name="FK_Contrato_Proforma" Association="Self.FK_Contrato_Proforma">
             <End Role="Proforma" EntitySet="Proforma" />
             <End Role="Contrato" EntitySet="Contrato" />
@@ -3093,6 +3103,7 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
           <EntitySet Name="DCD" EntityType="DB_9CAC35_indutradeModel.DCD" />
           <EntitySet Name="DetalleEmpaque" EntityType="DB_9CAC35_indutradeModel.DetalleEmpaque" />
           <EntitySet Name="Empaque" EntityType="DB_9CAC35_indutradeModel.Empaque" />
+          <EntitySet Name="FEP" EntityType="DB_9CAC35_indutradeModel.FEP" />
           <EntitySet Name="SolicitudLlenado" EntityType="DB_9CAC35_indutradeModel.SolicitudLlenado" />
           <EntitySet Name="SolicitudTransporte" EntityType="DB_9CAC35_indutradeModel.SolicitudTransporte" />
           <EntitySet Name="sysdiagrams" EntityType="DB_9CAC35_indutradeModel.sysdiagrams" />
@@ -3186,6 +3197,10 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
             <End Role="AgenteNaviera" EntitySet="AgenteNaviera" />
             <End Role="Calculadora" EntitySet="Calculadora" />
           </AssociationSet>
+          <AssociationSet Name="FK__Calculado__Agent__3BB5CE82" Association="DB_9CAC35_indutradeModel.FK__Calculado__Agent__3BB5CE82">
+            <End Role="AgenteNaviera" EntitySet="AgenteNaviera" />
+            <End Role="CalculadoraItems" EntitySet="CalculadoraItems" />
+          </AssociationSet>
           <AssociationSet Name="FK__Calculado__Calcu__05F8DC4F" Association="DB_9CAC35_indutradeModel.FK__Calculado__Calcu__05F8DC4F">
             <End Role="Calculadora" EntitySet="Calculadora" />
             <End Role="CalculadoraItems" EntitySet="CalculadoraItems" />
@@ -3225,6 +3240,10 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
           <AssociationSet Name="FK__DCD__ContratoID__0DEF03D2" Association="DB_9CAC35_indutradeModel.FK__DCD__ContratoID__0DEF03D2">
             <End Role="Contrato" EntitySet="Contrato" />
             <End Role="DCD" EntitySet="DCD" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FEP__DCDID__168449D3" Association="DB_9CAC35_indutradeModel.FK__FEP__DCDID__168449D3">
+            <End Role="DCD" EntitySet="DCD" />
+            <End Role="FEP" EntitySet="FEP" />
           </AssociationSet>
           <AssociationSet Name="FK__DetalleEm__empaq__4E3E9311" Association="DB_9CAC35_indutradeModel.FK__DetalleEm__empaq__4E3E9311">
             <End Role="Empaque" EntitySet="Empaque" />
@@ -3522,6 +3541,10 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
             <End Role="MotoNave" EntitySet="MotoNave" />
             <End Role="CertificadoMadera" EntitySet="CertificadoMadera" />
           </AssociationSet>
+          <AssociationSet Name="FK__Contrato__TipoCo__0EE3280B" Association="DB_9CAC35_indutradeModel.FK__Contrato__TipoCo__0EE3280B">
+            <End Role="Opcion" EntitySet="Opcion" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
           <AssociationSet Name="FK__OrdenComp__Forma__78D3EB5B" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Forma__78D3EB5B">
             <End Role="Opcion" EntitySet="Opcion" />
             <End Role="OrdenCompra" EntitySet="OrdenCompra" />
@@ -3539,10 +3562,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
             <End Role="CartaLlenadoPuerto" EntitySet="CartaLlenadoPuerto" />
           </AssociationSet>
           <AssociationSet Name="FK_Contrato_Opcion" Association="DB_9CAC35_indutradeModel.FK_Contrato_Opcion">
-            <End Role="Opcion" EntitySet="Opcion" />
-            <End Role="Contrato" EntitySet="Contrato" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contrato_Opcion2" Association="DB_9CAC35_indutradeModel.FK_Contrato_Opcion2">
             <End Role="Opcion" EntitySet="Opcion" />
             <End Role="Contrato" EntitySet="Contrato" />
           </AssociationSet>
@@ -3614,15 +3633,13 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
             <End Role="RecursosProforma" EntitySet="RecursosProforma" />
             <End Role="RecursosContrato" EntitySet="RecursosContrato" />
           </AssociationSet>
-          <EntitySet Name="FEP" EntityType="DB_9CAC35_indutradeModel.FEP" />
-          <AssociationSet Name="FK__FEP__DCDID__168449D3" Association="DB_9CAC35_indutradeModel.FK__FEP__DCDID__168449D3">
-            <End Role="DCD" EntitySet="DCD" />
-            <End Role="FEP" EntitySet="FEP" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Contrato__TipoCo__0EE3280B" Association="DB_9CAC35_indutradeModel.FK__Contrato__TipoCo__0EE3280B">
-            <End Role="Opcion" EntitySet="Opcion" />
-            <End Role="Contrato" EntitySet="Contrato" />
-          </AssociationSet>
+          <FunctionImport Name="contratos">
+            <Parameter Name="rowid_contrato" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spPROFORMA_EXPORTAR_PDF1" ReturnType="Collection(DB_9CAC35_indutradeModel.spPROFORMA_EXPORTAR_PDF1_Result)">
+            <Parameter Name="rowid_proforma" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spSOLICITUD_TRASNPORTE_EXPORTAR_PDF" ReturnType="Collection(DB_9CAC35_indutradeModel.spSOLICITUD_TRASNPORTE_EXPORTAR_PDF_Result)" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -3740,6 +3757,7 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
           <Property Name="FechaModificacion" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Calculadora" Relationship="DB_9CAC35_indutradeModel.FK__Calculado__Agent__27C3E46E" FromRole="AgenteNaviera" ToRole="Calculadora" />
           <NavigationProperty Name="Calculadora1" Relationship="DB_9CAC35_indutradeModel.FK__Calculado__Agent__2B947552" FromRole="AgenteNaviera" ToRole="Calculadora" />
+          <NavigationProperty Name="CalculadoraItems" Relationship="DB_9CAC35_indutradeModel.FK__Calculado__Agent__3BB5CE82" FromRole="AgenteNaviera" ToRole="CalculadoraItems" />
         </EntityType>
         <EntityType Name="Calculadora">
           <Key>
@@ -3757,6 +3775,7 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
           <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="0" />
           <Property Name="Terminada" Type="Boolean" Nullable="false" />
+          <Property Name="NombreBroker" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="AgenteNaviera" Relationship="DB_9CAC35_indutradeModel.FK__Calculado__Agent__27C3E46E" FromRole="Calculadora" ToRole="AgenteNaviera" />
           <NavigationProperty Name="AgenteNaviera1" Relationship="DB_9CAC35_indutradeModel.FK__Calculado__Agent__2B947552" FromRole="Calculadora" ToRole="AgenteNaviera" />
           <NavigationProperty Name="CalculadoraItems" Relationship="DB_9CAC35_indutradeModel.FK__Calculado__Calcu__05F8DC4F" FromRole="Calculadora" ToRole="CalculadoraItems" />
@@ -3923,6 +3942,8 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
           <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="0" />
           <Property Name="CalculadoraID" Type="Int32" />
+          <Property Name="AgenteNavieraID" Type="Int32" />
+          <NavigationProperty Name="AgenteNaviera" Relationship="DB_9CAC35_indutradeModel.FK__Calculado__Agent__3BB5CE82" FromRole="CalculadoraItems" ToRole="AgenteNaviera" />
           <NavigationProperty Name="Calculadora" Relationship="DB_9CAC35_indutradeModel.FK__Calculado__Calcu__05F8DC4F" FromRole="CalculadoraItems" ToRole="Calculadora" />
           <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__Calculado__Embal__06ED0088" FromRole="CalculadoraItems" ToRole="Opcion" />
           <NavigationProperty Name="Item" Relationship="DB_9CAC35_indutradeModel.FK__Calculado__ItemI__07E124C1" FromRole="CalculadoraItems" ToRole="Item" />
@@ -3982,6 +4003,16 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
           <NavigationProperty Name="Puerto1" Relationship="DB_9CAC35_indutradeModel.FK__Empaque__puertoD__5026DB83" FromRole="Empaque" ToRole="Puerto" />
           <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__Empaque_packing" FromRole="Empaque" ToRole="Opcion" />
           <NavigationProperty Name="Item" Relationship="DB_9CAC35_indutradeModel.FK__Empaque_producto" FromRole="Empaque" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="FEP">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DCDID" Type="Int32" />
+          <Property Name="Dex" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="NCertificadoCP" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DCD" Relationship="DB_9CAC35_indutradeModel.FK__FEP__DCDID__168449D3" FromRole="FEP" ToRole="DCD" />
         </EntityType>
         <EntityType Name="SolicitudLlenado">
           <Key>
@@ -4458,13 +4489,12 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
           <NavigationProperty Name="Costo" Relationship="DB_9CAC35_indutradeModel.FK__Costo__MonedaID__3429BB53" FromRole="Opcion" ToRole="Costo" />
           <NavigationProperty Name="Costo1" Relationship="DB_9CAC35_indutradeModel.FK__Costo__TipoID__351DDF8C" FromRole="Opcion" ToRole="Costo" />
           <NavigationProperty Name="MotoNave" Relationship="DB_9CAC35_indutradeModel.FK__MotoNave__Tipo__44EA3301" FromRole="Opcion" ToRole="MotoNave" />
+          <NavigationProperty Name="Contrato" Relationship="DB_9CAC35_indutradeModel.FK__Contrato__TipoCo__0EE3280B" FromRole="Opcion" ToRole="Contrato" />
           <NavigationProperty Name="OrdenCompra" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Forma__78D3EB5B" FromRole="Opcion" ToRole="OrdenCompra" />
           <NavigationProperty Name="Proforma" Relationship="DB_9CAC35_indutradeModel.FK__Proforma__TipoPa__6F4A8121" FromRole="Opcion" ToRole="Proforma" />
           <NavigationProperty Name="Proforma1" Relationship="DB_9CAC35_indutradeModel.FK__Proforma__TipoPr__6E765879" FromRole="Opcion" ToRole="Proforma" />
           <NavigationProperty Name="CartaLlenadoPuerto" Relationship="DB_9CAC35_indutradeModel.FK_CartaLlenadoPuerto_Empresa" FromRole="Opcion" ToRole="CartaLlenadoPuerto" />
-          <NavigationProperty Name="Contrato" Relationship="DB_9CAC35_indutradeModel.FK_Contrato_Opcion" FromRole="Opcion" ToRole="Contrato" />
-          <NavigationProperty Name="Contrato1" Relationship="DB_9CAC35_indutradeModel.FK_Contrato_Opcion2" FromRole="Opcion" ToRole="Contrato" />
-          <NavigationProperty Name="Contrato2" Relationship="DB_9CAC35_indutradeModel.FK__Contrato__TipoCo__0EE3280B" FromRole="Opcion" ToRole="Contrato" />
+          <NavigationProperty Name="Contrato1" Relationship="DB_9CAC35_indutradeModel.FK_Contrato_Opcion" FromRole="Opcion" ToRole="Contrato" />
         </EntityType>
         <EntityType Name="Planta">
           <Key>
@@ -4665,7 +4695,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
           <Property Name="Calidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EmbarqueID" Type="Int32" Nullable="false" />
           <Property Name="Seguro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TransporteID" Type="Int32" Nullable="false" />
           <Property Name="Inspector" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EmbarqueParcial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -4674,16 +4703,17 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
           <Property Name="FechaCreacion" Type="DateTime" Precision="0" />
           <Property Name="UsuarioActualizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FechaActualizacion" Type="DateTime" Precision="0" />
+          <Property Name="TipoContratoID" Type="Int32" />
+          <Property Name="Transporte" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Calidad2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DCD" Relationship="DB_9CAC35_indutradeModel.FK__DCD__ContratoID__0DEF03D2" FromRole="Contrato" ToRole="DCD" />
           <NavigationProperty Name="SolicitudLlenado" Relationship="DB_9CAC35_indutradeModel.FK_SolicitudLlenado_Contrato" FromRole="Contrato" ToRole="SolicitudLlenado" />
           <NavigationProperty Name="SolicitudTransporte" Relationship="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Contrato" FromRole="Contrato" ToRole="SolicitudTransporte" />
-          <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK_Contrato_Opcion" FromRole="Contrato" ToRole="Opcion" />
-          <NavigationProperty Name="Opcion1" Relationship="DB_9CAC35_indutradeModel.FK_Contrato_Opcion2" FromRole="Contrato" ToRole="Opcion" />
+          <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__Contrato__TipoCo__0EE3280B" FromRole="Contrato" ToRole="Opcion" />
+          <NavigationProperty Name="Opcion1" Relationship="DB_9CAC35_indutradeModel.FK_Contrato_Opcion" FromRole="Contrato" ToRole="Opcion" />
           <NavigationProperty Name="OrdenCompra" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Contr__77DFC722" FromRole="Contrato" ToRole="OrdenCompra" />
           <NavigationProperty Name="Proforma" Relationship="DB_9CAC35_indutradeModel.FK_Contrato_Proforma" FromRole="Contrato" ToRole="Proforma" />
           <NavigationProperty Name="MatrizBL" Relationship="DB_9CAC35_indutradeModel.FK_MatrizBL_Contrato" FromRole="Contrato" ToRole="MatrizBL" />
-          <Property Name="TipoContratoID" Type="Int32" />
-          <NavigationProperty Name="Opcion2" Relationship="DB_9CAC35_indutradeModel.FK__Contrato__TipoCo__0EE3280B" FromRole="Contrato" ToRole="Opcion" />
         </EntityType>
         <EntityType Name="MatrizBL">
           <Key>
@@ -5002,6 +5032,18 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Calculado__Agent__3BB5CE82">
+          <End Type="DB_9CAC35_indutradeModel.AgenteNaviera" Role="AgenteNaviera" Multiplicity="0..1" />
+          <End Type="DB_9CAC35_indutradeModel.CalculadoraItems" Role="CalculadoraItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgenteNaviera">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="CalculadoraItems">
+              <PropertyRef Name="AgenteNavieraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Calculado__Calcu__05F8DC4F">
           <End Type="DB_9CAC35_indutradeModel.Calculadora" Role="Calculadora" Multiplicity="0..1" />
           <End Type="DB_9CAC35_indutradeModel.CalculadoraItems" Role="CalculadoraItems" Multiplicity="*" />
@@ -5119,6 +5161,18 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
             </Principal>
             <Dependent Role="DCD">
               <PropertyRef Name="ContratoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FEP__DCDID__168449D3">
+          <End Type="DB_9CAC35_indutradeModel.DCD" Role="DCD" Multiplicity="0..1" />
+          <End Type="DB_9CAC35_indutradeModel.FEP" Role="FEP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DCD">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="FEP">
+              <PropertyRef Name="DCDID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6010,6 +6064,18 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Contrato__TipoCo__0EE3280B">
+          <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="0..1" />
+          <End Type="DB_9CAC35_indutradeModel.Contrato" Role="Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Opcion">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="TipoContratoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__OrdenComp__Forma__78D3EB5B">
           <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="0..1" />
           <End Type="DB_9CAC35_indutradeModel.OrdenCompra" Role="OrdenCompra" Multiplicity="*" />
@@ -6067,18 +6133,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
             </Principal>
             <Dependent Role="Contrato">
               <PropertyRef Name="EmbarqueID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Contrato_Opcion2">
-          <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="1" />
-          <End Type="DB_9CAC35_indutradeModel.Contrato" Role="Contrato" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Opcion">
-              <PropertyRef Name="RowID" />
-            </Principal>
-            <Dependent Role="Contrato">
-              <PropertyRef Name="TransporteID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6286,40 +6340,32 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="FEP">
-          <Key>
-            <PropertyRef Name="RowID" />
-          </Key>
-          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DCDID" Type="Int32" />
-          <Property Name="Dex" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="NCertificadoCP" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DCD" Relationship="DB_9CAC35_indutradeModel.FK__FEP__DCDID__168449D3" FromRole="FEP" ToRole="DCD" />
-        </EntityType>
-        <Association Name="FK__FEP__DCDID__168449D3">
-          <End Type="DB_9CAC35_indutradeModel.DCD" Role="DCD" Multiplicity="0..1" />
-          <End Type="DB_9CAC35_indutradeModel.FEP" Role="FEP" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DCD">
-              <PropertyRef Name="RowID" />
-            </Principal>
-            <Dependent Role="FEP">
-              <PropertyRef Name="DCDID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Contrato__TipoCo__0EE3280B">
-          <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="0..1" />
-          <End Type="DB_9CAC35_indutradeModel.Contrato" Role="Contrato" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Opcion">
-              <PropertyRef Name="RowID" />
-            </Principal>
-            <Dependent Role="Contrato">
-              <PropertyRef Name="TipoContratoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <ComplexType Name="spPROFORMA_EXPORTAR_PDF1_Result">
+          <Property Type="Int64" Name="No" Nullable="true" />
+          <Property Type="Int32" Name="Proforma" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Seller" Nullable="true" MaxLength="526" />
+          <Property Type="String" Name="ContactSeller" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TelSeller" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Pais" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Buyer" Nullable="true" MaxLength="526" />
+          <Property Type="String" Name="Loading" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Ncontract" Nullable="true" />
+          <Property Type="String" Name="Discharget" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="20" Scale="4" />
+          <Property Type="Double" Name="TM" Nullable="true" />
+          <Property Type="String" Name="Item" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="spSOLICITUD_TRASNPORTE_EXPORTAR_PDF_Result">
+          <Property Type="String" Name="razonsocial" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="direccion1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="identificacion" Nullable="true" MaxLength="25" />
+          <Property Type="Int32" Name="rowid" Nullable="false" />
+          <Property Type="String" Name="referencia" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="cantidadvehiculos" Nullable="true" />
+          <Property Type="String" Name="imputarflete" Nullable="true" MaxLength="100" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6441,6 +6487,7 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
           <EntitySetMapping Name="Calculadora">
             <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.Calculadora">
               <MappingFragment StoreEntitySet="Calculadora">
+                <ScalarProperty Name="NombreBroker" ColumnName="NombreBroker" />
                 <ScalarProperty Name="Terminada" ColumnName="Terminada" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
                 <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
@@ -6459,6 +6506,7 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
           <EntitySetMapping Name="CalculadoraItems">
             <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.CalculadoraItems">
               <MappingFragment StoreEntitySet="CalculadoraItems">
+                <ScalarProperty Name="AgenteNavieraID" ColumnName="AgenteNavieraID" />
                 <ScalarProperty Name="CalculadoraID" ColumnName="CalculadoraID" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
                 <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
@@ -6661,6 +6709,16 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
                 <ScalarProperty Name="puertoDescarga" ColumnName="puertoDescarga" />
                 <ScalarProperty Name="puertoCarga" ColumnName="puertoCarga" />
                 <ScalarProperty Name="rowid" ColumnName="rowid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FEP">
+            <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.FEP">
+              <MappingFragment StoreEntitySet="FEP">
+                <ScalarProperty Name="NCertificadoCP" ColumnName="NCertificadoCP" />
+                <ScalarProperty Name="Dex" ColumnName="Dex" />
+                <ScalarProperty Name="DCDID" ColumnName="DCDID" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -7200,6 +7258,8 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
           <EntitySetMapping Name="Contrato">
             <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.Contrato">
               <MappingFragment StoreEntitySet="Contrato">
+                <ScalarProperty Name="Calidad2" ColumnName="Calidad2" />
+                <ScalarProperty Name="Transporte" ColumnName="Transporte" />
                 <ScalarProperty Name="TipoContratoID" ColumnName="TipoContratoID" />
                 <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
                 <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
@@ -7209,7 +7269,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
                 <ScalarProperty Name="Titulo" ColumnName="Titulo" />
                 <ScalarProperty Name="EmbarqueParcial" ColumnName="EmbarqueParcial" />
                 <ScalarProperty Name="Inspector" ColumnName="Inspector" />
-                <ScalarProperty Name="TransporteID" ColumnName="TransporteID" />
                 <ScalarProperty Name="Seguro" ColumnName="Seguro" />
                 <ScalarProperty Name="EmbarqueID" ColumnName="EmbarqueID" />
                 <ScalarProperty Name="Calidad" ColumnName="Calidad" />
@@ -7357,16 +7416,41 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FEP">
-            <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.FEP">
-              <MappingFragment StoreEntitySet="FEP">
-                <ScalarProperty Name="NCertificadoCP" ColumnName="NCertificadoCP" />
-                <ScalarProperty Name="Dex" ColumnName="Dex" />
-                <ScalarProperty Name="DCDID" ColumnName="DCDID" />
-                <ScalarProperty Name="RowID" ColumnName="RowID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="contratos" FunctionName="DB_9CAC35_indutradeModel.Store.contratos" />
+          <FunctionImportMapping FunctionImportName="spPROFORMA_EXPORTAR_PDF1" FunctionName="DB_9CAC35_indutradeModel.Store.spPROFORMA_EXPORTAR_PDF">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_9CAC35_indutradeModel.spPROFORMA_EXPORTAR_PDF1_Result">
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="Proforma" ColumnName="Proforma" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Seller" ColumnName="Seller" />
+                <ScalarProperty Name="ContactSeller" ColumnName="ContactSeller" />
+                <ScalarProperty Name="TelSeller" ColumnName="TelSeller" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Buyer" ColumnName="Buyer" />
+                <ScalarProperty Name="Loading" ColumnName="Loading" />
+                <ScalarProperty Name="Ncontract" ColumnName="Ncontract" />
+                <ScalarProperty Name="Discharget" ColumnName="Discharget" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="TM" ColumnName="TM" />
+                <ScalarProperty Name="Item" ColumnName="Item" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spSOLICITUD_TRASNPORTE_EXPORTAR_PDF" FunctionName="DB_9CAC35_indutradeModel.Store.spSOLICITUD_TRASNPORTE_EXPORTAR_PDF">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_9CAC35_indutradeModel.spSOLICITUD_TRASNPORTE_EXPORTAR_PDF_Result">
+                <ScalarProperty Name="razonsocial" ColumnName="razonsocial" />
+                <ScalarProperty Name="direccion1" ColumnName="direccion1" />
+                <ScalarProperty Name="identificacion" ColumnName="identificacion" />
+                <ScalarProperty Name="rowid" ColumnName="rowid" />
+                <ScalarProperty Name="referencia" ColumnName="referencia" />
+                <ScalarProperty Name="cantidadvehiculos" ColumnName="cantidadvehiculos" />
+                <ScalarProperty Name="imputarflete" ColumnName="imputarflete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

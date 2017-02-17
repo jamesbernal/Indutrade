@@ -215,7 +215,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="row">
+                        @*<div class="row">
                             <div class="col-md-3">
                                 <label class="lang">Agencia Naviera</label>
                             </div>
@@ -242,6 +242,14 @@
 
                                     }
                                 </select>
+                            </div>
+                        </div>*@
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="lang">Broker</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input id="NombreBroker" name="NombreBroker" style="width:100%;" value="@Model.Calculadora.NombreBroker" />
                             </div>
                         </div>
                         <div class="row">
@@ -377,6 +385,43 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label class="lang">Agencia Naviera</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <select name="agentenaviera" id="agentenaviera" required>
+                                            <option value="">-Seleccionar-</option>
+                                            @foreach (PedidosOnline.Models.AgenteNaviera AgenciaN in ((List<AgenteNaviera>)ViewBag.AgenciaNaviera).ToList())
+                                            {
+                                                if (Model.Calculadora.RowID > 0)
+                                                {
+                                                    if (Model.Calculadora.AgenteNavieraID == AgenciaN.RowID)
+                                                    {
+                                                        <option value="@AgenciaN.RowID" selected="selected">@AgenciaN.Nombre</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@AgenciaN.RowID">@AgenciaN.Nombre</option>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <option value="@AgenciaN.RowID">@AgenciaN.Nombre</option>
+                                                }
+
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
                     <div class="col-md-12">
                         <div style="margin-bottom: 20px">
                             <h4 class="lang" key="">TRM</h4>
@@ -1868,7 +1913,8 @@
             data:{rowid:rowid},
             success:function(data)
             {
-            debugger
+                debugger
+                $('#agentenaviera').val(data.agencia);
                 $('#rowid_detalle').val(data.rowid);
                 $('#rowid_item').val(data.nombre_item);
                 ReCalcular()
