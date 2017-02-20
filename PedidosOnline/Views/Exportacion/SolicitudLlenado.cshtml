@@ -1,0 +1,438 @@
+﻿@model PedidosOnline.Models.SolicitudLlenado
+@{
+    ViewBag.Title = "SolicitudLlenado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Tabs.css" rel="stylesheet" />
+<style>
+    a {
+        color: #333;
+    }
+</style>
+<script type="text/javascript">
+    function guardarSolicitud(a)
+    {
+        debugger
+        ModalProcesandoShow();
+        var RowID = $(".RowID").val();
+        var RowIDCon = $(".RowIDCon").val();
+        var RowIDDes= $(".RowIDDes").val();
+        var empaque = $("#empaque").val();
+        var fechaD = $("#fechaD").val();
+
+        if(RowIDCon == ""){
+            Mensajes('El campo contrato es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+        if(RowIDDes == ""){
+            Mensajes('El campo destino es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+        if(empaque== ""){
+            Mensajes('El campo empaque es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+
+        if(fechaD== ""){
+            Mensajes('El campo fecha descargue es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+                $.ajax({
+                    type: "POST",
+                    url: "RegistrarSolicitudLlenado",
+                    data: {
+                        formulario: $("#form").serialize(),
+                        RowID: RowID,
+                        RowIDCon: RowIDCon,
+                        RowIDDes: RowIDDes,
+                    },
+                    success: function (data2) {
+                        debugger
+                        if(a==2)
+                        window.location = "/Exportacion/SolicitudLlenados";
+                        $(".RowID").val(data2.rowid);
+                        $("#btnVehiculo").show();
+                        Mensajes(data2.mensaje, "success", '');
+                        ModalProcesandoHiden();
+                    },
+                    error: function (request) {
+                        debugger
+                        ModalProcesandoHiden();
+                        Mensajes(request.responseText, 'error', '');
+                    }
+                });
+
+    }
+
+    function cargarItemsContrato(rowid_contrato) {
+        $.ajax({
+            type: "GET",
+            url: "ItemsContrato1",
+            data: {
+                RowID: rowid_contrato
+            },
+            success: function (data) {
+                $('#tblProductos tbody').empty();
+                $('#tblProductos tbody').append(data);
+            },
+            error: function (request) {
+                Mensajes("Se presento un error", 'error', '');
+
+            }
+        });
+    }
+
+    function cargarVehiculos(){
+        var RowID = $(".RowID").val();
+        $.ajax({
+            type: "GET",
+            url: "VehiculosSolicitud",
+            data: {
+                RowID: RowID
+            },
+            success: function (data) {
+                $('#tblVehiculos tbody').empty();
+                $('#tblVehiculos tbody').append(data);
+            },
+            error: function (request) {
+                Mensajes("Se presento un error", 'error', '');
+
+            }
+        });
+    }
+
+    function abrirModalVehiculo(){
+        debugger
+        var rowid = $(".RowID").val();
+        $("#Dialog")
+            .load("ModalVehiculo?RowID=0&RowID1="+ rowid)
+            .dialog("open");
+    }
+
+</script>
+<div id="Dialog"></div>
+<div class="panel">
+    <div class="row">
+        <div class="row" id="div_menu" style="margin-bottom:20px">
+            <div class="col-md-12">
+                <div class="nav">
+                    <span>
+                        &nbsp;&nbsp;
+                        <a href="@Url.Action("SolicitudLlenados","Exportacion",new {  @rih = Request.Params["rih"] })" class="alink">
+                            <i class="glyphicon glyphicon-list-alt"></i>&nbsp;<span class="lang" key="VISTA">Vista&nbsp;&nbsp;</span>
+                        </a>
+                    </span>
+                    <span>
+                        <a href="javascript:guardarSolicitud(1);" class="alink">
+                            <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
+                        </a>
+                    </span>
+                    <span>
+                        &nbsp;&nbsp;
+                        <a href="javascript:guardarSolicitud(2);" class="alink">
+                            <i class="glyphicon glyphicon-floppy-disk"></i><span class="lang" key="GUARDAR_&_CERRAR">&nbsp;Guardar&nbsp;&&nbsp;Cerrar</span>
+                        </a>
+                    </span>
+                    <span>
+                        &nbsp;&nbsp;
+                        <a href="javascript:abrirModalVehiculo();" id="btnVehiculo" class="alink">
+                            <i class="glyphicon glyphicon-floppy-disk"></i><span class="lang">&nbsp;Vehículo</span>
+                        </a>
+                    </span>
+                    @if (Model.RowID != 0)
+                    {
+                        <span>
+                            &nbsp;&nbsp;
+                            <a href="~/CartaLlenadoPuerto/CartaLlenadoPuerto" class="alink">
+                                <i class="glyphicon glyphicon-arrow-right"></i><span class="lang" key="Siguiente">Siguiente</span>
+                            </a>
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="tabbable tabbable-custom tabs-top">
+            <ul class="nav nav-tabs tabs-top">
+                <li id="li_tab1" class="active"><a href="#tab1" data-toggle="tab">Datos generales</a></li>
+                <li id="li_tab2"><a href="#tab2" data-toggle="tab">Items</a></li>
+                <li id="li_tab3"><a href="#tab3" data-toggle="tab">Vehículos Agregados</a></li>
+            </ul>
+        </div>
+        <div class="tab-content" style="overflow:hidden">
+            <div class="col-md-12">
+                <form id="form" name="form" onsubmit="return false">
+                    <input type="hidden" class="RowID" name="RowID" value="@Model.RowID" />
+                    <input type="hidden" class="RowIDCon" name="RowIDCon" />
+                    <div id="datosG">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="autoc_contrato" class="lang" key="CONTRATO">Contrato</label>
+                                </div>
+                                <div class="col-md-5">
+                                    @if (Model.RowID > 0)
+                                    {
+                                        <input type="text" id="autoc_contrato" name="autoc_contrato" value="@Model.Contrato.Titulo" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+
+                                    }
+                                    else
+                                    {
+                                        <input type="text" id="autoc_contrato" name="autoc_contrato" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                    }
+
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="proforma" class="lang">Proforma</label>
+                                </div>
+                                <div class="col-md-5">
+                                    @if (Model.RowID > 0)
+                                    {
+                                        <input type="text" id="proforma" name="proforma" value="@Model.Contrato.ProformaID" style="width: 100%" disabled="disabled" />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" id="proforma" name="proforma" value="" style="width: 100%" disabled="disabled" />
+                                    }
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="autoc_destino" class="lang">Destino</label>
+                                </div>
+                                <div class="col-md-5">
+                                    @if (Model.RowID > 0)
+                                    {
+                                        <input type="text" id="autoc_destino" name="autoc_destino" value="@Model.Ciudad.Nombre" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                        <input type="hidden" class="RowIDDes" name="RowIDDes" value="@Model.DestinoID" />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" id="autoc_destino" name="autoc_destino" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                        <input type="hidden" class="RowIDDes" name="RowIDDes" value="" />
+                                    }
+
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="BKK" class="lang">BKK(WOW-Sealand)</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" id="BKK" name="BKK" value="@Model.BKK" style="width: 100%" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="empaque" class="lang">Empaque</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <select id="empaque" name="empaque" style="width: 100%" required>
+                                        <option value="">---</option>
+                                        @foreach (var empaque in ViewBag.empaques)
+                                        {
+                                            if (/*Model.RowID != null ||*/ Model.RowID > 0)
+                                            {
+                                                if (Model.EmpaqueID == empaque.RowID)
+                                                {
+                                                    <option value="@Model.Opcion.RowID" selected>@Model.Opcion.Nombre</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@empaque.RowID">@empaque.Nombre</option>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <option value="@empaque.RowID">@empaque.Nombre</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="fechaD" class="lang">Fecha Descargue</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" id="fechaD" name="fechaD" style="width: 100%" value="@Model.FechaDescargue" readonly="readonly" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="tab_2" class="tab-pane">
+            <div class="col-md-12" style="margin-top:10px;">
+                <table id="tblProductos" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Ref.</th>
+                            <th>Descripcion</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Und. empaque</th>
+                            <th>Peso</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div id="tab_3" class="tab-pane">
+            <div class="col-md-12">
+                <table id="tblVehiculos" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Placa</th>
+                            <th>Fec. Cargue</th>
+                            <th>Remolque</th>
+                            <th>Emp. Transporte</th>
+                            <th>Conductor</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //$('#fechaE').datepicker({
+    //    dateFormat: 'dd/mm/yy',
+    //    minDate: 0,
+    //    maxDate: '+3Y',
+    //    inline: true
+    //});
+
+    $('#fechaD').datepicker({
+        dateFormat: 'dd/mm/yy',
+        minDate: 0,
+        maxDate: '+3Y',
+        inline: true
+    });
+
+    $('#autoc_destino').on('keyup keypress', function (e) {
+        debugger
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) { //Enter keycode
+            return false;
+        }
+    });
+
+    $("#autoc_destino").autocomplete({
+        source: "Buscar_Destinos",
+        minLenght: 3,
+        select: function (evento, ui) {//seleccion al autocompletar
+            debugger
+            if (ui.item != null) {//si hay valor en la seleccion autocompletar
+                $("#autoc_destino").val(ui.item.label);
+                $(".RowIDDes").val(ui.item.RowID);
+            }
+        },
+        change: function (event, ui) {
+
+        }
+    });
+
+    $('#autoc_contrato').on('keyup keypress', function (e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) { //Enter keycode
+            return false;
+        }
+    });
+
+    $("#autoc_contrato").autocomplete({
+        source: "Contrato_Buscar_Todos",
+        minLenght: 3,
+        select: function (evento, ui) {//seleccion al autocompletar
+            debugger
+            if (ui.item != null) {//si hay valor en la seleccion autocompletar
+                $("#autoc_contrato").val(ui.item.label);
+                $("#proforma").val(ui.item.RowIDPro);
+                $(".RowIDCon").val(ui.item.RowID);
+                cargarItemsContrato(ui.item.RowID);
+            }
+        },
+        change: function (event, ui) {
+
+        }
+    });
+
+    $("#li_tab1").click(function () {
+        debugger
+        $("#tblProductos").hide();
+        $("#datosG").show();
+        $("#tblVehiculos").hide();
+    });
+
+    $("#li_tab2").click(function () {
+        debugger
+        $("#tblProductos").show();
+        $("#datosG").hide();
+        $("#tblVehiculos").hide();
+    });
+
+    $("#li_tab3").click(function () {
+        debugger
+        $("#tblProductos").hide();
+        $("#datosG").hide();
+
+        $("#tblVehiculos").show();
+        cargarVehiculos();
+    });
+
+    $(document).ready(function () {
+        $("#tblVehiculos").hide();
+        $("#tblProductos").hide();
+
+        $("#btnVehiculo").hide();
+
+        debugger
+        if (@Model.RowID > 0)
+        {
+
+            $("#btnVehiculo").show();
+            var titulo = $("#autoc_contrato").val();
+            $.ajax({
+                type: "GET",
+                url: "Datos_Contrato",
+                data:
+                      {
+                          titulo: titulo
+                      },
+                success: function (data) {
+                    debugger
+                    $("#autoc_contrato").val(data.Titulo);
+                    $(".RowIDCon").val(data.RowID);
+                    $("#proforma").val(data.RowIDPro);
+                    cargarItemsContrato(data.RowID);
+                },
+                error: function (request) {
+                    Mensajes("Se presento un error", 'error', '');
+
+                }
+            });
+        }
+    });
+
+
+
+</script>

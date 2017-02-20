@@ -25,6 +25,41 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DB_9CAC35_indutradeModel.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DB_9CAC35_indutradeModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="contratos" FunctionName="DB_9CAC35_indutradeModel.Store.contratos" />
+    <FunctionImportMapping FunctionImportName="spPROFORMA_EXPORTAR_PDF1" FunctionName="DB_9CAC35_indutradeModel.Store.spPROFORMA_EXPORTAR_PDF">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB_9CAC35_indutradeModel.spPROFORMA_EXPORTAR_PDF1_Result">
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="Proforma" ColumnName="Proforma" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Seller" ColumnName="Seller" />
+          <ScalarProperty Name="ContactSeller" ColumnName="ContactSeller" />
+          <ScalarProperty Name="TelSeller" ColumnName="TelSeller" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+          <ScalarProperty Name="Pais" ColumnName="Pais" />
+          <ScalarProperty Name="Buyer" ColumnName="Buyer" />
+          <ScalarProperty Name="Loading" ColumnName="Loading" />
+          <ScalarProperty Name="Ncontract" ColumnName="Ncontract" />
+          <ScalarProperty Name="Discharget" ColumnName="Discharget" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="TM" ColumnName="TM" />
+          <ScalarProperty Name="Item" ColumnName="Item" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spSOLICITUD_TRASNPORTE_EXPORTAR_PDF" FunctionName="DB_9CAC35_indutradeModel.Store.spSOLICITUD_TRASNPORTE_EXPORTAR_PDF">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB_9CAC35_indutradeModel.spSOLICITUD_TRASNPORTE_EXPORTAR_PDF_Result">
+          <ScalarProperty Name="razonsocial" ColumnName="razonsocial" />
+          <ScalarProperty Name="direccion1" ColumnName="direccion1" />
+          <ScalarProperty Name="identificacion" ColumnName="identificacion" />
+          <ScalarProperty Name="rowid" ColumnName="rowid" />
+          <ScalarProperty Name="referencia" ColumnName="referencia" />
+          <ScalarProperty Name="cantidadvehiculos" ColumnName="cantidadvehiculos" />
+          <ScalarProperty Name="imputarflete" ColumnName="imputarflete" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <EntitySetMapping Name="Actividad">
       <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.Actividad">
         <MappingFragment StoreEntitySet="Actividad">
@@ -1045,40 +1080,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="contratos" FunctionName="DB_9CAC35_indutradeModel.Store.contratos" />
-    <FunctionImportMapping FunctionImportName="spPROFORMA_EXPORTAR_PDF1" FunctionName="DB_9CAC35_indutradeModel.Store.spPROFORMA_EXPORTAR_PDF">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="DB_9CAC35_indutradeModel.spPROFORMA_EXPORTAR_PDF1_Result">
-          <ScalarProperty Name="No" ColumnName="No" />
-          <ScalarProperty Name="Proforma" ColumnName="Proforma" />
-          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-          <ScalarProperty Name="Seller" ColumnName="Seller" />
-          <ScalarProperty Name="ContactSeller" ColumnName="ContactSeller" />
-          <ScalarProperty Name="TelSeller" ColumnName="TelSeller" />
-          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
-          <ScalarProperty Name="Pais" ColumnName="Pais" />
-          <ScalarProperty Name="Buyer" ColumnName="Buyer" />
-          <ScalarProperty Name="Loading" ColumnName="Loading" />
-          <ScalarProperty Name="Ncontract" ColumnName="Ncontract" />
-          <ScalarProperty Name="Discharget" ColumnName="Discharget" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="TM" ColumnName="TM" />
-          <ScalarProperty Name="Item" ColumnName="Item" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="spSOLICITUD_TRASNPORTE_EXPORTAR_PDF" FunctionName="DB_9CAC35_indutradeModel.Store.spSOLICITUD_TRASNPORTE_EXPORTAR_PDF">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="DB_9CAC35_indutradeModel.spSOLICITUD_TRASNPORTE_EXPORTAR_PDF_Result">
-          <ScalarProperty Name="razonsocial" ColumnName="razonsocial" />
-          <ScalarProperty Name="direccion1" ColumnName="direccion1" />
-          <ScalarProperty Name="identificacion" ColumnName="identificacion" />
-          <ScalarProperty Name="rowid" ColumnName="rowid" />
-          <ScalarProperty Name="referencia" ColumnName="referencia" />
-          <ScalarProperty Name="cantidadvehiculos" ColumnName="cantidadvehiculos" />
-          <ScalarProperty Name="imputarflete" ColumnName="imputarflete" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

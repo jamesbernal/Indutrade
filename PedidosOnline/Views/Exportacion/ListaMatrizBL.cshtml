@@ -1,0 +1,82 @@
+﻿@using PedidosOnline.Models;
+@model List<PedidosOnline.Models.MatrizBL>
+@{
+    ViewBag.Title = "ListaMatrizBL";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    a {
+        color: #333;
+    }
+</style>
+<script>
+
+    $(document).ready(function () {
+        $('tblMatrizBL').dataTable({
+            " processing": true,
+            "bFilter": true,
+            "bPaginate": true,
+            "info": false,
+            "bDestroy":true,
+            aLengthMenu: [
+            [15, 25, 50, 100, -1],
+            [15, 25, 50, 100, "All"]
+            ],
+            "iDisplayLength": 15
+
+        });
+
+    });
+</script>
+<div class="panel">
+    <div class="row">
+        <div>
+            <div class="nav">
+                <span>
+                    &nbsp;&nbsp;
+                    <a href="@Url.Action("MatrizBL", "Exportacion")" class="alink">
+                        <i class="glyphicon glyphicon-plus"></i>&nbsp;<span class="lang" key="NUEVO">Nuevo</span>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <table id="tblMatrizBL" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Fecha</th>
+                        <th>Num. Reserva</th>
+                        <th>Expedidor</th>
+                        <th>Contrato</th>
+                        <th>Empresa</th>
+                        <th>Consignatario</th>
+                        <th>Notificación</th>
+                        <th>NCM</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (PedidosOnline.Models.MatrizBL matriz in ViewBag.matrices)
+                    {
+                        <tr>
+                            <td>@matriz.RowID</td>
+                            <td>@matriz.Fecha</td>
+                            <td>@matriz.NumeroReserva</td>
+                            <td>@matriz.Expedidor</td>
+                            <td>@matriz.Contrato.Titulo</td>
+                            <td>@matriz.Tercero.RazonSocial</td>
+                            <td>@matriz.Consignee</td>
+                            <td>@matriz.Notificacion</td>
+                            <td>@matriz.NCM</td>
+                            <td><a href="@Url.Action("MatrizBL", "Exportacion", new { RowID = matriz.RowID })"><i class="glyphicon glyphicon-pencil"></i></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+﻿@using PedidosOnline.Models;
+@model List<PedidosOnline.Models.Contrato>
+@{
+    ViewBag.Title = "Contratos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    a {
+        color: #333;
+    }
+</style>
+<script>
+
+    $(document).ready(function () {
+        $('tblContratos').dataTable({
+            " processing": true,
+            "bFilter": true,
+            "bPaginate": true,
+            "info": false,
+            "bDestroy":true,
+            aLengthMenu: [
+            [15, 25, 50, 100, -1],
+            [15, 25, 50, 100, "All"]
+            ],
+            "iDisplayLength": 15
+
+        });
+
+    });
+</script>
+<div class="panel">
+    <div class="row">
+        <div>
+            <div class="nav">
+                <span>
+                    &nbsp;&nbsp;
+                    <a href="@Url.Action("Contrato", "Exportacion")" class="alink">
+                        <i class="glyphicon glyphicon-plus"></i>&nbsp;<span class="lang" key="NUEVO">Nuevo</span>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <table id="tblContratos" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Titulo</th>
+                        <th>Fecha</th>
+                        <th>Vendedor</th>
+                        <th>Comprador</th>
+                        <th>Origen</th>
+                        <th>Destino</th>
+                        <th>Per. Embarque</th>
+                        <th>Transporte</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (PedidosOnline.Models.Contrato contratos in ViewBag.contratos)
+                    {
+                        <tr>
+                            <td>@contratos.RowID</td>
+                            <td>
+                                <a href="javascript:UtilExportarPDF('CONTRATO',@contratos.RowID)" class="alink" ata-toggle="tooltip" data-placement="bottom" title="Exportar PDF">
+                                    <i class="glyphicon glyphicon-file"></i>
+                                </a>
+                                @*<a href="@Url.Action("Export", "Proforma", new { @rowid = @cal.RowID, @rih = Request.Params["rih"] })"><i class="glyphicon glyphicon-export"></i></a>*@
+                            </td>
+                            <td>@contratos.Titulo</td>
+                            <td>@contratos.Fecha</td>
+                            <td>@contratos.Proforma.Tercero1.RazonSocial</td>
+                            <td>@contratos.Proforma.Tercero.RazonSocial</td>
+                            <td> </td>
+                            <td>@contratos.Proforma.Calculadora.Ciudad.Nombre</td>
+                            <td>@contratos.Opcion.Nombre</td>
+                            <th>@contratos.Opcion1.Nombre</th>
+                            <td><a href="@Url.Action("Contrato", "Exportacion", new { RowID = contratos.RowID })"><i class="glyphicon glyphicon-pencil"></i></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

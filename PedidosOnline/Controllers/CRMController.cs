@@ -11,7 +11,98 @@ namespace PedidosOnline.Controllers
     public class CRMController : Controller
     {
         PedidosOnlineEntities db = new PedidosOnlineEntities();
-        #region ERP TERCERO
+
+        #region :::::METODOS GENERALES:::::
+        private FormCollection DeSerialize(FormCollection FormData)
+        {
+            FormCollection collection = new FormCollection();
+            //un-encode, and add spaces back in
+            string querystring = Uri.UnescapeDataString(FormData["FormData"]).Replace("+", " ");
+            var split = querystring.Split(new[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
+            Dictionary<string, string> items = new Dictionary<string, string>();
+            foreach (string s in split)
+            {
+                string text = s.Substring(0, s.IndexOf("="));
+                string value = s.Substring(s.IndexOf("=") + 1);
+
+                if (items.Keys.Contains(text))
+                    items[text] = items[text] + "," + value;
+                else
+                    items.Add(text, value);
+            }
+            foreach (var i in items)
+            {
+                collection.Add(i.Key, i.Value);
+            }
+            return collection;
+        }
+        public JsonResult Get_Ruta_File()
+        {
+
+            try
+            {
+                HttpPostedFileBase file = Request.Files[0];
+
+                var ruta = "";
+                if (file != null && file.ContentLength > 0)
+                {
+                    string Guid_Img = Guid.NewGuid().ToString();
+                    Guid_Img = Guid_Img.Substring(1, 7);
+                    var nombreArchivo = Guid_Img.Trim() + "_" + Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Recurso/ImagenPerfil"), nombreArchivo);
+
+                    ruta = "/Recurso/ImagenPerfil/" + nombreArchivo;
+                    try
+                    {
+                        Directory.CreateDirectory(Server.MapPath("~/Recurso/ImagenPerfil"));
+                    }
+                    catch (Exception ex) { }
+                    file.SaveAs(path);
+                }
+
+                if (string.IsNullOrEmpty(ruta))
+                {
+                    Response.StatusCode = 500;
+                    return Json("No hay archivo adjunto");
+                }
+                return Json(ruta);
+            }
+            catch { }
+
+            Response.StatusCode = 500;
+            return Json("No hay archivo adjunto");
+        }
+
+        public string SelectPaises()
+        {
+            string result = "<option value=''>-Seleccionar-</option>";
+            foreach (var item in db.Pais.ToList())
+            {
+                result += "<option value='" + item.RowID + "'>" + item.Nombre + "</option>";
+            }
+            return result;
+        }
+        public string SelectDepartamento(int? rowid)
+        {
+            string result = "<option value=''>-Seleccionar-</option>";
+            foreach (var item in db.Departamento.Where(f => f.PaisID == rowid).ToList())
+            {
+                result += "<option value='" + item.RowID + "'>" + item.Nombre + "</option>";
+            }
+            return result;
+        }
+        public string SelectCiudades(int? rowid)
+        {
+            string result = "<option value=''>-Seleccionar-</option>";
+            foreach (var item in db.Ciudad.Where(f => f.DepartamentoID == rowid).ToList())
+            {
+                result += "<option value='" + item.RowID + "'>" + item.Nombre + "</option>";
+            }
+            return result;
+        }
+        #endregion
+
+        #region :::::ERP TERCERO:::::
         [CheckSessionOut]
         public ActionResult ListadoTercerosSucursal()
         {
@@ -173,7 +264,7 @@ namespace PedidosOnline.Controllers
         }
         #endregion
 
-        #region TERCEROS POTENCIALES
+        #region :::::TERCEROS POTENCIALES:::::
 
         public JsonResult InformacionContacto(int? rowid)
         {
@@ -301,7 +392,7 @@ namespace PedidosOnline.Controllers
 
         #endregion
 
-        #region CONTACTOS
+        #region :::::CONTACTOS:::::
         [CheckSessionOut]
         public ActionResult ListadoContactos()
         {
@@ -405,7 +496,7 @@ namespace PedidosOnline.Controllers
         }
         #endregion
 
-        #region ACTIVIDADES
+        #region :::::ACTIVIDADES:::::
         [CheckSessionOut]
         public ActionResult Modal_Referencia(string tipo_referencia)
         {
@@ -706,93 +797,5 @@ namespace PedidosOnline.Controllers
         }
 
         #endregion
-
-        private FormCollection DeSerialize(FormCollection FormData)
-        {
-            FormCollection collection = new FormCollection();
-            //un-encode, and add spaces back in
-            string querystring = Uri.UnescapeDataString(FormData["FormData"]).Replace("+", " ");
-            var split = querystring.Split(new[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
-            Dictionary<string, string> items = new Dictionary<string, string>();
-            foreach (string s in split)
-            {
-                string text = s.Substring(0, s.IndexOf("="));
-                string value = s.Substring(s.IndexOf("=") + 1);
-
-                if (items.Keys.Contains(text))
-                    items[text] = items[text] + "," + value;
-                else
-                    items.Add(text, value);
-            }
-            foreach (var i in items)
-            {
-                collection.Add(i.Key, i.Value);
-            }
-            return collection;
-        }
-        public JsonResult Get_Ruta_File()
-        {
-
-            try
-            {
-                HttpPostedFileBase file = Request.Files[0];
-
-                var ruta = "";
-                if (file != null && file.ContentLength > 0)
-                {
-                    string Guid_Img = Guid.NewGuid().ToString();
-                    Guid_Img = Guid_Img.Substring(1, 7);
-                    var nombreArchivo = Guid_Img.Trim() + "_" + Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Recurso/ImagenPerfil"), nombreArchivo);
-
-                    ruta = "/Recurso/ImagenPerfil/" + nombreArchivo;
-                    try
-                    {
-                        Directory.CreateDirectory(Server.MapPath("~/Recurso/ImagenPerfil"));
-                    }
-                    catch (Exception ex) { }
-                    file.SaveAs(path);
-                }
-
-                if (string.IsNullOrEmpty(ruta))
-                {
-                    Response.StatusCode = 500;
-                    return Json("No hay archivo adjunto");
-                }
-                return Json(ruta);
-            }
-            catch { }
-
-            Response.StatusCode = 500;
-            return Json("No hay archivo adjunto");
-        }
-
-        public string SelectPaises()
-        {
-            string result = "<option value=''>-Seleccionar-</option>";
-            foreach (var item in db.Pais.ToList())
-            {
-                result += "<option value='"+item.RowID+"'>"+item.Nombre+"</option>";
-            }
-            return result;
-        }
-        public string SelectDepartamento(int?rowid)
-        {
-            string result = "<option value=''>-Seleccionar-</option>";
-            foreach (var item in db.Departamento.Where(f=>f.PaisID==rowid).ToList())
-            {
-                result += "<option value='" + item.RowID + "'>" + item.Nombre + "</option>";
-            }
-            return result;
-        }
-        public string SelectCiudades(int?rowid)
-        {
-            string result = "<option value=''>-Seleccionar-</option>";
-            foreach (var item in db.Ciudad.Where(f=>f.DepartamentoID==rowid).ToList())
-            {
-                result += "<option value='" + item.RowID + "'>" + item.Nombre + "</option>";
-            }
-            return result;
-        }
     }
 }

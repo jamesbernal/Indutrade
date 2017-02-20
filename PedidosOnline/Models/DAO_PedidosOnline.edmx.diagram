@@ -5,57 +5,57 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b82249f4f66a41c0a3ea8a7c0f1e1bf8" Name="Diagram1" ZoomLevel="72">
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Actividad" Width="1.5" PointX="13.5" PointY="15.375" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Contacto" Width="1.5" PointX="11.25" PointY="14.75" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.TerceroPotencial" Width="1.5" PointX="16.5" PointY="15.375" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.AgenteNaviera" Width="1.5" PointX="1.5" PointY="62.375" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Calculadora" Width="1.5" PointX="1.5" PointY="56.125" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.CalculadoraItems" Width="1.5" PointX="6.75" PointY="24" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.DCD" Width="1.5" PointX="8.25" PointY="75.125" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.DetalleEmpaque" Width="1.5" PointX="13.75" PointY="34.5" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Empaque" Width="1.5" PointX="11.5" PointY="33.5" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.FEP" Width="1.5" PointX="10.5" PointY="75.625" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.SolicitudLlenado" Width="1.5" PointX="9.25" PointY="32.125" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.SolicitudTransporte" Width="1.5" PointX="12.25" PointY="39.75" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="8" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.TipoVehiculo" Width="1.5" PointX="14.5" PointY="41.5" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Vehiculo" Width="1.5" PointX="9.25" PointY="27.125" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.VehiculoSolicitudLlenado" Width="1.5" PointX="11.5" PointY="26.75" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Ciudad" Width="1.5" PointX="1.5" PointY="2.125" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Compañia" Width="1.5" PointX="1.5" PointY="22.875" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.CondicionPago" Width="1.5" PointX="3.75" PointY="12.375" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.ContactoERP" Width="1.5" PointX="3.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Departamento" Width="1.5" PointX="1.5" PointY="47.875" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Empresa" Width="1.5" PointX="1.5" PointY="30.125" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Item" Width="1.5" PointX="0.75" PointY="8.125" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.ListaPrecio" Width="1.5" PointX="0.75" PointY="16.25" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Pais" Width="1.5" PointX="1.5" PointY="52.125" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Precio" Width="1.5" PointX="3" PointY="16" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Sucursal" Width="1.5" PointX="6" PointY="13.25" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Tercero" Width="1.5" PointX="3.75" PointY="20.875" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Agrupacion" Width="1.5" PointX="1.5" PointY="43.625" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Costo" Width="1.5" PointX="3.75" PointY="37.25" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.MotoNave" Width="1.5" PointX="11.25" PointY="4.125" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Opcion" Width="1.5" PointX="1.5" PointY="35.125" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Planta" Width="1.5" PointX="10" PointY="46.125" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Puerto" Width="1.5" PointX="1.5" PointY="66.125" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Menu" Width="1.5" PointX="13.75" PointY="50.125" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Modulo" Width="1.5" PointX="11.5" PointY="50.625" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Rol" Width="1.5" PointX="13.75" PointY="6.625" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.RolMenu" Width="1.5" PointX="16" PointY="6.5" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Usuario" Width="1.5" PointX="19" PointY="16.25" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.CartaLlenadoPuerto" Width="1.5" PointX="16.5" PointY="31.375" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.CertificadoCalidad" Width="1.5" PointX="16.5" PointY="22.125" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.CertificadoMadera" Width="1.5" PointX="13.5" PointY="21.375" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Contrato" Width="1.5" PointX="6" PointY="58" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.MatrizBL" Width="1.5" PointX="9.25" PointY="40.125" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.OrdenCompra" Width="1.5" PointX="8.25" PointY="15.75" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.OrdenCompraItem" Width="1.5" PointX="10.5" PointY="9.875" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Proforma" Width="1.5" PointX="3.75" PointY="57.875" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.RecursosContrato" Width="1.5" PointX="8.25" PointY="65" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.RecursosProforma" Width="1.5" PointX="6" PointY="64.875" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.m_plantillas" Width="1.5" PointX="5.75" PointY="4" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.PuntoEnvio" Width="1.5" PointX="8.25" PointY="11.25" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Actividad" Width="1.5" PointX="10.5" PointY="6.125" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Contacto" Width="1.5" PointX="8.25" PointY="5.5" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.TerceroPotencial" Width="1.5" PointX="13.5" PointY="6.125" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.AgenteNaviera" Width="1.5" PointX="2.25" PointY="51.5" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Calculadora" Width="1.5" PointX="4.5" PointY="50.25" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.CalculadoraItems" Width="1.5" PointX="13.5" PointY="21.125" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.DCD" Width="1.5" PointX="11.25" PointY="60.5" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.DetalleEmpaque" Width="1.5" PointX="18.75" PointY="41.25" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Empaque" Width="1.5" PointX="16.5" PointY="31.125" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.FEP" Width="1.5" PointX="13.5" PointY="60.875" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.SolicitudLlenado" Width="1.5" PointX="15.75" PointY="17.75" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.SolicitudTransporte" Width="1.5" PointX="11.25" PointY="33.25" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.TipoVehiculo" Width="1.5" PointX="13.5" PointY="54" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Vehiculo" Width="1.5" PointX="15.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.VehiculoSolicitudLlenado" Width="1.5" PointX="18" PointY="14" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Ciudad" Width="1.5" PointX="1.5" PointY="31.625" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Compañia" Width="1.5" PointX="3.75" PointY="3" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.CondicionPago" Width="1.5" PointX="3.75" PointY="8.5" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.ContactoERP" Width="1.5" PointX="3.75" PointY="31" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Departamento" Width="1.5" PointX="1.5" PointY="37.375" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Empresa" Width="1.5" PointX="1.5" PointY="3.125" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Item" Width="1.5" PointX="11.25" PointY="17.875" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.ListaPrecio" Width="1.5" PointX="0.75" PointY="13" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Pais" Width="1.5" PointX="1.5" PointY="41.625" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Precio" Width="1.5" PointX="3" PointY="12.75" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Sucursal" Width="1.5" PointX="6" PointY="10" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Tercero" Width="1.5" PointX="3.75" PointY="19.625" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Agrupacion" Width="1.5" PointX="1.5" PointY="26.625" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Costo" Width="1.5" PointX="3.75" PointY="38.375" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.MotoNave" Width="1.5" PointX="15.75" PointY="24.875" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Opcion" Width="1.5" PointX="1.5" PointY="18.25" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Planta" Width="1.5" PointX="9" PointY="34.625" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Puerto" Width="1.5" PointX="4.5" PointY="45.875" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Menu" Width="1.5" PointX="17.75" PointY="63.875" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Modulo" Width="1.5" PointX="15.5" PointY="64.375" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Rol" Width="1.5" PointX="17.75" PointY="3.375" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.RolMenu" Width="1.5" PointX="20" PointY="3.25" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Usuario" Width="1.5" PointX="21" PointY="14.125" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.CartaLlenadoPuerto" Width="1.5" PointX="18" PointY="24.5" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.CertificadoCalidad" Width="1.5" PointX="19.5" PointY="30.625" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.CertificadoMadera" Width="1.5" PointX="19" PointY="36.375" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Contrato" Width="1.5" PointX="9" PointY="47.75" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.MatrizBL" Width="1.5" PointX="11.25" PointY="39.375" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.OrdenCompra" Width="1.5" PointX="11.25" PointY="12.5" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.OrdenCompraItem" Width="1.5" PointX="13.5" PointY="12.625" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Proforma" Width="1.5" PointX="6.75" PointY="47.625" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.RecursosContrato" Width="1.5" PointX="11.25" PointY="54.75" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.RecursosProforma" Width="1.5" PointX="9" PointY="54.625" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.m_plantillas" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.PuntoEnvio" Width="1.5" PointX="8.25" PointY="12.875" />
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Actividad__Estad__2A6B46EF" />
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Actividad__Prior__2B5F6B28" />
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Actividad__Terce__2C538F61" />
@@ -142,6 +142,7 @@
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Vended__01342732" />
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Vended__39237A9A" />
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Vended__74CE504D" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__CartaLlen__Empre__4DD47EBD" />
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Prove__79C80F94" />
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Proforma__Compra__6C6E1476" />
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Proforma__Vended__703EA55A" />
