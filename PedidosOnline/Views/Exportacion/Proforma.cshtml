@@ -39,15 +39,19 @@
         $('#item').hide();
         $('#items').click(function()
         {
-            $('#guardarProforma').hide();
+            $('.guardarProforma').hide();
             $('#item').show();
         })
         $('#proforma').click(function()
         {
-            $('#guardarProforma').show();
+            $('.guardarProforma').show();
             $('#item').hide();
         })
     });
+    function siguiente()
+    {
+        location.href='../Exportacion/Contrato?rowid_proforma='+@Model.Proforma.RowID;
+    }
 </script>
 <div class="row" id="div_menu" style="margin-bottom:20px">
     <div class="col-md-12">
@@ -58,9 +62,14 @@
                     <i class="glyphicon glyphicon-list-alt"></i>&nbsp;<span class="lang" key="VISTA">Vista</span>
                 </a>
             </span>
-            <span id="guardarProforma">
+            <span class="guardarProforma">
                 <a href="javascript:Guardar(1);" class="alink">
                     <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
+                </a>
+            </span>
+            <span class="guardarProforma">
+                <a href="javascript:Guardar(2);" class="alink">
+                    <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">&nbsp;Guardar&nbsp;&&nbsp;Cerrar</span>
                 </a>
             </span>
             <span id="item">
@@ -72,7 +81,7 @@
             {
                 <span>
                     &nbsp;&nbsp;
-                    <a href="~/Exportacion/Contrato" class="alink">
+                    <a href="javascript:siguiente()" class="alink">
                         <i class="glyphicon glyphicon-arrow-right"></i><span class="lang" key="Siguiente">Siguiente</span>
                     </a>
                 </span>
@@ -532,7 +541,7 @@
 
         })
     }
-    function Guardar()
+    function Guardar(accion)
     {
         var validator = $("#formPrincial").validate();
         if (validator.form())
@@ -549,7 +558,13 @@
                 {
                     debugger
                     if (@Model.Proforma.RowID>0) {
-                        Mensajes('Guardado Satisfactoriamente','success','');
+                        if (accion==1) {
+                            Mensajes('Guardado Satisfactoriamente','success','');
+                        }
+                        else
+                        {
+                            location.href="../Exportacion/Proformas";
+                        }
                     }
                     else
                     {

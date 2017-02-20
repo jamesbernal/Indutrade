@@ -40,7 +40,7 @@
 <div class="row ">
     <div class="row" id="div_menu" style="margin-bottom:20px">
         <div class="col-md-12">
-            <div class="nav">
+            <div class=" col-md-2">
                 <span>
                     <a href="@Url.Action( "Calculadora","Exportacion",new {   @rih = Request.Params["rih"] })" class="alink">
                         <i class="glyphicon glyphicon-plus"></i>&nbsp;<SPAN class="lang" key="NUEVO">Nuevo</SPAN>
@@ -73,7 +73,7 @@
                             #@cal.RowID
                         </td>
                         <td>
-                            @cal.Tercero.NombreComercial
+                            @cal.Tercero.RazonSocial
                         </td>
                         <td>
                             @cal.Ciudad.Nombre
