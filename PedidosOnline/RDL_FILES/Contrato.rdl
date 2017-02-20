@@ -6,157 +6,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>5.67287cm</Width>
+              <Width>4.52008cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>13.32729cm</Width>
+              <Width>12.1745cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
-            <TablixRow>
-              <Height>0.6cm</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox66">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>NÚMERO DE CONTRATO:</Value>
-                              <Style>
-                                <FontStyle>Normal</FontStyle>
-                                <FontWeight>Bold</FontWeight>
-                                <TextDecoration>None</TextDecoration>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox66</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>White</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BottomBorder>
-                          <Color>White</Color>
-                        </BottomBorder>
-                        <RightBorder>
-                          <Color>White</Color>
-                        </RightBorder>
-                        <BackgroundColor>Khaki</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="numerocontrato">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!numerocontrato.Value</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>numerocontrato</rd:DefaultName>
-                      <Style>
-                        <Border />
-                        <BackgroundColor>Khaki</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-            <TablixRow>
-              <Height>0.6cm</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox63">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>FECHA:</Value>
-                              <Style>
-                                <FontStyle>Normal</FontStyle>
-                                <FontWeight>Bold</FontWeight>
-                                <TextDecoration>None</TextDecoration>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox63</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>Khaki</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="fechacontrato">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!fechacontrato.Value</Value>
-                              <Style>
-                                <FontSize>6pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>fechacontrato</rd:DefaultName>
-                      <Style>
-                        <Border />
-                        <BackgroundColor>Khaki</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
             <TablixRow>
               <Height>0.59737cm</Height>
               <TablixCells>
@@ -208,7 +64,7 @@
                             <TextRun>
                               <Value>=Fields!vendedor.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -280,7 +136,7 @@
                             <TextRun>
                               <Value>=Fields!comprador.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -352,7 +208,7 @@
                             <TextRun>
                               <Value>=Fields!intermediario.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -424,7 +280,7 @@
                             <TextRun>
                               <Value>=Fields!itemreferencia.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -496,7 +352,7 @@
                             <TextRun>
                               <Value>=Fields!calidad.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -568,7 +424,7 @@
                             <TextRun>
                               <Value>=Fields!peso.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -642,7 +498,7 @@
                             <TextRun>
                               <Value>=Fields!puertocargue.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -714,7 +570,7 @@
                             <TextRun>
                               <Value>=Fields!puertodescargue.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -786,7 +642,7 @@
                             <TextRun>
                               <Value>=Fields!embalaje.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -858,7 +714,7 @@
                             <TextRun>
                               <Value>=Fields!precio.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1001,7 +857,7 @@
                             <TextRun>
                               <Value>=Fields!seguro.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1072,7 +928,7 @@
                             <TextRun>
                               <Value>=Fields!transporte.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1145,7 +1001,7 @@
                             <TextRun>
                               <Value>=Fields!inspector.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1216,7 +1072,7 @@
                             <TextRun>
                               <Value>=Fields!peso.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1290,7 +1146,7 @@
                             <TextRun>
                               <Value>=Fields!calidad2.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1362,7 +1218,7 @@
                             <TextRun>
                               <Value>=Fields!embarqueparcial.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1434,7 +1290,7 @@
                             <TextRun>
                               <Value>=Fields!mediopago.Value</Value>
                               <Style>
-                                <FontSize>6pt</FontSize>
+                                <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1486,16 +1342,15 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
-                <TablixMember />
-                <TablixMember />
               </TablixMembers>
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0.09984cm</Top>
-        <Height>11.98248cm</Height>
-        <Width>19.00016cm</Width>
+        <Top>0.82615cm</Top>
+        <Left>1.20983cm</Left>
+        <Height>10.78423cm</Height>
+        <Width>16.69458cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1512,7 +1367,7 @@
                 <Value>18. TÉRMINOS                                                                                                                                  </Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1527,7 +1382,7 @@
                 <Value>1.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1538,7 +1393,7 @@
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Times New Roman</FontFamily>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1548,7 +1403,7 @@
                 <Value>El comprador y el vendedor asumen sus obligaciones respectivas, como indica termino INCOTERM de venta.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1569,7 +1424,7 @@
                 <Value>2.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1580,7 +1435,7 @@
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Times New Roman</FontFamily>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1590,7 +1445,7 @@
                 <Value>Se permiten días libres desde la llegada del buque o vagón al puerto de llegada o punto aduanero tierra adentro, para cumplir las formalidades aduaneras y completar el envío. Los días libres serán según los términos y condiciones estándar de la compañía naviera. Después del vencimiento de los “18 días libres”, la sobreestadía del contenedor será facturada según las tarifas estándar de la compañía naviera.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1611,7 +1466,7 @@
                 <Value>        3.   Todos los demás términos de descarga serán según los estándares y condiciones de la línea naviera.           </Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1626,7 +1481,7 @@
                 <Value>19. DOCUMENTACIÓN                                                                     </Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1641,7 +1496,7 @@
                 <Value>  El Vendedor Debe Proporcionar Lo Siguiente:                                                              </Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1661,7 +1516,7 @@
                 <Value>1.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1672,7 +1527,7 @@
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Times New Roman</FontFamily>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1682,7 +1537,7 @@
                 <Value>Factura Comercial (5 Original Y Copia 1)</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1703,7 +1558,7 @@
                 <Value>2.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1714,7 +1569,7 @@
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Times New Roman</FontFamily>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1724,7 +1579,7 @@
                 <Value>Lista De Empaque  (3 Originales Y 3 Copias)</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1745,7 +1600,7 @@
                 <Value>3.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1756,7 +1611,7 @@
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Times New Roman</FontFamily>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1766,7 +1621,7 @@
                 <Value>Certificado No Maderero Emitido Por El Embarcador (3 Original Y 3 Copias)</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1787,7 +1642,7 @@
                 <Value>4.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1798,7 +1653,7 @@
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Times New Roman</FontFamily>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1808,7 +1663,7 @@
                 <Value>Conocimiento De Embarque Con Flete Pre-Pagado (3 Original Y 3 Copias), Emitido Por La Compañía Naviera</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1829,7 +1684,7 @@
                 <Value>5.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1840,7 +1695,7 @@
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Times New Roman</FontFamily>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1850,7 +1705,7 @@
                 <Value>Certificados De Calidad  (3 Original Y 3 Copias), Ficha Técnica, Resultados De Las Pruebas Y Detalles Del Embarque.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1871,7 +1726,7 @@
                 <Value>6.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1882,7 +1737,7 @@
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Times New Roman</FontFamily>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1892,7 +1747,7 @@
                 <Value>Certificado De Cantidad Emitido Por SGS (3 Originales Y 3 Copias)</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1913,7 +1768,7 @@
                 <Value>7.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1924,7 +1779,7 @@
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Times New Roman</FontFamily>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1934,7 +1789,7 @@
                 <Value>Certificado De Origen (1 Original Y 1 Copias) Emitido Por U.A.E. Dirección De Impuestos Y Aduanas Nacionales (Dian)</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1955,7 +1810,7 @@
                 <Value>8.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1966,7 +1821,7 @@
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Times New Roman</FontFamily>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1976,7 +1831,7 @@
                 <Value>Póliza De Seguro (1 Original Y 1 Copia)                                                 </Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -1997,7 +1852,7 @@
                 <Value>20. CONDICIONES ESPECIALES                                                                     </Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -2017,7 +1872,7 @@
                 <Value>La propiedad de los bienes cobijados por este contrato, son del vendedor hasta que el vendedor haya recibido el pago incondicional correspondiente. Este contrato constituye el único acuerdo entre las partes; ninguna adición y/o alteraciones serán válidas, salvo que sean consignadas por escrito y firmadas por ambas partes. Todos los acuerdos previos son automáticamente cancelados si no son incluidos en el presente contrato.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -2037,7 +1892,7 @@
                 <Value>Cualquier indulgencia, extensión, u otros indultos que puedan ser otorgados en cualquier momento por cualquiera de las partes hacia la otra, no será interpretado como una novación de los derechos de cualquiera de las partes.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -2057,7 +1912,7 @@
                 <Value>Si no se reciben protestas escritas o desacuerdos contractuales dentro de las veinticuatro (24) horas, se da por entendido que todos los términos y condiciones fueron aceptados. La validez de este contrato, no será afectada por la no entrega del contrato firmado por la contraparte.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -2072,7 +1927,7 @@
                 <Value>21. CLAUSULAS ADICIONALES                                                                     </Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -2087,7 +1942,7 @@
                 <Value>1.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -2098,7 +1953,7 @@
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Times New Roman</FontFamily>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -2108,7 +1963,7 @@
                 <Value>Arbitraje: Cualquier disputa o desacuerdo de cualquier tipo, que surja u ocurra entre las partes en relación con razón, motivo, externo o interno, que tenga conexión con este contrato, será referido a arbitraje según las regulaciones de FOSFA.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -2129,7 +1984,7 @@
                 <Value>2.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -2140,7 +1995,7 @@
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Times New Roman</FontFamily>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -2150,7 +2005,7 @@
                 <Value>Otras condiciones que no contradigan FOSFA 32.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -2171,7 +2026,7 @@
                 <Value>3.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -2182,7 +2037,7 @@
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Times New Roman</FontFamily>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -2192,7 +2047,7 @@
                 <Value>Es responsabilidad del vendedor revisar los contenedores vacíos antes de instalar, cualquier daño dentro o fuera de los contenedores, será fotografiado en un archivo como EIR.</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
-                  <FontSize>5pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                   <TextDecoration>None</TextDecoration>
                   <Color>#000000</Color>
@@ -2209,9 +2064,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox104</rd:DefaultName>
-        <Top>12.25871cm</Top>
+        <Top>13.18327cm</Top>
         <Left>1.20983cm</Left>
-        <Height>6.18954cm</Height>
+        <Height>12.76665cm</Height>
         <Width>16.69458cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
@@ -2370,8 +2225,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox105</rd:DefaultName>
-        <Top>18.55408cm</Top>
-        <Left>1.20983cm</Left>
+        <Top>26.09103cm</Top>
+        <Left>1.20984cm</Left>
         <Height>3.28913cm</Height>
         <Width>7.42125cm</Width>
         <ZIndex>2</ZIndex>
@@ -2531,8 +2386,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox105</rd:DefaultName>
-        <Top>18.55408cm</Top>
-        <Left>9.95612cm</Left>
+        <Top>26.09103cm</Top>
+        <Left>9.95613cm</Left>
         <Height>3.28913cm</Height>
         <Width>7.94829cm</Width>
         <ZIndex>3</ZIndex>
@@ -2868,8 +2723,8 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <Top>22.1265cm</Top>
-        <Left>1.20983cm</Left>
+        <Top>30.12075cm</Top>
+        <Left>1.20984cm</Left>
         <Height>4.12833cm</Height>
         <Width>16.69458cm</Width>
         <ZIndex>4</ZIndex>
@@ -2880,13 +2735,17 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>10.43624in</Height>
-    <Style />
+    <Height>13.48389in</Height>
+    <Style>
+      <Border>
+        <Style>None</Style>
+      </Border>
+    </Style>
   </Body>
   <Width>7.48038in</Width>
   <Page>
     <PageHeader>
-      <Height>2.05944cm</Height>
+      <Height>3.30209cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -2894,7 +2753,8 @@
           <Source>Embedded</Source>
           <Value>encabezado_informes1</Value>
           <Sizing>Fit</Sizing>
-          <Height>1.98289cm</Height>
+          <Left>0cm</Left>
+          <Height>3.19625cm</Height>
           <Width>19.00016cm</Width>
           <Style>
             <Border>
@@ -2902,6 +2762,132 @@
             </Border>
           </Style>
         </Image>
+        <Textbox Name="Textbox116">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>NÚMERO DE CONTRATO:</Value>
+                  <Style>
+                    <FontStyle>Normal</FontStyle>
+                    <FontWeight>Bold</FontWeight>
+                    <TextDecoration>None</TextDecoration>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox116</rd:DefaultName>
+          <Top>1.80203cm</Top>
+          <Left>1.20983cm</Left>
+          <Height>0.6cm</Height>
+          <Width>4.52008cm</Width>
+          <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="numerocontrato2">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Fields!numerocontrato.Value</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>numerocontrato</rd:DefaultName>
+          <Top>1.80203cm</Top>
+          <Left>5.90631cm</Left>
+          <Height>0.6cm</Height>
+          <Width>4.21316cm</Width>
+          <ZIndex>2</ZIndex>
+          <Style>
+            <Border />
+            <BackgroundColor>Khaki</BackgroundColor>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox117">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>FECHA:</Value>
+                  <Style>
+                    <FontStyle>Normal</FontStyle>
+                    <FontWeight>Bold</FontWeight>
+                    <TextDecoration>None</TextDecoration>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox116</rd:DefaultName>
+          <Top>2.50091cm</Top>
+          <Left>1.20984cm</Left>
+          <Height>0.6cm</Height>
+          <Width>4.52008cm</Width>
+          <ZIndex>3</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="fechacontrato3">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Fields!fechacontrato.Value</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>fechacontrato</rd:DefaultName>
+          <Top>2.47258cm</Top>
+          <Left>5.90631cm</Left>
+          <Height>0.6cm</Height>
+          <Width>4.21316cm</Width>
+          <ZIndex>4</ZIndex>
+          <Style>
+            <Border />
+            <BackgroundColor>Khaki</BackgroundColor>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
       </ReportItems>
       <Style>
         <Border>
@@ -2918,6 +2904,7 @@
           <Source>Embedded</Source>
           <Value>pie_informes</Value>
           <Sizing>Fit</Sizing>
+          <Top>0cm</Top>
           <Left>0cm</Left>
           <Height>2.07207cm</Height>
           <Width>19.00016cm</Width>
@@ -2934,8 +2921,8 @@
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
+    <PageHeight>27.94cm</PageHeight>
+    <PageWidth>21.59cm</PageWidth>
     <LeftMargin>2cm</LeftMargin>
     <RightMargin>2cm</RightMargin>
     <TopMargin>2cm</TopMargin>
