@@ -43,7 +43,7 @@
         }
                 $.ajax({
                     type: "POST",
-                    url: "/SolicitudLlenado/RegistrarSolicitudLlenado",
+                    url: "RegistrarSolicitudLlenado",
                     data: {
                         formulario: $("#form").serialize(),
                         RowID: RowID,
@@ -53,7 +53,7 @@
                     success: function (data2) {
                         debugger
                         if(a==2)
-                        window.location = "/SolicitudLlenado/SolicitudLlenados";
+                        window.location = "/Exportacion/SolicitudLlenados";
                         $(".RowID").val(data2.rowid);
                         $("#btnVehiculo").show();
                         Mensajes(data2.mensaje, "success", '');
@@ -71,7 +71,7 @@
     function cargarItemsContrato(rowid_contrato) {
         $.ajax({
             type: "GET",
-            url: "/SolicitudTransporte/ItemsContrato",
+            url: "ItemsContrato1",
             data: {
                 RowID: rowid_contrato
             },
@@ -90,7 +90,7 @@
         var RowID = $(".RowID").val();
         $.ajax({
             type: "GET",
-            url: "/SolicitudLlenado/VehiculosSolicitud",
+            url: "VehiculosSolicitud",
             data: {
                 RowID: RowID
             },
@@ -413,7 +413,7 @@
             var titulo = $("#autoc_contrato").val();
             $.ajax({
                 type: "GET",
-                url: "/SolicitudTransporte/Datos_Contrato",
+                url: "Datos_Contrato",
                 data:
                       {
                           titulo: titulo

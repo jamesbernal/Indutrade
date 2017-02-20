@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PedidosOnline.Models;
+using System.Data.SqlClient;
+
 using PedidosOnline.Utilidades;
 
 namespace PedidosOnline.Controllers
@@ -89,6 +91,29 @@ namespace PedidosOnline.Controllers
             string result = "";
             Proforma proforma = db.Proforma.Where(p => p.RowID == RowID).FirstOrDefault();
             List<CalculadoraItems> itemsC = db.CalculadoraItems.Where(c => c.CalculadoraID == proforma.CalculadoraID).ToList();
+            double subtotal = 0;
+            foreach (var item in itemsC)
+            {
+                subtotal = Convert.ToDouble(item.PVE) * Convert.ToDouble(item.CantidadTonelada);
+                result += "<tr>" +
+                         "<td >" + item.Item.Referencia + " </td >" +
+                         "<td > " + item.Item.Descripcion + " </td >" +
+                         "<td > " + item.CantidadTonelada + " </td >" +
+                         "<td > " + item.PVE + " </td >" +
+                         "<td > " + item.Opcion.Descripcion + " </td >" +
+                         "<td > " + item.CantidadTonelada + " </td >" +
+                         "<td > " + subtotal + " </td >" +
+                   "</tr>";
+
+            }
+            return result;
+        }
+        [CheckSessionOutAttribute]
+        public string ItemsContrato1(int RowID)
+        {
+            string result = "";
+            Contrato c = db.Contrato.Where(f => f.RowID == RowID).FirstOrDefault();
+            List<CalculadoraItems> itemsC = db.CalculadoraItems.Where(a => a.CalculadoraID == c.Proforma.CalculadoraID).ToList();
             double subtotal = 0;
             foreach (var item in itemsC)
             {
@@ -654,7 +679,12 @@ namespace PedidosOnline.Controllers
             }
             else
             {
-                return View(new CartaLlenadoPuerto());
+                CartaLlenadoPuerto carta = new CartaLlenadoPuerto();
+                carta.MotoNave = new MotoNave();
+                carta.Tercero = new Tercero();
+                carta.Vehiculo = new Vehiculo();
+                carta.Opcion = new Opcion();
+                return View(carta);
             }
         }
         [CheckSessionOut]
@@ -863,17 +893,20 @@ namespace PedidosOnline.Controllers
         [CheckSessionOut]
         public JsonResult BuscarContrato(int? RowID)
         {
-            var cont = (from terceroexiste in db.Contrato.Where(f => f.RowID == RowID).ToList()
+            string term = Request.Params["term"];
+            var cont = (from terceroexiste in db.Contrato.ToList()
+                        where terceroexiste.RowID.ToString().Contains(term)
                         select new
                         {
                             nombrecomp = terceroexiste.Proforma.Tercero.RazonSocial,
                             nitcomp = terceroexiste.Proforma.Tercero.Identificacion,
                             nombreven = terceroexiste.Proforma.Tercero1.RazonSocial,
                             nitven = terceroexiste.Proforma.Tercero1.Identificacion,
-                             }).FirstOrDefault();
+                            label=terceroexiste.RowID
+                             });
 
-            var jsonResult = Json(cont, JsonRequestBehavior.AllowGet);
-            return Json( cont  , JsonRequestBehavior.AllowGet);
+            //var jsonResult = Json(cont, JsonRequestBehavior.AllowGet);
+            return Json(cont, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GuardarDCD(FormCollection form, int? RowID, int? RowIDContrato)
@@ -1602,7 +1635,7 @@ namespace PedidosOnline.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         [CheckSessionOut]
-        public JsonResult Contrato(string term)
+        public JsonResult ContratoB(string term)
         {
             List<Contrato> lista = db.Contrato.Where(f => f.Titulo.Contains(term)).ToList();
             var result = (from reg in lista.ToList()

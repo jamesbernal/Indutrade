@@ -45,7 +45,7 @@
         }
         $.ajax({
             type: "POST",
-            url: "/Contrato/RegistrarContrato",
+            url: "RegistrarContrato",
             data: {
                 formulario: $("#form").serialize(),
                 RowID: RowID,
@@ -58,13 +58,13 @@
                     }
                     else
                     {
-                        location.href="../Contrato/Contrato?rowid="+data2;
+                        location.href="../Exportacion/Contrato?rowid="+data2;
                     }
                     ModalProcesandoHiden();
                 }
                 else
                 {
-                    location.href="../Contrato/Contratos";
+                    location.href="../Exportacion/Contratos";
                 }
             },
             error: function (request) {
@@ -77,7 +77,7 @@
     function cargarItemsContrato(rowid_proforma) {
         $.ajax({
             type: "GET",
-            url: "/Contrato/ItemsContrato",
+            url: "/Exportacion/ItemsContrato",
             data: {
                 RowID: rowid_proforma
             },
@@ -459,7 +459,7 @@
             var titulo = $("#autoc_proforma").val();
             $.ajax({
                 type: "GET",
-                url: "/Contrato/Datos_Proforma",
+                url: "Datos_Proforma",
                 data:
                       {
                           titulo: titulo

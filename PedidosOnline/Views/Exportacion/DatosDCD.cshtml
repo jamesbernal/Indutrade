@@ -5,34 +5,23 @@
 }
 <link href="~/Content/Tabs.css" rel="stylesheet" />
 <script type="text/javascript">
-
-    function BuscarContrato() {
-
-                    $.ajax({
-                        type: "POST",
-                        url: "/Exportacion/BuscarContrato",
-                        data: {
-                            formulario: $("#form").serialize(),
-                            RowID: $('#ccontrato').val()
-                        },
-                        success: function (data) {
-                            $('#comprador').empty();
-                            $('#comprador').val(data.nombrecomp);
-                            $('#compradornit').empty();
-                            $('#compradornit').val(data.nitcomp);
-                            $('#vendedor').empty();
-                            $('#vendedor').val(data.nombreven);
-                            $('#vendedornit').empty();
-                            $('#vendedornit').val(data.nitven);
-                            TablaBalance();
-                        },
-                        error: function (data) {
-                            $('#tercero').empty();
-                        }
-                    });
-                    return false;
-
-    }
+    $(document).ready(function(){
+        $('#ccontrato').autocomplete({
+            source: '/Exportacion/BuscarContrato',
+            minLength: 1,
+            select: function (evento,ui) {
+                $('#comprador').empty();
+                $('#comprador').val(ui.item.nombrecomp);
+                $('#compradornit').empty();
+                $('#compradornit').val(ui.item.nitcomp);
+                $('#vendedor').empty();
+                $('#vendedor').val(ui.item.nombreven);
+                $('#vendedornit').empty();
+                $('#vendedornit').val(ui.item.nitven);
+                TablaBalance();
+            }
+        })
+    })
     function guardarDCD(a) {
         //debugger
         ModalProcesandoShow();
@@ -70,17 +59,17 @@
                 RowIDContrato: $("#ccontrato").val()
             },
             success: function (data2) {
-                
+                debugger
                 if(a == 1)
                 {
                     
-                    window.location = 'DCD'
+                    location.href = "../Exportacion/DatosDCD?rowid="+data2;
                     ModalProcesandoHiden();
                 }
                 else
                 {
                     ModalProcesandoHiden();
-                    location.href="../DCD/Exportacion";
+                    location.href = "../Exportacion/DCD";
                 }
             },
             error: function (request) {
@@ -139,11 +128,11 @@
                             <div class="col-md-5">
                                 @if (Model.RowID > 0)
                                 {
-                                    <input type="text" id="ccontrato" name="ccontrato" value="@Model.Contrato.RowID " onblur="BuscarContrato()" style="width: 100%"/>
+                                    <input type="text" id="ccontrato" name="ccontrato" value="@Model.Contrato.RowID "  style="width: 100%"/>
                                 }
                                 else
                                 {
-                                    <input type="text" id="ccontrato" name="ccontrato" onblur="BuscarContrato()" style="width: 100%" />
+                                    <input type="text" id="ccontrato" name="ccontrato"  style="width: 100%" />
                                 }
                             </div>                            
                         </div>
@@ -391,25 +380,25 @@
 <script>
     $(document).ready(function () {
         $('#Reprensentanteleg').on('keypress', function (e) {
-                                                    //debugger
-                                                    var code = (e.keyCode ? e.keyCode : e.which);
-                                                    if (code == 13) { //Enter keycode
-                                                        return false;
-                                                    }
-                                                });
+            //debugger
+            var code = (e.keyCode ? e.keyCode : e.which);
+            if (code == 13) { //Enter keycode
+                return false;
+            }
+        });
 
         $("#Reprensentanteleg").autocomplete({
                                                     source: "Buscar_Representante",
             minLenght: 3,
             select: function (evento, ui) {//seleccion al autocompletar
-                                                        if (ui.item != null) {//si hay valor en la seleccion autocompletar
-                    $("#Reprensentanteleg").val(ui.item.label);
-                                                        }
+                if (ui.item != null) {//si hay valor en la seleccion autocompletar
+                $("#Reprensentanteleg").val(ui.item.label);
+                                            }
                                                     },
             change: function (event, ui) {
 
-                                            }
-                                            });
+            }
+        });
 
         $('#fecha').datepicker({
             dateFormat: 'dd/mm/yy',
@@ -431,7 +420,7 @@
             success:function(data){
                 $('#tableBalance tbody').empty();
                 $('#tableBalance tbody').append(data);
-                ReCalcular();
+                //ReCalcular();
             }
         })
 

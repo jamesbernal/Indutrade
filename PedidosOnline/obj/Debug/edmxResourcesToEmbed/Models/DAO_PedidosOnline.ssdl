@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DB_9CAC35_indutradeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="DB_9CAC35_indutradeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Actividad">
     <Key>
       <PropertyRef Name="RowID" />
@@ -316,8 +316,8 @@
     <Property Name="Dex" Type="varchar" MaxLength="30" />
     <Property Name="NCertificadoCP" Type="varchar" MaxLength="30" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_9CAC35_indutrade.dbo.m_plantillas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.dbo.m_plantillas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="m_plantillas">
     <Key>
       <PropertyRef Name="RowID" />
@@ -575,8 +575,8 @@ warning 6002: The table/view 'DB_9CAC35_indutrade.dbo.m_plantillas' does not hav
     <Property Name="FechaModificacion" Type="date" />
     <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_9CAC35_indutrade.Erp.PuntoEnvio' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="PuntoEnvio">
     <Key>
       <PropertyRef Name="RowID" />
@@ -1154,6 +1154,18 @@ warning 6002: The table/view 'DB_9CAC35_indutrade.Erp.PuntoEnvio' does not have 
       </Principal>
       <Dependent Role="Calculadora">
         <PropertyRef Name="TerceroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CartaLlen__Empre__4DD47EBD">
+    <End Role="Tercero" Type="Self.Tercero" Multiplicity="1" />
+    <End Role="CartaLlenadoPuerto" Type="Self.CartaLlenadoPuerto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tercero">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="CartaLlenadoPuerto">
+        <PropertyRef Name="EmpresaID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2621,6 +2633,10 @@ warning 6002: The table/view 'DB_9CAC35_indutrade.Erp.PuntoEnvio' does not have 
     <AssociationSet Name="FK__Calculado__Terce__2AA05119" Association="Self.FK__Calculado__Terce__2AA05119">
       <End Role="Tercero" EntitySet="Tercero" />
       <End Role="Calculadora" EntitySet="Calculadora" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CartaLlen__Empre__4DD47EBD" Association="Self.FK__CartaLlen__Empre__4DD47EBD">
+      <End Role="Tercero" EntitySet="Tercero" />
+      <End Role="CartaLlenadoPuerto" EntitySet="CartaLlenadoPuerto" />
     </AssociationSet>
     <AssociationSet Name="FK__Certifica__Ciuda__7EE1CA6C" Association="Self.FK__Certifica__Ciuda__7EE1CA6C">
       <End Role="Ciudad" EntitySet="Ciudad" />

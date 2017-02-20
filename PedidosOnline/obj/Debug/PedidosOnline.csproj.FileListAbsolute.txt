@@ -548,9 +548,6 @@ C:\Indutrade\PedidosOnline\bin\Microsoft.Owin.Security.Google.dll
 C:\Indutrade\PedidosOnline\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
 C:\Indutrade\PedidosOnline\bin\Microsoft.Owin.Security.OAuth.dll
 C:\Indutrade\PedidosOnline\bin\Microsoft.Owin.Security.Twitter.dll
-C:\Indutrade\PedidosOnline\bin\Microsoft.ReportViewer.Common.dll
-C:\Indutrade\PedidosOnline\bin\Microsoft.ReportViewer.ProcessingObjectModel.dll
-C:\Indutrade\PedidosOnline\bin\Microsoft.ReportViewer.WebForms.dll
 C:\Indutrade\PedidosOnline\bin\Microsoft.Web.Infrastructure.dll
 C:\Indutrade\PedidosOnline\bin\Newtonsoft.Json.dll
 C:\Indutrade\PedidosOnline\bin\Owin.dll
@@ -564,7 +561,6 @@ C:\Indutrade\PedidosOnline\bin\System.Web.WebPages.Deployment.dll
 C:\Indutrade\PedidosOnline\bin\System.Web.WebPages.dll
 C:\Indutrade\PedidosOnline\bin\System.Web.WebPages.Razor.dll
 C:\Indutrade\PedidosOnline\bin\WebGrease.dll
-C:\Indutrade\PedidosOnline\bin\Microsoft.mshtml.dll
 C:\Indutrade\PedidosOnline\bin\Spire.License.xml
 C:\Indutrade\PedidosOnline\bin\Spire.Pdf.xml
 C:\Indutrade\PedidosOnline\bin\System.Web.Helpers.xml
@@ -611,3 +607,4 @@ C:\Indutrade\PedidosOnline\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
 C:\Indutrade\PedidosOnline\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
 C:\Indutrade\PedidosOnline\obj\Debug\PedidosOnline.dll
 C:\Indutrade\PedidosOnline\obj\Debug\PedidosOnline.pdb
+C:\Indutrade\PedidosOnline\obj\Debug\PedidosOnline.csprojResolveAssemblyReference.cache

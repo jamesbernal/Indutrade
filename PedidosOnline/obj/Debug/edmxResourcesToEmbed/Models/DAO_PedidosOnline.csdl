@@ -34,6 +34,13 @@
     <FunctionImport Name="spPROFORMA_EXPORTAR_PDF" ReturnType="Collection(DB_9CAC35_indutradeModel.spPROFORMA_EXPORTAR_PDF_Result)">
       <Parameter Name="rowid_proforma" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="contratos">
+      <Parameter Name="rowid_contrato" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spPROFORMA_EXPORTAR_PDF1" ReturnType="Collection(DB_9CAC35_indutradeModel.spPROFORMA_EXPORTAR_PDF1_Result)">
+      <Parameter Name="rowid_proforma" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spSOLICITUD_TRASNPORTE_EXPORTAR_PDF" ReturnType="Collection(DB_9CAC35_indutradeModel.spSOLICITUD_TRASNPORTE_EXPORTAR_PDF_Result)" />
     <EntitySet Name="Actividad" EntityType="DB_9CAC35_indutradeModel.Actividad" />
     <EntitySet Name="Contacto" EntityType="DB_9CAC35_indutradeModel.Contacto" />
     <EntitySet Name="TerceroPotencial" EntityType="DB_9CAC35_indutradeModel.TerceroPotencial" />
@@ -429,6 +436,10 @@
       <End Role="Tercero" EntitySet="Tercero" />
       <End Role="Sucursal" EntitySet="Sucursal" />
     </AssociationSet>
+    <AssociationSet Name="FK__CartaLlen__Empre__4DD47EBD" Association="DB_9CAC35_indutradeModel.FK__CartaLlen__Empre__4DD47EBD">
+      <End Role="Tercero" EntitySet="Tercero" />
+      <End Role="CartaLlenadoPuerto" EntitySet="CartaLlenadoPuerto" />
+    </AssociationSet>
     <AssociationSet Name="FK__OrdenComp__Prove__79C80F94" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Prove__79C80F94">
       <End Role="Tercero" EntitySet="Tercero" />
       <End Role="OrdenCompra" EntitySet="OrdenCompra" />
@@ -573,13 +584,6 @@
       <End Role="RecursosProforma" EntitySet="RecursosProforma" />
       <End Role="RecursosContrato" EntitySet="RecursosContrato" />
     </AssociationSet>
-    <FunctionImport Name="contratos">
-      <Parameter Name="rowid_contrato" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="spPROFORMA_EXPORTAR_PDF1" ReturnType="Collection(DB_9CAC35_indutradeModel.spPROFORMA_EXPORTAR_PDF1_Result)">
-      <Parameter Name="rowid_proforma" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="spSOLICITUD_TRASNPORTE_EXPORTAR_PDF" ReturnType="Collection(DB_9CAC35_indutradeModel.spSOLICITUD_TRASNPORTE_EXPORTAR_PDF_Result)" />
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -598,6 +602,32 @@
     <Property Type="String" Name="Titulo" Nullable="true" MaxLength="200" />
     <Property Type="String" Name="Nit" Nullable="true" MaxLength="200" />
     <Property Type="String" Name="razon" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="spPROFORMA_EXPORTAR_PDF1_Result">
+    <Property Type="Int64" Name="No" Nullable="true" />
+    <Property Type="Int32" Name="Proforma" Nullable="false" />
+    <Property Type="String" Name="Titulo" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Seller" Nullable="true" MaxLength="526" />
+    <Property Type="String" Name="ContactSeller" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="TelSeller" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Pais" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Buyer" Nullable="true" MaxLength="526" />
+    <Property Type="String" Name="Loading" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="Ncontract" Nullable="true" />
+    <Property Type="String" Name="Discharget" Nullable="true" MaxLength="100" />
+    <Property Type="Decimal" Name="Price" Nullable="true" Precision="20" Scale="4" />
+    <Property Type="Double" Name="TM" Nullable="true" />
+    <Property Type="String" Name="Item" Nullable="true" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="spSOLICITUD_TRASNPORTE_EXPORTAR_PDF_Result">
+    <Property Type="String" Name="razonsocial" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="direccion1" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="identificacion" Nullable="true" MaxLength="25" />
+    <Property Type="Int32" Name="rowid" Nullable="false" />
+    <Property Type="String" Name="referencia" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="cantidadvehiculos" Nullable="true" />
+    <Property Type="String" Name="imputarflete" Nullable="true" MaxLength="100" />
   </ComplexType>
   <EntityType Name="Actividad">
     <Key>
@@ -1335,12 +1365,13 @@
     <NavigationProperty Name="Sucursal5" Relationship="DB_9CAC35_indutradeModel.FK__Sucursal__Vended__01342732" FromRole="Tercero" ToRole="Sucursal" />
     <NavigationProperty Name="Sucursal6" Relationship="DB_9CAC35_indutradeModel.FK__Sucursal__Vended__39237A9A" FromRole="Tercero" ToRole="Sucursal" />
     <NavigationProperty Name="Sucursal7" Relationship="DB_9CAC35_indutradeModel.FK__Sucursal__Vended__74CE504D" FromRole="Tercero" ToRole="Sucursal" />
+    <NavigationProperty Name="CartaLlenadoPuerto" Relationship="DB_9CAC35_indutradeModel.FK__CartaLlen__Empre__4DD47EBD" FromRole="Tercero" ToRole="CartaLlenadoPuerto" />
     <NavigationProperty Name="OrdenCompra" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Prove__79C80F94" FromRole="Tercero" ToRole="OrdenCompra" />
     <NavigationProperty Name="Proforma" Relationship="DB_9CAC35_indutradeModel.FK__Proforma__Compra__6C6E1476" FromRole="Tercero" ToRole="Proforma" />
     <NavigationProperty Name="Proforma1" Relationship="DB_9CAC35_indutradeModel.FK__Proforma__Vended__703EA55A" FromRole="Tercero" ToRole="Proforma" />
     <NavigationProperty Name="PuntoEnvio" Relationship="DB_9CAC35_indutradeModel.FK__PuntoEnvi__Vende__3BFFE745" FromRole="Tercero" ToRole="PuntoEnvio" />
     <NavigationProperty Name="Usuario" Relationship="DB_9CAC35_indutradeModel.FK__Usuario__Tercero__251C81ED" FromRole="Tercero" ToRole="Usuario" />
-    <NavigationProperty Name="CartaLlenadoPuerto" Relationship="DB_9CAC35_indutradeModel.FK_CartaLlenadoPuerto_Tercero" FromRole="Tercero" ToRole="CartaLlenadoPuerto" />
+    <NavigationProperty Name="CartaLlenadoPuerto1" Relationship="DB_9CAC35_indutradeModel.FK_CartaLlenadoPuerto_Tercero" FromRole="Tercero" ToRole="CartaLlenadoPuerto" />
     <NavigationProperty Name="MatrizBL" Relationship="DB_9CAC35_indutradeModel.FK_MatrizBL_Empresa" FromRole="Tercero" ToRole="MatrizBL" />
   </EntityType>
   <EntityType Name="Agrupacion">
@@ -1577,7 +1608,8 @@
     <Property Name="FechaModificacion" Type="DateTime" Precision="0" />
     <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Vehiculo" Relationship="DB_9CAC35_indutradeModel.FK_CartaLlenadoPuerto_Vehiculo" FromRole="CartaLlenadoPuerto" ToRole="Vehiculo" />
-    <NavigationProperty Name="Tercero" Relationship="DB_9CAC35_indutradeModel.FK_CartaLlenadoPuerto_Tercero" FromRole="CartaLlenadoPuerto" ToRole="Tercero" />
+    <NavigationProperty Name="Tercero" Relationship="DB_9CAC35_indutradeModel.FK__CartaLlen__Empre__4DD47EBD" FromRole="CartaLlenadoPuerto" ToRole="Tercero" />
+    <NavigationProperty Name="Tercero1" Relationship="DB_9CAC35_indutradeModel.FK_CartaLlenadoPuerto_Tercero" FromRole="CartaLlenadoPuerto" ToRole="Tercero" />
     <NavigationProperty Name="MotoNave" Relationship="DB_9CAC35_indutradeModel.FK_CartaLlenadoPuerto_MotoNave" FromRole="CartaLlenadoPuerto" ToRole="MotoNave" />
     <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK_CartaLlenadoPuerto_Empresa" FromRole="CartaLlenadoPuerto" ToRole="Opcion" />
     <NavigationProperty Name="Puerto" Relationship="DB_9CAC35_indutradeModel.FK_CartaLlenadoPuerto_Puerto" FromRole="CartaLlenadoPuerto" ToRole="Puerto" />
@@ -2848,6 +2880,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__CartaLlen__Empre__4DD47EBD">
+    <End Type="DB_9CAC35_indutradeModel.Tercero" Role="Tercero" Multiplicity="1" />
+    <End Type="DB_9CAC35_indutradeModel.CartaLlenadoPuerto" Role="CartaLlenadoPuerto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tercero">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="CartaLlenadoPuerto">
+        <PropertyRef Name="EmpresaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__OrdenComp__Prove__79C80F94">
     <End Type="DB_9CAC35_indutradeModel.Tercero" Role="Tercero" Multiplicity="0..1" />
     <End Type="DB_9CAC35_indutradeModel.OrdenCompra" Role="OrdenCompra" Multiplicity="*" />
@@ -3280,30 +3324,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <ComplexType Name="spPROFORMA_EXPORTAR_PDF1_Result">
-    <Property Type="Int64" Name="No" Nullable="true" />
-    <Property Type="Int32" Name="Proforma" Nullable="false" />
-    <Property Type="String" Name="Titulo" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="Seller" Nullable="true" MaxLength="526" />
-    <Property Type="String" Name="ContactSeller" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="TelSeller" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="Pais" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="Buyer" Nullable="true" MaxLength="526" />
-    <Property Type="String" Name="Loading" Nullable="true" MaxLength="100" />
-    <Property Type="Int32" Name="Ncontract" Nullable="true" />
-    <Property Type="String" Name="Discharget" Nullable="true" MaxLength="100" />
-    <Property Type="Decimal" Name="Price" Nullable="true" Precision="20" Scale="4" />
-    <Property Type="Double" Name="TM" Nullable="true" />
-    <Property Type="String" Name="Item" Nullable="true" MaxLength="200" />
-  </ComplexType>
-  <ComplexType Name="spSOLICITUD_TRASNPORTE_EXPORTAR_PDF_Result">
-    <Property Type="String" Name="razonsocial" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="direccion1" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="identificacion" Nullable="true" MaxLength="25" />
-    <Property Type="Int32" Name="rowid" Nullable="false" />
-    <Property Type="String" Name="referencia" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="cantidadvehiculos" Nullable="true" />
-    <Property Type="String" Name="imputarflete" Nullable="true" MaxLength="100" />
-  </ComplexType>
 </Schema>
