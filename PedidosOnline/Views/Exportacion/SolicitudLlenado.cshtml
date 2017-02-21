@@ -52,12 +52,20 @@
                     },
                     success: function (data2) {
                         debugger
-                        if(a==2)
-                        window.location = "/Exportacion/SolicitudLlenados";
-                        $(".RowID").val(data2.rowid);
-                        $("#btnVehiculo").show();
-                        Mensajes(data2.mensaje, "success", '');
-                        ModalProcesandoHiden();
+                        if (@Model.RowID>0) {
+                            if(a==2)
+                            {
+                                window.location = "/Exportacion/SolicitudLlenados";
+                            }
+                            $("#btnVehiculo").show();
+                            Mensajes('Guardo Correctamente', "success", '');
+                            ModalProcesandoHiden();
+                        }
+                        else
+                        {
+                            window.location = "/Exportacion/SolicitudLlenado?rowid="+data2.rowid;
+                        }
+                        
                     },
                     error: function (request) {
                         debugger
@@ -166,7 +174,7 @@
             <div class="col-md-12">
                 <form id="form" name="form" onsubmit="return false">
                     <input type="hidden" class="RowID" name="RowID" value="@Model.RowID" />
-                    <input type="hidden" class="RowIDCon" name="RowIDCon" />
+                    <input type="hidden" class="RowIDCon" name="RowIDCon"  value="@Model.ContratoID"/>
                     <div id="datosG">
                         <div class="col-md-6">
                             <div class="form-group">

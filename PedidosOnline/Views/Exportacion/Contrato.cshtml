@@ -7,6 +7,12 @@
     a {
         color: #333;
     }
+    input {
+        width:100%
+    }
+    select {
+        width:100%
+    }
 </style>
 
 <link href="~/Content/Tabs.css" rel="stylesheet" />
@@ -91,7 +97,10 @@
             }
         });
     }
-
+    function siguiente()
+    {
+        location.href='../Exportacion/OrdenCompra?rowid_contrato='+@Model.RowID;
+    }
 
 
 </script>
@@ -123,7 +132,7 @@
                     {
                         <span>
                             &nbsp;&nbsp;
-                            <a href="~/OrdenCompra/OrdenCompra" class="alink">
+                            <a href="javascript:siguiente()" class="alink">
                                 <i class="glyphicon glyphicon-arrow-right"></i><span class="lang" key="Siguiente">Siguiente</span>
                             </a>
                         </span>
@@ -210,9 +219,9 @@
                                     {
                                         if (/*Model.RowID != null ||*/ Model.RowID > 0)
                                         {
-                                            if (Model.Opcion.RowID == periodo.RowID)
+                                            if (Model.Opcion1.RowID == periodo.RowID)
                                             {
-                                                <option value="@Model.Opcion.RowID" selected>@Model.Opcion.Descripcion</option>
+                                                <option value="@periodo.RowID" selected>@periodo.Descripcion</option>
                                             }
                                             else
                                             {

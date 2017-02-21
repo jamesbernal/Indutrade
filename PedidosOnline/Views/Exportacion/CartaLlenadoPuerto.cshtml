@@ -57,7 +57,7 @@
         }
         $.ajax({
             type: "POST",
-            url: "/CartaLlenadoPuerto/RegistrarCartaLlenadoPuerto",
+            url: "RegistrarCartaLlenadoPuerto",
             data: {
                 formulario: $("#form").serialize(),
                 RowID: RowID,
@@ -73,12 +73,12 @@
                     if(@Model.RowID > 0){
                         Mensajes('Guardado Satisfactoriamente','success','');
                     }else{
-                        location.href="../CartaLlenadoPuerto/CartaLlenadoPuerto?rowid="+data2;
+                        location.href="../Exportacion/CartaLlenadoPuerto?rowid="+data2;
                     }
                 }else
                 {
                     Mensajes('Guardado Satisfactoriamente','success','');
-                    window.location = "/CartaLlenadoPuerto/CartaLlenadoPuertos";
+                    window.location = "/Exportacion/CartaLlenadoPuertos";
                 }
                 ModalProcesandoHiden();
             },
@@ -119,7 +119,7 @@
                     {
                         <span>
                             &nbsp;&nbsp;
-                            <a href="~/MatrizBL/MatrizBL" class="alink">
+                            <a href="~/Exportacion/MatrizBL" class="alink">
                                 <i class="glyphicon glyphicon-arrow-right"></i><span class="lang" key="Siguiente">Siguiente</span>
                             </a>
                         </span>
@@ -193,7 +193,7 @@
                                     <label for="peso" class="lang">Peso</label>
                                 </div>
                                 <div class="col-md-5">
-                                    <input type="number" id="peso" name="peso" onkeypress="return SoloNumeros(event)" style="width: 30%;float: left;">
+                                    <input type="number" id="peso" name="peso" onkeypress="return SoloNumeros(event)" value="@Model.Peso" style="width: 30%;float: left;">
                                     <div class="col-md-8">
                                         <select id="medidaP" name="medidaP" style="width: 100%" required>
                                             <option value="">---</option>
@@ -383,13 +383,14 @@
     });
 
     $("#autoc_empresa").autocomplete({
-        source: "Buscar_Empresas",
+        source: "BuscarTercero",
         minLenght: 3,
         select: function (evento, ui) {//seleccion al autocompletar
-            debugger
             if (ui.item != null) {//si hay valor en la seleccion autocompletar
+                debugger
+
                 $("#autoc_empresa").val(ui.item.label);
-                $(".RowIDE").val(ui.item.RowID);
+                $(".RowIDE").val(ui.item.rowid);
             }
         },
         change: function (event, ui) {
@@ -456,7 +457,7 @@
             var titulo = $("#autoc_conductor").val();
             $.ajax({
                 type: "GET",
-                url: "/CartaLlenadoPuerto/Datos_Conductor",
+                url: "Datos_Conductor",
                 data:
                       {
                           titulo: titulo

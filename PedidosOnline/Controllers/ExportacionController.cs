@@ -1257,19 +1257,24 @@ namespace PedidosOnline.Controllers
             return View(Lista);
         }
         [CheckSessionOut]
-        public ActionResult Contrato(int? RowID)
+        public ActionResult Contrato(int? RowID,int? rowid_proforma)
         {
             ViewBag.periodoE = db.Opcion.Where(pe => pe.Agrupacion.Nombre == "PERIODO EMBARQUE").ToList();
             ViewBag.transporte = db.Opcion.Where(pe => pe.Agrupacion.Nombre == "TRANSPORTE").ToList();
+            Contrato contrato = new Models.Contrato();
             if (RowID != null || RowID > 0)
             {
-                Contrato contrato = db.Contrato.Where(c => c.RowID == RowID).FirstOrDefault();
-                return View(contrato);
+                contrato = db.Contrato.Where(c => c.RowID == RowID).FirstOrDefault();
             }
-            else
+            if (rowid_proforma>0)
             {
-                return View(new Contrato());
+                contrato = db.Contrato.Where(c => c.ProformaID==rowid_proforma).FirstOrDefault();
+                if (contrato==null)
+                {
+                    contrato = new  Contrato();
+                }
             }
+            return View(contrato);
 
         }
         [CheckSessionOutAttribute]
@@ -1558,13 +1563,28 @@ namespace PedidosOnline.Controllers
 
         #region :::::ORDEN COMPRA:::::
         [CheckSessionOut]
-        public ActionResult OrdenCompra(int? rowid)
+        public ActionResult OrdenCompra(int? rowid,int? rowid_contrato)
         {
             ViewBag.FormaPago = db.Opcion.Where(f => f.Agrupacion.Nombre == "PROFORMA.FORMAPAGO").ToList();
             OrdenCompra reg = new Models.OrdenCompra();
             if (rowid > 0)
             {
                 reg = db.OrdenCompra.Where(f => f.RowID == rowid).FirstOrDefault();
+            }
+            else if (rowid_contrato>0)
+            {
+                reg = db.OrdenCompra.Where(f => f.ContratoID == rowid_contrato).FirstOrDefault();
+                if (reg==null)
+                {
+                    reg = new Models.OrdenCompra();
+                    reg.Contrato = new Models.Contrato();
+                    reg.Tercero = new Tercero();
+                    reg.Opcion = new Opcion();
+                    reg.Sucursal = new Sucursal();
+                    reg.Sucursal.Tercero = new Tercero();
+                    reg.Sucursal1 = new Sucursal();
+                    reg.Sucursal1.Tercero = new Tercero();
+                }
             }
             else
             {
@@ -1795,7 +1815,7 @@ namespace PedidosOnline.Controllers
             return View(Lista);
         }
         [CheckSessionOut]
-        public ActionResult Proforma(int? rowid)
+        public ActionResult Proforma(int? rowid,int? rowid_calculadora)
         {
             ViewBag.FormaPago = db.Opcion.Where(f => f.Agrupacion.Nombre == "PROFORMA.FORMAPAGO").ToList();
             ViewBag.Puertos = db.Puerto.ToList();
@@ -1804,6 +1824,26 @@ namespace PedidosOnline.Controllers
             {
                 reg.Proforma = db.Proforma.Where(f => f.RowID == rowid).FirstOrDefault();
                 reg.items = db.CalculadoraItems.Where(f => f.CalculadoraID == reg.Proforma.CalculadoraID).ToList();
+            }
+            else if (rowid_calculadora>0)
+            {
+                reg.Proforma = db.Proforma.Where(f => f.CalculadoraID==rowid_calculadora).FirstOrDefault();
+                
+                if (reg.Proforma==null)
+                {
+                    reg.items = new List<CalculadoraItems>();
+                    reg.Proforma = new Models.Proforma();
+                    reg.Proforma.Tercero = new Tercero();
+                    reg.Proforma.Tercero1 = new Tercero();
+                    reg.Proforma.Calculadora = new Calculadora();
+                    reg.Proforma.Calculadora.Ciudad = new Ciudad();
+                    reg.Proforma.Calculadora.Opcion = new Opcion();
+                    reg.Proforma.Calculadora.Opcion1 = new Opcion();
+                }
+                else
+                {
+                    reg.items = db.CalculadoraItems.Where(f => f.CalculadoraID == rowid_calculadora).ToList();
+                }
             }
             else
             {

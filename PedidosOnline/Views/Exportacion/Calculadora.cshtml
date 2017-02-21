@@ -71,6 +71,7 @@
         //$('.deshabilitar').attr("disabled",false);
         if (validator.form())
         {
+            ModalProcesandoShow();
             var formData = new FormData(document.getElementById("formPrincial"));
             $.ajax({
                 url:"GuardarCalculadora",
@@ -80,8 +81,22 @@
                 data: formData,
                 success:function(data)
                 {
-                    location.href="../Exportacion/Calculadora?rowid="+data;
+                    if (@Model.Calculadora.RowID>0) {
+                        if (accion==1) {
+                            Mensajes('Guardado Correctamente','success','');
+                        }
+                        else
+                        {
+                            location.href="../Exportacion/Calculadoras"
+                        }
+                    }
+                    else
+                    {
+                        location.href="../Exportacion/Calculadora?rowid="+data;
+                    }
+                    
                     $('.deshabilitar').attr("disabled",true);
+                    ModalProcesandoHiden();
                 },
                 error:function(error)
                 {
@@ -153,16 +168,16 @@
                                         {
                                             if (Model.Calculadora.TerceroID == tercero.RowID)
                                             {
-                                                <option value="@tercero.RowID" selected="selected">@tercero.RowIDERP - @tercero.Identificacion - @tercero.NombreComercial</option>
+                                                <option value="@tercero.RowID" selected="selected">@tercero.RowIDERP - @tercero.Identificacion - @tercero.RazonSocial</option>
                                             }
                                             else
                                             {
-                                                <option value="@tercero.RowID">@tercero.RowIDERP - @tercero.Identificacion - @tercero.NombreComercial</option>
+                                                <option value="@tercero.RowID">@tercero.RowIDERP - @tercero.Identificacion - @tercero.RazonSocial</option>
                                             }
                                         }
                                         else
                                         {
-                                            <option value="@tercero.RowID">@tercero.RowIDERP - @tercero.Identificacion - @tercero.NombreComercial</option>
+                                            <option value="@tercero.RowID">@tercero.RowIDERP - @tercero.Identificacion - @tercero.RazonSocial</option>
                                         }
 
                                     }
@@ -252,7 +267,7 @@
                                 <label class="lang">Fecha Programada</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" value="" style="width:100%;" name="DateDetalle" id="DateDetalle" required>
+                                <input type="text" value="" style="width:100%;" name="DateDetalle" id="DateDetalle" readonly required>
                             </div>
                         </div>
                         <div class="row">
@@ -1970,24 +1985,24 @@
 </script>
 <script>
     function Siguiente(){
-        debugger
-            $.ajax({
-                url:"Siguiente",
-                type:"post",
-                data:{ rowid : $("#cliente").val(),},
-                success:function(data)
+        location.href="../Exportacion/Proforma?rowid_calculadora="+@Model.Calculadora.RowID;
+        //debugger
+        //    $.ajax({
+        //        url:"Siguiente",
+        //        type:"post",
+        //        data:{ rowid : $("#cliente").val(),},
+        //        success:function(data)
 
-                {
-                    debugger
-                    location.href="../Exportacion/Proforma";
-                    var Proforma = new Object();
-                },
-                error:function(error)
-                {
-                    Mensajes(error,'error','');
-                }
-            })
-        }
+        //        {
+        //            debugger
+
+        //            var Proforma = new Object();
+        //        },
+        //        error:function(error)
+        //        {
+        //            Mensajes(error,'error','');
+        //        }
+        //    })
+      }
 </script>
 <!--TAB BALANCE -->
->
