@@ -70,14 +70,14 @@
                                 </a>
                                 @*<a href="@Url.Action("Export", "Proforma", new { @rowid = @cal.RowID, @rih = Request.Params["rih"] })"><i class="glyphicon glyphicon-export"></i></a>*@
                             </td>
-                            <td>@contratos.Titulo</td>
+                            <!--<td>contratos.Titulo</td>-->
                             <td>@contratos.Fecha</td>
-                            <td>@contratos.Proforma.Tercero1.RazonSocial</td>
-                            <td>@contratos.Proforma.Tercero.RazonSocial</td>
+                            <td>@contratos.Tercero1.RazonSocial</td>
+                            <td>@contratos.Tercero.RazonSocial</td>
                             <td> </td>
-                            <td>@contratos.Proforma.Calculadora.Ciudad.Nombre</td>
+                            <td>@contratos.Calculadora.Ciudad.Nombre</td>
                             <td>@contratos.Opcion.Nombre</td>
-                            <th>@contratos.Opcion1.Nombre</th>
+                            <th></th>
                             <td><a href="@Url.Action("Contrato", "Contrato", new { RowID = contratos.RowID })"><i class="glyphicon glyphicon-pencil"></i></a></td>
                         </tr>
                     }

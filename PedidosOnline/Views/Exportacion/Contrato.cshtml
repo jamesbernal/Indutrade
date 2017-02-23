@@ -24,39 +24,49 @@
         var RowID = $(".RowID").val();
         var RowIDPro = $(".RowIDPro").val();
 
-        if(RowIDPro == ""){
-            Mensajes('El campo proforma es requerido!', 'error', '');
-            ModalProcesandoHiden();
-            return null;
-        }
-        if($(".autoc_inspector").val()== ""){
-            Mensajes('El campo inspector es requerido!', 'error', '');
-            ModalProcesandoHiden();
-            return null;
-        }
-        if($("#fecha").val()== ""){
-            Mensajes('El campo fecha es requerido!', 'error', '');
-            ModalProcesandoHiden();
-            return null;
-        }
-        if($("#periodoE").val()== ""){
-            Mensajes('El campo periodo embarque es requerido!', 'error', '');
-            ModalProcesandoHiden();
-            return null;
-        }
-        if($("#transporte").val()== ""){
-            Mensajes('El campo transporte es requerido!', 'error', '');
-            ModalProcesandoHiden();
-            return null;
-        }
+        //if(RowIDPro == ""){
+        //    Mensajes('El campo proforma es requerido!', 'error', '');
+        //    ModalProcesandoHiden();
+        //    return null;
+        //}
+        //if($(".autoc_inspector").val()== ""){
+        //    Mensajes('El campo inspector es requerido!', 'error', '');
+        //    ModalProcesandoHiden();
+        //    return null;
+        //}
+        //if($("#fecha").val()== ""){
+        //    Mensajes('El campo fecha es requerido!', 'error', '');
+        //    ModalProcesandoHiden();
+        //    return null;
+        //}
+        //if($("#periodoE").val()== ""){
+        //    Mensajes('El campo periodo embarque es requerido!', 'error', '');
+        //    ModalProcesandoHiden();
+        //    return null;
+        //}
+        //if($("#transporte").val()== ""){
+        //    Mensajes('El campo transporte es requerido!', 'error', '');
+        //    ModalProcesandoHiden();
+        //    return null;
+        //}
+        var termino=$("#terminos").text();
+        console.log(termino)
+        var formData = new FormData(document.getElementById("form"));
+        formData.append('RowID',RowID,'RowIDPro',RowIDPro,'terminos',termino)
         $.ajax({
-            type: "POST",
-            url: "RegistrarContrato",
-            data: {
-                formulario: $("#form").serialize(),
-                RowID: RowID,
-                RowIDPro: RowIDPro
-            },
+            type: "post",
+            dataType: "html",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            url: "RegistrarContrato"
+            //dataType: "html",
+            //data: formData
+                //formulario: $("#form").serialize(),
+                //RowID: RowID,
+                //RowIDPro: RowIDPro
+            ,
             success: function (data2) {
                 if(a == 1){
                     if (@Model.RowID >0) {
@@ -80,12 +90,12 @@
         });
     }
 
-    function cargarItemsContrato(rowid_proforma) {
+    function cargarItemsContrato(rowid_contrato) {
         $.ajax({
             type: "GET",
             url: "/Exportacion/ItemsContrato",
             data: {
-                RowID: rowid_proforma
+                RowID: rowid_contrato
             },
             success: function (data) {
                 $('#tblProductos tbody').empty();
@@ -153,34 +163,39 @@
                 <form id="form" name="form" onsubmit="return false">
                     <input type="hidden" class="RowID" id="RowID" name="RowID" value="@Model.RowID" />
                     <input type="hidden" class="RowIDPro" name="RowIDPro" />
+                    <input type="hidden" class="RowIDCalculadora" name="RowIDCalculadora" value="@Model.CalculadoraID" />
                     <div class="col-md-5">
                         <div class="form-group">
                             <div class="col-md-3">
-                                <label for="autoc_proforma" class="lang" key="PROFORMA">Proforma</label>
+                                <label for="Auto_Calculadora" class="lang">Comprador/Calculadora</label>
                             </div>
                             <div class="col-md-5">
-                                @if (/*Model.RowID != null ||*/ Model.RowID > 0)
+                                @if (Model.RowID > 0)
                                 {
-                                    <input type="text" id="autoc_proforma" name="autoc_proforma" value="@Model.Proforma.Titulo" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                    <input type="text" id="Auto_Calculadora" name="Auto_Calculadora" value="@Model.Calculadora.Tercero.Identificacion - @Model.Calculadora.Tercero.RazonSocial  @Model.Calculadora.Opcion.Nombre " placeholder="---" />
+                                    <input type="hidden" id="ClienteID" name="ClienteID"  value="@Model.CalculadoraID" required />
                                 }
                                 else
                                 {
-                                    <input type="text" id="autoc_proforma" name="autoc_proforma" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                    <input type="text" id="Auto_Calculadora" name="Auto_Calculadora" value="@Model.CalculadoraID" placeholder="---" />
+                                    <input type="hidden" id="ClienteID" name="ClienteID" required />
                                 }
-
-
+                                
                             </div>
                         </div>
                         <br />
                         <div class="form-group">
                             <div class="col-md-3">
-                                <label for="titulo" class="lang">Titulo</label>
+                                <label for="intermediario" class="lang" key="INTERMEDIARIO">Intermediario</label>
                             </div>
                             <div class="col-md-5">
-                                <input type="text" id="titulo" name="titulo" value="@Model.Titulo" style="width: 100%" />
+                                <input type="text" id="intermediario" name="" class="autocompletar" value="@Model.Tercero1.RazonSocial" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                <input type="hidden" id="valintermediario" name="valintermediario" value="@Model.IntermediarioID"required />
                             </div>
                         </div>
                         <br />
+
+                       
                         <div class="form-group">
                             <div class="col-md-3">
                                 <label for="fecha" class="lang">Fecha</label>
@@ -190,15 +205,15 @@
                             </div>
                         </div>
                         <br />
-                        <div class="form-group">
+                        @*<div class="form-group">
                             <div class="col-md-3">
                                 <label for="intermediario" class="lang">Intermediario</label>
                             </div>
                             <div class="col-md-5">
-                                <input type="text" id="intermediario" name="intermediario" value="@Model.Intermediario" style="width: 100%" />
+                                <input type="text" id="intermediario" name="" class="autocompletar" placeholder="---"  value="@Model.IntermediarioID" style="width: 100%" />
                             </div>
                         </div>
-                        <br />
+                        <br />*@
                         @*<div class="form-group">
                                 <div class="col-md-3">
                                     <label for="fecha" class="lang">Fecha</label>
@@ -213,37 +228,31 @@
                                 <label for="periodoE" class="lang">Per. embarque</label>
                             </div>
                             <div class="col-md-5">
-                                <select id="periodoE" name="periodoE" style="width: 100%" required>
-                                    <option value="">---</option>
-                                    @foreach (var periodo in ViewBag.periodoE)
-                                    {
-                                        if (/*Model.RowID != null ||*/ Model.RowID > 0)
-                                        {
-                                            if (Model.Opcion1.RowID == periodo.RowID)
-                                            {
-                                                <option value="@periodo.RowID" selected>@periodo.Descripcion</option>
-                                            }
-                                            else
-                                            {
-                                                <option value="@periodo.RowID">@periodo.Descripcion</option>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <option value="@periodo.RowID">@periodo.Descripcion</option>
-                                        }
-                                    }
-                                </select>
+                                <input type="text" name="periodoE" id="periodoE" value="@Model.Periodo" style="width: 100%" required/>
                             </div>
                         </div>
                         <br />
                         <div class="form-group">
                             <div class="col-md-3">
-                                <label for="transporte" class="lang">Transporte</label>
+                                <label for="TerminosCondiciones" class="lang">Terminos y condiciones</label>
+                            </div>
+                            <div class="col-md-5" id="modal-terminos">
+                                <a class="ui-button-text-icon-primary"  onclick="cargarmodal()">Ver terminos</a>
+                               @*<input type="hidden" name="terminos" id="terminoseviar" />*@
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="autoc_inspector" class="lang">Inspector</label>
                             </div>
                             <div class="col-md-5">
-                                <input type="text" id="transporte" name="transporte" value="@Model.Transporte" style="width: 100%" />
+                                <input type="text" id="autoc_inspector" name="autoc_inspector" class="autocompletar" value="@Model.Tercero2.RazonSocial" placeholder="---" style="width: 100%" />
+                                <input type="hidden" id="valautoc_inspector" name="valautoc_inspector" class="" value="@Model.InspectorID" placeholder="---" style="width: 100%" />
                             </div>
+
+
                         </div>
                         <br />
                         <div class="form-group">
@@ -251,64 +260,134 @@
                                 <label for="calidad" class="lang">Seguro</label>
                             </div>
                             <div class="col-md-5">
-                                <input type="text" id="seguro" name="seguro" value="@Model.Seguro" style="width: 100%" />
+                                @if (Model.RowID > 0)
+                                {
+                                    if (Model.Seguro == true)
+                                    {
+                                        <div class="col-md-4">
+                                            <strong>
+                                                SI
+                                            </strong>
+                                            <input type="radio" class="col-md-6" style="position:absolute" name="seguro" value="true" checked />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <strong>
+                                                NO
+                                            </strong>
+                                            <input type="radio" class="col-md-6" style="position:absolute" name="seguro" value="false" />
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-4">
+                                            <strong>
+                                                SI
+                                            </strong>
+                                            <input type="radio" class="col-md-6" style="position:absolute" name="seguro" value="true"  />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <strong>
+                                                NO
+                                            </strong>
+                                            <input type="radio" class="col-md-6" style="position:absolute" name="seguro" value="false" checked />
+                                        </div>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <div class="col-md-4">
+                                        <strong>
+                                            SI
+                                        </strong>
+                                        <input type="radio" class="col-md-6" style="position:absolute" name="seguro" value="true" checked />
+                                    </div>
+                                        <div class="col-md-4">
+                                            <strong>
+                                                NO
+                                            </strong>
+                                            <input type="radio" class="col-md-6" style="position:absolute" name="seguro" value="false"/>
+                                        </div>
+                                }
+
                             </div>
                         </div>
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="autoc_inspector" class="lang">Inspector</label>
-                            </div>
-                            <div class="col-md-5">
-                                <input type="text" id="autoc_inspector" name="autoc_inspector" value="@Model.Inspector" placeholder="---" style="width: 100%" />
-                            </div>
-
-
-                        </div>
+                        
                         <br />
                         <div class="form-group">
                             <div class="col-md-3">
                                 <label for="embarqueP" class="lang">Embarque parcial</label>
                             </div>
                             <div class="col-md-5">
-                                <input type="text" id="embarqueP" name="embarqueP" value="@Model.EmbarqueParcial" style="width: 100%" />
+                                @if (Model.RowID > 0)
+                                {
+                                    if (Model.EmbarqueParcial == true)
+                                    {
+                                        <div class="col-md-4">
+                                            <strong>
+                                                SI
+                                            </strong>
+                                            <input type="radio" class="col-md-6" style="position:absolute" name="embarqueP" value="true" checked />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <strong>
+                                                NO
+                                            </strong>
+                                            <input type="radio" class="col-md-6" style="position:absolute" name="embarqueP" value="false" />
+                                        </div>
+                                    }
+                                    if (Model.EmbarqueParcial == false)
+                                    {
+                                        <div class="col-md-4">
+                                            <strong>
+                                                SI
+                                            </strong>
+                                            <input type="radio" class="col-md-6" style="position:absolute" name="embarqueP" value="true"  />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <strong>
+                                                NO
+                                            </strong>
+                                            <input type="radio" class="col-md-6" style="position:absolute" name="embarqueP" value="false" checked />
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                <div class="col-md-4">
+                                    <strong>
+                                        SI
+                                    </strong>
+                                    <input type="radio" class="col-md-6" style="position:absolute" name="embarqueP" value="true" checked />
+                                </div>
+                                <div class="col-md-4">
+                                    <strong>
+                                        NO
+                                    </strong>
+                                    <input type="radio" class="col-md-6" style="position:absolute" name="embarqueP" value="false" />
+                                </div>
+                                }
+                               
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <div class="col-md-3">
+                                <label for="consecutivo" class="lang">Consecutivo</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="consecutivo" name="consecutivo" value="@Model.Consecutivo" style="width: 100%" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
                                 <label for="vendedor" class="lang">Vendedor</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" id="vendedor" name="vendedor" placeholder="---" disabled />
-                            </div>
-                        </div>
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="vendedor" class="lang">Comprador</label>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" id="comprador" name="comprador" placeholder="---" disabled />
-                            </div>
-                        </div>
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="origen" class="lang">Origen</label>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" id="origen" name="origen" placeholder="---" disabled />
-                            </div>
-                        </div>
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="empaque" class="lang">Destino</label>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" id="destino" name="destino" placeholder="---" disabled />
+                                <input type="text" id="vendedor" name="vendedor" value="@Model.Tercero3.NombreComercial" placeholder="---" />
+                                <input type="hidden" id="valvendedor" name="valvendedor" value="@Model.Tercero3.RowID" placeholder="---" />
                             </div>
                         </div>
                         <br />
@@ -317,16 +396,70 @@
                                 <label for="formaP" class="lang">Forma de pago</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" id="formaP" name="formaP" placeholder="---" disabled />
+                                <select id="formaP" name="formaP" placeholder="Elija una opción">
+                                    @foreach (var formapago in ViewBag.FormasPago)
+                                    {
+                                        if (Model.RowID > 0)
+                                        {
+                                            if (Model.Opcion1.RowID == formapago.RowID)
+                                            {
+                                                <option value="@formapago.RowID" selected>@formapago.Nombre</option>
+                                            }
+                                            else 
+                                            {
+                                                <option value="@formapago.RowID">@formapago.Nombre</option>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <option value="@formapago.RowID">@formapago.Nombre</option>
+                                        }
+                                    }
+                                </select>
                             </div>
                         </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="origen" class="lang">Termino Incoterm</label>
+                            </div>
+                            <div class="col-md-4">
+                                @if (Model.RowID>0)
+                                {
+                                    <input type="text" id="Incoterm" name="Incoterm" value="@Model.Calculadora.Opcion.Nombre" placeholder="@Model.Calculadora.Opcion.Nombre" disabled />
+                                }
+                                else
+                                {
+                                    <input type="text" id="Incoterm" name="Incoterm" disabled />
+                                }
+
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="empaque" class="lang">Transporte corresponde</label>
+                            </div>
+                            <div class="col-md-4">
+                                @if (Model.RowID > 0)
+                                {
+                                    <input type="text" id="tranportecorresponde" name="tranportecorresponde" placeholder="@Model.Calculadora.Opcion.Codigo" readonly />
+                                }
+                                else
+                                {
+                                    <input type="text" id="tranportecorresponde" name="tranportecorresponde" placeholder="---" readonly />
+                                }
+
+                            </div>
+                        </div>
+                        <br />
                         <br />
                         <div class="form-group">
                             <div class="col-md-3">
                                 <label for="formaP" class="lang">Calidad 1</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" id="calidad1" name="calidad1" value="@Model.Calidad" />
+                                <input type="text" id="calidad1" name="calidad1" value="@Model.Calidad1" />
                             </div>
                         </div>
                         <br />
@@ -362,6 +495,35 @@
                                 <input type="text" id="peso" name="peso" placeholder="---" disabled />
                             </div>*@
                     </div>
+                    <div class="modal fade col-md-12" id="myModal1" data-backdrop="static" data-keyboard="false" style="overflow: auto;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                   
+                                    <h4 class="modal-title"><b>Terminos Condiciones</b></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            @if (Model.TerminosCondiciones != null)
+                                            {
+                                                <textarea id="terminos" name="terminos">@Model.TerminosCondiciones</textarea>
+                                            }
+                                            else
+                                            {
+                                                <textarea id="terminos" name="terminos">@ViewBag.Termino.Body</textarea>
+                                            }
+                                            
+
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="modal-footer">
+                                <button type="button" class="salir" aria-hidden="true">Verficado</button>
+                            </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
                 </form>
             </div>
         </div>
@@ -385,15 +547,35 @@
         </div>
     </div>
 </div>
+
+
 <script>
+    $(document).ready(function(){
+        $("#terminos").summernote({
+            height : '100%'
+        });
+        $(".salir").click(function(){
+            $("#myModal1").modal('hide');
+        })
+        cargarItemsContrato($(".RowIDCalculadora").val());
+    })
+    function cargarmodal(){
+        $("#myModal1").modal('show');
+    }
     $('#fecha').datepicker({
         dateFormat: 'dd/mm/yy',
         minDate: 0,
         maxDate: '+3Y',
         inline: true
     });
-
-    $('#autoc_inspector').on('keyup keypress', function (e) {
+    $('#periodoE').datepicker({
+        dateFormat: 'dd/mm/yy',
+        minDate: 0,
+        maxDate: '+3Y',
+        inline: true
+    });
+    
+    $('.autocompletar').on('keyup keypress', function (e) {
         //debugger
         var code = (e.keyCode ? e.keyCode : e.which);
         if (code == 13) { //Enter keycode
@@ -401,13 +583,28 @@
         }
     });
 
-    $("#autoc_inspector").autocomplete({
-        source: "Contrato_Buscar_Inspector",
+    $(".autocompletar").autocomplete({
+        source: "Buscar_Tercero",
         minLenght: 3,
         select: function (evento, ui) {//seleccion al autocompletar
             //debugger
             if (ui.item != null) {//si hay valor en la seleccion autocompletar
-                $("#autoc_inspector").val(ui.item.label);
+                $(this).val(ui.item.label);
+                $("#val"+$(this).attr("id")).val(ui.item.RowID)
+            }
+        },
+        change: function (event, ui) {
+
+        }
+    });
+    $("#vendedor").autocomplete({
+        source: "Buscar_Empresa",
+        minLenght: 3,
+        select: function (evento, ui) {//seleccion al autocompletar
+            //debugger
+            if (ui.item != null) {//si hay valor en la seleccion autocompletar
+                $(this).val(ui.item.label);
+                $("#val"+$(this).attr("id")).val(ui.item.RowID)
             }
         },
         change: function (event, ui) {
@@ -415,7 +612,7 @@
         }
     });
 
-    $('#autoc_proforma').on('keyup keypress', function (e) {
+    $('#Auto_Contrato').on('keyup keypress', function (e) {
         //debugger
         var code = (e.keyCode ? e.keyCode : e.which);
         if (code == 13) { //Enter keycode
@@ -426,19 +623,19 @@
 
 
 
-    $("#autoc_proforma").autocomplete({
-        source: "Proforma_Buscar_Todos?tipo_proforma=EXPORTACION",
+    $("#Auto_Calculadora").autocomplete({
+        source: "Buscar_Calculadora",
         minLenght: 3,
         select: function (evento, ui) {//seleccion al autocompletar
-            //debugger
+            console.log(ui);
             if (ui.item != null) {//si hay valor en la seleccion autocompletar
-                $("#autoc_proforma").val(ui.item.label);
-                $("#vendedor").val(ui.item.vendedor);
-                $("#comprador").val(ui.item.comprador);
-                $("#origen").val(ui.item.origen);
-                $("#destino").val(ui.item.destino);
-                $("#formaP").val(ui.item.formaPago);
-                $(".RowIDPro").val(ui.item.RowID);
+                $("#Auto_Calculadora").val(ui.item.RowID+"-"+ui.item.label);
+                $("#ClienteID").val(ui.item.RowIDCliente);
+                $("#Incoterm").val(ui.item.incoterm);
+                $("#tranportecorresponde").val(ui.item.tranportecorresponde);
+                //$("#destino").val(ui.item.destino);
+                //$("#formaP").val(ui.item.formaPago);
+                $(".RowIDCalculadora").val(ui.item.RowID);
                 cargarItemsContrato(ui.item.RowID);
             }
         },
@@ -460,7 +657,7 @@
     });
 
 
-    $(document).ready(function () {
+    @*$(document).ready(function () {
         $("#tblProductos").hide();
         //debugger
         if (@Model.RowID > 0)
@@ -488,6 +685,6 @@
                 }
             });
         }
-    });
+    });*@
 
 </script>

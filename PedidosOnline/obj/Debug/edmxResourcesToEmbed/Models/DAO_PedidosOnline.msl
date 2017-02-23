@@ -148,282 +148,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Calculadora">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.Calculadora">
-        <MappingFragment StoreEntitySet="Calculadora">
-          <ScalarProperty Name="NombreBroker" ColumnName="NombreBroker" />
-          <ScalarProperty Name="Terminada" ColumnName="Terminada" />
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
-          <ScalarProperty Name="IncotermID" ColumnName="IncotermID" />
-          <ScalarProperty Name="observacion" ColumnName="observacion" />
-          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-          <ScalarProperty Name="DestinoID" ColumnName="DestinoID" />
-          <ScalarProperty Name="AgenteNavieraID" ColumnName="AgenteNavieraID" />
-          <ScalarProperty Name="TerceroID" ColumnName="TerceroID" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CalculadoraItems">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.CalculadoraItems">
-        <MappingFragment StoreEntitySet="CalculadoraItems">
-          <ScalarProperty Name="AgenteNavieraID" ColumnName="AgenteNavieraID" />
-          <ScalarProperty Name="CalculadoraID" ColumnName="CalculadoraID" />
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
-          <ScalarProperty Name="DVUtilidadTotal" ColumnName="DVUtilidadTotal" />
-          <ScalarProperty Name="DVUtilidadPorton" ColumnName="DVUtilidadPorton" />
-          <ScalarProperty Name="DVUtilidadPContenedor" ColumnName="DVUtilidadPContenedor" />
-          <ScalarProperty Name="DVMargenTotal" ColumnName="DVMargenTotal" />
-          <ScalarProperty Name="DVMargenPorton" ColumnName="DVMargenPorton" />
-          <ScalarProperty Name="DVMargenPContenedor" ColumnName="DVMargenPContenedor" />
-          <ScalarProperty Name="DVTDestinoTotal" ColumnName="DVTDestinoTotal" />
-          <ScalarProperty Name="DVTDestinoPorton" ColumnName="DVTDestinoPorton" />
-          <ScalarProperty Name="DVTDestinoPContenedor" ColumnName="DVTDestinoPContenedor" />
-          <ScalarProperty Name="DVTAduanerosTotal" ColumnName="DVTAduanerosTotal" />
-          <ScalarProperty Name="DVTAduanerosPorton" ColumnName="DVTAduanerosPorton" />
-          <ScalarProperty Name="DVTAduanerosPContenedor" ColumnName="DVTAduanerosPContenedor" />
-          <ScalarProperty Name="DVCostoManipulacionTotal" ColumnName="DVCostoManipulacionTotal" />
-          <ScalarProperty Name="DVCostoManipulacionPorton" ColumnName="DVCostoManipulacionPorton" />
-          <ScalarProperty Name="DVCostoManipulacionPContenedor" ColumnName="DVCostoManipulacionPContenedor" />
-          <ScalarProperty Name="DVSeguroTotal" ColumnName="DVSeguroTotal" />
-          <ScalarProperty Name="DVSeguroPorton" ColumnName="DVSeguroPorton" />
-          <ScalarProperty Name="DVSeguroPContenedor" ColumnName="DVSeguroPContenedor" />
-          <ScalarProperty Name="DVAgendamientoTotal" ColumnName="DVAgendamientoTotal" />
-          <ScalarProperty Name="DVAgendamientoPorton" ColumnName="DVAgendamientoPorton" />
-          <ScalarProperty Name="DVAgendamientoPContenedor" ColumnName="DVAgendamientoPContenedor" />
-          <ScalarProperty Name="DatosVentaCOPTotal" ColumnName="DatosVentaCOPTotal" />
-          <ScalarProperty Name="DatosVentaCOPPorton" ColumnName="DatosVentaCOPPorton" />
-          <ScalarProperty Name="DatosVentaCOPPContenedor" ColumnName="DatosVentaCOPPContenedor" />
-          <ScalarProperty Name="DatosVentaUSDTotal" ColumnName="DatosVentaUSDTotal" />
-          <ScalarProperty Name="DatosVentaUSDPorton" ColumnName="DatosVentaUSDPorton" />
-          <ScalarProperty Name="DatosVentaUSDPContenedor" ColumnName="DatosVentaUSDPContenedor" />
-          <ScalarProperty Name="CTotalPUSD_cop" ColumnName="CTotalPUSD_cop" />
-          <ScalarProperty Name="CTotalUSDTON_cop" ColumnName="CTotalUSDTON_cop" />
-          <ScalarProperty Name="CTotalUSDCON_cop" ColumnName="CTotalUSDCON_cop" />
-          <ScalarProperty Name="CTotalPUSD_usd" ColumnName="CTotalPUSD_usd" />
-          <ScalarProperty Name="CTotalUSDTON_usd" ColumnName="CTotalUSDTON_usd" />
-          <ScalarProperty Name="CTotalUSDCON_usd" ColumnName="CTotalUSDCON_usd" />
-          <ScalarProperty Name="CMateriaPPARTE" ColumnName="CMateriaPPARTE" />
-          <ScalarProperty Name="CMateriaPUSD" ColumnName="CMateriaPUSD" />
-          <ScalarProperty Name="CMateriaPUSDTON" ColumnName="CMateriaPUSDTON" />
-          <ScalarProperty Name="CMateriaPUSDCON" ColumnName="CMateriaPUSDCON" />
-          <ScalarProperty Name="CLTotalcostoPARTE" ColumnName="CLTotalcostoPARTE" />
-          <ScalarProperty Name="CLTotalcostoUSD" ColumnName="CLTotalcostoUSD" />
-          <ScalarProperty Name="CLTotalcostoUSDTON" ColumnName="CLTotalcostoUSDTON" />
-          <ScalarProperty Name="CLTotalcostoUSDCON" ColumnName="CLTotalcostoUSDCON" />
-          <ScalarProperty Name="FleteMaritimoPARTE" ColumnName="FleteMaritimoPARTE" />
-          <ScalarProperty Name="FleteMaritimoUSD" ColumnName="FleteMaritimoUSD" />
-          <ScalarProperty Name="FleteMaritimoUSDTON" ColumnName="FleteMaritimoUSDTON" />
-          <ScalarProperty Name="FleteMaritimoUSDCON" ColumnName="FleteMaritimoUSDCON" />
-          <ScalarProperty Name="EDocumentoPARTE" ColumnName="EDocumentoPARTE" />
-          <ScalarProperty Name="EDocumentoUSD" ColumnName="EDocumentoUSD" />
-          <ScalarProperty Name="EDocumentoUSDTON" ColumnName="EDocumentoUSDTON" />
-          <ScalarProperty Name="EDocumentoUSDCON" ColumnName="EDocumentoUSDCON" />
-          <ScalarProperty Name="FleteTerrPARTE" ColumnName="FleteTerrPARTE" />
-          <ScalarProperty Name="FleteTerrUSD" ColumnName="FleteTerrUSD" />
-          <ScalarProperty Name="FleteTerrUSDTON" ColumnName="FleteTerrUSDTON" />
-          <ScalarProperty Name="FleteTerrUSDCON" ColumnName="FleteTerrUSDCON" />
-          <ScalarProperty Name="DGOaPARTE" ColumnName="DGOaPARTE" />
-          <ScalarProperty Name="DGOaUSD" ColumnName="DGOaUSD" />
-          <ScalarProperty Name="DGOaUSDTON" ColumnName="DGOaUSDTON" />
-          <ScalarProperty Name="DGOaUSDCON" ColumnName="DGOaUSDCON" />
-          <ScalarProperty Name="DiasAlmacenPARTE" ColumnName="DiasAlmacenPARTE" />
-          <ScalarProperty Name="DiasAlmacenUSD" ColumnName="DiasAlmacenUSD" />
-          <ScalarProperty Name="DiasAlmacenUSDTON" ColumnName="DiasAlmacenUSDTON" />
-          <ScalarProperty Name="DiasAlmacenUSDCON" ColumnName="DiasAlmacenUSDCON" />
-          <ScalarProperty Name="CAChlfPARTE" ColumnName="CAChlfPARTE" />
-          <ScalarProperty Name="CAChlfUSD" ColumnName="CAChlfUSD" />
-          <ScalarProperty Name="CAChlfUSDTON" ColumnName="CAChlfUSDTON" />
-          <ScalarProperty Name="CAChlfUSDCON" ColumnName="CAChlfUSDCON" />
-          <ScalarProperty Name="CACothPARTE" ColumnName="CACothPARTE" />
-          <ScalarProperty Name="CACothUSD" ColumnName="CACothUSD" />
-          <ScalarProperty Name="CACothUSDTON" ColumnName="CACothUSDTON" />
-          <ScalarProperty Name="CACothUSDCON" ColumnName="CACothUSDCON" />
-          <ScalarProperty Name="CACBFPARTE" ColumnName="CACBFPARTE" />
-          <ScalarProperty Name="CACBFUSD" ColumnName="CACBFUSD" />
-          <ScalarProperty Name="CACBFUSDTON" ColumnName="CACBFUSDTON" />
-          <ScalarProperty Name="CACBFUSDCON" ColumnName="CACBFUSDCON" />
-          <ScalarProperty Name="CACDFPARTE" ColumnName="CACDFPARTE" />
-          <ScalarProperty Name="CACDFUSD" ColumnName="CACDFUSD" />
-          <ScalarProperty Name="CACDFUSDTON" ColumnName="CACDFUSDTON" />
-          <ScalarProperty Name="CACDFUSDCON" ColumnName="CACDFUSDCON" />
-          <ScalarProperty Name="CACHFPARTE" ColumnName="CACHFPARTE" />
-          <ScalarProperty Name="CACHFUSD" ColumnName="CACHFUSD" />
-          <ScalarProperty Name="CACHFUSDTON" ColumnName="CACHFUSDTON" />
-          <ScalarProperty Name="CACHFUSDCON" ColumnName="CACHFUSDCON" />
-          <ScalarProperty Name="ComisionACargaPARTE" ColumnName="ComisionACargaPARTE" />
-          <ScalarProperty Name="ComisionACargaUSD" ColumnName="ComisionACargaUSD" />
-          <ScalarProperty Name="ComisionACargaUSDTON" ColumnName="ComisionACargaUSDTON" />
-          <ScalarProperty Name="ComisionACargaUSDCON" ColumnName="ComisionACargaUSDCON" />
-          <ScalarProperty Name="SerpentinPARTE" ColumnName="SerpentinPARTE" />
-          <ScalarProperty Name="SerpentinUSD" ColumnName="SerpentinUSD" />
-          <ScalarProperty Name="SerpentinUSDTON" ColumnName="SerpentinUSDTON" />
-          <ScalarProperty Name="SerpentinUSDCON" ColumnName="SerpentinUSDCON" />
-          <ScalarProperty Name="GPUICPARTE" ColumnName="GPUICPARTE" />
-          <ScalarProperty Name="GPUICUSD" ColumnName="GPUICUSD" />
-          <ScalarProperty Name="GPUICUSDTON" ColumnName="GPUICUSDTON" />
-          <ScalarProperty Name="GPUICUSDCON" ColumnName="GPUICUSDCON" />
-          <ScalarProperty Name="GPUCLLPARTE" ColumnName="GPUCLLPARTE" />
-          <ScalarProperty Name="GPUCLLUSD" ColumnName="GPUCLLUSD" />
-          <ScalarProperty Name="GPUCLLUSDTON" ColumnName="GPUCLLUSDTON" />
-          <ScalarProperty Name="GPUCLLUSDCON" ColumnName="GPUCLLUSDCON" />
-          <ScalarProperty Name="GPLLFlexiPARTE" ColumnName="GPLLFlexiPARTE" />
-          <ScalarProperty Name="GPLLFlexiUSD" ColumnName="GPLLFlexiUSD" />
-          <ScalarProperty Name="GPLLFlexiUSDTON" ColumnName="GPLLFlexiUSDTON" />
-          <ScalarProperty Name="GPLLFlexiUSDCON" ColumnName="GPLLFlexiUSDCON" />
-          <ScalarProperty Name="GPMPPARTE" ColumnName="GPMPPARTE" />
-          <ScalarProperty Name="GPMPUSD" ColumnName="GPMPUSD" />
-          <ScalarProperty Name="GPMPUSDTON" ColumnName="GPMPUSDTON" />
-          <ScalarProperty Name="GPMPUSDCON" ColumnName="GPMPUSDCON" />
-          <ScalarProperty Name="GPortuarioPARTE" ColumnName="GPortuarioPARTE" />
-          <ScalarProperty Name="GPortuarioUSD" ColumnName="GPortuarioUSD" />
-          <ScalarProperty Name="GPortuarioUSDTON" ColumnName="GPortuarioUSDTON" />
-          <ScalarProperty Name="GPortuarioUSDCON" ColumnName="GPortuarioUSDCON" />
-          <ScalarProperty Name="FlexiTanquePARTE" ColumnName="FlexiTanquePARTE" />
-          <ScalarProperty Name="FlexiTanqueUSD" ColumnName="FlexiTanqueUSD" />
-          <ScalarProperty Name="FlexiTanqueUSDTON" ColumnName="FlexiTanqueUSDTON" />
-          <ScalarProperty Name="FlexiTanqueUSDCON" ColumnName="FlexiTanqueUSDCON" />
-          <ScalarProperty Name="TrasiegoPARTE" ColumnName="TrasiegoPARTE" />
-          <ScalarProperty Name="TrasiegoUSD" ColumnName="TrasiegoUSD" />
-          <ScalarProperty Name="TrasiegoUSDTON" ColumnName="TrasiegoUSDTON" />
-          <ScalarProperty Name="TrasiegoUSDCON" ColumnName="TrasiegoUSDCON" />
-          <ScalarProperty Name="CertificadoCalidadPARTE" ColumnName="CertificadoCalidadPARTE" />
-          <ScalarProperty Name="CertificadoCalidadUSD" ColumnName="CertificadoCalidadUSD" />
-          <ScalarProperty Name="CertificadoCalidadUSDTON" ColumnName="CertificadoCalidadUSDTON" />
-          <ScalarProperty Name="CertificadoCalidadUSDCON" ColumnName="CertificadoCalidadUSDCON" />
-          <ScalarProperty Name="SGSPARTE" ColumnName="SGSPARTE" />
-          <ScalarProperty Name="SGSUSD" ColumnName="SGSUSD" />
-          <ScalarProperty Name="SGSUSDTON" ColumnName="SGSUSDTON" />
-          <ScalarProperty Name="SGSUSDCON" ColumnName="SGSUSDCON" />
-          <ScalarProperty Name="CBrokerPARTE" ColumnName="CBrokerPARTE" />
-          <ScalarProperty Name="CBrokerUSD" ColumnName="CBrokerUSD" />
-          <ScalarProperty Name="CBrokerUSDTON" ColumnName="CBrokerUSDTON" />
-          <ScalarProperty Name="CBrokerUSDCON" ColumnName="CBrokerUSDCON" />
-          <ScalarProperty Name="MPPCCOPCalculado" ColumnName="MPPCCOPCalculado" />
-          <ScalarProperty Name="MPPCUSDValor" ColumnName="MPPCUSDValor" />
-          <ScalarProperty Name="MPPCUSDCalculado" ColumnName="MPPCUSDCalculado" />
-          <ScalarProperty Name="MPPCCOPValor" ColumnName="MPPCCOPValor" />
-          <ScalarProperty Name="PVE" ColumnName="PVE" />
-          <ScalarProperty Name="PVEporcentaje" ColumnName="PVEporcentaje" />
-          <ScalarProperty Name="PVEBRentabilidad" ColumnName="PVEBRentabilidad" />
-          <ScalarProperty Name="PVEBRentabilidadporcentaje" ColumnName="PVEBRentabilidadporcentaje" />
-          <ScalarProperty Name="EmbalajeID" ColumnName="EmbalajeID" />
-          <ScalarProperty Name="TRMVenta" ColumnName="TRMVenta" />
-          <ScalarProperty Name="TRMCompra" ColumnName="TRMCompra" />
-          <ScalarProperty Name="TRM" ColumnName="TRM" />
-          <ScalarProperty Name="NumeroContenedor" ColumnName="NumeroContenedor" />
-          <ScalarProperty Name="ToneladaContenedor" ColumnName="ToneladaContenedor" />
-          <ScalarProperty Name="NumeroEnvio" ColumnName="NumeroEnvio" />
-          <ScalarProperty Name="CantidadTonelada" ColumnName="CantidadTonelada" />
-          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DCD">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.DCD">
-        <MappingFragment StoreEntitySet="DCD">
-          <ScalarProperty Name="Destino" ColumnName="Destino" />
-          <ScalarProperty Name="FechaExpedicion" ColumnName="FechaExpedicion" />
-          <ScalarProperty Name="Año" ColumnName="Año" />
-          <ScalarProperty Name="Mes" ColumnName="Mes" />
-          <ScalarProperty Name="NroConvenio" ColumnName="NroConvenio" />
-          <ScalarProperty Name="RepresentanteLegal" ColumnName="RepresentanteLegal" />
-          <ScalarProperty Name="ContratoID" ColumnName="ContratoID" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DetalleEmpaque">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.DetalleEmpaque">
-        <MappingFragment StoreEntitySet="DetalleEmpaque">
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
-          <ScalarProperty Name="net" ColumnName="net" />
-          <ScalarProperty Name="gross" ColumnName="gross" />
-          <ScalarProperty Name="numeroContenedor" ColumnName="numeroContenedor" />
-          <ScalarProperty Name="empaqueID" ColumnName="empaqueID" />
-          <ScalarProperty Name="rowid" ColumnName="rowid" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Empaque">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.Empaque">
-        <MappingFragment StoreEntitySet="Empaque">
-          <ScalarProperty Name="para" ColumnName="para" />
-          <ScalarProperty Name="subtitulo" ColumnName="subtitulo" />
-          <ScalarProperty Name="titulo" ColumnName="titulo" />
-          <ScalarProperty Name="BlNumber" ColumnName="BlNumber" />
-          <ScalarProperty Name="vessel" ColumnName="vessel" />
-          <ScalarProperty Name="packing" ColumnName="packing" />
-          <ScalarProperty Name="producto" ColumnName="producto" />
-          <ScalarProperty Name="net" ColumnName="net" />
-          <ScalarProperty Name="gross" ColumnName="gross" />
-          <ScalarProperty Name="exportDate" ColumnName="exportDate" />
-          <ScalarProperty Name="notify" ColumnName="notify" />
-          <ScalarProperty Name="shipper" ColumnName="shipper" />
-          <ScalarProperty Name="puertoDescarga" ColumnName="puertoDescarga" />
-          <ScalarProperty Name="puertoCarga" ColumnName="puertoCarga" />
-          <ScalarProperty Name="rowid" ColumnName="rowid" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="FEP">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.FEP">
-        <MappingFragment StoreEntitySet="FEP">
-          <ScalarProperty Name="NCertificadoCP" ColumnName="NCertificadoCP" />
-          <ScalarProperty Name="Dex" ColumnName="Dex" />
-          <ScalarProperty Name="DCDID" ColumnName="DCDID" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SolicitudLlenado">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.SolicitudLlenado">
-        <MappingFragment StoreEntitySet="SolicitudLlenado">
-          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="EmpaqueID" ColumnName="EmpaqueID" />
-          <ScalarProperty Name="BKK" ColumnName="BKK" />
-          <ScalarProperty Name="ContratoID" ColumnName="ContratoID" />
-          <ScalarProperty Name="DestinoID" ColumnName="DestinoID" />
-          <ScalarProperty Name="FechaDescargue" ColumnName="FechaDescargue" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SolicitudTransporte">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.SolicitudTransporte">
-        <MappingFragment StoreEntitySet="SolicitudTransporte">
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
-          <ScalarProperty Name="RequisitosDescargue" ColumnName="RequisitosDescargue" />
-          <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
-          <ScalarProperty Name="PlantaDescargueID" ColumnName="PlantaDescargueID" />
-          <ScalarProperty Name="RequisitosCargue" ColumnName="RequisitosCargue" />
-          <ScalarProperty Name="FechaCargue" ColumnName="FechaCargue" />
-          <ScalarProperty Name="PlantaCargueID" ColumnName="PlantaCargueID" />
-          <ScalarProperty Name="OpcionID" ColumnName="OpcionID" />
-          <ScalarProperty Name="Flete" ColumnName="Flete" />
-          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-          <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-          <ScalarProperty Name="ContratoID" ColumnName="ContratoID" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
       <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.sysdiagrams">
         <MappingFragment StoreEntitySet="sysdiagrams">
@@ -435,15 +159,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TipoVehiculo">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.TipoVehiculo">
-        <MappingFragment StoreEntitySet="TipoVehiculo">
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-          <ScalarProperty Name="SolicitudTransporteID" ColumnName="SolicitudTransporteID" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Vehiculo">
       <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.Vehiculo">
         <MappingFragment StoreEntitySet="Vehiculo">
@@ -451,19 +166,6 @@
           <ScalarProperty Name="Modelo" ColumnName="Modelo" />
           <ScalarProperty Name="Marca" ColumnName="Marca" />
           <ScalarProperty Name="Placa" ColumnName="Placa" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="VehiculoSolicitudLlenado">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.VehiculoSolicitudLlenado">
-        <MappingFragment StoreEntitySet="VehiculoSolicitudLlenado">
-          <ScalarProperty Name="SolicitudLlenadoID" ColumnName="SolicitudLlenadoID" />
-          <ScalarProperty Name="TerceroID" ColumnName="TerceroID" />
-          <ScalarProperty Name="EmpresaTransporteID" ColumnName="EmpresaTransporteID" />
-          <ScalarProperty Name="Remolque" ColumnName="Remolque" />
-          <ScalarProperty Name="VehiculoID" ColumnName="VehiculoID" />
-          <ScalarProperty Name="FechaCargue" ColumnName="FechaCargue" />
           <ScalarProperty Name="RowID" ColumnName="RowID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -686,6 +388,245 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Calculadora">
+      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.Calculadora">
+        <MappingFragment StoreEntitySet="Calculadora">
+          <ScalarProperty Name="NombreBroker" ColumnName="NombreBroker" />
+          <ScalarProperty Name="Terminada" ColumnName="Terminada" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+          <ScalarProperty Name="IncotermID" ColumnName="IncotermID" />
+          <ScalarProperty Name="observacion" ColumnName="observacion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="DestinoID" ColumnName="DestinoID" />
+          <ScalarProperty Name="AgenteNavieraID" ColumnName="AgenteNavieraID" />
+          <ScalarProperty Name="TerceroID" ColumnName="TerceroID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CalculadoraItems">
+      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.CalculadoraItems">
+        <MappingFragment StoreEntitySet="CalculadoraItems">
+          <ScalarProperty Name="AgenteNavieraID" ColumnName="AgenteNavieraID" />
+          <ScalarProperty Name="CalculadoraID" ColumnName="CalculadoraID" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+          <ScalarProperty Name="DVUtilidadTotal" ColumnName="DVUtilidadTotal" />
+          <ScalarProperty Name="DVUtilidadPorton" ColumnName="DVUtilidadPorton" />
+          <ScalarProperty Name="DVUtilidadPContenedor" ColumnName="DVUtilidadPContenedor" />
+          <ScalarProperty Name="DVMargenTotal" ColumnName="DVMargenTotal" />
+          <ScalarProperty Name="DVMargenPorton" ColumnName="DVMargenPorton" />
+          <ScalarProperty Name="DVMargenPContenedor" ColumnName="DVMargenPContenedor" />
+          <ScalarProperty Name="DVTDestinoTotal" ColumnName="DVTDestinoTotal" />
+          <ScalarProperty Name="DVTDestinoPorton" ColumnName="DVTDestinoPorton" />
+          <ScalarProperty Name="DVTDestinoPContenedor" ColumnName="DVTDestinoPContenedor" />
+          <ScalarProperty Name="DVTAduanerosTotal" ColumnName="DVTAduanerosTotal" />
+          <ScalarProperty Name="DVTAduanerosPorton" ColumnName="DVTAduanerosPorton" />
+          <ScalarProperty Name="DVTAduanerosPContenedor" ColumnName="DVTAduanerosPContenedor" />
+          <ScalarProperty Name="DVCostoManipulacionTotal" ColumnName="DVCostoManipulacionTotal" />
+          <ScalarProperty Name="DVCostoManipulacionPorton" ColumnName="DVCostoManipulacionPorton" />
+          <ScalarProperty Name="DVCostoManipulacionPContenedor" ColumnName="DVCostoManipulacionPContenedor" />
+          <ScalarProperty Name="DVSeguroTotal" ColumnName="DVSeguroTotal" />
+          <ScalarProperty Name="DVSeguroPorton" ColumnName="DVSeguroPorton" />
+          <ScalarProperty Name="DVSeguroPContenedor" ColumnName="DVSeguroPContenedor" />
+          <ScalarProperty Name="DVAgendamientoTotal" ColumnName="DVAgendamientoTotal" />
+          <ScalarProperty Name="DVAgendamientoPorton" ColumnName="DVAgendamientoPorton" />
+          <ScalarProperty Name="DVAgendamientoPContenedor" ColumnName="DVAgendamientoPContenedor" />
+          <ScalarProperty Name="DatosVentaCOPTotal" ColumnName="DatosVentaCOPTotal" />
+          <ScalarProperty Name="DatosVentaCOPPorton" ColumnName="DatosVentaCOPPorton" />
+          <ScalarProperty Name="DatosVentaCOPPContenedor" ColumnName="DatosVentaCOPPContenedor" />
+          <ScalarProperty Name="DatosVentaUSDTotal" ColumnName="DatosVentaUSDTotal" />
+          <ScalarProperty Name="DatosVentaUSDPorton" ColumnName="DatosVentaUSDPorton" />
+          <ScalarProperty Name="DatosVentaUSDPContenedor" ColumnName="DatosVentaUSDPContenedor" />
+          <ScalarProperty Name="CTotalPUSD_cop" ColumnName="CTotalPUSD_cop" />
+          <ScalarProperty Name="CTotalUSDTON_cop" ColumnName="CTotalUSDTON_cop" />
+          <ScalarProperty Name="CTotalUSDCON_cop" ColumnName="CTotalUSDCON_cop" />
+          <ScalarProperty Name="CTotalPUSD_usd" ColumnName="CTotalPUSD_usd" />
+          <ScalarProperty Name="CTotalUSDTON_usd" ColumnName="CTotalUSDTON_usd" />
+          <ScalarProperty Name="CTotalUSDCON_usd" ColumnName="CTotalUSDCON_usd" />
+          <ScalarProperty Name="CMateriaPPARTE" ColumnName="CMateriaPPARTE" />
+          <ScalarProperty Name="CMateriaPUSD" ColumnName="CMateriaPUSD" />
+          <ScalarProperty Name="CMateriaPUSDTON" ColumnName="CMateriaPUSDTON" />
+          <ScalarProperty Name="CMateriaPUSDCON" ColumnName="CMateriaPUSDCON" />
+          <ScalarProperty Name="CLTotalcostoPARTE" ColumnName="CLTotalcostoPARTE" />
+          <ScalarProperty Name="CLTotalcostoUSD" ColumnName="CLTotalcostoUSD" />
+          <ScalarProperty Name="CLTotalcostoUSDTON" ColumnName="CLTotalcostoUSDTON" />
+          <ScalarProperty Name="CLTotalcostoUSDCON" ColumnName="CLTotalcostoUSDCON" />
+          <ScalarProperty Name="FleteMaritimoPARTE" ColumnName="FleteMaritimoPARTE" />
+          <ScalarProperty Name="FleteMaritimoUSD" ColumnName="FleteMaritimoUSD" />
+          <ScalarProperty Name="FleteMaritimoUSDTON" ColumnName="FleteMaritimoUSDTON" />
+          <ScalarProperty Name="FleteMaritimoUSDCON" ColumnName="FleteMaritimoUSDCON" />
+          <ScalarProperty Name="EDocumentoPARTE" ColumnName="EDocumentoPARTE" />
+          <ScalarProperty Name="EDocumentoUSD" ColumnName="EDocumentoUSD" />
+          <ScalarProperty Name="EDocumentoUSDTON" ColumnName="EDocumentoUSDTON" />
+          <ScalarProperty Name="EDocumentoUSDCON" ColumnName="EDocumentoUSDCON" />
+          <ScalarProperty Name="FleteTerrPARTE" ColumnName="FleteTerrPARTE" />
+          <ScalarProperty Name="FleteTerrUSD" ColumnName="FleteTerrUSD" />
+          <ScalarProperty Name="FleteTerrUSDTON" ColumnName="FleteTerrUSDTON" />
+          <ScalarProperty Name="FleteTerrUSDCON" ColumnName="FleteTerrUSDCON" />
+          <ScalarProperty Name="DGOaPARTE" ColumnName="DGOaPARTE" />
+          <ScalarProperty Name="DGOaUSD" ColumnName="DGOaUSD" />
+          <ScalarProperty Name="DGOaUSDTON" ColumnName="DGOaUSDTON" />
+          <ScalarProperty Name="DGOaUSDCON" ColumnName="DGOaUSDCON" />
+          <ScalarProperty Name="DiasAlmacenPARTE" ColumnName="DiasAlmacenPARTE" />
+          <ScalarProperty Name="DiasAlmacenUSD" ColumnName="DiasAlmacenUSD" />
+          <ScalarProperty Name="DiasAlmacenUSDTON" ColumnName="DiasAlmacenUSDTON" />
+          <ScalarProperty Name="DiasAlmacenUSDCON" ColumnName="DiasAlmacenUSDCON" />
+          <ScalarProperty Name="CAChlfPARTE" ColumnName="CAChlfPARTE" />
+          <ScalarProperty Name="CAChlfUSD" ColumnName="CAChlfUSD" />
+          <ScalarProperty Name="CAChlfUSDTON" ColumnName="CAChlfUSDTON" />
+          <ScalarProperty Name="CAChlfUSDCON" ColumnName="CAChlfUSDCON" />
+          <ScalarProperty Name="CACothPARTE" ColumnName="CACothPARTE" />
+          <ScalarProperty Name="CACothUSD" ColumnName="CACothUSD" />
+          <ScalarProperty Name="CACothUSDTON" ColumnName="CACothUSDTON" />
+          <ScalarProperty Name="CACothUSDCON" ColumnName="CACothUSDCON" />
+          <ScalarProperty Name="CACBFPARTE" ColumnName="CACBFPARTE" />
+          <ScalarProperty Name="CACBFUSD" ColumnName="CACBFUSD" />
+          <ScalarProperty Name="CACBFUSDTON" ColumnName="CACBFUSDTON" />
+          <ScalarProperty Name="CACBFUSDCON" ColumnName="CACBFUSDCON" />
+          <ScalarProperty Name="CACDFPARTE" ColumnName="CACDFPARTE" />
+          <ScalarProperty Name="CACDFUSD" ColumnName="CACDFUSD" />
+          <ScalarProperty Name="CACDFUSDTON" ColumnName="CACDFUSDTON" />
+          <ScalarProperty Name="CACDFUSDCON" ColumnName="CACDFUSDCON" />
+          <ScalarProperty Name="CACHFPARTE" ColumnName="CACHFPARTE" />
+          <ScalarProperty Name="CACHFUSD" ColumnName="CACHFUSD" />
+          <ScalarProperty Name="CACHFUSDTON" ColumnName="CACHFUSDTON" />
+          <ScalarProperty Name="CACHFUSDCON" ColumnName="CACHFUSDCON" />
+          <ScalarProperty Name="ComisionACargaPARTE" ColumnName="ComisionACargaPARTE" />
+          <ScalarProperty Name="ComisionACargaUSD" ColumnName="ComisionACargaUSD" />
+          <ScalarProperty Name="ComisionACargaUSDTON" ColumnName="ComisionACargaUSDTON" />
+          <ScalarProperty Name="ComisionACargaUSDCON" ColumnName="ComisionACargaUSDCON" />
+          <ScalarProperty Name="SerpentinPARTE" ColumnName="SerpentinPARTE" />
+          <ScalarProperty Name="SerpentinUSD" ColumnName="SerpentinUSD" />
+          <ScalarProperty Name="SerpentinUSDTON" ColumnName="SerpentinUSDTON" />
+          <ScalarProperty Name="SerpentinUSDCON" ColumnName="SerpentinUSDCON" />
+          <ScalarProperty Name="GPUICPARTE" ColumnName="GPUICPARTE" />
+          <ScalarProperty Name="GPUICUSD" ColumnName="GPUICUSD" />
+          <ScalarProperty Name="GPUICUSDTON" ColumnName="GPUICUSDTON" />
+          <ScalarProperty Name="GPUICUSDCON" ColumnName="GPUICUSDCON" />
+          <ScalarProperty Name="GPUCLLPARTE" ColumnName="GPUCLLPARTE" />
+          <ScalarProperty Name="GPUCLLUSD" ColumnName="GPUCLLUSD" />
+          <ScalarProperty Name="GPUCLLUSDTON" ColumnName="GPUCLLUSDTON" />
+          <ScalarProperty Name="GPUCLLUSDCON" ColumnName="GPUCLLUSDCON" />
+          <ScalarProperty Name="GPLLFlexiPARTE" ColumnName="GPLLFlexiPARTE" />
+          <ScalarProperty Name="GPLLFlexiUSD" ColumnName="GPLLFlexiUSD" />
+          <ScalarProperty Name="GPLLFlexiUSDTON" ColumnName="GPLLFlexiUSDTON" />
+          <ScalarProperty Name="GPLLFlexiUSDCON" ColumnName="GPLLFlexiUSDCON" />
+          <ScalarProperty Name="GPMPPARTE" ColumnName="GPMPPARTE" />
+          <ScalarProperty Name="GPMPUSD" ColumnName="GPMPUSD" />
+          <ScalarProperty Name="GPMPUSDTON" ColumnName="GPMPUSDTON" />
+          <ScalarProperty Name="GPMPUSDCON" ColumnName="GPMPUSDCON" />
+          <ScalarProperty Name="GPortuarioPARTE" ColumnName="GPortuarioPARTE" />
+          <ScalarProperty Name="GPortuarioUSD" ColumnName="GPortuarioUSD" />
+          <ScalarProperty Name="GPortuarioUSDTON" ColumnName="GPortuarioUSDTON" />
+          <ScalarProperty Name="GPortuarioUSDCON" ColumnName="GPortuarioUSDCON" />
+          <ScalarProperty Name="FlexiTanquePARTE" ColumnName="FlexiTanquePARTE" />
+          <ScalarProperty Name="FlexiTanqueUSD" ColumnName="FlexiTanqueUSD" />
+          <ScalarProperty Name="FlexiTanqueUSDTON" ColumnName="FlexiTanqueUSDTON" />
+          <ScalarProperty Name="FlexiTanqueUSDCON" ColumnName="FlexiTanqueUSDCON" />
+          <ScalarProperty Name="TrasiegoPARTE" ColumnName="TrasiegoPARTE" />
+          <ScalarProperty Name="TrasiegoUSD" ColumnName="TrasiegoUSD" />
+          <ScalarProperty Name="TrasiegoUSDTON" ColumnName="TrasiegoUSDTON" />
+          <ScalarProperty Name="TrasiegoUSDCON" ColumnName="TrasiegoUSDCON" />
+          <ScalarProperty Name="CertificadoCalidadPARTE" ColumnName="CertificadoCalidadPARTE" />
+          <ScalarProperty Name="CertificadoCalidadUSD" ColumnName="CertificadoCalidadUSD" />
+          <ScalarProperty Name="CertificadoCalidadUSDTON" ColumnName="CertificadoCalidadUSDTON" />
+          <ScalarProperty Name="CertificadoCalidadUSDCON" ColumnName="CertificadoCalidadUSDCON" />
+          <ScalarProperty Name="SGSPARTE" ColumnName="SGSPARTE" />
+          <ScalarProperty Name="SGSUSD" ColumnName="SGSUSD" />
+          <ScalarProperty Name="SGSUSDTON" ColumnName="SGSUSDTON" />
+          <ScalarProperty Name="SGSUSDCON" ColumnName="SGSUSDCON" />
+          <ScalarProperty Name="CBrokerPARTE" ColumnName="CBrokerPARTE" />
+          <ScalarProperty Name="CBrokerUSD" ColumnName="CBrokerUSD" />
+          <ScalarProperty Name="CBrokerUSDTON" ColumnName="CBrokerUSDTON" />
+          <ScalarProperty Name="CBrokerUSDCON" ColumnName="CBrokerUSDCON" />
+          <ScalarProperty Name="MPPCCOPCalculado" ColumnName="MPPCCOPCalculado" />
+          <ScalarProperty Name="MPPCUSDValor" ColumnName="MPPCUSDValor" />
+          <ScalarProperty Name="MPPCUSDCalculado" ColumnName="MPPCUSDCalculado" />
+          <ScalarProperty Name="MPPCCOPValor" ColumnName="MPPCCOPValor" />
+          <ScalarProperty Name="PVE" ColumnName="PVE" />
+          <ScalarProperty Name="PVEporcentaje" ColumnName="PVEporcentaje" />
+          <ScalarProperty Name="PVEBRentabilidad" ColumnName="PVEBRentabilidad" />
+          <ScalarProperty Name="PVEBRentabilidadporcentaje" ColumnName="PVEBRentabilidadporcentaje" />
+          <ScalarProperty Name="EmbalajeID" ColumnName="EmbalajeID" />
+          <ScalarProperty Name="TRMVenta" ColumnName="TRMVenta" />
+          <ScalarProperty Name="TRMCompra" ColumnName="TRMCompra" />
+          <ScalarProperty Name="TRM" ColumnName="TRM" />
+          <ScalarProperty Name="NumeroContenedor" ColumnName="NumeroContenedor" />
+          <ScalarProperty Name="ToneladaContenedor" ColumnName="ToneladaContenedor" />
+          <ScalarProperty Name="NumeroEnvio" ColumnName="NumeroEnvio" />
+          <ScalarProperty Name="CantidadTonelada" ColumnName="CantidadTonelada" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contrato">
+      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.Contrato">
+        <MappingFragment StoreEntitySet="Contrato">
+          <ScalarProperty Name="FormaPagoID" ColumnName="FormaPagoID" />
+          <ScalarProperty Name="Transporte" ColumnName="Transporte" />
+          <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+          <ScalarProperty Name="UsuarioActualizaID" ColumnName="UsuarioActualizaID" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="Consecutivo" ColumnName="Consecutivo" />
+          <ScalarProperty Name="UsuarioCreacionID" ColumnName="UsuarioCreacionID" />
+          <ScalarProperty Name="EmbarqueParcial" ColumnName="EmbarqueParcial" />
+          <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+          <ScalarProperty Name="Seguro" ColumnName="Seguro" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="TerminosCondiciones" ColumnName="TerminosCondiciones" />
+          <ScalarProperty Name="Calidad2" ColumnName="Calidad2" />
+          <ScalarProperty Name="Calidad1" ColumnName="Calidad1" />
+          <ScalarProperty Name="TipoContratoID" ColumnName="TipoContratoID" />
+          <ScalarProperty Name="CalculadoraID" ColumnName="CalculadoraID" />
+          <ScalarProperty Name="InspectorID" ColumnName="InspectorID" />
+          <ScalarProperty Name="VendedorID" ColumnName="VendedorID" />
+          <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+          <ScalarProperty Name="IntermediarioID" ColumnName="IntermediarioID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Proforma">
+      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.Proforma">
+        <MappingFragment StoreEntitySet="Proforma">
+          <ScalarProperty Name="TipoProformaID" ColumnName="TipoProformaID" />
+          <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+          <ScalarProperty Name="UsuarioActualizaID" ColumnName="UsuarioActualizaID" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="UsuarioCreacionID" ColumnName="UsuarioCreacionID" />
+          <ScalarProperty Name="FechaEnvio" ColumnName="FechaEnvio" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="PuertoDescargueID" ColumnName="PuertoDescargueID" />
+          <ScalarProperty Name="PuertoCargueID" ColumnName="PuertoCargueID" />
+          <ScalarProperty Name="ContratoID" ColumnName="ContratoID" />
+          <ScalarProperty Name="FormaPagoID" ColumnName="FormaPagoID" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProformaItemCalculadora">
+      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.ProformaItemCalculadora">
+        <MappingFragment StoreEntitySet="ProformaItemCalculadora">
+          <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+          <ScalarProperty Name="UsuarioActualizaID" ColumnName="UsuarioActualizaID" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="UsuarioCreacionID" ColumnName="UsuarioCreacionID" />
+          <ScalarProperty Name="PrecioCombrar" ColumnName="PrecioCombrar" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="ItemCalculadoraID" ColumnName="ItemCalculadoraID" />
+          <ScalarProperty Name="ProformaID" ColumnName="ProformaID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Agrupacion">
       <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.Agrupacion">
         <MappingFragment StoreEntitySet="Agrupacion">
@@ -853,192 +794,6 @@
           <ScalarProperty Name="TerceroID" ColumnName="TerceroID" />
           <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
           <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CartaLlenadoPuerto">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.CartaLlenadoPuerto">
-        <MappingFragment StoreEntitySet="CartaLlenadoPuerto">
-          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="TerceroID" ColumnName="TerceroID" />
-          <ScalarProperty Name="VehiculoID" ColumnName="VehiculoID" />
-          <ScalarProperty Name="NombreSIA" ColumnName="NombreSIA" />
-          <ScalarProperty Name="EmpresaID" ColumnName="EmpresaID" />
-          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-          <ScalarProperty Name="Importador" ColumnName="Importador" />
-          <ScalarProperty Name="PorcentajeVacio" ColumnName="PorcentajeVacio" />
-          <ScalarProperty Name="OpcionID" ColumnName="OpcionID" />
-          <ScalarProperty Name="Peso" ColumnName="Peso" />
-          <ScalarProperty Name="DescripcionMercancia" ColumnName="DescripcionMercancia" />
-          <ScalarProperty Name="PuertoID" ColumnName="PuertoID" />
-          <ScalarProperty Name="MotonaveID" ColumnName="MotonaveID" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CertificadoCalidad">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.CertificadoCalidad">
-        <MappingFragment StoreEntitySet="CertificadoCalidad">
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
-          <ScalarProperty Name="Fecha_Vencimiento_Producto" ColumnName="Fecha_Vencimiento_Producto" />
-          <ScalarProperty Name="Fecha_Elaboracion_Producto" ColumnName="Fecha_Elaboracion_Producto" />
-          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-          <ScalarProperty Name="FechaRevision" ColumnName="FechaRevision" />
-          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-          <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
-          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-          <ScalarProperty Name="CiudadID" ColumnName="CiudadID" />
-          <ScalarProperty Name="Cliente" ColumnName="Cliente" />
-          <ScalarProperty Name="MatrizBLID" ColumnName="MatrizBLID" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CertificadoMadera">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.CertificadoMadera">
-        <MappingFragment StoreEntitySet="CertificadoMadera">
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
-          <ScalarProperty Name="Inspector" ColumnName="Inspector" />
-          <ScalarProperty Name="DiaInspeccion" ColumnName="DiaInspeccion" />
-          <ScalarProperty Name="CiudadID" ColumnName="CiudadID" />
-          <ScalarProperty Name="MatrizBLID" ColumnName="MatrizBLID" />
-          <ScalarProperty Name="DescripcionBienes" ColumnName="DescripcionBienes" />
-          <ScalarProperty Name="MotonaveID" ColumnName="MotonaveID" />
-          <ScalarProperty Name="Para" ColumnName="Para" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Contrato">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.Contrato">
-        <MappingFragment StoreEntitySet="Contrato">
-          <ScalarProperty Name="Calidad2" ColumnName="Calidad2" />
-          <ScalarProperty Name="Transporte" ColumnName="Transporte" />
-          <ScalarProperty Name="TipoContratoID" ColumnName="TipoContratoID" />
-          <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
-          <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
-          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-          <ScalarProperty Name="EmbarqueParcial" ColumnName="EmbarqueParcial" />
-          <ScalarProperty Name="Inspector" ColumnName="Inspector" />
-          <ScalarProperty Name="Seguro" ColumnName="Seguro" />
-          <ScalarProperty Name="EmbarqueID" ColumnName="EmbarqueID" />
-          <ScalarProperty Name="Calidad" ColumnName="Calidad" />
-          <ScalarProperty Name="ProformaID" ColumnName="ProformaID" />
-          <ScalarProperty Name="Intermediario" ColumnName="Intermediario" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="MatrizBL">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.MatrizBL">
-        <MappingFragment StoreEntitySet="MatrizBL">
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
-          <ScalarProperty Name="NCM" ColumnName="NCM" />
-          <ScalarProperty Name="ContratoID" ColumnName="ContratoID" />
-          <ScalarProperty Name="Notificacion" ColumnName="Notificacion" />
-          <ScalarProperty Name="Consignee" ColumnName="Consignee" />
-          <ScalarProperty Name="EmpresaID" ColumnName="EmpresaID" />
-          <ScalarProperty Name="Expedidor" ColumnName="Expedidor" />
-          <ScalarProperty Name="NumeroReserva" ColumnName="NumeroReserva" />
-          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="OrdenCompra">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.OrdenCompra">
-        <MappingFragment StoreEntitySet="OrdenCompra">
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
-          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-          <ScalarProperty Name="SucursalDespacho" ColumnName="SucursalDespacho" />
-          <ScalarProperty Name="FormaPagoID" ColumnName="FormaPagoID" />
-          <ScalarProperty Name="SucursalFactura" ColumnName="SucursalFactura" />
-          <ScalarProperty Name="ContratoID" ColumnName="ContratoID" />
-          <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="OrdenCompraItem">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.OrdenCompraItem">
-        <MappingFragment StoreEntitySet="OrdenCompraItem">
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
-          <ScalarProperty Name="ValorTotal" ColumnName="ValorTotal" />
-          <ScalarProperty Name="ValorBase" ColumnName="ValorBase" />
-          <ScalarProperty Name="ValorDescuento" ColumnName="ValorDescuento" />
-          <ScalarProperty Name="ValorImpuesto" ColumnName="ValorImpuesto" />
-          <ScalarProperty Name="UnidadEmpaque" ColumnName="UnidadEmpaque" />
-          <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
-          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
-          <ScalarProperty Name="OrdenCompraID" ColumnName="OrdenCompraID" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Proforma">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.Proforma">
-        <MappingFragment StoreEntitySet="Proforma">
-          <ScalarProperty Name="TipoProformaID" ColumnName="TipoProformaID" />
-          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-          <ScalarProperty Name="NumeroContrato" ColumnName="NumeroContrato" />
-          <ScalarProperty Name="FechaEnvio" ColumnName="FechaEnvio" />
-          <ScalarProperty Name="PuertoDescargueID" ColumnName="PuertoDescargueID" />
-          <ScalarProperty Name="PuertoCargueID" ColumnName="PuertoCargueID" />
-          <ScalarProperty Name="TipoPagoID" ColumnName="TipoPagoID" />
-          <ScalarProperty Name="CompradorID" ColumnName="CompradorID" />
-          <ScalarProperty Name="VendedorID" ColumnName="VendedorID" />
-          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-          <ScalarProperty Name="Nit" ColumnName="Nit" />
-          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-          <ScalarProperty Name="CalculadoraID" ColumnName="CalculadoraID" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="RecursosContrato">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.RecursosContrato">
-        <MappingFragment StoreEntitySet="RecursosContrato">
-          <ScalarProperty Name="ContratoID" ColumnName="ContratoID" />
-          <ScalarProperty Name="Archivo" ColumnName="Archivo" />
-          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="RecursosProforma">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.RecursosProforma">
-        <MappingFragment StoreEntitySet="RecursosProforma">
-          <ScalarProperty Name="ProformaID" ColumnName="ProformaID" />
-          <ScalarProperty Name="Archivo" ColumnName="Archivo" />
-          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
           <ScalarProperty Name="RowID" ColumnName="RowID" />
         </MappingFragment>
       </EntityTypeMapping>

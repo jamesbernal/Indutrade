@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DB_9CAC35_indutradeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="DB_9CAC35_indutradeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Actividad">
     <Key>
       <PropertyRef Name="RowID" />
@@ -84,238 +84,6 @@
     <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaModificacion" Type="date" />
   </EntityType>
-  <EntityType Name="Calculadora">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TerceroID" Type="int" />
-    <Property Name="AgenteNavieraID" Type="int" />
-    <Property Name="DestinoID" Type="int" />
-    <Property Name="Fecha" Type="datetime" Nullable="false" />
-    <Property Name="observacion" Type="varchar" MaxLength="250" />
-    <Property Name="IncotermID" Type="int" />
-    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="FechaCreacion" Type="date" Nullable="false" />
-    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaModificacion" Type="date" />
-    <Property Name="Terminada" Type="bit" Nullable="false" />
-    <Property Name="NombreBroker" Type="varchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="CalculadoraItems">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ItemID" Type="int" />
-    <Property Name="CantidadTonelada" Type="float" />
-    <Property Name="NumeroEnvio" Type="int" />
-    <Property Name="ToneladaContenedor" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="NumeroContenedor" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="TRM" Type="float" />
-    <Property Name="TRMCompra" Type="float" />
-    <Property Name="TRMVenta" Type="float" />
-    <Property Name="EmbalajeID" Type="int" />
-    <Property Name="PVEBRentabilidadporcentaje" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="PVEBRentabilidad" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="PVEporcentaje" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="PVE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="MPPCCOPValor" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="MPPCUSDCalculado" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="MPPCUSDValor" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="MPPCCOPCalculado" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CBrokerUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CBrokerUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CBrokerUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CBrokerPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="SGSUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="SGSUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="SGSUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="SGSPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CertificadoCalidadUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CertificadoCalidadUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CertificadoCalidadUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CertificadoCalidadPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="TrasiegoUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="TrasiegoUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="TrasiegoUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="TrasiegoPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="FlexiTanqueUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="FlexiTanqueUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="FlexiTanqueUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="FlexiTanquePARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPortuarioUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPortuarioUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPortuarioUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPortuarioPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPMPUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPMPUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPMPUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPMPPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPLLFlexiUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPLLFlexiUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPLLFlexiUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPLLFlexiPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPUCLLUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPUCLLUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPUCLLUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPUCLLPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPUICUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPUICUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPUICUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="GPUICPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="SerpentinUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="SerpentinUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="SerpentinUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="SerpentinPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="ComisionACargaUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="ComisionACargaUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="ComisionACargaUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="ComisionACargaPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CACHFUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CACHFUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CACHFUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CACHFPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CACDFUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CACDFUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CACDFUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CACDFPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CACBFUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CACBFUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CACBFUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CACBFPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CACothUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CACothUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CACothUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CACothPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CAChlfUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CAChlfUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CAChlfUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CAChlfPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DiasAlmacenUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DiasAlmacenUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DiasAlmacenUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DiasAlmacenPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DGOaUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DGOaUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DGOaUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DGOaPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="FleteTerrUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="FleteTerrUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="FleteTerrUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="FleteTerrPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="EDocumentoUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="EDocumentoUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="EDocumentoUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="EDocumentoPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="FleteMaritimoUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="FleteMaritimoUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="FleteMaritimoUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="FleteMaritimoPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CLTotalcostoUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CLTotalcostoUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CLTotalcostoUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CLTotalcostoPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CMateriaPUSDCON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CMateriaPUSDTON" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CMateriaPUSD" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CMateriaPPARTE" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CTotalUSDCON_usd" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CTotalUSDTON_usd" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CTotalPUSD_usd" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CTotalUSDCON_cop" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CTotalUSDTON_cop" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="CTotalPUSD_cop" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DatosVentaUSDPContenedor" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DatosVentaUSDPorton" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DatosVentaUSDTotal" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DatosVentaCOPPContenedor" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DatosVentaCOPPorton" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DatosVentaCOPTotal" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVAgendamientoPContenedor" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVAgendamientoPorton" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVAgendamientoTotal" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVSeguroPContenedor" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVSeguroPorton" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVSeguroTotal" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVCostoManipulacionPContenedor" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVCostoManipulacionPorton" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVCostoManipulacionTotal" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVTAduanerosPContenedor" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVTAduanerosPorton" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVTAduanerosTotal" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVTDestinoPContenedor" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVTDestinoPorton" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVTDestinoTotal" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVMargenPContenedor" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVMargenPorton" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVMargenTotal" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVUtilidadPContenedor" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVUtilidadPorton" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="DVUtilidadTotal" Type="decimal" Precision="20" Scale="4" />
-    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="FechaCreacion" Type="date" Nullable="false" />
-    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaModificacion" Type="date" />
-    <Property Name="CalculadoraID" Type="int" />
-    <Property Name="AgenteNavieraID" Type="int" />
-  </EntityType>
-  <EntityType Name="DCD">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ContratoID" Type="int" Nullable="false" />
-    <Property Name="RepresentanteLegal" Type="varchar" MaxLength="50" />
-    <Property Name="NroConvenio" Type="varchar" MaxLength="10" />
-    <Property Name="Mes" Type="varchar" MaxLength="3" />
-    <Property Name="Año" Type="varchar" MaxLength="6" />
-    <Property Name="FechaExpedicion" Type="varchar" MaxLength="30" />
-    <Property Name="Destino" Type="varchar" MaxLength="30" />
-  </EntityType>
-  <EntityType Name="DetalleEmpaque">
-    <Key>
-      <PropertyRef Name="rowid" />
-    </Key>
-    <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="empaqueID" Type="int" />
-    <Property Name="numeroContenedor" Type="varchar" MaxLength="100" />
-    <Property Name="gross" Type="float" />
-    <Property Name="net" Type="float" />
-    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="FechaCreacion" Type="date" Nullable="false" />
-    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaModificacion" Type="date" />
-  </EntityType>
-  <EntityType Name="Empaque">
-    <Key>
-      <PropertyRef Name="rowid" />
-    </Key>
-    <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="puertoCarga" Type="int" />
-    <Property Name="puertoDescarga" Type="int" />
-    <Property Name="shipper" Type="varchar" MaxLength="100" />
-    <Property Name="notify" Type="varchar" MaxLength="200" />
-    <Property Name="exportDate" Type="datetime" />
-    <Property Name="gross" Type="float" />
-    <Property Name="net" Type="float" />
-    <Property Name="producto" Type="int" />
-    <Property Name="packing" Type="int" />
-    <Property Name="vessel" Type="varchar" MaxLength="100" />
-    <Property Name="BlNumber" Type="int" />
-    <Property Name="titulo" Type="varchar" MaxLength="100" />
-    <Property Name="subtitulo" Type="int" />
-    <Property Name="para" Type="varchar" MaxLength="100" />
-  </EntityType>
-  <EntityType Name="FEP">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DCDID" Type="int" />
-    <Property Name="Dex" Type="varchar" MaxLength="30" />
-    <Property Name="NCertificadoCP" Type="varchar" MaxLength="30" />
-  </EntityType>
   <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.dbo.m_plantillas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="m_plantillas">
@@ -339,42 +107,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.dbo.m_plantillas' no tie
     <Property Name="Secuencia" Type="int" />
     <Property Name="Detail" Type="text" />
   </EntityType>
-  <EntityType Name="SolicitudLlenado">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FechaDescargue" Type="date" />
-    <Property Name="DestinoID" Type="int" Nullable="false" />
-    <Property Name="ContratoID" Type="int" Nullable="false" />
-    <Property Name="BKK" Type="varchar" MaxLength="50" />
-    <Property Name="EmpaqueID" Type="int" Nullable="false" />
-    <Property Name="FechaCreacion" Type="date" />
-    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaModificacion" Type="date" />
-    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="SolicitudTransporte">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ContratoID" Type="int" Nullable="false" />
-    <Property Name="ProveedorID" Type="int" Nullable="false" />
-    <Property Name="Cantidad" Type="int" />
-    <Property Name="Flete" Type="varchar" MaxLength="100" />
-    <Property Name="OpcionID" Type="int" />
-    <Property Name="PlantaCargueID" Type="int" />
-    <Property Name="FechaCargue" Type="date" />
-    <Property Name="RequisitosCargue" Type="varchar" MaxLength="100" />
-    <Property Name="PlantaDescargueID" Type="int" />
-    <Property Name="FechaEntrega" Type="date" />
-    <Property Name="RequisitosDescargue" Type="varchar" MaxLength="100" />
-    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaCreacion" Type="date" />
-    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaModificacion" Type="date" />
-  </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
       <PropertyRef Name="diagram_id" />
@@ -385,14 +117,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.dbo.m_plantillas' no tie
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
-  <EntityType Name="TipoVehiculo">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="SolicitudTransporteID" Type="int" Nullable="false" />
-    <Property Name="Nombre" Type="varchar" MaxLength="50" />
-  </EntityType>
   <EntityType Name="Vehiculo">
     <Key>
       <PropertyRef Name="RowID" />
@@ -402,18 +126,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.dbo.m_plantillas' no tie
     <Property Name="Marca" Type="varchar" MaxLength="50" />
     <Property Name="Modelo" Type="varchar" MaxLength="50" />
     <Property Name="Color" Type="varchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="VehiculoSolicitudLlenado">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FechaCargue" Type="date" />
-    <Property Name="VehiculoID" Type="int" Nullable="false" />
-    <Property Name="Remolque" Type="varchar" MaxLength="50" />
-    <Property Name="EmpresaTransporteID" Type="int" Nullable="false" />
-    <Property Name="TerceroID" Type="int" Nullable="false" />
-    <Property Name="SolicitudLlenadoID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Ciudad">
     <Key>
@@ -641,6 +353,240 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
     <Property Name="FechaModificacion" Type="date" />
     <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Calculadora">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TerceroID" Type="int" />
+    <Property Name="AgenteNavieraID" Type="int" />
+    <Property Name="DestinoID" Type="int" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="observacion" Type="varchar" MaxLength="250" />
+    <Property Name="IncotermID" Type="int" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FechaCreacion" Type="date" Nullable="false" />
+    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
+    <Property Name="FechaModificacion" Type="date" />
+    <Property Name="Terminada" Type="bit" Nullable="false" />
+    <Property Name="NombreBroker" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CalculadoraItems">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemID" Type="int" />
+    <Property Name="CantidadTonelada" Type="float" />
+    <Property Name="NumeroEnvio" Type="int" />
+    <Property Name="ToneladaContenedor" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="NumeroContenedor" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="TRM" Type="float" />
+    <Property Name="TRMCompra" Type="float" />
+    <Property Name="TRMVenta" Type="float" />
+    <Property Name="EmbalajeID" Type="int" />
+    <Property Name="PVEBRentabilidadporcentaje" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="PVEBRentabilidad" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="PVEporcentaje" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="PVE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="MPPCCOPValor" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="MPPCUSDCalculado" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="MPPCUSDValor" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="MPPCCOPCalculado" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CBrokerUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CBrokerUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CBrokerUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CBrokerPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="SGSUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="SGSUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="SGSUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="SGSPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CertificadoCalidadUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CertificadoCalidadUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CertificadoCalidadUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CertificadoCalidadPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="TrasiegoUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="TrasiegoUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="TrasiegoUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="TrasiegoPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="FlexiTanqueUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="FlexiTanqueUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="FlexiTanqueUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="FlexiTanquePARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPortuarioUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPortuarioUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPortuarioUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPortuarioPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPMPUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPMPUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPMPUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPMPPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPLLFlexiUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPLLFlexiUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPLLFlexiUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPLLFlexiPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPUCLLUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPUCLLUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPUCLLUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPUCLLPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPUICUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPUICUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPUICUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="GPUICPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="SerpentinUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="SerpentinUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="SerpentinUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="SerpentinPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="ComisionACargaUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="ComisionACargaUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="ComisionACargaUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="ComisionACargaPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CACHFUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CACHFUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CACHFUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CACHFPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CACDFUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CACDFUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CACDFUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CACDFPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CACBFUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CACBFUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CACBFUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CACBFPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CACothUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CACothUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CACothUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CACothPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CAChlfUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CAChlfUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CAChlfUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CAChlfPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DiasAlmacenUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DiasAlmacenUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DiasAlmacenUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DiasAlmacenPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DGOaUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DGOaUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DGOaUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DGOaPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="FleteTerrUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="FleteTerrUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="FleteTerrUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="FleteTerrPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="EDocumentoUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="EDocumentoUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="EDocumentoUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="EDocumentoPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="FleteMaritimoUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="FleteMaritimoUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="FleteMaritimoUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="FleteMaritimoPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CLTotalcostoUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CLTotalcostoUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CLTotalcostoUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CLTotalcostoPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CMateriaPUSDCON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CMateriaPUSDTON" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CMateriaPUSD" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CMateriaPPARTE" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CTotalUSDCON_usd" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CTotalUSDTON_usd" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CTotalPUSD_usd" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CTotalUSDCON_cop" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CTotalUSDTON_cop" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="CTotalPUSD_cop" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DatosVentaUSDPContenedor" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DatosVentaUSDPorton" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DatosVentaUSDTotal" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DatosVentaCOPPContenedor" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DatosVentaCOPPorton" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DatosVentaCOPTotal" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVAgendamientoPContenedor" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVAgendamientoPorton" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVAgendamientoTotal" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVSeguroPContenedor" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVSeguroPorton" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVSeguroTotal" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVCostoManipulacionPContenedor" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVCostoManipulacionPorton" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVCostoManipulacionTotal" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVTAduanerosPContenedor" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVTAduanerosPorton" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVTAduanerosTotal" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVTDestinoPContenedor" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVTDestinoPorton" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVTDestinoTotal" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVMargenPContenedor" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVMargenPorton" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVMargenTotal" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVUtilidadPContenedor" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVUtilidadPorton" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="DVUtilidadTotal" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FechaCreacion" Type="date" Nullable="false" />
+    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
+    <Property Name="FechaModificacion" Type="date" />
+    <Property Name="CalculadoraID" Type="int" />
+    <Property Name="AgenteNavieraID" Type="int" />
+  </EntityType>
+  <EntityType Name="Contrato">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IntermediarioID" Type="int" />
+    <Property Name="ClienteID" Type="int" />
+    <Property Name="VendedorID" Type="int" />
+    <Property Name="InspectorID" Type="int" />
+    <Property Name="CalculadoraID" Type="int" />
+    <Property Name="TipoContratoID" Type="int" />
+    <Property Name="Calidad1" Type="nvarchar(max)" />
+    <Property Name="Calidad2" Type="nvarchar(max)" />
+    <Property Name="TerminosCondiciones" Type="nvarchar(max)" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Seguro" Type="bit" />
+    <Property Name="Periodo" Type="date" />
+    <Property Name="EmbarqueParcial" Type="bit" />
+    <Property Name="UsuarioCreacionID" Type="int" />
+    <Property Name="Consecutivo" Type="varchar" MaxLength="100" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizaID" Type="int" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+    <Property Name="Transporte" Type="varchar" MaxLength="100" />
+    <Property Name="FormaPagoID" Type="int" />
+  </EntityType>
+  <EntityType Name="Proforma">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Titulo" Type="nvarchar" MaxLength="250" />
+    <Property Name="FormaPagoID" Type="int" />
+    <Property Name="ContratoID" Type="int" />
+    <Property Name="PuertoCargueID" Type="int" />
+    <Property Name="PuertoDescargueID" Type="int" />
+    <Property Name="Observaciones" Type="nvarchar" MaxLength="500" />
+    <Property Name="FechaEnvio" Type="datetime" />
+    <Property Name="UsuarioCreacionID" Type="int" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizaID" Type="int" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+    <Property Name="TipoProformaID" Type="int" />
+  </EntityType>
+  <EntityType Name="ProformaItemCalculadora">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProformaID" Type="int" />
+    <Property Name="ItemCalculadoraID" Type="int" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="PrecioCombrar" Type="float" />
+    <Property Name="UsuarioCreacionID" Type="int" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizaID" Type="int" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+  </EntityType>
   <EntityType Name="Agrupacion">
     <Key>
       <PropertyRef Name="RowID" />
@@ -800,182 +746,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
     <Property Name="FechaCreacion" Type="date" />
     <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaActualizacion" Type="date" />
-  </EntityType>
-  <EntityType Name="CartaLlenadoPuerto">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MotonaveID" Type="int" Nullable="false" />
-    <Property Name="PuertoID" Type="int" Nullable="false" />
-    <Property Name="DescripcionMercancia" Type="varchar" MaxLength="50" />
-    <Property Name="Peso" Type="int" />
-    <Property Name="OpcionID" Type="int" Nullable="false" />
-    <Property Name="PorcentajeVacio" Type="int" />
-    <Property Name="Importador" Type="varchar" MaxLength="50" />
-    <Property Name="Direccion" Type="varchar" MaxLength="50" />
-    <Property Name="EmpresaID" Type="int" Nullable="false" />
-    <Property Name="NombreSIA" Type="varchar" MaxLength="50" />
-    <Property Name="VehiculoID" Type="int" Nullable="false" />
-    <Property Name="TerceroID" Type="int" Nullable="false" />
-    <Property Name="FechaCreacion" Type="date" />
-    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaModificacion" Type="date" />
-    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="CertificadoCalidad">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MatrizBLID" Type="int" Nullable="false" />
-    <Property Name="Cliente" Type="varchar" MaxLength="50" />
-    <Property Name="CiudadID" Type="int" />
-    <Property Name="Direccion" Type="varchar" MaxLength="100" />
-    <Property Name="ProductoID" Type="int" />
-    <Property Name="Codigo" Type="varchar" MaxLength="100" />
-    <Property Name="FechaRevision" Type="datetime" />
-    <Property Name="Cantidad" Type="int" />
-    <Property Name="Fecha_Elaboracion_Producto" Type="datetime" />
-    <Property Name="Fecha_Vencimiento_Producto" Type="datetime" />
-    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaCreacion" Type="datetime" />
-    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaModificacion" Type="datetime" />
-  </EntityType>
-  <EntityType Name="CertificadoMadera">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Para" Type="varchar" MaxLength="50" />
-    <Property Name="MotonaveID" Type="int" Nullable="false" />
-    <Property Name="DescripcionBienes" Type="varchar" MaxLength="50" />
-    <Property Name="MatrizBLID" Type="int" Nullable="false" />
-    <Property Name="CiudadID" Type="int" Nullable="false" />
-    <Property Name="DiaInspeccion" Type="date" />
-    <Property Name="Inspector" Type="varchar" MaxLength="50" />
-    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaCreacion" Type="date" />
-    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaModificacion" Type="date" />
-  </EntityType>
-  <EntityType Name="Contrato">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Intermediario" Type="varchar" MaxLength="50" />
-    <Property Name="ProformaID" Type="int" Nullable="false" />
-    <Property Name="Calidad" Type="varchar" MaxLength="50" />
-    <Property Name="EmbarqueID" Type="int" Nullable="false" />
-    <Property Name="Seguro" Type="varchar" MaxLength="50" />
-    <Property Name="Inspector" Type="varchar" MaxLength="50" />
-    <Property Name="EmbarqueParcial" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Titulo" Type="varchar" MaxLength="50" />
-    <Property Name="Fecha" Type="datetime" />
-    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaCreacion" Type="date" />
-    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaActualizacion" Type="date" />
-    <Property Name="TipoContratoID" Type="int" />
-    <Property Name="Transporte" Type="varchar" MaxLength="100" />
-    <Property Name="Calidad2" Type="varchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="MatrizBL">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Fecha" Type="date" />
-    <Property Name="NumeroReserva" Type="varchar" MaxLength="50" />
-    <Property Name="Expedidor" Type="varchar" MaxLength="50" />
-    <Property Name="EmpresaID" Type="int" Nullable="false" />
-    <Property Name="Consignee" Type="varchar" MaxLength="50" />
-    <Property Name="Notificacion" Type="varchar" MaxLength="50" />
-    <Property Name="ContratoID" Type="int" Nullable="false" />
-    <Property Name="NCM" Type="int" />
-    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaCreacion" Type="date" />
-    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaModificacion" Type="date" />
-  </EntityType>
-  <EntityType Name="OrdenCompra">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Fecha" Type="datetime" />
-    <Property Name="ProveedorID" Type="int" />
-    <Property Name="ContratoID" Type="int" />
-    <Property Name="SucursalFactura" Type="int" />
-    <Property Name="FormaPagoID" Type="int" />
-    <Property Name="SucursalDespacho" Type="int" />
-    <Property Name="Observaciones" Type="varchar" MaxLength="300" />
-    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaCreacion" Type="datetime" />
-    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaModificacion" Type="datetime" />
-  </EntityType>
-  <EntityType Name="OrdenCompraItem">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="OrdenCompraID" Type="int" />
-    <Property Name="ItemID" Type="int" />
-    <Property Name="Cantidad" Type="float" />
-    <Property Name="ValorUnitario" Type="float" />
-    <Property Name="UnidadEmpaque" Type="varchar" MaxLength="50" />
-    <Property Name="ValorImpuesto" Type="float" />
-    <Property Name="ValorDescuento" Type="float" />
-    <Property Name="ValorBase" Type="float" />
-    <Property Name="ValorTotal" Type="float" />
-    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaCreacion" Type="datetime" />
-    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaModificacion" Type="datetime" />
-  </EntityType>
-  <EntityType Name="Proforma">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CalculadoraID" Type="int" />
-    <Property Name="Titulo" Type="varchar" MaxLength="200" />
-    <Property Name="Nit" Type="varchar" MaxLength="200" />
-    <Property Name="Fecha" Type="datetime" />
-    <Property Name="VendedorID" Type="int" />
-    <Property Name="CompradorID" Type="int" />
-    <Property Name="TipoPagoID" Type="int" />
-    <Property Name="PuertoCargueID" Type="int" />
-    <Property Name="PuertoDescargueID" Type="int" />
-    <Property Name="FechaEnvio" Type="datetime" />
-    <Property Name="NumeroContrato" Type="varchar" MaxLength="100" />
-    <Property Name="Observaciones" Type="varchar" MaxLength="300" />
-    <Property Name="FechaCreacion" Type="date" />
-    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaModificacion" Type="date" />
-    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
-    <Property Name="TipoProformaID" Type="int" />
-  </EntityType>
-  <EntityType Name="RecursosContrato">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Codigo" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="Archivo" Type="nvarchar" MaxLength="500" Nullable="false" />
-    <Property Name="ContratoID" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="RecursosProforma">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Codigo" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="Archivo" Type="nvarchar" MaxLength="500" Nullable="false" />
-    <Property Name="ProformaID" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK__Actividad__Estad__2A6B46EF">
     <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
@@ -1157,54 +927,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CartaLlen__Empre__4DD47EBD">
-    <End Role="Tercero" Type="Self.Tercero" Multiplicity="1" />
-    <End Role="CartaLlenadoPuerto" Type="Self.CartaLlenadoPuerto" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tercero">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="CartaLlenadoPuerto">
-        <PropertyRef Name="EmpresaID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Certifica__Ciuda__7EE1CA6C">
-    <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
-    <End Role="CertificadoCalidad" Type="Self.CertificadoCalidad" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Ciudad">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="CertificadoCalidad">
-        <PropertyRef Name="CiudadID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Certifica__Matri__7DEDA633">
-    <End Role="MatrizBL" Type="Self.MatrizBL" Multiplicity="1" />
-    <End Role="CertificadoCalidad" Type="Self.CertificadoCalidad" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MatrizBL">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="CertificadoCalidad">
-        <PropertyRef Name="MatrizBLID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Certifica__Produ__7FD5EEA5">
-    <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
-    <End Role="CertificadoCalidad" Type="Self.CertificadoCalidad" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Item">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="CertificadoCalidad">
-        <PropertyRef Name="ProductoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__Ciudad__Departam__10216507">
     <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
     <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="*" />
@@ -1277,7 +999,67 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Contrato__TipoCo__0EE3280B">
+  <Association Name="FK__Contrato__Calcul__5634BA94">
+    <End Role="Calculadora" Type="Self.Calculadora" Multiplicity="0..1" />
+    <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calculadora">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Contrato">
+        <PropertyRef Name="CalculadoraID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Contrato__Client__5728DECD">
+    <End Role="Tercero" Type="Self.Tercero" Multiplicity="0..1" />
+    <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tercero">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Contrato">
+        <PropertyRef Name="ClienteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Contrato__FormaP__797DF6D1">
+    <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
+    <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opcion">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Contrato">
+        <PropertyRef Name="FormaPagoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Contrato__Inspec__581D0306">
+    <End Role="Tercero" Type="Self.Tercero" Multiplicity="0..1" />
+    <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tercero">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Contrato">
+        <PropertyRef Name="InspectorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Contrato__Interm__5911273F">
+    <End Role="Tercero" Type="Self.Tercero" Multiplicity="0..1" />
+    <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tercero">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Contrato">
+        <PropertyRef Name="IntermediarioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Contrato__TipoCo__5A054B78">
     <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
     <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1286,6 +1068,42 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Principal>
       <Dependent Role="Contrato">
         <PropertyRef Name="TipoContratoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Contrato__Usuari__5AF96FB1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Contrato">
+        <PropertyRef Name="UsuarioCreacionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Contrato__Usuari__5BED93EA">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Contrato">
+        <PropertyRef Name="UsuarioActualizaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Contrato__Vended__5CE1B823">
+    <End Role="Tercero" Type="Self.Tercero" Multiplicity="0..1" />
+    <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tercero">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Contrato">
+        <PropertyRef Name="VendedorID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1313,18 +1131,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__DCD__ContratoID__0DEF03D2">
-    <End Role="Contrato" Type="Self.Contrato" Multiplicity="1" />
-    <End Role="DCD" Type="Self.DCD" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Contrato">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="DCD">
-        <PropertyRef Name="ContratoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__Departame__PaisI__0D44F85C">
     <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
     <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
@@ -1334,78 +1140,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Principal>
       <Dependent Role="Departamento">
         <PropertyRef Name="PaisID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__DetalleEm__empaq__4E3E9311">
-    <End Role="Empaque" Type="Self.Empaque" Multiplicity="0..1" />
-    <End Role="DetalleEmpaque" Type="Self.DetalleEmpaque" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empaque">
-        <PropertyRef Name="rowid" />
-      </Principal>
-      <Dependent Role="DetalleEmpaque">
-        <PropertyRef Name="empaqueID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Empaque__BlNumbe__4F32B74A">
-    <End Role="MatrizBL" Type="Self.MatrizBL" Multiplicity="0..1" />
-    <End Role="Empaque" Type="Self.Empaque" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MatrizBL">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="Empaque">
-        <PropertyRef Name="BlNumber" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Empaque__puertoC__55DFB4D9">
-    <End Role="Puerto" Type="Self.Puerto" Multiplicity="0..1" />
-    <End Role="Empaque" Type="Self.Empaque" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Puerto">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="Empaque">
-        <PropertyRef Name="puertoCarga" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Empaque__puertoD__5026DB83">
-    <End Role="Puerto" Type="Self.Puerto" Multiplicity="0..1" />
-    <End Role="Empaque" Type="Self.Empaque" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Puerto">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="Empaque">
-        <PropertyRef Name="puertoDescarga" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Empaque_packing">
-    <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
-    <End Role="Empaque" Type="Self.Empaque" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Opcion">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="Empaque">
-        <PropertyRef Name="packing" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Empaque_producto">
-    <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
-    <End Role="Empaque" Type="Self.Empaque" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Item">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="Empaque">
-        <PropertyRef Name="producto" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1430,18 +1164,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Principal>
       <Dependent Role="Empresa">
         <PropertyRef Name="IdiomaID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__FEP__DCDID__168449D3">
-    <End Role="DCD" Type="Self.DCD" Multiplicity="0..1" />
-    <End Role="FEP" Type="Self.FEP" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DCD">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="FEP">
-        <PropertyRef Name="DCDID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1493,90 +1215,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrdenComp__Contr__77DFC722">
-    <End Role="Contrato" Type="Self.Contrato" Multiplicity="0..1" />
-    <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Contrato">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="OrdenCompra">
-        <PropertyRef Name="ContratoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__OrdenComp__Forma__78D3EB5B">
-    <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
-    <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Opcion">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="OrdenCompra">
-        <PropertyRef Name="FormaPagoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__OrdenComp__ItemI__7E8CC4B1">
-    <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
-    <End Role="OrdenCompraItem" Type="Self.OrdenCompraItem" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Item">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="OrdenCompraItem">
-        <PropertyRef Name="ItemID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__OrdenComp__Orden__7F80E8EA">
-    <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="0..1" />
-    <End Role="OrdenCompraItem" Type="Self.OrdenCompraItem" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OrdenCompra">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="OrdenCompraItem">
-        <PropertyRef Name="OrdenCompraID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__OrdenComp__Prove__79C80F94">
-    <End Role="Tercero" Type="Self.Tercero" Multiplicity="0..1" />
-    <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tercero">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="OrdenCompra">
-        <PropertyRef Name="ProveedorID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__OrdenComp__Sucur__7ABC33CD">
-    <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="0..1" />
-    <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Sucursal">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="OrdenCompra">
-        <PropertyRef Name="SucursalFactura" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__OrdenComp__Sucur__7BB05806">
-    <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="0..1" />
-    <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Sucursal">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="OrdenCompra">
-        <PropertyRef Name="SucursalDespacho" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__Precio__ItemID__2CBDA3B5">
     <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
     <End Role="Precio" Type="Self.Precio" Multiplicity="*" />
@@ -1601,31 +1239,31 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Proforma__Calcul__6B79F03D">
-    <End Role="Calculadora" Type="Self.Calculadora" Multiplicity="0..1" />
+  <Association Name="FK__Proforma__Contra__5FBE24CE">
+    <End Role="Contrato" Type="Self.Contrato" Multiplicity="0..1" />
     <End Role="Proforma" Type="Self.Proforma" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Calculadora">
+      <Principal Role="Contrato">
         <PropertyRef Name="RowID" />
       </Principal>
       <Dependent Role="Proforma">
-        <PropertyRef Name="CalculadoraID" />
+        <PropertyRef Name="ContratoID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Proforma__Compra__6C6E1476">
-    <End Role="Tercero" Type="Self.Tercero" Multiplicity="0..1" />
+  <Association Name="FK__Proforma__FormaP__60B24907">
+    <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
     <End Role="Proforma" Type="Self.Proforma" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Tercero">
+      <Principal Role="Opcion">
         <PropertyRef Name="RowID" />
       </Principal>
       <Dependent Role="Proforma">
-        <PropertyRef Name="CompradorID" />
+        <PropertyRef Name="FormaPagoID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Proforma__Puerto__6D6238AF">
+  <Association Name="FK__Proforma__Puerto__61A66D40">
     <End Role="Puerto" Type="Self.Puerto" Multiplicity="0..1" />
     <End Role="Proforma" Type="Self.Proforma" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1637,7 +1275,7 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Proforma__Puerto__6E565CE8">
+  <Association Name="FK__Proforma__Puerto__629A9179">
     <End Role="Puerto" Type="Self.Puerto" Multiplicity="0..1" />
     <End Role="Proforma" Type="Self.Proforma" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1649,19 +1287,7 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Proforma__TipoPa__6F4A8121">
-    <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
-    <End Role="Proforma" Type="Self.Proforma" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Opcion">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="Proforma">
-        <PropertyRef Name="TipoPagoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Proforma__TipoPr__6E765879">
+  <Association Name="FK__Proforma__TipoPr__6B2FD77A">
     <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
     <End Role="Proforma" Type="Self.Proforma" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1673,15 +1299,87 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Proforma__Vended__703EA55A">
-    <End Role="Tercero" Type="Self.Tercero" Multiplicity="0..1" />
+  <Association Name="FK__Proforma__TipoPr__6C23FBB3">
+    <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
     <End Role="Proforma" Type="Self.Proforma" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Tercero">
+      <Principal Role="Opcion">
         <PropertyRef Name="RowID" />
       </Principal>
       <Dependent Role="Proforma">
-        <PropertyRef Name="VendedorID" />
+        <PropertyRef Name="TipoProformaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Proforma__Usuari__638EB5B2">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Proforma" Type="Self.Proforma" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Proforma">
+        <PropertyRef Name="UsuarioCreacionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Proforma__Usuari__6482D9EB">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Proforma" Type="Self.Proforma" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Proforma">
+        <PropertyRef Name="UsuarioActualizaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProformaI__ItemC__675F4696">
+    <End Role="CalculadoraItems" Type="Self.CalculadoraItems" Multiplicity="0..1" />
+    <End Role="ProformaItemCalculadora" Type="Self.ProformaItemCalculadora" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CalculadoraItems">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="ProformaItemCalculadora">
+        <PropertyRef Name="ItemCalculadoraID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProformaI__Profo__68536ACF">
+    <End Role="Proforma" Type="Self.Proforma" Multiplicity="0..1" />
+    <End Role="ProformaItemCalculadora" Type="Self.ProformaItemCalculadora" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proforma">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="ProformaItemCalculadora">
+        <PropertyRef Name="ProformaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProformaI__Usuar__69478F08">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="ProformaItemCalculadora" Type="Self.ProformaItemCalculadora" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="ProformaItemCalculadora">
+        <PropertyRef Name="UsuarioCreacionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProformaI__Usuar__6A3BB341">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="ProformaItemCalculadora" Type="Self.ProformaItemCalculadora" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="ProformaItemCalculadora">
+        <PropertyRef Name="UsuarioActualizaID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1730,30 +1428,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Principal>
       <Dependent Role="PuntoEnvio">
         <PropertyRef Name="VendedorID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__RecursosC__Contr__0B129727">
-    <End Role="RecursosProforma" Type="Self.RecursosProforma" Multiplicity="1" />
-    <End Role="RecursosContrato" Type="Self.RecursosContrato" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="RecursosProforma">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="RecursosContrato">
-        <PropertyRef Name="ContratoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__RecursosP__Profo__0371755F">
-    <End Role="Proforma" Type="Self.Proforma" Multiplicity="1" />
-    <End Role="RecursosProforma" Type="Self.RecursosProforma" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Proforma">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="RecursosProforma">
-        <PropertyRef Name="ProformaID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2141,246 +1815,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CartaLlenadoPuerto_Empresa">
-    <End Role="Opcion" Type="Self.Opcion" Multiplicity="1" />
-    <End Role="CartaLlenadoPuerto" Type="Self.CartaLlenadoPuerto" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Opcion">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="CartaLlenadoPuerto">
-        <PropertyRef Name="OpcionID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CartaLlenadoPuerto_MotoNave">
-    <End Role="MotoNave" Type="Self.MotoNave" Multiplicity="1" />
-    <End Role="CartaLlenadoPuerto" Type="Self.CartaLlenadoPuerto" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MotoNave">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="CartaLlenadoPuerto">
-        <PropertyRef Name="MotonaveID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CartaLlenadoPuerto_Puerto">
-    <End Role="Puerto" Type="Self.Puerto" Multiplicity="1" />
-    <End Role="CartaLlenadoPuerto" Type="Self.CartaLlenadoPuerto" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Puerto">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="CartaLlenadoPuerto">
-        <PropertyRef Name="PuertoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CartaLlenadoPuerto_Tercero">
-    <End Role="Tercero" Type="Self.Tercero" Multiplicity="1" />
-    <End Role="CartaLlenadoPuerto" Type="Self.CartaLlenadoPuerto" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tercero">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="CartaLlenadoPuerto">
-        <PropertyRef Name="TerceroID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CartaLlenadoPuerto_Vehiculo">
-    <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="1" />
-    <End Role="CartaLlenadoPuerto" Type="Self.CartaLlenadoPuerto" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Vehiculo">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="CartaLlenadoPuerto">
-        <PropertyRef Name="VehiculoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CertificadoMadera_Ciudad">
-    <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="1" />
-    <End Role="CertificadoMadera" Type="Self.CertificadoMadera" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Ciudad">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="CertificadoMadera">
-        <PropertyRef Name="CiudadID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CertificadoMadera_MatrizBL">
-    <End Role="MatrizBL" Type="Self.MatrizBL" Multiplicity="1" />
-    <End Role="CertificadoMadera" Type="Self.CertificadoMadera" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MatrizBL">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="CertificadoMadera">
-        <PropertyRef Name="MatrizBLID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CertificadoMadera_MotoNave">
-    <End Role="MotoNave" Type="Self.MotoNave" Multiplicity="1" />
-    <End Role="CertificadoMadera" Type="Self.CertificadoMadera" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MotoNave">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="CertificadoMadera">
-        <PropertyRef Name="MotonaveID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Contrato_Opcion">
-    <End Role="Opcion" Type="Self.Opcion" Multiplicity="1" />
-    <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Opcion">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="Contrato">
-        <PropertyRef Name="EmbarqueID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Contrato_Proforma">
-    <End Role="Proforma" Type="Self.Proforma" Multiplicity="1" />
-    <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Proforma">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="Contrato">
-        <PropertyRef Name="ProformaID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_MatrizBL_Contrato">
-    <End Role="Contrato" Type="Self.Contrato" Multiplicity="1" />
-    <End Role="MatrizBL" Type="Self.MatrizBL" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Contrato">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="MatrizBL">
-        <PropertyRef Name="ContratoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_MatrizBL_Empresa">
-    <End Role="Tercero" Type="Self.Tercero" Multiplicity="1" />
-    <End Role="MatrizBL" Type="Self.MatrizBL" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tercero">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="MatrizBL">
-        <PropertyRef Name="EmpresaID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SolicitudLlenado_Ciudad">
-    <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="1" />
-    <End Role="SolicitudLlenado" Type="Self.SolicitudLlenado" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Ciudad">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="SolicitudLlenado">
-        <PropertyRef Name="DestinoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SolicitudLlenado_Contrato">
-    <End Role="Contrato" Type="Self.Contrato" Multiplicity="1" />
-    <End Role="SolicitudLlenado" Type="Self.SolicitudLlenado" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Contrato">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="SolicitudLlenado">
-        <PropertyRef Name="ContratoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SolicitudLlenado_Opcion">
-    <End Role="Opcion" Type="Self.Opcion" Multiplicity="1" />
-    <End Role="SolicitudLlenado" Type="Self.SolicitudLlenado" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Opcion">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="SolicitudLlenado">
-        <PropertyRef Name="EmpaqueID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SolicitudTransporte_Contrato">
-    <End Role="Contrato" Type="Self.Contrato" Multiplicity="1" />
-    <End Role="SolicitudTransporte" Type="Self.SolicitudTransporte" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Contrato">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="SolicitudTransporte">
-        <PropertyRef Name="ContratoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SolicitudTransporte_Opcion">
-    <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
-    <End Role="SolicitudTransporte" Type="Self.SolicitudTransporte" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Opcion">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="SolicitudTransporte">
-        <PropertyRef Name="OpcionID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SolicitudTransporte_Planta">
-    <End Role="Planta" Type="Self.Planta" Multiplicity="0..1" />
-    <End Role="SolicitudTransporte" Type="Self.SolicitudTransporte" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Planta">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="SolicitudTransporte">
-        <PropertyRef Name="PlantaCargueID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SolicitudTransporte_SolicitudTransporte">
-    <End Role="Planta" Type="Self.Planta" Multiplicity="0..1" />
-    <End Role="SolicitudTransporte" Type="Self.SolicitudTransporte" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Planta">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="SolicitudTransporte">
-        <PropertyRef Name="PlantaDescargueID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SolicitudTransporte_Tercero">
-    <End Role="Tercero" Type="Self.Tercero" Multiplicity="1" />
-    <End Role="SolicitudTransporte" Type="Self.SolicitudTransporte" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tercero">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="SolicitudTransporte">
-        <PropertyRef Name="ProveedorID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="fk_TipoRelacionID">
     <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
     <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
@@ -2390,66 +1824,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Principal>
       <Dependent Role="Actividad">
         <PropertyRef Name="TipoRelacionID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TipoVehiculo_SolicitudTransporte">
-    <End Role="SolicitudTransporte" Type="Self.SolicitudTransporte" Multiplicity="1" />
-    <End Role="TipoVehiculo" Type="Self.TipoVehiculo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SolicitudTransporte">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="TipoVehiculo">
-        <PropertyRef Name="SolicitudTransporteID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Vehiculo_Compañia">
-    <End Role="Compañia" Type="Self.Compañia" Multiplicity="1" />
-    <End Role="VehiculoSolicitudLlenado" Type="Self.VehiculoSolicitudLlenado" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Compañia">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="VehiculoSolicitudLlenado">
-        <PropertyRef Name="EmpresaTransporteID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Vehiculo_SolicitudLlenado">
-    <End Role="SolicitudLlenado" Type="Self.SolicitudLlenado" Multiplicity="1" />
-    <End Role="VehiculoSolicitudLlenado" Type="Self.VehiculoSolicitudLlenado" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SolicitudLlenado">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="VehiculoSolicitudLlenado">
-        <PropertyRef Name="SolicitudLlenadoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Vehiculo_Tercero">
-    <End Role="Tercero" Type="Self.Tercero" Multiplicity="1" />
-    <End Role="VehiculoSolicitudLlenado" Type="Self.VehiculoSolicitudLlenado" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tercero">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="VehiculoSolicitudLlenado">
-        <PropertyRef Name="TerceroID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_VehiculoSolicitudLlenado_Vehiculo">
-    <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="1" />
-    <End Role="VehiculoSolicitudLlenado" Type="Self.VehiculoSolicitudLlenado" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Vehiculo">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="VehiculoSolicitudLlenado">
-        <PropertyRef Name="VehiculoID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2496,18 +1870,8 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
     <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="Crm" store:Type="Tables" />
     <EntitySet Name="TerceroPotencial" EntityType="Self.TerceroPotencial" Schema="Crm" store:Type="Tables" />
     <EntitySet Name="AgenteNaviera" EntityType="Self.AgenteNaviera" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Calculadora" EntityType="Self.Calculadora" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CalculadoraItems" EntityType="Self.CalculadoraItems" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DCD" EntityType="Self.DCD" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleEmpaque" EntityType="Self.DetalleEmpaque" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Empaque" EntityType="Self.Empaque" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="FEP" EntityType="Self.FEP" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="SolicitudLlenado" EntityType="Self.SolicitudLlenado" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="SolicitudTransporte" EntityType="Self.SolicitudTransporte" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TipoVehiculo" EntityType="Self.TipoVehiculo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Vehiculo" EntityType="Self.Vehiculo" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="VehiculoSolicitudLlenado" EntityType="Self.VehiculoSolicitudLlenado" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="Erp" store:Type="Tables" />
     <EntitySet Name="Compañia" EntityType="Self.Compañia" Schema="Erp" store:Type="Tables" />
     <EntitySet Name="CondicionPago" EntityType="Self.CondicionPago" Schema="Erp" store:Type="Tables" />
@@ -2520,6 +1884,11 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
     <EntitySet Name="Precio" EntityType="Self.Precio" Schema="Erp" store:Type="Tables" />
     <EntitySet Name="Sucursal" EntityType="Self.Sucursal" Schema="Erp" store:Type="Tables" />
     <EntitySet Name="Tercero" EntityType="Self.Tercero" Schema="Erp" store:Type="Tables" />
+    <EntitySet Name="Calculadora" EntityType="Self.Calculadora" Schema="Exportacion" store:Type="Tables" />
+    <EntitySet Name="CalculadoraItems" EntityType="Self.CalculadoraItems" Schema="Exportacion" store:Type="Tables" />
+    <EntitySet Name="Contrato" EntityType="Self.Contrato" Schema="Exportacion" store:Type="Tables" />
+    <EntitySet Name="Proforma" EntityType="Self.Proforma" Schema="Exportacion" store:Type="Tables" />
+    <EntitySet Name="ProformaItemCalculadora" EntityType="Self.ProformaItemCalculadora" Schema="Exportacion" store:Type="Tables" />
     <EntitySet Name="Agrupacion" EntityType="Self.Agrupacion" Schema="Maestro" store:Type="Tables" />
     <EntitySet Name="Costo" EntityType="Self.Costo" Schema="Maestro" store:Type="Tables" />
     <EntitySet Name="MotoNave" EntityType="Self.MotoNave" Schema="Maestro" store:Type="Tables" />
@@ -2531,16 +1900,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
     <EntitySet Name="Rol" EntityType="Self.Rol" Schema="Perfil" store:Type="Tables" />
     <EntitySet Name="RolMenu" EntityType="Self.RolMenu" Schema="Perfil" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="Perfil" store:Type="Tables" />
-    <EntitySet Name="CartaLlenadoPuerto" EntityType="Self.CartaLlenadoPuerto" Schema="Ventas" store:Type="Tables" />
-    <EntitySet Name="CertificadoCalidad" EntityType="Self.CertificadoCalidad" Schema="Ventas" store:Type="Tables" />
-    <EntitySet Name="CertificadoMadera" EntityType="Self.CertificadoMadera" Schema="Ventas" store:Type="Tables" />
-    <EntitySet Name="Contrato" EntityType="Self.Contrato" Schema="Ventas" store:Type="Tables" />
-    <EntitySet Name="MatrizBL" EntityType="Self.MatrizBL" Schema="Ventas" store:Type="Tables" />
-    <EntitySet Name="OrdenCompra" EntityType="Self.OrdenCompra" Schema="Ventas" store:Type="Tables" />
-    <EntitySet Name="OrdenCompraItem" EntityType="Self.OrdenCompraItem" Schema="Ventas" store:Type="Tables" />
-    <EntitySet Name="Proforma" EntityType="Self.Proforma" Schema="Ventas" store:Type="Tables" />
-    <EntitySet Name="RecursosContrato" EntityType="Self.RecursosContrato" Schema="Ventas" store:Type="Tables" />
-    <EntitySet Name="RecursosProforma" EntityType="Self.RecursosProforma" Schema="Ventas" store:Type="Tables" />
     <EntitySet Name="m_plantillas" EntityType="Self.m_plantillas" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [m_plantillas].[RowID] AS [RowID], 
@@ -2634,22 +1993,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       <End Role="Tercero" EntitySet="Tercero" />
       <End Role="Calculadora" EntitySet="Calculadora" />
     </AssociationSet>
-    <AssociationSet Name="FK__CartaLlen__Empre__4DD47EBD" Association="Self.FK__CartaLlen__Empre__4DD47EBD">
-      <End Role="Tercero" EntitySet="Tercero" />
-      <End Role="CartaLlenadoPuerto" EntitySet="CartaLlenadoPuerto" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Certifica__Ciuda__7EE1CA6C" Association="Self.FK__Certifica__Ciuda__7EE1CA6C">
-      <End Role="Ciudad" EntitySet="Ciudad" />
-      <End Role="CertificadoCalidad" EntitySet="CertificadoCalidad" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Certifica__Matri__7DEDA633" Association="Self.FK__Certifica__Matri__7DEDA633">
-      <End Role="MatrizBL" EntitySet="MatrizBL" />
-      <End Role="CertificadoCalidad" EntitySet="CertificadoCalidad" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Certifica__Produ__7FD5EEA5" Association="Self.FK__Certifica__Produ__7FD5EEA5">
-      <End Role="Item" EntitySet="Item" />
-      <End Role="CertificadoCalidad" EntitySet="CertificadoCalidad" />
-    </AssociationSet>
     <AssociationSet Name="FK__Ciudad__Departam__10216507" Association="Self.FK__Ciudad__Departam__10216507">
       <End Role="Departamento" EntitySet="Departamento" />
       <End Role="Ciudad" EntitySet="Ciudad" />
@@ -2674,8 +2017,40 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       <End Role="Ciudad" EntitySet="Ciudad" />
       <End Role="ContactoERP" EntitySet="ContactoERP" />
     </AssociationSet>
-    <AssociationSet Name="FK__Contrato__TipoCo__0EE3280B" Association="Self.FK__Contrato__TipoCo__0EE3280B">
+    <AssociationSet Name="FK__Contrato__Calcul__5634BA94" Association="Self.FK__Contrato__Calcul__5634BA94">
+      <End Role="Calculadora" EntitySet="Calculadora" />
+      <End Role="Contrato" EntitySet="Contrato" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Contrato__Client__5728DECD" Association="Self.FK__Contrato__Client__5728DECD">
+      <End Role="Tercero" EntitySet="Tercero" />
+      <End Role="Contrato" EntitySet="Contrato" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Contrato__FormaP__797DF6D1" Association="Self.FK__Contrato__FormaP__797DF6D1">
       <End Role="Opcion" EntitySet="Opcion" />
+      <End Role="Contrato" EntitySet="Contrato" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Contrato__Inspec__581D0306" Association="Self.FK__Contrato__Inspec__581D0306">
+      <End Role="Tercero" EntitySet="Tercero" />
+      <End Role="Contrato" EntitySet="Contrato" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Contrato__Interm__5911273F" Association="Self.FK__Contrato__Interm__5911273F">
+      <End Role="Tercero" EntitySet="Tercero" />
+      <End Role="Contrato" EntitySet="Contrato" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Contrato__TipoCo__5A054B78" Association="Self.FK__Contrato__TipoCo__5A054B78">
+      <End Role="Opcion" EntitySet="Opcion" />
+      <End Role="Contrato" EntitySet="Contrato" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Contrato__Usuari__5AF96FB1" Association="Self.FK__Contrato__Usuari__5AF96FB1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Contrato" EntitySet="Contrato" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Contrato__Usuari__5BED93EA" Association="Self.FK__Contrato__Usuari__5BED93EA">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Contrato" EntitySet="Contrato" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Contrato__Vended__5CE1B823" Association="Self.FK__Contrato__Vended__5CE1B823">
+      <End Role="Tercero" EntitySet="Tercero" />
       <End Role="Contrato" EntitySet="Contrato" />
     </AssociationSet>
     <AssociationSet Name="FK__Costo__MonedaID__3429BB53" Association="Self.FK__Costo__MonedaID__3429BB53">
@@ -2686,37 +2061,9 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       <End Role="Opcion" EntitySet="Opcion" />
       <End Role="Costo" EntitySet="Costo" />
     </AssociationSet>
-    <AssociationSet Name="FK__DCD__ContratoID__0DEF03D2" Association="Self.FK__DCD__ContratoID__0DEF03D2">
-      <End Role="Contrato" EntitySet="Contrato" />
-      <End Role="DCD" EntitySet="DCD" />
-    </AssociationSet>
     <AssociationSet Name="FK__Departame__PaisI__0D44F85C" Association="Self.FK__Departame__PaisI__0D44F85C">
       <End Role="Pais" EntitySet="Pais" />
       <End Role="Departamento" EntitySet="Departamento" />
-    </AssociationSet>
-    <AssociationSet Name="FK__DetalleEm__empaq__4E3E9311" Association="Self.FK__DetalleEm__empaq__4E3E9311">
-      <End Role="Empaque" EntitySet="Empaque" />
-      <End Role="DetalleEmpaque" EntitySet="DetalleEmpaque" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Empaque__BlNumbe__4F32B74A" Association="Self.FK__Empaque__BlNumbe__4F32B74A">
-      <End Role="MatrizBL" EntitySet="MatrizBL" />
-      <End Role="Empaque" EntitySet="Empaque" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Empaque__puertoC__55DFB4D9" Association="Self.FK__Empaque__puertoC__55DFB4D9">
-      <End Role="Puerto" EntitySet="Puerto" />
-      <End Role="Empaque" EntitySet="Empaque" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Empaque__puertoD__5026DB83" Association="Self.FK__Empaque__puertoD__5026DB83">
-      <End Role="Puerto" EntitySet="Puerto" />
-      <End Role="Empaque" EntitySet="Empaque" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Empaque_packing" Association="Self.FK__Empaque_packing">
-      <End Role="Opcion" EntitySet="Opcion" />
-      <End Role="Empaque" EntitySet="Empaque" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Empaque_producto" Association="Self.FK__Empaque_producto">
-      <End Role="Item" EntitySet="Item" />
-      <End Role="Empaque" EntitySet="Empaque" />
     </AssociationSet>
     <AssociationSet Name="FK__Empresa__ErpID__15DA3E5D" Association="Self.FK__Empresa__ErpID__15DA3E5D">
       <End Role="Opcion" EntitySet="Opcion" />
@@ -2725,10 +2072,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
     <AssociationSet Name="FK__Empresa__IdiomaI__16CE6296" Association="Self.FK__Empresa__IdiomaI__16CE6296">
       <End Role="Opcion" EntitySet="Opcion" />
       <End Role="Empresa" EntitySet="Empresa" />
-    </AssociationSet>
-    <AssociationSet Name="FK__FEP__DCDID__168449D3" Association="Self.FK__FEP__DCDID__168449D3">
-      <End Role="DCD" EntitySet="DCD" />
-      <End Role="FEP" EntitySet="FEP" />
     </AssociationSet>
     <AssociationSet Name="FK__Item__CompañiaID__29E1370A" Association="Self.FK__Item__CompañiaID__29E1370A">
       <End Role="Compañia" EntitySet="Compañia" />
@@ -2746,34 +2089,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       <End Role="Agrupacion" EntitySet="Agrupacion" />
       <End Role="Opcion" EntitySet="Opcion" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrdenComp__Contr__77DFC722" Association="Self.FK__OrdenComp__Contr__77DFC722">
-      <End Role="Contrato" EntitySet="Contrato" />
-      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
-    </AssociationSet>
-    <AssociationSet Name="FK__OrdenComp__Forma__78D3EB5B" Association="Self.FK__OrdenComp__Forma__78D3EB5B">
-      <End Role="Opcion" EntitySet="Opcion" />
-      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
-    </AssociationSet>
-    <AssociationSet Name="FK__OrdenComp__ItemI__7E8CC4B1" Association="Self.FK__OrdenComp__ItemI__7E8CC4B1">
-      <End Role="Item" EntitySet="Item" />
-      <End Role="OrdenCompraItem" EntitySet="OrdenCompraItem" />
-    </AssociationSet>
-    <AssociationSet Name="FK__OrdenComp__Orden__7F80E8EA" Association="Self.FK__OrdenComp__Orden__7F80E8EA">
-      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
-      <End Role="OrdenCompraItem" EntitySet="OrdenCompraItem" />
-    </AssociationSet>
-    <AssociationSet Name="FK__OrdenComp__Prove__79C80F94" Association="Self.FK__OrdenComp__Prove__79C80F94">
-      <End Role="Tercero" EntitySet="Tercero" />
-      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
-    </AssociationSet>
-    <AssociationSet Name="FK__OrdenComp__Sucur__7ABC33CD" Association="Self.FK__OrdenComp__Sucur__7ABC33CD">
-      <End Role="Sucursal" EntitySet="Sucursal" />
-      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
-    </AssociationSet>
-    <AssociationSet Name="FK__OrdenComp__Sucur__7BB05806" Association="Self.FK__OrdenComp__Sucur__7BB05806">
-      <End Role="Sucursal" EntitySet="Sucursal" />
-      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
-    </AssociationSet>
     <AssociationSet Name="FK__Precio__ItemID__2CBDA3B5" Association="Self.FK__Precio__ItemID__2CBDA3B5">
       <End Role="Item" EntitySet="Item" />
       <End Role="Precio" EntitySet="Precio" />
@@ -2782,33 +2097,53 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       <End Role="ListaPrecio" EntitySet="ListaPrecio" />
       <End Role="Precio" EntitySet="Precio" />
     </AssociationSet>
-    <AssociationSet Name="FK__Proforma__Calcul__6B79F03D" Association="Self.FK__Proforma__Calcul__6B79F03D">
-      <End Role="Calculadora" EntitySet="Calculadora" />
+    <AssociationSet Name="FK__Proforma__Contra__5FBE24CE" Association="Self.FK__Proforma__Contra__5FBE24CE">
+      <End Role="Contrato" EntitySet="Contrato" />
       <End Role="Proforma" EntitySet="Proforma" />
     </AssociationSet>
-    <AssociationSet Name="FK__Proforma__Compra__6C6E1476" Association="Self.FK__Proforma__Compra__6C6E1476">
-      <End Role="Tercero" EntitySet="Tercero" />
-      <End Role="Proforma" EntitySet="Proforma" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Proforma__Puerto__6D6238AF" Association="Self.FK__Proforma__Puerto__6D6238AF">
-      <End Role="Puerto" EntitySet="Puerto" />
-      <End Role="Proforma" EntitySet="Proforma" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Proforma__Puerto__6E565CE8" Association="Self.FK__Proforma__Puerto__6E565CE8">
-      <End Role="Puerto" EntitySet="Puerto" />
-      <End Role="Proforma" EntitySet="Proforma" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Proforma__TipoPa__6F4A8121" Association="Self.FK__Proforma__TipoPa__6F4A8121">
+    <AssociationSet Name="FK__Proforma__FormaP__60B24907" Association="Self.FK__Proforma__FormaP__60B24907">
       <End Role="Opcion" EntitySet="Opcion" />
       <End Role="Proforma" EntitySet="Proforma" />
     </AssociationSet>
-    <AssociationSet Name="FK__Proforma__TipoPr__6E765879" Association="Self.FK__Proforma__TipoPr__6E765879">
+    <AssociationSet Name="FK__Proforma__Puerto__61A66D40" Association="Self.FK__Proforma__Puerto__61A66D40">
+      <End Role="Puerto" EntitySet="Puerto" />
+      <End Role="Proforma" EntitySet="Proforma" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Proforma__Puerto__629A9179" Association="Self.FK__Proforma__Puerto__629A9179">
+      <End Role="Puerto" EntitySet="Puerto" />
+      <End Role="Proforma" EntitySet="Proforma" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Proforma__TipoPr__6B2FD77A" Association="Self.FK__Proforma__TipoPr__6B2FD77A">
       <End Role="Opcion" EntitySet="Opcion" />
       <End Role="Proforma" EntitySet="Proforma" />
     </AssociationSet>
-    <AssociationSet Name="FK__Proforma__Vended__703EA55A" Association="Self.FK__Proforma__Vended__703EA55A">
-      <End Role="Tercero" EntitySet="Tercero" />
+    <AssociationSet Name="FK__Proforma__TipoPr__6C23FBB3" Association="Self.FK__Proforma__TipoPr__6C23FBB3">
+      <End Role="Opcion" EntitySet="Opcion" />
       <End Role="Proforma" EntitySet="Proforma" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Proforma__Usuari__638EB5B2" Association="Self.FK__Proforma__Usuari__638EB5B2">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Proforma" EntitySet="Proforma" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Proforma__Usuari__6482D9EB" Association="Self.FK__Proforma__Usuari__6482D9EB">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Proforma" EntitySet="Proforma" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProformaI__ItemC__675F4696" Association="Self.FK__ProformaI__ItemC__675F4696">
+      <End Role="CalculadoraItems" EntitySet="CalculadoraItems" />
+      <End Role="ProformaItemCalculadora" EntitySet="ProformaItemCalculadora" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProformaI__Profo__68536ACF" Association="Self.FK__ProformaI__Profo__68536ACF">
+      <End Role="Proforma" EntitySet="Proforma" />
+      <End Role="ProformaItemCalculadora" EntitySet="ProformaItemCalculadora" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProformaI__Usuar__69478F08" Association="Self.FK__ProformaI__Usuar__69478F08">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="ProformaItemCalculadora" EntitySet="ProformaItemCalculadora" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProformaI__Usuar__6A3BB341" Association="Self.FK__ProformaI__Usuar__6A3BB341">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="ProformaItemCalculadora" EntitySet="ProformaItemCalculadora" />
     </AssociationSet>
     <AssociationSet Name="FK__Puerto__CiudadID__39E294A9" Association="Self.FK__Puerto__CiudadID__39E294A9">
       <End Role="Ciudad" EntitySet="Ciudad" />
@@ -2825,14 +2160,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
     <AssociationSet Name="FK__PuntoEnvi__Vende__3BFFE745" Association="Self.FK__PuntoEnvi__Vende__3BFFE745">
       <End Role="Tercero" EntitySet="Tercero" />
       <End Role="PuntoEnvio" EntitySet="PuntoEnvio" />
-    </AssociationSet>
-    <AssociationSet Name="FK__RecursosC__Contr__0B129727" Association="Self.FK__RecursosC__Contr__0B129727">
-      <End Role="RecursosProforma" EntitySet="RecursosProforma" />
-      <End Role="RecursosContrato" EntitySet="RecursosContrato" />
-    </AssociationSet>
-    <AssociationSet Name="FK__RecursosP__Profo__0371755F" Association="Self.FK__RecursosP__Profo__0371755F">
-      <End Role="Proforma" EntitySet="Proforma" />
-      <End Role="RecursosProforma" EntitySet="RecursosProforma" />
     </AssociationSet>
     <AssociationSet Name="FK__RolMenu__MenuID__7AF13DF7" Association="Self.FK__RolMenu__MenuID__7AF13DF7">
       <End Role="Menu" EntitySet="Menu" />
@@ -2962,109 +2289,9 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       <End Role="Contacto" EntitySet="Contacto" />
       <End Role="Actividad" EntitySet="Actividad" />
     </AssociationSet>
-    <AssociationSet Name="FK_CartaLlenadoPuerto_Empresa" Association="Self.FK_CartaLlenadoPuerto_Empresa">
-      <End Role="Opcion" EntitySet="Opcion" />
-      <End Role="CartaLlenadoPuerto" EntitySet="CartaLlenadoPuerto" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CartaLlenadoPuerto_MotoNave" Association="Self.FK_CartaLlenadoPuerto_MotoNave">
-      <End Role="MotoNave" EntitySet="MotoNave" />
-      <End Role="CartaLlenadoPuerto" EntitySet="CartaLlenadoPuerto" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CartaLlenadoPuerto_Puerto" Association="Self.FK_CartaLlenadoPuerto_Puerto">
-      <End Role="Puerto" EntitySet="Puerto" />
-      <End Role="CartaLlenadoPuerto" EntitySet="CartaLlenadoPuerto" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CartaLlenadoPuerto_Tercero" Association="Self.FK_CartaLlenadoPuerto_Tercero">
-      <End Role="Tercero" EntitySet="Tercero" />
-      <End Role="CartaLlenadoPuerto" EntitySet="CartaLlenadoPuerto" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CartaLlenadoPuerto_Vehiculo" Association="Self.FK_CartaLlenadoPuerto_Vehiculo">
-      <End Role="Vehiculo" EntitySet="Vehiculo" />
-      <End Role="CartaLlenadoPuerto" EntitySet="CartaLlenadoPuerto" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CertificadoMadera_Ciudad" Association="Self.FK_CertificadoMadera_Ciudad">
-      <End Role="Ciudad" EntitySet="Ciudad" />
-      <End Role="CertificadoMadera" EntitySet="CertificadoMadera" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CertificadoMadera_MatrizBL" Association="Self.FK_CertificadoMadera_MatrizBL">
-      <End Role="MatrizBL" EntitySet="MatrizBL" />
-      <End Role="CertificadoMadera" EntitySet="CertificadoMadera" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CertificadoMadera_MotoNave" Association="Self.FK_CertificadoMadera_MotoNave">
-      <End Role="MotoNave" EntitySet="MotoNave" />
-      <End Role="CertificadoMadera" EntitySet="CertificadoMadera" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Contrato_Opcion" Association="Self.FK_Contrato_Opcion">
-      <End Role="Opcion" EntitySet="Opcion" />
-      <End Role="Contrato" EntitySet="Contrato" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Contrato_Proforma" Association="Self.FK_Contrato_Proforma">
-      <End Role="Proforma" EntitySet="Proforma" />
-      <End Role="Contrato" EntitySet="Contrato" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MatrizBL_Contrato" Association="Self.FK_MatrizBL_Contrato">
-      <End Role="Contrato" EntitySet="Contrato" />
-      <End Role="MatrizBL" EntitySet="MatrizBL" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MatrizBL_Empresa" Association="Self.FK_MatrizBL_Empresa">
-      <End Role="Tercero" EntitySet="Tercero" />
-      <End Role="MatrizBL" EntitySet="MatrizBL" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SolicitudLlenado_Ciudad" Association="Self.FK_SolicitudLlenado_Ciudad">
-      <End Role="Ciudad" EntitySet="Ciudad" />
-      <End Role="SolicitudLlenado" EntitySet="SolicitudLlenado" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SolicitudLlenado_Contrato" Association="Self.FK_SolicitudLlenado_Contrato">
-      <End Role="Contrato" EntitySet="Contrato" />
-      <End Role="SolicitudLlenado" EntitySet="SolicitudLlenado" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SolicitudLlenado_Opcion" Association="Self.FK_SolicitudLlenado_Opcion">
-      <End Role="Opcion" EntitySet="Opcion" />
-      <End Role="SolicitudLlenado" EntitySet="SolicitudLlenado" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SolicitudTransporte_Contrato" Association="Self.FK_SolicitudTransporte_Contrato">
-      <End Role="Contrato" EntitySet="Contrato" />
-      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SolicitudTransporte_Opcion" Association="Self.FK_SolicitudTransporte_Opcion">
-      <End Role="Opcion" EntitySet="Opcion" />
-      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SolicitudTransporte_Planta" Association="Self.FK_SolicitudTransporte_Planta">
-      <End Role="Planta" EntitySet="Planta" />
-      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SolicitudTransporte_SolicitudTransporte" Association="Self.FK_SolicitudTransporte_SolicitudTransporte">
-      <End Role="Planta" EntitySet="Planta" />
-      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SolicitudTransporte_Tercero" Association="Self.FK_SolicitudTransporte_Tercero">
-      <End Role="Tercero" EntitySet="Tercero" />
-      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
-    </AssociationSet>
     <AssociationSet Name="fk_TipoRelacionID" Association="Self.fk_TipoRelacionID">
       <End Role="Opcion" EntitySet="Opcion" />
       <End Role="Actividad" EntitySet="Actividad" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TipoVehiculo_SolicitudTransporte" Association="Self.FK_TipoVehiculo_SolicitudTransporte">
-      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
-      <End Role="TipoVehiculo" EntitySet="TipoVehiculo" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Vehiculo_Compañia" Association="Self.FK_Vehiculo_Compañia">
-      <End Role="Compañia" EntitySet="Compañia" />
-      <End Role="VehiculoSolicitudLlenado" EntitySet="VehiculoSolicitudLlenado" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Vehiculo_SolicitudLlenado" Association="Self.FK_Vehiculo_SolicitudLlenado">
-      <End Role="SolicitudLlenado" EntitySet="SolicitudLlenado" />
-      <End Role="VehiculoSolicitudLlenado" EntitySet="VehiculoSolicitudLlenado" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Vehiculo_Tercero" Association="Self.FK_Vehiculo_Tercero">
-      <End Role="Tercero" EntitySet="Tercero" />
-      <End Role="VehiculoSolicitudLlenado" EntitySet="VehiculoSolicitudLlenado" />
-    </AssociationSet>
-    <AssociationSet Name="FK_VehiculoSolicitudLlenado_Vehiculo" Association="Self.FK_VehiculoSolicitudLlenado_Vehiculo">
-      <End Role="Vehiculo" EntitySet="Vehiculo" />
-      <End Role="VehiculoSolicitudLlenado" EntitySet="VehiculoSolicitudLlenado" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

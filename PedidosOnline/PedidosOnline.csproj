@@ -207,15 +207,6 @@
     <Compile Include="Models\CalculadoraItems.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CartaLlenadoPuerto.cs">
-      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CertificadoCalidad.cs">
-      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CertificadoMadera.cs">
-      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Ciudad.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
@@ -252,31 +243,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DAO_PedidosOnline.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\DCD.cs">
-      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Departamento.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DetalleEmpaque.cs">
-      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Empaque.cs">
-      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Empresa.cs">
-      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\FEP.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Item.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ListaPrecio.cs">
-      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MatrizBL.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Menu.cs">
@@ -294,12 +270,6 @@
     <Compile Include="Models\Opcion.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OrdenCompra.cs">
-      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OrdenCompraItem.cs">
-      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Pais.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
@@ -312,28 +282,19 @@
     <Compile Include="Models\Proforma.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProformaItemCalculadora.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Puerto.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PuntoEnvio.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RecursosContrato.cs">
-      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RecursosProforma.cs">
-      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Rol.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RolMenu.cs">
-      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SolicitudLlenado.cs">
-      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SolicitudTransporte.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\spPROFORMA_EXPORTAR_PDF1_Result.cs">
@@ -363,16 +324,10 @@
     <Compile Include="Models\TerceroPotencial.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TipoVehiculo.cs">
-      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vehiculo.cs">
-      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\VehiculoSolicitudLlenado.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1870,6 +1825,48 @@
     <Content Include="Content\js\UTIL_PORTAL.js" />
     <Content Include="Content\Menu-Responsive.css" />
     <Content Include="Content\Pedidos-Ingresado.min.css" />
+    <Content Include="Content\plugins\summernote\lang\summernote-ar-AR.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-bg-BG.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-ca-ES.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-cs-CZ.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-da-DK.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-de-DE.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-es-ES.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-es-EU.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-fa-IR.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-fi-FI.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-fr-FR.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-he-IL.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-hu-HU.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-id-ID.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-it-IT.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-ja-JP.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-ko-KR.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-lt-LT.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-nb-NO.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-nl-NL.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-pl-PL.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-pt-BR.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-pt-PT.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-ro-RO.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-ru-RU.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-sk-SK.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-sl-SI.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-sr-RS-Latin.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-sr-RS.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-sv-SE.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-th-TH.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-tr-TR.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-uk-UA.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-vi-VN.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-zh-CN.js" />
+    <Content Include="Content\plugins\summernote\lang\summernote-zh-TW.js" />
+    <Content Include="Content\plugins\summernote\plugin\hello\summernote-ext-hello.js" />
+    <Content Include="Content\plugins\summernote\plugin\specialchars\summernote-ext-specialchars.js" />
+    <Content Include="Content\plugins\summernote\summernote.css" />
+    <Content Include="Content\plugins\summernote\summernote.js" />
+    <Content Include="Content\plugins\summernote\summernote.min.css" />
+    <Content Include="Content\plugins\summernote\summernote.min.js" />
     <Content Include="Content\Responsive-Ecommerce.css" />
     <Content Include="Content\Responsive-Ecommerce2.css" />
     <Content Include="Content\SubMenuButton.css" />
@@ -2155,6 +2152,9 @@
     <Content Include="Models\DAO_PedidosOnline.edmx.diagram">
       <DependentUpon>DAO_PedidosOnline.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\plugins\summernote\font\summernote.eot" />
+    <Content Include="Content\plugins\summernote\font\summernote.ttf" />
+    <Content Include="Content\plugins\summernote\font\summernote.woff" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>

@@ -612,7 +612,3 @@ C:\Indutrade\PedidosOnline\bin\Microsoft.ReportViewer.ProcessingObjectModel.dll
 C:\Indutrade\PedidosOnline\bin\Microsoft.ReportViewer.WebForms.dll
 C:\Indutrade\PedidosOnline\bin\Microsoft.mshtml.dll
 C:\Indutrade\PedidosOnline\obj\Debug\PedidosOnline.csprojResolveAssemblyReference.cache
-C:\Indutrade\PedidosOnline\bin\Microsoft.ReportViewer.Common.dll
-C:\Indutrade\PedidosOnline\bin\Microsoft.ReportViewer.ProcessingObjectModel.dll
-C:\Indutrade\PedidosOnline\bin\Microsoft.ReportViewer.WebForms.dll
-C:\Indutrade\PedidosOnline\bin\Microsoft.mshtml.dll
