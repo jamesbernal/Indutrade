@@ -57,13 +57,13 @@
                     <th></th>
                     <th class="lang">Id</th>
                     <th class="lang">Titulo</th>
+                    <th class="lang">Consecutivo Contrato</th>
                     <th class="lang">Vendedor</th>
                     <th class="lang">Comprador</th>
-                    <th class="lang">Tipo de Pago</th>
                 </tr>
             </thead>
             <tbody style="text-align:center;">
-                @foreach (Proforma cal in Model.ToList())
+                @foreach (Proforma cal in ViewBag.ListaProformas)
                 {
 
                     <tr>
@@ -83,13 +83,13 @@
                             @cal.Titulo
                         </td>
                         <td>
-                            @cal.Tercero1.RazonSocial
+                            @cal.Contrato.Consecutivo
                         </td>
                         <td>
-                            @cal.Tercero.RazonSocial
+                            @cal.Contrato.Tercero.RazonSocial
                         </td>
                         <td>
-                            @cal.Opcion.Nombre
+                            @cal.Contrato.Tercero3.RazonSocial
                         </td>
                     </tr>
                 }

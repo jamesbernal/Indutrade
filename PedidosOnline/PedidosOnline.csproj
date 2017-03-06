@@ -201,6 +201,9 @@
     <Compile Include="Models\Agrupacion.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Booking.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Calculadora.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
@@ -223,6 +226,9 @@
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Contrato.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ContratoAdjunto.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Costo.cs">
@@ -268,6 +274,15 @@
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Opcion.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrdenCompra.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrdenCompraContrato.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrdenCompraItem.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Pais.cs">

@@ -19,15 +19,13 @@
 
     form input {
         width: 100%;
+        margin-bottom: 1px;
     }
 
     form select {
         width: 100%;
     }
 
-    .row {
-        margin-bottom: 3px;
-    }
 
     textarea {
         width: 100%;
@@ -48,594 +46,692 @@
             $('#item').hide();
         })
     });
-    function siguiente()
-    {
-        location.href='../Exportacion/Contrato?rowid_proforma='+@Model.Proforma.RowID;
-    }
 </script>
-<div class="row" id="div_menu" style="margin-bottom:20px">
-    <div class="col-md-12">
-        <div class="nav">
-            <span>
-                &nbsp;&nbsp;
-                <a href="@Url.Action("Proformas","Exportacion",new {  @rih = Request.Params["rih"] })" class="alink">
-                    <i class="glyphicon glyphicon-list-alt"></i>&nbsp;<span class="lang" key="VISTA">Vista</span>
-                </a>
-            </span>
-            <span class="guardarProforma">
-                <a href="javascript:Guardar(1);" class="alink">
-                    <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
-                </a>
-            </span>
-            <span class="guardarProforma">
-                <a href="javascript:Guardar(2);" class="alink">
-                    <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">&nbsp;Guardar&nbsp;&&nbsp;Cerrar</span>
-                </a>
-            </span>
-            <span id="item">
-                <a href="javascript:GuardarItem(1);" class="alink">
-                    <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
-                </a>
-            </span>
-            @if (Model.Proforma.RowID != 0)
+<script>
+    $(document).ready(function () {
+        $('#contrato').on('keypress', function (e) {
+            var code = (e.keyCode ? e.keyCode : e.which);
+            if (code == 13) { //Enter keycode
+                return false;
+            }
+        });
+
+        $('#fecha').datepicker({
+            dateFormat: 'dd/mm/yy',
+            minDate: 0,
+            maxDate: '+3Y',
+            inline: true
+        });
+
+        $("#contrato").autocomplete({
+            source: "Buscar_contrato",
+            minLenght: 3,
+            select: function (evento, ui) {//seleccion al autocompletar
+                if (ui.item != null) {
+                    //si hay valor en la seleccion autocompletar
+                    $("#contrato").val(ui.item.label);
+                }
+            },
+            select: function (event, ui) {
+                $.ajax({
+                    url: "CargarContrato",
+                    asyn: false,
+                    data: {
+                        RowID: ui.item.RowID
+                    },
+                    success: function (data) {
+                        debugger
+                        $('#vendedor').empty();
+                        $('#vendedor').val(data[0].vendedornom);
+                        $('#vendedornit').empty();
+                        $('#vendedornit').val(data[0].vendedornit)
+                        $('#vendedortel').empty();
+                        $('#vendedortel').val(data[0].vendedortel)
+                        $('#vendedordir').empty();
+                        $('#vendedordir').val(data[0].vendedordir)
+
+                        $('#comprador').empty();
+                        $('#comprador').val(data[0].comprador);
+                        $('#compradornit').empty();
+                        $('#compradornit').val(data[0].compradornit)
+                        $('#compradortel').empty();
+                        $('#compradortel').val(data[0].compradortel)
+                        $('#compradordir').empty();
+                        $('#compradordir').val(data[0].compradordir)
+                    }
+                })
+            }
+        });
+    });
+
+</script>
+<div class="col-md-12">
+    <div class="nav">
+        <span>
+            &nbsp;&nbsp;
+            <a href="@Url.Action("Proformas","Exportacion",new {  @rih = Request.Params["rih"] })" class="alink">
+                <i class="glyphicon glyphicon-list-alt"></i>&nbsp;<span class="lang" key="VISTA">Vista&nbsp;&nbsp;</span>
+            </a>
+        </span>
+        <span>
+            <a href="javascript:Guardar()" class="alink">
+                <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
+            </a>
+        </span>
+
+        @*@if (Model.RowID != 0)
             {
                 <span>
                     &nbsp;&nbsp;
-                    <a href="javascript:siguiente()" class="alink">
+                    <a href="~/OrdenCompra/OrdenCompra" class="alink">
                         <i class="glyphicon glyphicon-arrow-right"></i><span class="lang" key="Siguiente">Siguiente</span>
                     </a>
                 </span>
-            }
+            }*@
+        <div class="tabbable tabbable-custom tabs-top">
+            <br />
+            <ul class="nav nav-tabs tabs-top">
+                <li class="active"><a href="#tab_1" id="litab_1" data-toggle="tab" class="lang" key="">Informacion General Proforma</a></li>
+                @if (Model.Proforma.RowID > 0)
+                {
+                    <li class="item" style=""><a href="#tab_2" id="litab_2" data-toggle="tab" class="lang" key="">Items</a></li>
+                }
+            </ul>
         </div>
-    </div>
-</div>
-<div class="row">
+        <div class="tab-content" style="overflow:hidden">
+            <div class="tab-pane active" id="tab_1">
+                <div class="col-md-12">
+                    <form id="form" name="form" onsubmit="return false">
+                        <input type="hidden" class="RowID" id="RowID" name="RowID" value="@Model.Proforma.RowID" />
+                        <div class="col-md-5">
 
-    <div class="tabbable tabbable-custom tabs-top">
-        <ul class="nav nav-tabs tabs-top">
-            <li id="proforma" class="active"><a href="#tab_1" id="litab_1" data-toggle="tab" class="lang" key="">Informacion General </a></li>
-            <li id="items"><a href="#tab_2" id="litab_2" data-toggle="tab" class="lang" key="">Items</a></li>
-        </ul>
-    </div>
-
-    <div class="tab-content" style="overflow:hidden">
-        <div class="tab-pane active" id="tab_1">
-
-            <div class="col-md-12" style="margin-top:20px;">
-                <form id="formPrincial" name="formPrincial" method="post" onsubmit="return false">
-                    <input type="hidden" name="rowid" id="rowid" value="@Model.Proforma.RowID" />
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>Encabezado</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" id="encabezado" name="encabezado" value="@Model.Proforma.Titulo" required />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>Fecha</label>
-                            </div>
-                            <div class="col-md-6">
-
-                                <input type="text" id="fecha" name="fecha" value="@(Model.Proforma.RowID>0?Model.Proforma.Fecha:DateTime.Now)" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label class="lang">vendedor</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" id="vendedor" name="vendedor" required />
-                                <input type="hidden" id="rowid_vendedor" value="@Model.Proforma.VendedorID" name="rowid_vendedor" required />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label class="lang">Nit</label>
-                            </div>
-                            <div class="col-md-6">
-                                <label id="txt_nit"></label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label class="lang">Direccion</label>
-                            </div>
-                            <div class="col-md-6">
-                                <label id="txt_direccion"></label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label class="lang">Ciudad</label>
-                            </div>
-                            <div class="col-md-6">
-                                <label id="txt_ciudad"></label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label class="lang">Razon Social</label>
-                            </div>
-                            <div class="col-md-6">
-                                <label id="txt_razonsocial"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label class="lang">Comprador</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" id="comprador" name="comprador" required />
-                                <input type="hidden" id="rowid_comprador" value="@Model.Proforma.CompradorID" name="rowid_comprador" required />
-                            </div>
-                        </div>
-                        <div class="row calculadora">
-                            <div class="col-md-3">
-                                <label class="lang">Calculadora</label>
-                            </div>
-                            <div class="col-md-6">
-                                <select id="calculadora" name="calculadora" required></select>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">Encabezado</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="titulo" name="titulo" value="@Model.Proforma.Titulo " style="width: 100%" />
+                                </div>
+                                <br />
                             </div>
 
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label class="lang">Direccion</label>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label for="fecha" class="lang">Contrato</label>
+                                    </div>
+                                    @if (Model.Proforma.RowID > 0)
+                                    {
+                                        <div class="col-md-6">
+                                            <input type="text" id="contrato" name="contrato" value="@Model.Proforma.Contrato.Consecutivo" />
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-6">
+                                            <input type="text" id="contrato" name="contrato" />
+                                        </div>
+                                    }
+                                </div>
+                                <br />
                             </div>
-                            <div class="col-md-6">
-                                <label id="txt_direccion_c"></label>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label for="fecha" class="lang">Vendedor</label>
+                                    </div>
+                                    @if (Model.Proforma.RowID > 0)
+                                    {
+                                        <div class="col-md-6">
+                                            <input type="text" id="vendedor" name="vendedor" value="@Model.Proforma.Contrato.Tercero.RazonSocial" disabled />
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-6">
+                                            <input type="text" id="vendedor" name="vendedor" value="" disabled />
+                                        </div>
+                                    }
+                                </div>
+                                <br />
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label class="lang">Telefono</label>
-                            </div>
-                            <div class="col-md-6">
-                                <label id="txt_telefono_c"></label>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div id="tab_2" class="tab-pane">
-            <form id="formItem" name="formItem" onsubmit="return false">
-                <input type="hidden" name="rowid" id="rowid" value="@Model.Proforma.RowID" />
-                <div class="row">
-                    <div class="col-md-12">
-                        <table id="tableItems" class="table table-striped table-responsive table-hover">
-                            <thead>
-                                <tr>
-                                    <th>BIENES Y SERVICIOS</th>
-                                    <th>TM</th>
-                                    <th>U.V./USD</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (PedidosOnline.Models.CalculadoraItems item in Model.items.ToList())
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">Nit</label>
+                                </div>
+                                @if (Model.Proforma.RowID > 0)
                                 {
-                                    <tr>
-                                        <td>@item.Item.Descripcion</td>
-                                        <td>@item.CantidadTonelada</td>
-                                        <td>@item.PVE</td>
-                                        <td>@item.DatosVentaUSDTotal</td>
-                                    </tr>
+                                    <div class="col-md-6">
+                                        <input type="text" id="vendedornit" name="vendedornit" value="@Model.Proforma.Contrato.Tercero.Identificacion" disabled />
+                                    </div>
                                 }
-                                <tr>
-                                    <td>FOB(USD)</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                @{
-                                    double? totalFlete = (double)(Model.items.Sum(f => f.FleteTerrUSDTON)) * Model.items.Sum(f => f.CantidadTonelada);
-                                    double? totalSeguro = (double)(Model.items.Sum(f => f.DVSeguroPorton)) * Model.items.Sum(f => f.CantidadTonelada);
-                                    double? totaltermino = (double)(Model.items.Sum(f => f.PVE)) * Model.items.Sum(f => f.CantidadTonelada);
+                                else
+                                {
+                                    <div class="col-md-6">
+                                        <input type="text" id="vendedornit" name="vendedornit" value="" disabled />
+                                    </div>
                                 }
-                                <tr>
-                                    <td>Flete</td>
-                                    <td>@Model.items.Sum(f => f.FleteTerrUSDTON)</td>
-                                    <td></td>
-                                    <td>@totalFlete</td>
-                                </tr>
-                                <tr>
-                                    <td>Seguro</td>
-                                    <td>@Model.items.Sum(f => f.DVSeguroPorton)</td>
-                                    <td></td>
-                                    <td>@totalSeguro</td>
-                                </tr>
-                                <tr>
-                                    <td>@Model.Proforma.Calculadora.Opcion.Nombre</td>
-                                    <td>@Model.items.Sum(f => f.PVE)</td>
-                                    <td></td>
-                                    <td>@totaltermino</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div style="margin-bottom: 20px">
-                            <h4 class="lang" key=" ">Pago</h4>
-                            <hr style="margin:0px">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="row">
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">Telefono</label>
+                                </div>
+                                @if (Model.Proforma.RowID > 0)
+                                {
+                                    <div class="col-md-6">
+                                        <input type="text" id="vendedortel" name="vendedortel" value="@Model.Proforma.Contrato.Tercero.ContactoERP.Telefono1 " disabled />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-md-6">
+                                        <input type="text" id="vendedortel" name="vendedortel" value="" disabled />
+                                    </div>
+                                }
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">Direccion</label>
+                                </div>
+                                @if (Model.Proforma.RowID > 0)
+                                {
+                                    <div class="col-md-6">
+                                        <input type="text" id="vendedordir" name="vendedordir" value="@Model.Proforma.Contrato.Tercero.ContactoERP.Direccion1 " disabled />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-md-6">
+                                        <input type="text" id="vendedordir" name="vendedordir" value="" disabled />
+                                    </div>
+                                }
+                                <br />
+                            </div>
                             <div class="col-md-3">
                                 <label>Forma de Pago</label>
                             </div>
-                            <div class="col-md-6">
-                                <select id="formapago" name="formapago" required>
-                                    <option value="">-Seleccionar-</option>
-                                    @foreach (PedidosOnline.Models.Opcion p in ((List<PedidosOnline.Models.Opcion>)ViewBag.FormaPago).ToList())
+                        </div>
+                        <div class="col-md-6">
+                            <br />
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label for="fecha" class="lang">Comprador</label>
+                                    </div>
+                                    @if (Model.Proforma.RowID > 0)
                                     {
-                                        if (Model.Proforma.RowID > 0)
+                                        <div class="col-md-6">
+                                            <input type="text" id="comprador" name="comprador" value="@Model.Proforma.Contrato.Tercero3.RazonSocial" disabled />
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-6">
+                                            <input type="text" id="comprador" name="comprador" value="" rdisabled />
+                                        </div>
+                                    }
+                                </div>
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">Nit</label>
+                                </div>
+                                @if (Model.Proforma.RowID > 0)
+                                {
+                                    <div class="col-md-6">
+                                        <input type="text" id="compradornit" name="compradornit" value="@Model.Proforma.Contrato.Tercero3.Identificacion" disabled />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-md-6">
+                                        <input type="text" id="compradornit" name="compradornit" disabled />
+                                    </div>
+                                }
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">Telefono</label>
+                                </div>
+                                @if (Model.Proforma.RowID > 0)
+                                {
+                                    <div class="col-md-6">
+                                        <input type="text" id="compradortel" name="compradortel" value="@Model.Proforma.Contrato.Tercero3.ContactoERP.Telefono1" disabled />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-md-6">
+                                        <input type="text" id="compradortel" name="compradortel" disabled />
+                                    </div>
+                                }
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">Direccion</label>
+                                </div>
+                                @if (Model.Proforma.RowID > 0)
+                                {
+                                    <div class="col-md-6">
+                                        <input type="text" id="compradordir" name="compradordir" value="@Model.Proforma.Contrato.Tercero3.ContactoERP.Direccion1" disabled />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-md-6">
+                                        <input type="text" id="compradordir" name="compradordir" disabled />
+                                    </div>
+                                }
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label for="fecha" class="lang">Fecha envio</label>
+                                    </div>
+                                    @if (Model.Proforma.RowID > 0)
+                                    {
+                                        <div class="col-md-6">
+                                            <input type="text" id="fecha" name="fecha" value="@Model.Proforma.FechaEnvio" />
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-6">
+                                            <input type="text" id="fecha" name="fecha" />
+                                        </div>
+                                    }
+                                </div>
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">Puerto Cargue</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select id="puertocargue" name="puertocargue" required>
+                                        <option value="">-Seleccionar-</option>
+                                        @foreach (PedidosOnline.Models.Puerto p in ((List<PedidosOnline.Models.Puerto>)ViewBag.Puertos).ToList())
                                         {
-                                            if (Model.Proforma.TipoPagoID == p.RowID)
+                                            if (Model.Proforma.RowID > 0)
                                             {
-                                                <option value="@p.RowID" selected>@p.Nombre</option>
+                                                if (Model.Proforma.PuertoCargueID == p.RowID)
+                                                {
+                                                    <option value="@p.RowID" selected>@p.Nombre</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@p.RowID">@p.Nombre</option>
+                                                }
                                             }
                                             else
                                             {
                                                 <option value="@p.RowID">@p.Nombre</option>
                                             }
                                         }
-                                        else
+                                    </select>
+                                </div>
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label>Puerto Descargue</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select id="puertodescargue" name="puertodescargue" required>
+                                        <option value="">-Seleccionar-</option>
+                                        @foreach (PedidosOnline.Models.Puerto p in ((List<PedidosOnline.Models.Puerto>)ViewBag.Puertos).ToList())
                                         {
-                                            <option value="@p.RowID">@p.Nombre</option>
+                                            if (Model.Proforma.RowID > 0)
+                                            {
+                                                if (Model.Proforma.PuertoDescargueID == p.RowID)
+                                                {
+                                                    <option value="@p.RowID" selected>@p.Nombre</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@p.RowID">@p.Nombre</option>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <option value="@p.RowID">@p.Nombre</option>
+                                            }
                                         }
-                                    }
-                                    }
-                                </select>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+                    </form>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div style="margin-bottom: 20px">
-                            <h4 class="lang" key=" ">Datos de Embarque</h4>
-                            <hr style="margin:0px">
-                        </div>
-                    </div>
-                </div>
+            </div>
+            <div class="tab-pane item" id="tab_2">
+                <div class="col-md-12">
+                    <form id="formItems" name="fromItem" onsubmit="return false">
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>Numero Contrato</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" id="numerocontrato" name="numerocontrato" value="@Model.Proforma.NumeroContrato" required />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>Fecha Envio</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" id="fechaenvio" name="fechaenvio" value="@Model.Proforma.FechaEnvio" required />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>Puerto Cargue</label>
-                            </div>
-                            <div class="col-md-6">
-                                <select id="puertocargue" name="puertocargue" required>
-                                    <option value="">-Seleccionar-</option>
-                                    @foreach (PedidosOnline.Models.Puerto p in ((List<PedidosOnline.Models.Puerto>)ViewBag.Puertos).ToList())
-                                    {
-                                        if (Model.Proforma.RowID > 0)
-                                        {
-                                            if (Model.Proforma.PuertoCargueID == p.RowID)
+                        <br />
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">Items</label>
+                                </div>
+                                @if (Model.Proforma.RowID > 0)
+                                {
+                                    <div class="col-md-6">
+                                        <select id="itemsc" onchange="CargarItems()" name="itemsc" required>
+                                            <option value="">-Seleccionar-</option>
+                                            @foreach (PedidosOnline.Models.CalculadoraItems p in ViewBag.ItemsCal)
                                             {
-                                                <option value="@p.RowID" selected>@p.Nombre</option>
+                                                if (p.Item != null)
+                                                {
+                                                    <option value="@p.Item.RowID">@p.Item.Descripcion</option>
+                                                }
                                             }
-                                            else
-                                            {
-                                                <option value="@p.RowID">@p.Nombre</option>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <option value="@p.RowID">@p.Nombre</option>
-                                        }
-                                    }
-                                </select>
+                                        </select>
+                                    </div>
+                                }
+                                <br />
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>Puerto Descargue</label>
+                        <br />
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <table class="table table-hover table-responsive table-condensed" id="tablaItems">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Item</th>
+                                                <th>Empaque</th>
+                                                <th>Cantidad</th>
+                                                <th>Valor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <select id="puertodescargue" name="puertodescargue" required>
-                                    <option value="">-Seleccionar-</option>
-                                    @foreach (PedidosOnline.Models.Puerto p in ((List<PedidosOnline.Models.Puerto>)ViewBag.Puertos).ToList())
-                                    {
-                                        if (Model.Proforma.RowID > 0)
-                                        {
-                                            if (Model.Proforma.PuertoDescargueID == p.RowID)
-                                            {
-                                                <option value="@p.RowID" selected>@p.Nombre</option>
-                                            }
-                                            else
-                                            {
-                                                <option value="@p.RowID">@p.Nombre</option>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <option value="@p.RowID">@p.Nombre</option>
-                                        }
-                                    }
-                                </select>
+                            <br />
+                        </div>
+                        <div class="col-md-4">
+                            <br />
+                            <br />
+
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">Contenedores</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="Contenedores" name="Contenedores" style="width: 100%" />
+                                </div>
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">Flete</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="flete" name="flete" value="" style="width: 100%" />
+                                </div>
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">CIF/CFR</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="cif" name="cif" onkeyup="CalcularItems()" style="width: 100%" />
+                                </div>
+                                <br />
                             </div>
                         </div>
-                    </div>
+                        <div class="col-md-4">
+                            <h4>Por Tonelada</h4>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">FOB</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="fobton" name="fobton" value="" style="width: 100%" disabled />
+                                </div>
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">Flete</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="fleteton" name="fleteton" style="width: 100%" disabled />
+                                </div>
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">Seguro</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="seguroton" name="seguroton" style="width: 100%" disabled />
+                                </div>
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">CIF/CFR</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="cifton" name="cifton" onkeyup="CalcularItems" style="width: 100%" disabled />
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Valor Total</h4>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">FOB</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="fob" name="fob" value="" style="width: 100%" disabled />
+                                </div>
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">Flete</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="fleteval" name="fleteval" style="width: 100%" disabled />
+                                </div>
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">Seguro</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="seguro" name="seguro" style="width: 100%" disabled />
+                                </div>
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="ti" class="lang">CIF/CFR</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="cifval" name="cifval" onkeyup="CalcularItems" style="width: 100%" disabled />
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>Destino</label>
-                            </div>
-                            <div class="col-md-6">
-                                <label id="txt_destino">@Model.Proforma.Calculadora.Ciudad.Nombre</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>Observaciones</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <textarea id="observaciones" name="observaciones" rows="3">@Model.Proforma.Observaciones</textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
 <script>
-    $.extend($.validator.defaults, {
-        invalidHandler: function (form, validator) {
-            var errors = validator.numberOfInvalids();
-            if (errors) {
-                var message = errors == 1
-                ? 'Completar Campo Vacio.'
-                : 'Completar ' + errors + ' Campos que se encuentran vacios.';
-                Mensajes(message, 'error', '');
-            }
-        }
-    });
-    $.validator.messages.required = 'Campo requerido';
-
-    $(document).ready(function () {
-        $('#fechaenvio').datetimepicker(
-           {
-               dayOfWeekStart: 1,
-               timepicker: true,
-               lang: 'es',
-               timepicker: false
-           });
-        loadPage()
-        $('#vendedor').autocomplete({
-            source: "BuscarTercero",
-            minLength: 1,
-            select: function (eve, ui) {
-                $('#rowid_vendedor').val(ui.item.rowid);
-                $('#txt_direccion').html(ui.item.direccion);
-                $('#txt_nit').html(ui.item.nit);
-                $('#txt_razonsocial').html(ui.item.label);
-                $('#txt_ciudad').html(ui.item.ciudad);
-            }
-        })
-        $('#comprador').autocomplete({
-            source: "BuscarTercero",
-            minLength: 1,
-            select: function (eve, ui) {
-                $('#rowid_comprador').val(ui.item.rowid);
-                $('#txt_direccion_c').html(ui.item.direccion);
-                $('#txt_telefono_c').html(ui.item.telefono);
-                CalculadorasCombo()
-            }
-        })
-    })
-    function loadPage()
-    {
-        CalculadorasCombo()
-        if (@Model.Proforma.RowID>0) {
-            $('#items').show();
-            $('#vendedor').val("@Model.Proforma.Tercero1.RazonSocial");
-            $('#comprador').val("@Model.Proforma.Tercero.RazonSocial");
-            var rowid1=0;
-            var rowid2=0;
-            if (@Model.Proforma.RowID>0) {
-                rowid1="@Model.Proforma.VendedorID";
-                rowid2="@Model.Proforma.CompradorID";
-            }
-
-            CargarInformacionTerceros(rowid1,'V');
-            CargarInformacionTerceros(rowid2,'C');
-        }
-        else
-        {
-            $('#items').hide();
-        }
-    }
-    function CalculadorasCombo()
-    {
-        if ($('#rowid_comprador').val()!='') {
-            $('.calculadora').show();
-        }
-        else
-        {
-            $('.calculadora').hide();
-            return;
-        }
-        $.ajax({
-            url:"CalculadoraComprador",
-            data:{rowid:$('#rowid_comprador').val()},
-            success:function(data){
-                $('#calculadora').empty();
-                $('#calculadora').append(data);
-                if (@Model.Proforma.RowID>0) {
-                    $('#calculadora').val(@Model.Proforma.CalculadoraID);
-                }
-            }
-
-        })
-    }
-    function CargarInformacionTerceros(rowid,tipo)
-    {
-        $.ajax({
-            url:"InfoTercero",
-            data:{rowid:rowid},
-            success:function(data){
-                if (tipo=='V') {
-                    $('#rowid_vendedor').val(data[0].rowid);
-                    $('#txt_direccion').html(data[0].direccion);
-                    $('#txt_nit').html(data[0].nit);
-                    $('#txt_razonsocial').html(data[0].label);
-                    $('#txt_ciudad').html(data[0].ciudad);
-                }
-                else{
-                    $('#rowid_comprador').val(data[0].rowid);
-                    $('#txt_direccion_c').html(data[0].direccion);
-                    $('#txt_telefono_c').html(data[0].telefono);
-                }
-            }
-
-        })
-    }
-    function Guardar(accion)
-    {
-        var validator = $("#formPrincial").validate();
-        if (validator.form())
-        {
-            var formData = new FormData(document.getElementById("formPrincial"));
-            ModalProcesandoShow();
-            $.ajax({
-                url:"GuardarProforma",
-                type:"post",
-                contentType: false,
-                processData: false,
-                data: formData,
-                success:function(data)
-                {
-                    debugger
-                    if (@Model.Proforma.RowID>0) {
-                        if (accion==1) {
-                            Mensajes('Guardado Satisfactoriamente','success','');
-                        }
-                        else
-                        {
-                            location.href="../Exportacion/Proformas";
-                        }
-                    }
-                    else
-                    {
-                        location.href="../Exportacion/Proforma?rowid="+data;
-                    }
-                    ModalProcesandoHiden();
-                },
-                error:function(error)
-                {
-                    ModalProcesandoHiden();
-                    Mensajes(error,'error','');
-                }
-            })
-        }
-    }
-</script>
-<!--ITEMS-->
-<script>
-    $(document).ready(function(){
-        if (@Model.Proforma.RowID>0) {
-           // CargarItems()
-        }
-    })
-    function CargarItems()
-    {
-        var rowid=0;
-        if (@Model.Proforma.RowID>0) {
-            rowid="@Model.Proforma.CalculadoraID";
-            }
-        else
-        {
-            rowid=0;
-        }
-
-        $.ajax({
-            url:"ItemsCalculadora",
-            data:{rowid:rowid},
-            success:function(data)
+            $(document).ready(function(){
+                CargarItems();
+            });
+            function CalcularItems()
             {
-                $('#tableItems tbody').empty();
-                $('#tableItems tbody').append(data);
-            }
-        })
-    }
+                if(@Model.Proforma.RowID > 0)
+                {
+                    $.ajax({
+                        url:"CalcularItemsProforma",
+                        data:{
 
-    function GuardarItem()
-    {
-        var validator = $("#formItem").validate();
-        if (validator.form())
-        {
-            ModalProcesandoShow();
-            var formData = new FormData(document.getElementById("formItem"));
-            $.ajax({
-                url:"GuardarProformaItems",
-                type:"post",
-                contentType: false,
-                processData: false,
-                data: formData,
-                success:function(data)
-                {
-                    Mensajes('Guardado Correctamente','success','');
-                    ModalProcesandoHiden();
-                },
-                error:function(error)
-                {
-                    ModalProcesandoHiden();
-                    Mensajes(error,'error','');
+                            contenedores: $("#Contenedores").val(),
+                            flete: $("#flete").val(),
+                            cantidad: $("#Cantidad").val(),
+                            CIF: $("#cif").val(),
+                        },
+                        success:function(data){
+                            debugger
+                            $("#fobton").empty();
+                            $("#fobton").val(data.TotalFOBTon);
+                            $("#fleteton").empty();
+                            $("#fleteton").val(data.FleteTon);
+                            $("#seguroton").empty();
+                            $("#seguroton").val(data.SeguroTon);
+                            $("#cifton").empty();
+                            $("#cifton").val(data.CIFTon);
+
+
+                            $("#fob").empty();
+                            $("#fob").val(data.TotalFOBValor);
+                            $("#fleteval").empty();
+                            $("#fleteval").val(data.FleteValorTotal);
+                            $("#seguro").empty();
+                            $("#seguro").val(data.SeguroValorTotal);
+                            $("#cifval").empty();
+                            $("#cifval").val(data.ValorTotalCIF);
+                        }
+
+                    })
                 }
-            })
-        }
+            }
 
-    }
+            function CargarItems()
+            {
+                if(@Model.Proforma.RowID > 0)
+                {
+                    $.ajax({
+                        url:"ItemsCAlculadoraProforma",
+                        data:{
+                            rowid: @Model.Proforma.RowID,
+                            itemcal: $("#itemsc").val(),
+                        },
+                        success:function(data){
+                            $('#tablaItems tbody').empty();
+                            $('#tablaItems tbody').append(data);
+                        }
+
+                    })
+                }
+            }
+            function agregarItem(item,rowid)
+            {
+                ModalProcesandoShow();
+                if ($("#Cantidad").val() == "") {
+                    Mensajes('Hay campos vacios!', 'error', '');
+                    ModalProcesandoHiden();
+                    return null;
+                }
+                if ($("#valor").val() == "") {
+                    Mensajes('Hay campos vacios!', 'error', '');
+                    ModalProcesandoHiden();
+                    return null;
+                }
+                if ($("#Contenedores").val() == "") {
+                    Mensajes('Hay campos vacios!', 'error', '');
+                    ModalProcesandoHiden();
+                    return null;
+                }
+                if ($("#flete").val() == "") {
+                    Mensajes('Hay campos vacios!', 'error', '');
+                    ModalProcesandoHiden();
+                    return null;
+                }
+                if ($("#cif").val() == "") {
+                    Mensajes('Hay campos vacios!', 'error', '');
+                    ModalProcesandoHiden();
+                    return null;
+                }
+                    $.ajax({
+                        url:"GuardarItemsProforma",
+                        data:{Item: item,
+                            rowid: rowid,
+                            can: $("#Cantidad").val(),
+                            valor: $("#valor").val(),
+                            fobton: $("#fobton").val(),
+                            fleteton: $("#fleteton").val(),
+                            seguton: $("#seguroton").val(),
+                            cifton: $("#cifton").val(),
+                            fobval: $("#fob").val(),
+                            fleteval: $("#fleteval").val(),
+                            seguval: $("#seguro").val(),
+                            cifval: $("#cifval").val(),
+
+                        },
+                        success:function(data){
+                            location.href="../Exportacion/Proforma?rowid="+data;
+                            ModalProcesandoHiden();
+                        }
+                    })
+            }
+
+            function CalcularTotales(a)
+            {
+                $.ajax({
+                    url:"CalcularTotalesProforma",
+                    data:{valorcantidad: $("#Cantidad").val(),
+                        valortotal: $("#valor").val(),
+                    },
+                    success:function(data){
+                        $('#totalcantidad').html(data.Cantidad);
+                        $('#totalunitario').html(data.Valorunitario);
+                    }
+                })
+            }
+
+
+            function Guardar()
+            {
+                var validator = $("#form").validate();
+                if (validator.form())
+                {
+                    var formData = new FormData(document.getElementById("form"));
+                    ModalProcesandoShow();
+                    $.ajax({
+                        url:"GuardarProforma",
+                        type:"post",
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success:function(data)
+                        {
+
+                            location.href="../Exportacion/Proforma?rowid="+data;
+                            ModalProcesandoHiden();
+                        },
+                        error:function(error)
+                        {
+                            ModalProcesandoHiden();
+                            Mensajes(error,'error','');
+                        }
+                    })
+                }
+            }
+
 </script>
-<!--ITEMS-->

@@ -58,7 +58,7 @@
                         <th>Destino</th>
                         <th>Per. Embarque</th>
                         <th>Transporte</th>
-                       
+
                     </tr>
                 </thead>
                 <tbody>
@@ -73,17 +73,17 @@
                                 @*<a href="@Url.Action("Export", "Proforma", new { @rowid = @cal.RowID, @rih = Request.Params["rih"] })"><i class="glyphicon glyphicon-export"></i></a>*@
                             </td>
                             <td>@contratos.RowID</td>
-                            
+
                             <td></td>
                             <td>@contratos.Fecha</td>
                             <td>@contratos.Tercero1.RazonSocial</td>
                             <td>@contratos.Tercero.RazonSocial</td>
-                            
+
                             <td>@contratos.Calculadora.Ciudad.Nombre</td>
                             <td>@contratos.Opcion.Nombre</td>
-                            <td></td>
+                            <td>@contratos.Periodo.Value.ToString("dd/MM")</td>
                             <td>@contratos.Transporte</td>
-                            
+
                         </tr>
                     }
                 </tbody>

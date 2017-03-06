@@ -56,7 +56,6 @@
         $('#DateDetalle').datetimepicker(
            {
                dayOfWeekStart: 1,
-               timepicker: true,
                lang: 'es',
                timepicker: false
            });
@@ -151,22 +150,24 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="lang">Contrato</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" name="contrato" id="contrato" />
-                                    <input type="hidden" name="rowid_contrato" id="rowid_contrato" value="@Model.ContratoID" />
-                                </div>
-                            </div>
+                            
                             <div class="row">
                                 <div class="col-md-3">
                                     <label class="lang">Proveedor</label>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" name="proveedor" id="proveedor" />
-                                    <input type="hidden" name="rowid_proveedor" id="rowid_proveedor" value="@Model.ProveedorID" />
+                                    <input type="hidden" name="rowid_proveedor" id="rowid_proveedor" value="@Model.Sucursal.TerceroID" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Sucursal Proveedor</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select id="sucursalproveedor" name="sucursalproveedor">
+                                        
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">
@@ -201,15 +202,32 @@
                                     <input type="text" name="proveedor_ciudad" id="proveedor_ciudad" disabled />
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Fecha</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="Fecha" id="Fecha" value="@DateTime.Now" disabled />
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label class="lang">Facturar A</label>
+                                    <label class="lang">Comprador</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="tercerofacturacion" id="tercerofacturacion" />
-                                    <input type="hidden" name="rowid_facturacion" id="rowid_facturacion" value="@Model.SucursalFactura" />
+                                    <input type="text" name="comprador" id="comprador"  value="@Model.Tercero.RazonSocial" />
+                                    <input type="hidden" name="compradorid" id="compradorid" value="@Model.CompradorID" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Solicitante</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="solicitante" id="solicitante" value="@Model.Tercero1.RazonSocial" />
+                                    <input type="hidden" name="solicitanteid" id="solicitanteid" value="@Model.SolicitanteID" />
                                 </div>
                             </div>
                             <div class="row">
@@ -256,23 +274,41 @@
 
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
-                            <div style="margin-bottom: 20px">
-                                <h4 class="lang" key=" ">Despacho</h4>
-                                <hr style="margin:0px">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Condicion de Pago</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select id="formapago" name="formapago">
+                                        <option value="">-Seleccionar-</option>
+                                        @foreach (PedidosOnline.Models.CondicionPago item in ((List<PedidosOnline.Models.CondicionPago>)ViewBag.FormaPago).ToList())
+                                        {
+                                            if (Model.RowID > 0)
+                                            {
+                                                if (Model.FormaPagoID == item.RowID)
+                                                {
+                                                    <option value="@item.RowID" selected>@item.Descripcion</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.RowID">@item.Descripcion</option>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.RowID">@item.Descripcion</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-3">
                                     <label class="lang">Despacho</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select id="despacho" name="despacho">
-                                        <option value="">-Seleccionar-</option>
-                                    </select>
+                                    <input type="text" id="despacho" name="despacho" />
                                 </div>
                             </div>
                             <div class="row">
@@ -280,48 +316,9 @@
                                     <label class="lang">Lugar Entrega</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="despacho_direccion" id="despacho_direccion" disabled />
+                                    <input type="text" id="lugar_entrega" name="lugar_entrega" />
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="lang">Ciudad</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" name="despacho_ciudad" id="despacho_ciudad" disabled />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="lang">Forma Pago</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <select id="formapago" name="formapago">
-                                        <option value="">-Seleccionar-</option>
-                                        @foreach (PedidosOnline.Models.Opcion item in ((List<PedidosOnline.Models.Opcion>)ViewBag.FormaPago).ToList())
-                                        {
-                                            if (Model.RowID > 0)
-                                            {
-                                                if (Model.FormaPagoID == item.RowID)
-                                                {
-                                                    <option value="@item.RowID" selected>@item.Nombre</option>
-                                                }
-                                                else
-                                                {
-                                                    <option value="@item.RowID">@item.Nombre</option>
-                                                }
-                                            }
-                                            else
-                                            {
-                                                <option value="@item.RowID">@item.Nombre</option>
-                                            }
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </form>
@@ -367,52 +364,57 @@
 
     function pageLoad()
     {
-        if (@Model.RowID>0) {
-            $('#contrato').val("@Model.Contrato.Titulo")
-            $('#proveedor').val("@Model.Tercero.RazonSocial")
-            $('#tercerofacturacion').val("@Model.Sucursal.Tercero.RazonSocial"+"@Model.Sucursal.Nombre")
-            CargarInformacionTerceroFacturacion(@Model.SucursalFactura);
-            CargarInformacionTerceroProveedor(@Model.ProveedorID);
-            CargarSucursalDespacho(@Model.SucursalFactura);
-        }
+        
     }
 
     $(document).ready(function () {
         pageLoad()
         $('#proveedor').autocomplete({
-            source: "BuscarTercero",
+            source: "Buscar_Tercero_Proveedor",
             minLength: 1,
             select: function (evento, ui)
             {
-                $('#rowid_proveedor').val(ui.item.rowid);
-                CargarInformacionTerceroProveedor(ui.item.rowid)
+                $('#rowid_proveedor').val(ui.item.RowID);
+                CargarInformacionTerceroProveedor(ui.item.RowID)
+                CargarSucursalProveedor(ui.item.RowID);
             }
         });
-        $('#contrato').autocomplete({
-            source: "ContratoB",
+        $('#comprador').autocomplete({
+            source: "Buscar_Tercero",
             minLength: 1,
             select: function (evento, ui) {
-                debugger
-                $('#rowid_contrato').val(ui.item.rowid);
+                $('#compradorid').val(ui.item.RowID);
+                CargarInformacionTerceroFacturacion(ui.item.RowID);
+                
             }
         });
-        $('#tercerofacturacion').autocomplete({
-            source: "BuscarTerceroSucursal",
+        $('#solicitante').autocomplete({
+            source: "Buscar_Tercero",
             minLength: 1,
             select: function (evento, ui) {
-                $('#rowid_facturacion').val(ui.item.rowid);
-                CargarInformacionTerceroFacturacion(ui.item.rowid);
-                CargarSucursalDespacho(ui.item.rowid);
+                $('#solicitanteid').val(ui.item.RowID);
+                
             }
         });
     });
+    function CargarSucursalProveedor(rowid)
+    {
+        $.ajax({
+            url: "TerceroSucursales",
+            data: { rowid: rowid },
+            success: function (data)
+            {
+                $('#sucursalproveedor').empty();
+                $('#sucursalproveedor').append(data);
+            }
+        });
+    }
     function CargarInformacionTerceroProveedor(rowid)
     {
         $.ajax({
             url: "TerceroInformacion",
             data: { rowid: rowid },
             success: function (data) {
-                debugger
                 $('#proveedor_nit').val(data[0].nit);
                 $('#proveedor_ciudad').val(data[0].ciudad);
                 $('#proveedor_telefono').val(data[0].ciudad);
@@ -421,12 +423,10 @@
         });
     }
     function CargarInformacionTerceroFacturacion(rowid) {
-        debugger
         $.ajax({
-            url: "SucursalesTerceroInformacion",
+            url: "TerceroInformacion",
             data: { rowid: rowid },
             success: function (data) {
-                debugger
                 $('#facturacion_nit').val(data[0].nit);
                 $('#facturacion_telefono').val(data[0].nit);
                 $('#facturacion_ciudad').val(data[0].ciudad);
@@ -434,37 +434,7 @@
             }
         });
     }
-    function CargarInformacionDespacho(rowid) {
-        $.ajax({
-            url: "SucursalesTerceroInformacion",
-            data: { rowid: rowid },
-            success: function (data) {
-                $('#despacho_ciudad').val(data[0].ciudad);
-                $('#despacho_direccion').val(data[0].direccion);
-            }
-        });
-    }
-    function CargarSucursalDespacho(rowid)
-    {
-        $.ajax({
-            url: "SucursalesTercero",
-            data: { rowid: rowid },
-            success: function (data)
-            {
-                $('#despacho').empty();
-                $('#despacho').append(data);
-                if (@Model.RowID>0) {
-                    $('#despacho').val(@Model.SucursalDespacho);
-                    CargarInformacionDespacho($('#despacho').val());
-                }
-            }
-        });
-    }
-    $(document).ready(function () {
-        $('#despacho').change(function () {
-            CargarInformacionDespacho($('#despacho').val())
-        });
-    });
+   
 </script>
 <!--ITEM-->
 <script>

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using PedidosOnline.Models;
 using System.Data.SqlClient;
-using PedidosOnline.Models;
+using System.IO;
 using PedidosOnline.Utilidades;
 
 namespace PedidosOnline.Controllers
@@ -60,6 +60,28 @@ namespace PedidosOnline.Controllers
 
             return jsonResult;
         }
+        public JsonResult Buscar_Tercero_Proveedor()
+        {
+            List<Terceros> data = new List<Terceros>();
+            string terms = Request.Params["term"].Trim().ToUpper();
+            List<Terceros> Lista = (from listado in db.Tercero
+                                    where (listado.RazonSocial.Contains(terms) && listado.Proveedor==1)
+                                    select new Terceros()
+                                    {
+                                        RowID = listado.RowID,
+                                        RazonSocial = listado.RazonSocial,
+                                        label = listado.RazonSocial,
+
+
+                                    }).Distinct().OrderBy(f => f.label).ToList();//.Take(15);
+            data.AddRange(Lista.ToList());
+
+
+            var jsonResult = Json(data.OrderBy(f => f.RowID), JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+
+            return jsonResult;
+        }
         public JsonResult Buscar_Calculadora()
         {
             List<Terceros> data = new List<Terceros>();
@@ -75,7 +97,7 @@ namespace PedidosOnline.Controllers
                                                ContactoTelefono=listado.Tercero.ContactoERP.Telefono1,
                                                RowIDCliente = listado.Tercero.RowID,
                                                incoterm =listado.Opcion.Nombre,
-                                               tranportecorresponde = listado.Opcion.Nombre
+                                               tranportecorresponde = listado.Opcion.Codigo
                                            }).Distinct().OrderBy(cal=>cal.RowID).ToList();
             var returnjson = Json(ListaCalc.OrderBy(cal => cal.RowID), JsonRequestBehavior.AllowGet);
             returnjson.MaxJsonLength = int.MaxValue;
@@ -97,15 +119,80 @@ namespace PedidosOnline.Controllers
             returnjson.MaxJsonLength = int.MaxValue;
             return returnjson;
         }
-        
+
         #endregion
-        
+
+        #region:::::CONTRATO:::::
+        public string EliminarEvidenciaContrato(int? rowid)
+        {
+            db.ContratoAdjunto.Remove(db.ContratoAdjunto.Where(f => f.RowID == rowid).FirstOrDefault());
+            db.SaveChanges();
+            return "";
+        }
+        [CheckSessionOut]
+        public string CargarEvidenciasContrato(int? rowid)
+        {
+            string result = "";
+            foreach (var item in db.ContratoAdjunto.Where(f=>f.ContratoID==rowid).ToList())
+            {
+                result += "<tr><td><a href=\"" + item.Recurso + "\" target=\"_blank\"><i class=\"glyphicon glyphicon-picture\"></i></a></td><td>" + item.Descripcion+"</td><td>"+item.UsuarioCreacion+"</td><td>"+item.FechaCreacion+ "</td><td><a onclick=\"EliminarEvidencia(" + item.RowID + ")\"><i class=\"glyphicon glyphicon-trash\"></a></td></tr>";
+            }
+
+            return result;
+        }
+        [CheckSessionOut]
+        public string ContratoAdjuntoGuardar()
+        {
+            try
+            {
+                HttpPostedFileBase file = Request.Files[0];
+                int? rowid = int.Parse(Request.Params["rowid"]);
+                var ruta = "";
+                if (file != null && file.ContentLength > 0)
+                {
+                    string Guid_Img = Guid.NewGuid().ToString();
+                    Guid_Img = Guid_Img.Substring(1, 7);
+                    var nombreArchivo = Guid_Img.Trim() + "_" + Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/RepositorioArchivos/ArchivosContrato"), nombreArchivo);
+                    //Directory.CreateDirectory(path);
+
+                    ruta = "/RepositorioArchivos/ArchivosContrato/" + nombreArchivo;
+                    try
+                    {
+                        Directory.CreateDirectory(Server.MapPath("~/RepositorioArchivos/ArchivosContrato"));
+                    }
+                    catch (Exception ex) { }
+                    file.SaveAs(path);
+                    ContratoAdjunto contratoad = new ContratoAdjunto();
+                    contratoad.Recurso = ruta;
+                    contratoad.ContratoID = rowid;
+                    contratoad.Descripcion = Request.Params["descripcion"];
+                    contratoad.UsuarioCreacion = ((Usuario)Session["curUser"]).NombreUsuario;
+                    contratoad.FechaCreacion = DateTime.Now;
+                    db.ContratoAdjunto.Add(contratoad);
+                    db.SaveChanges();
+
+                }
+
+                if (string.IsNullOrEmpty(ruta))
+                {
+                    Response.StatusCode = 500;
+                }
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = 500;
+            }
+            
+            return "";
+        }
+        [CheckSessionOut]
         public ActionResult Contrato(int? rowid)
         {
             Models.Contrato contrato = new Models.Contrato();
             ViewBag.Termino = db.m_plantillas.Where(mp => mp.Nombre == "TERMINOSCONTRATO").FirstOrDefault();
             ViewBag.FormasPago = db.Opcion.Where(fp => fp.Agrupacion.Nombre == "CONTRATO.FORMAPAGO").ToList();
-            if (rowid>0)
+            if (rowid > 0)
             {
                 contrato = db.Contrato.Where(con => con.RowID == rowid).FirstOrDefault();
                 return View(contrato);
@@ -132,12 +219,12 @@ namespace PedidosOnline.Controllers
         }
         [CheckSessionOutAttribute]
         [ValidateInput(false)]
-        public JsonResult RegistrarContrato(FormCollection form, int? RowID, int? RowIDPro,string terminos)
+        public JsonResult RegistrarContrato(FormCollection form, int? RowID, int? RowIDPro, string terminos)
         {
             //FormCollection.KeysCollection lo =(Request.Form[""]);
             //string los2 = lo[1];
             var lol = Request.Form;
-             form.Remove("terminos");
+            form.Remove("terminos");
             Usuario objusuario = (Usuario)(Session["curUser"]);
             String mensaje = "";
 
@@ -196,7 +283,7 @@ namespace PedidosOnline.Controllers
 
                 throw;
             }
-           
+
             //try
             //{
             //    if (RowID == 0)
@@ -256,6 +343,8 @@ namespace PedidosOnline.Controllers
 
             return Json(rowid, JsonRequestBehavior.AllowGet);
         }
+        #endregion
+
         #region ::::CALCULADORA::::
 
         [CheckSessionOut]
@@ -284,6 +373,12 @@ namespace PedidosOnline.Controllers
                            items = db.CalculadoraItems.Where(f => f.CalculadoraID == reg.RowID).ToList()
                        }).FirstOrDefault();
             }
+            else
+            {
+                obj.Calculadora.Tercero = new Tercero();
+                obj.Calculadora.Tercero1 = new Tercero();
+                obj.Calculadora.Tercero2 = new Tercero();
+            }
             return View(obj);
         }
         public string GuardarCalculadora()
@@ -302,12 +397,12 @@ namespace PedidosOnline.Controllers
                 obj.UsuarioCreacion = "Admin";//((s_usuario)Session["curUser"]).nombre_usuario;
                 obj.FechaCreacion = DateTime.Now;
             }
-            obj.TerceroID = int.Parse(Request.Params["cliente"]);
+            obj.TerceroID = int.Parse(Request.Params["rowid_cliente"]);
             obj.IncotermID = int.Parse(Request.Params["InCortems"]);
             obj.Fecha = DateTime.Parse(Request.Params["DateDetalle"]);
             obj.DestinoID = int.Parse(Request.Params["ciudadID"]);
             //obj.AgenteNavieraID = int.Parse(Request.Params["agenciaNav"]);
-            obj.NombreBroker = Request.Params["NombreBroker"];
+            obj.BrokerID = int.Parse(Request.Params["idBroker"]);
             obj.observacion = Request.Params["observa"];
             if (obj.RowID == 0)
             {
@@ -733,6 +828,398 @@ namespace PedidosOnline.Controllers
         }
         #endregion
 
+        //#region :::::ORDEN COMPRA:::::
+        //[CheckSessionOut]
+        //public ActionResult OrdenCompra(int? rowid, int? rowid_contrato)
+        //{
+        //    ViewBag.FormaPago = db.CondicionPago.ToList();
+        //    Models.OrdenCompra reg = new Models.OrdenCompra();
+        //    if (rowid > 0)
+        //    {
+        //        reg = db.OrdenCompra.Where(f => f.RowID == rowid).FirstOrDefault();
+        //    }
+        //    else
+        //    {
+        //        reg.Tercero = new Tercero();
+        //        reg.Tercero1 = new Tercero();
+        //        reg.Opcion = new Opcion();
+        //        reg.CondicionPago = new CondicionPago();
+        //        reg.Sucursal = new Sucursal();
+        //        reg.Sucursal.Tercero = new Tercero();
+        //    }
+        //    return View(reg);
+        //}
+        //[CheckSessionOut]
+        //public JsonResult BuscarTerceroSucursal(string term)
+        //{
+        //    var result = (from reg in db.Sucursal.Where(f => f.Tercero.RazonSocial.Contains(term) || f.Tercero.Identificacion.Contains(term) || f.Nombre.Contains(term))
+        //                  select new
+        //                  {
+        //                      label = reg.Tercero.RazonSocial + "-" + reg.Nombre,
+        //                      nit = reg.Tercero.Identificacion,
+        //                      rowid = reg.RowID,
+        //                      ciudad = reg.ContactoERP.Ciudad.Nombre + "," + reg.ContactoERP.Ciudad.Departamento.Pais.Nombre,
+        //                      telefono = reg.ContactoERP.Telefono1,
+        //                      direccion = reg.ContactoERP.Direccion1,
+        //                      iva = ""
+        //                  });
+
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
+        //[CheckSessionOut]
+        //public JsonResult TerceroInformacion(int rowid)
+        //{
+        //    var result = (from reg in db.Tercero.Where(f => f.RowID == rowid)
+        //                  select new
+        //                  {
+        //                      label = reg.RazonSocial,
+        //                      nit = reg.Identificacion,
+        //                      rowid = reg.RowID,
+        //                      ciudad = reg.ContactoERP.Ciudad.Nombre + "," + reg.ContactoERP.Ciudad.Departamento.Pais.Nombre,
+        //                      telefono = reg.ContactoERP.Telefono1,
+        //                      direccion = reg.ContactoERP.Direccion1
+        //                  });
+
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
+        //[CheckSessionOut]
+        //public ActionResult OrdenCompras()
+        //{
+        //    List<OrdenCompra> lista = db.OrdenCompra.ToList();
+        //    return View(lista);
+        //}
+        //[CheckSessionOut]
+        //public JsonResult SucursalesTerceroInformacion(int? rowid)
+        //{
+        //    var result = (from reg in db.Sucursal.Where(f => f.RowID == rowid)
+        //                  select new
+        //                  {
+        //                      label = reg.Tercero.RazonSocial + "-" + reg.Nombre,
+        //                      nit = reg.Tercero.Identificacion,
+        //                      rowid = reg.RowID,
+        //                      ciudad = reg.ContactoERP.Ciudad.Nombre + "," + reg.ContactoERP.Ciudad.Departamento.Pais.Nombre,
+        //                      telefono = reg.ContactoERP.Telefono1,
+        //                      direccion = reg.ContactoERP.Direccion1,
+        //                      iva = ""
+        //                  });
+
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
+        //[CheckSessionOut]
+        //public string TerceroSucursales(int rowid)
+        //{
+
+        //    //Sucursal sucursal = db.Sucursal.Where(f => f.RowID == rowid).FirstOrDefault();
+        //    string resultado = "<option value=''>-Seleccionar-</option>";
+        //    foreach (Sucursal item in db.Sucursal.Where(f => f.TerceroID == rowid).ToList())
+        //    {
+        //        resultado += "<option value='" + item.RowID + "'>" +item.Codigo+" "+ item.Nombre + "</option>";
+        //    }
+        //    return resultado;
+        //}
+
+        //[CheckSessionOut]
+        //public string GuardarOrdenCompra()
+        //{
+        //    OrdenCompra reg = new Models.OrdenCompra();
+        //    int rowid = int.Parse(Request.Params["rowid"]);
+        //    if (rowid > 0)
+        //    {
+        //        reg = db.OrdenCompra.Where(f => f.RowID == rowid).FirstOrDefault();
+        //    }
+           
+        //    reg.FormaPagoID = int.Parse(Request.Params["formapago"]);
+        //    reg.Observaciones = Request.Params["observaciones"];
+
+        //    reg.Fecha = DateTime.Now;
+        //    if (reg.RowID == 0)
+        //    {
+        //        reg.FechaCreacion = DateTime.Now;
+        //        reg.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
+        //        db.OrdenCompra.Add(reg);
+        //        db.SaveChanges();
+        //        Contrato c = db.Contrato.Where(f => f.RowID == reg.ContratoID).FirstOrDefault();
+        //        foreach (var item in db.CalculadoraItems.Where(f => f.CalculadoraID == reg.Contrato.Proforma.CalculadoraID))
+        //        {
+        //            OrdenCompraItem OCItem = new Models.OrdenCompraItem();
+        //            OCItem.ItemID = item.ItemID;
+        //            OCItem.OrdenCompraID = reg.RowID;
+        //            OCItem.UnidadEmpaque = item.Item.Unidad;
+        //            OCItem.Cantidad = item.CantidadTonelada;
+        //            OCItem.ValorUnitario = double.Parse(item.MPPCUSDCalculado.ToString());
+        //            OCItem.ValorImpuesto = (((OCItem.Cantidad * OCItem.ValorUnitario) * item.Item.Impuesto) / 100);
+        //            OCItem.ValorBase = OCItem.Cantidad * OCItem.ValorUnitario;
+        //            OCItem.ValorTotal = OCItem.ValorBase + OCItem.ValorImpuesto;
+        //            OCItem.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
+        //            OCItem.FechaCreacion = DateTime.Now;
+        //            db.OrdenCompraItem.Add(OCItem);
+        //            db.SaveChanges();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        reg.UsuarioModificacion = ((Usuario)Session["CurUser"]).NombreUsuario;
+        //        reg.FechaModificacion = DateTime.Now;
+        //    }
+
+        //    return reg.RowID.ToString();
+        //}
+
+        //#endregion
+
+        #region :::::PROFORMA:::::
+
+        [CheckSessionOut]
+        public ActionResult Proformas()
+        {
+            List<Proforma> Lista = db.Proforma.OrderBy(f => f.RowID).ToList();
+            ViewBag.ListaProformas = Lista.ToList();
+            return View(Lista);
+        }
+
+        [CheckSessionOut]
+        public ActionResult Proforma(int? rowid)
+        {
+            ViewBag.FormaPago = db.Opcion.Where(f => f.Agrupacion.Nombre == "PROFORMA.FORMAPAGO").ToList();
+            ViewBag.Puertos = db.Puerto.ToList();
+
+            reg_Proforma reg = new reg_Proforma();
+            reg.Proforma = db.Proforma.Where(f => f.RowID == rowid).FirstOrDefault();
+            if (reg.Proforma == null)
+            {
+                reg.Proforma = new Models.Proforma();
+            }
+            else
+            {
+                ViewBag.ItemsCal = db.CalculadoraItems.Where(f => f.CalculadoraID == reg.Proforma.Contrato.CalculadoraID).ToList();
+            }
+            return View(reg);
+        }
+        [CheckSessionOut]
+        public JsonResult Buscar_contrato()
+        {
+
+            List<Contratos> data = new List<Contratos>();
+            string terms = Request.Params["term"].Trim().ToUpper();
+            List<Contratos> Lista = new List<Utilidades.Contratos>();
+            try
+            {
+                Lista = (from listado in db.Contrato
+                         where (listado.Consecutivo.Contains(terms))
+                         select new Contratos()
+                         {
+                             RowID = listado.RowID,
+                             label = listado.Consecutivo,
+                         }).Distinct().OrderBy(f => f.label).ToList();
+            }
+            catch { Lista = new List<Utilidades.Contratos>(); }
+            data.AddRange(Lista.ToList());
+
+            var jsonResult = Json(data.OrderBy(f => f.RowID), JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+
+            return jsonResult;
+        }
+        [CheckSessionOut]
+        public JsonResult CargarContrato(int? RowID)
+        {
+            Contrato cn = db.Contrato.Where(f => f.RowID == RowID).FirstOrDefault();
+            ViewBag.ItemsCal = db.CalculadoraItems.Where(f => f.CalculadoraID == cn.CalculadoraID).ToList();
+            var cont = (from terceroexiste in db.Contrato.ToList()
+                        where terceroexiste.RowID == RowID
+                        select new
+                        {
+                            vendedornom = terceroexiste.Tercero.RazonSocial,
+                            vendedornit = terceroexiste.Tercero.Identificacion,
+                            vendedortel = terceroexiste.Tercero.ContactoERP.Telefono1,
+                            vendedordir = terceroexiste.Tercero.ContactoERP.Direccion1,
+                            comprador = terceroexiste.Tercero3.RazonSocial,
+                            compradornit = terceroexiste.Tercero3.Identificacion,
+                            compradortel = terceroexiste.Tercero3.ContactoERP.Telefono1,
+                            compradordir = terceroexiste.Tercero3.ContactoERP.Direccion1,
+                            nitven = terceroexiste.Tercero3.Identificacion,
+
+                        });
+
+            return Json(cont, JsonRequestBehavior.AllowGet);
+        }
+
+        [CheckSessionOut]
+        public string GuardarProforma()
+        {
+            Proforma reg = new Models.Proforma();
+            int rowid = int.Parse(Request.Params["rowid"]);
+            reg = db.Proforma.Where(f => f.RowID == rowid).FirstOrDefault();
+            if (reg == null)
+            {
+                reg = new Models.Proforma();
+            }
+            reg.Titulo = Request.Params["titulo"];
+            string contrato = Request.Params["contrato"];
+            try
+            {
+                Contrato con = db.Contrato.Where(f => f.Consecutivo == contrato).FirstOrDefault();
+                reg.ContratoID = con.RowID;
+            }
+            catch { }
+            reg.TipoProformaID = db.Opcion.Where(op => op.Agrupacion.Nombre == "TIPOPROFORMA" && op.Codigo == "EXPORTACION").FirstOrDefault().RowID;
+            reg.FechaEnvio = Convert.ToDateTime(Request.Params["fecha"].ToString());
+            reg.PuertoCargueID = int.Parse(Request.Params["puertocargue"].ToString());
+            reg.PuertoDescargueID = int.Parse(Request.Params["puertodescargue"].ToString());
+            reg.FechaCreacion = DateTime.Now;
+            if (reg.RowID == 0)
+            {
+                db.Proforma.Add(reg);
+            }
+            else
+            {
+                reg.FechaActualizacion = DateTime.Now;
+            }
+
+            db.SaveChanges();
+            return reg.RowID.ToString();
+        }
+        [CheckSessionOut]
+        public string ItemsCAlculadoraProforma(int? rowid, int? itemcal)
+        {
+            string result = "";
+            if (itemcal != null)
+            {
+                Proforma pr = db.Proforma.Where(f => f.RowID == rowid).FirstOrDefault();
+
+                if (pr != null)
+                {
+                    List<CalculadoraItems> lista = db.CalculadoraItems.Where(f => f.ItemID == itemcal && f.CalculadoraID == pr.Contrato.CalculadoraID).ToList();
+
+                    foreach (var item in lista)
+                    {
+
+                        //@Url.Action('GuardarItemsProforma', 'Exportacion', new { @Item = "+ item.RowID+ ", @rowid = "+rowid+ ", @rih = Request.Params['rih'] })
+                        result += "<tr><td><a href='javascript:agregarItem(" + item.RowID + "," + rowid + ")'><i class='glyphicon glyphicon-save'> </i></a></td>" +
+                            "<td>" + item.Item.Descripcion + "</td>" +
+                               "<td>" + item.Opcion.Nombre + "</td>" +
+                               "<td><input type='number' id='Cantidad' onkeyup='CalcularTotales(" + item.RowID + ")' value='" + item.CantidadTonelada + "'></td>" +
+                               "<td><input type='text' id='valor' onkeyup='CalcularTotales(" + item.RowID + ")' value='" + item.CTotalPUSD_usd + "'></td>" +
+                               "</tr>";
+                    }
+                    result += "<tr><td></td><td></td><td>Total:</td><td><span id='totalcantidad'>" + lista.Sum(f => f.CantidadTonelada) + "</span></td><td><span id='totalunitario'>" + lista.Sum(f => f.CTotalPUSD_usd) + "</span></td></tr>";
+                }
+                else
+                {
+                    result += "<tr><td></td>" +
+                           "<td></td>" +
+                           "<td></td>" +
+                           "<td></td>" +
+                           "<td></td></tr>";
+                }
+            }
+            else
+            {
+                ProformaItemCalculadora proformaitem = db.ProformaItemCalculadora.Where(f => f.ProformaID == rowid).FirstOrDefault();
+                if (proformaitem != null)
+                {
+                    List<ProformaItemCalculadora> lista = db.ProformaItemCalculadora.Where(f => f.RowID == proformaitem.RowID).ToList();
+
+                    foreach (var item in lista)
+                    {
+                        result += "<tr><td><a href='javascript:agregarItem(" + item.RowID + "," + rowid + ")'><i class='glyphicon glyphicon-save'> </i></a></td>" +
+                               "<td>" + item.CalculadoraItems.Item.Descripcion + "</td>" +
+                               "<td>" + item.CalculadoraItems.Opcion.Nombre + "</td>" +
+                               "<td><input type='number' id='Cantidad' onkeyup='CalcularTotales(" + item.CalculadoraItems.Item.RowID + ")' value='" + item.Cantidad + "'></td>" +
+                               "<td><input type='text' id='valor' onkeyup='CalcularTotales(" + item.RowID + ")' value='" + item.PrecioCombrar + "'></td>" +
+                               "</tr>";
+                    }
+                    result += "<tr><td></td><td></td><td>Total:</td><td><span name='totalcantidad' id='totalcantidad'>" + lista.Sum(f => f.Cantidad) + "</span></td><td><span id='totalunitario' name='totalunitario' >" + lista.Sum(f => f.PrecioCombrar) + "</span></td></tr>";
+                }
+                else
+                {
+                    result += "<tr><td></td>" +
+                               "<td></td>" +
+                               "<td></td>" +
+                               "<td></td>" +
+                               "<td></td></tr>";
+                }
+            }
+            return result;
+        }
+        [CheckSessionOut]
+        public string GuardarItemsProforma(int? Item, int? rowid, string can, string valor, double? fobton, double? fleteton, double? seguton, double? cifton, double? fobval, double? fleteval, double? seguval, double? cifval)
+        {
+            ProformaItemCalculadora proformaitem = db.ProformaItemCalculadora.Where(f => f.ProformaID == rowid).FirstOrDefault();
+            if (proformaitem != null)
+            {
+                proformaitem.ItemCalculadoraID = Item;
+                proformaitem.FechaActualizacion = DateTime.Now;
+                proformaitem.Cantidad = int.Parse(can);
+                proformaitem.PrecioCombrar = double.Parse(valor);
+                proformaitem.CifTonelada = cifton;
+                proformaitem.CifValor = cifval;
+                proformaitem.FleteTonelada = fleteton;
+                proformaitem.FleteValor = fleteval;
+                proformaitem.FobTonelada = fobton;
+                proformaitem.FobValor = fobval;
+                proformaitem.SeguroTonelada = seguton;
+                proformaitem.SeguroValor = seguval;
+            }
+            else
+            {
+                proformaitem = new ProformaItemCalculadora();
+                proformaitem.ProformaID = rowid;
+                proformaitem.ItemCalculadoraID = Item;
+                proformaitem.FechaCreacion = DateTime.Now;
+                proformaitem.Cantidad = int.Parse(can);
+                proformaitem.PrecioCombrar = double.Parse(valor);
+                proformaitem.CifTonelada = cifton;
+                proformaitem.CifValor = cifval;
+                proformaitem.FleteTonelada = fleteton;
+                proformaitem.FleteValor = fleteval;
+                proformaitem.FobTonelada = fobton;
+                proformaitem.FobValor = fobval;
+                proformaitem.SeguroTonelada = seguton;
+                proformaitem.SeguroValor = seguval;
+                db.ProformaItemCalculadora.Add(proformaitem);
+            }
+            db.SaveChanges();
+
+            return rowid.ToString();
+        }
+        [CheckSessionOut]
+        public JsonResult CalcularTotalesProforma(double? valorcantidad, double? valortotal)
+        {
+            var data = new
+            {
+                Cantidad = valorcantidad,
+                Valorunitario = valortotal,
+            };
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        [CheckSessionOut]
+        public JsonResult CalcularItemsProforma(double contenedores, double flete, double cantidad, double CIF)
+        {
+            double ValorTotalCIF = Math.Round(CIF * cantidad, 2);
+            double SeguroTon = Math.Round(((CIF * 0.5) / 100), 2);
+            double FleteValorTotal = Math.Round((contenedores * flete), 2);
+            double FleteTon = Math.Round(((contenedores * flete) / cantidad), 2);
+            double TotalFOBTon = Math.Round(((CIF - ((CIF * 0.5) / 100)) - ((contenedores * flete) / cantidad)), 2);
+            double SeguroValorTotal = Math.Round((cantidad * ((CIF * 0.5) / 100)), 2);
+            double TotalFOBValor = Math.Round((ValorTotalCIF - SeguroValorTotal - FleteValorTotal), 2);
+
+            var data = new
+            {
+                ValorTotalCIF = ValorTotalCIF,
+                SeguroTon = SeguroTon,
+                FleteValorTotal = FleteValorTotal,
+                FleteTon = FleteTon,
+                TotalFOBTon = TotalFOBTon,
+                SeguroValorTotal = SeguroValorTotal,
+                TotalFOBValor = TotalFOBValor,
+                CIFTon = CIF,
+            };
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+
         //#region ::::::METODOS GENERALES::::::
         //[CheckSessionOut]
         //public JsonResult Buscar_Motonaves()
@@ -802,7 +1289,7 @@ namespace PedidosOnline.Controllers
         //    return jsonResult;
 
         //}
-        
+
         //[CheckSessionOutAttribute]
         //public string ItemsContrato1(int RowID)
         //{
@@ -1706,7 +2193,7 @@ namespace PedidosOnline.Controllers
         //    return jsonResult;
         //}
 
-        
+
         //#endregion
 
         //#region :::::MATRIZ BL :::::

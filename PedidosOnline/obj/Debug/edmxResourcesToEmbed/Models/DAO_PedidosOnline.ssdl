@@ -84,8 +84,8 @@
     <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaModificacion" Type="date" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.dbo.m_plantillas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.dbo.m_plantillas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="m_plantillas">
     <Key>
       <PropertyRef Name="RowID" />
@@ -287,8 +287,8 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.dbo.m_plantillas' no tie
     <Property Name="FechaModificacion" Type="date" />
     <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="PuntoEnvio">
     <Key>
       <PropertyRef Name="RowID" />
@@ -353,6 +353,15 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
     <Property Name="FechaModificacion" Type="date" />
     <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Booking">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProformaID" Type="int" />
+    <Property Name="TipoLlenadoID" Type="int" />
+    <Property Name="Nota" Type="text" />
+  </EntityType>
   <EntityType Name="Calculadora">
     <Key>
       <PropertyRef Name="RowID" />
@@ -369,7 +378,7 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
     <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaModificacion" Type="date" />
     <Property Name="Terminada" Type="bit" Nullable="false" />
-    <Property Name="NombreBroker" Type="varchar" MaxLength="50" />
+    <Property Name="BrokerID" Type="int" />
   </EntityType>
   <EntityType Name="CalculadoraItems">
     <Key>
@@ -555,13 +564,78 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
     <Property Name="Transporte" Type="varchar" MaxLength="100" />
     <Property Name="FormaPagoID" Type="int" />
   </EntityType>
+  <EntityType Name="ContratoAdjunto">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContratoID" Type="int" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="Recurso" Type="text" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="20" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="OrdenCompra">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="FormaPagoID" Type="int" />
+    <Property Name="SucursalProveedorID" Type="int" />
+    <Property Name="EstadoID" Type="int" />
+    <Property Name="CompradorID" Type="int" />
+    <Property Name="SolicitanteID" Type="int" />
+    <Property Name="ERPCodigo" Type="varchar" MaxLength="30" />
+    <Property Name="Referencia" Type="varchar" MaxLength="30" />
+    <Property Name="Observaciones" Type="varchar" MaxLength="300" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="Despacho" Type="varchar" MaxLength="200" />
+    <Property Name="LugarEntrega" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="OrdenCompraContrato">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrdenCompraID" Type="int" />
+    <Property Name="ContratoID" Type="int" />
+    <Property Name="AgregarItems" Type="bit" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="30" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="30" />
+    <Property Name="FechaModificacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="OrdenCompraItem">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrdenCompraID" Type="int" />
+    <Property Name="ItemID" Type="int" />
+    <Property Name="Cantidad" Type="float" />
+    <Property Name="ValorUnitario" Type="float" />
+    <Property Name="UnidadEmpaque" Type="varchar" MaxLength="50" />
+    <Property Name="ValorImpuesto" Type="float" />
+    <Property Name="ValorDescuento" Type="float" />
+    <Property Name="ValorBase" Type="float" />
+    <Property Name="ValorTotal" Type="float" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
+    <Property Name="FechaModificacion" Type="datetime" />
+  </EntityType>
   <EntityType Name="Proforma">
     <Key>
       <PropertyRef Name="RowID" />
     </Key>
     <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Titulo" Type="nvarchar" MaxLength="250" />
-    <Property Name="FormaPagoID" Type="int" />
     <Property Name="ContratoID" Type="int" />
     <Property Name="PuertoCargueID" Type="int" />
     <Property Name="PuertoDescargueID" Type="int" />
@@ -586,6 +660,14 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
     <Property Name="FechaCreacion" Type="datetime" />
     <Property Name="UsuarioActualizaID" Type="int" />
     <Property Name="FechaActualizacion" Type="datetime" />
+    <Property Name="FobTonelada" Type="float" />
+    <Property Name="FleteTonelada" Type="float" />
+    <Property Name="SeguroTonelada" Type="float" />
+    <Property Name="CifTonelada" Type="float" />
+    <Property Name="FobValor" Type="float" />
+    <Property Name="FleteValor" Type="float" />
+    <Property Name="SeguroValor" Type="float" />
+    <Property Name="CifValor" Type="float" />
   </EntityType>
   <EntityType Name="Agrupacion">
     <Key>
@@ -795,6 +877,30 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Booking__Proform__0F6D37F0">
+    <End Role="Proforma" Type="Self.Proforma" Multiplicity="0..1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proforma">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="ProformaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Booking__TipoLle__10615C29">
+    <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opcion">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="TipoLlenadoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Calculado__Agent__27C3E46E">
     <End Role="AgenteNaviera" Type="Self.AgenteNaviera" Multiplicity="0..1" />
     <End Role="Calculadora" Type="Self.Calculadora" Multiplicity="*" />
@@ -828,6 +934,18 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Principal>
       <Dependent Role="CalculadoraItems">
         <PropertyRef Name="AgenteNavieraID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Calculado__Broke__0C90CB45">
+    <End Role="Tercero" Type="Self.Tercero" Multiplicity="0..1" />
+    <End Role="Calculadora" Type="Self.Calculadora" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tercero">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Calculadora">
+        <PropertyRef Name="BrokerID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1107,6 +1225,18 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__ContratoA__Contr__47B19113">
+    <End Role="Contrato" Type="Self.Contrato" Multiplicity="0..1" />
+    <End Role="ContratoAdjunto" Type="Self.ContratoAdjunto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contrato">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="ContratoAdjunto">
+        <PropertyRef Name="ContratoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Costo__MonedaID__3429BB53">
     <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
     <End Role="Costo" Type="Self.Costo" Multiplicity="*" />
@@ -1215,6 +1345,162 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__OrdenComp__Compr__4D6A6A69">
+    <End Role="Tercero" Type="Self.Tercero" Multiplicity="0..1" />
+    <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tercero">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="OrdenCompra">
+        <PropertyRef Name="CompradorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrdenComp__Contr__550B8C31">
+    <End Role="Contrato" Type="Self.Contrato" Multiplicity="0..1" />
+    <End Role="OrdenCompraContrato" Type="Self.OrdenCompraContrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contrato">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="OrdenCompraContrato">
+        <PropertyRef Name="ContratoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrdenComp__Contr__57E7F8DC">
+    <End Role="Contrato" Type="Self.Contrato" Multiplicity="0..1" />
+    <End Role="OrdenCompraContrato" Type="Self.OrdenCompraContrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contrato">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="OrdenCompraContrato">
+        <PropertyRef Name="ContratoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrdenComp__Estad__4C764630">
+    <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
+    <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opcion">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="OrdenCompra">
+        <PropertyRef Name="EstadoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrdenComp__Forma__4A8DFDBE">
+    <End Role="CondicionPago" Type="Self.CondicionPago" Multiplicity="0..1" />
+    <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CondicionPago">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="OrdenCompra">
+        <PropertyRef Name="FormaPagoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrdenComp__ItemI__513AFB4D">
+    <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+    <End Role="OrdenCompraItem" Type="Self.OrdenCompraItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="OrdenCompraItem">
+        <PropertyRef Name="ItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrdenComp__ItemI__5AC46587">
+    <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+    <End Role="OrdenCompraItem" Type="Self.OrdenCompraItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="OrdenCompraItem">
+        <PropertyRef Name="ItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrdenComp__Orden__522F1F86">
+    <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="0..1" />
+    <End Role="OrdenCompraItem" Type="Self.OrdenCompraItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenCompra">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="OrdenCompraItem">
+        <PropertyRef Name="OrdenCompraID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrdenComp__Orden__55FFB06A">
+    <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="0..1" />
+    <End Role="OrdenCompraContrato" Type="Self.OrdenCompraContrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenCompra">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="OrdenCompraContrato">
+        <PropertyRef Name="OrdenCompraID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrdenComp__Orden__58DC1D15">
+    <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="0..1" />
+    <End Role="OrdenCompraContrato" Type="Self.OrdenCompraContrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenCompra">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="OrdenCompraContrato">
+        <PropertyRef Name="OrdenCompraID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrdenComp__Orden__5BB889C0">
+    <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="0..1" />
+    <End Role="OrdenCompraItem" Type="Self.OrdenCompraItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenCompra">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="OrdenCompraItem">
+        <PropertyRef Name="OrdenCompraID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrdenComp__Solic__4E5E8EA2">
+    <End Role="Tercero" Type="Self.Tercero" Multiplicity="0..1" />
+    <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tercero">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="OrdenCompra">
+        <PropertyRef Name="SolicitanteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrdenComp__Sucur__4B8221F7">
+    <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="0..1" />
+    <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sucursal">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="OrdenCompra">
+        <PropertyRef Name="SucursalProveedorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Precio__ItemID__2CBDA3B5">
     <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
     <End Role="Precio" Type="Self.Precio" Multiplicity="*" />
@@ -1248,18 +1534,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       </Principal>
       <Dependent Role="Proforma">
         <PropertyRef Name="ContratoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Proforma__FormaP__60B24907">
-    <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
-    <End Role="Proforma" Type="Self.Proforma" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Opcion">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="Proforma">
-        <PropertyRef Name="FormaPagoID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1884,9 +2158,14 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
     <EntitySet Name="Precio" EntityType="Self.Precio" Schema="Erp" store:Type="Tables" />
     <EntitySet Name="Sucursal" EntityType="Self.Sucursal" Schema="Erp" store:Type="Tables" />
     <EntitySet Name="Tercero" EntityType="Self.Tercero" Schema="Erp" store:Type="Tables" />
+    <EntitySet Name="Booking" EntityType="Self.Booking" Schema="Exportacion" store:Type="Tables" />
     <EntitySet Name="Calculadora" EntityType="Self.Calculadora" Schema="Exportacion" store:Type="Tables" />
     <EntitySet Name="CalculadoraItems" EntityType="Self.CalculadoraItems" Schema="Exportacion" store:Type="Tables" />
     <EntitySet Name="Contrato" EntityType="Self.Contrato" Schema="Exportacion" store:Type="Tables" />
+    <EntitySet Name="ContratoAdjunto" EntityType="Self.ContratoAdjunto" Schema="Exportacion" store:Type="Tables" />
+    <EntitySet Name="OrdenCompra" EntityType="Self.OrdenCompra" Schema="Exportacion" store:Type="Tables" />
+    <EntitySet Name="OrdenCompraContrato" EntityType="Self.OrdenCompraContrato" Schema="Exportacion" store:Type="Tables" />
+    <EntitySet Name="OrdenCompraItem" EntityType="Self.OrdenCompraItem" Schema="Exportacion" store:Type="Tables" />
     <EntitySet Name="Proforma" EntityType="Self.Proforma" Schema="Exportacion" store:Type="Tables" />
     <EntitySet Name="ProformaItemCalculadora" EntityType="Self.ProformaItemCalculadora" Schema="Exportacion" store:Type="Tables" />
     <EntitySet Name="Agrupacion" EntityType="Self.Agrupacion" Schema="Maestro" store:Type="Tables" />
@@ -1949,6 +2228,14 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       <End Role="Opcion" EntitySet="Opcion" />
       <End Role="Actividad" EntitySet="Actividad" />
     </AssociationSet>
+    <AssociationSet Name="FK__Booking__Proform__0F6D37F0" Association="Self.FK__Booking__Proform__0F6D37F0">
+      <End Role="Proforma" EntitySet="Proforma" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Booking__TipoLle__10615C29" Association="Self.FK__Booking__TipoLle__10615C29">
+      <End Role="Opcion" EntitySet="Opcion" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
     <AssociationSet Name="FK__Calculado__Agent__27C3E46E" Association="Self.FK__Calculado__Agent__27C3E46E">
       <End Role="AgenteNaviera" EntitySet="AgenteNaviera" />
       <End Role="Calculadora" EntitySet="Calculadora" />
@@ -1960,6 +2247,10 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
     <AssociationSet Name="FK__Calculado__Agent__3BB5CE82" Association="Self.FK__Calculado__Agent__3BB5CE82">
       <End Role="AgenteNaviera" EntitySet="AgenteNaviera" />
       <End Role="CalculadoraItems" EntitySet="CalculadoraItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Calculado__Broke__0C90CB45" Association="Self.FK__Calculado__Broke__0C90CB45">
+      <End Role="Tercero" EntitySet="Tercero" />
+      <End Role="Calculadora" EntitySet="Calculadora" />
     </AssociationSet>
     <AssociationSet Name="FK__Calculado__Calcu__05F8DC4F" Association="Self.FK__Calculado__Calcu__05F8DC4F">
       <End Role="Calculadora" EntitySet="Calculadora" />
@@ -2053,6 +2344,10 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       <End Role="Tercero" EntitySet="Tercero" />
       <End Role="Contrato" EntitySet="Contrato" />
     </AssociationSet>
+    <AssociationSet Name="FK__ContratoA__Contr__47B19113" Association="Self.FK__ContratoA__Contr__47B19113">
+      <End Role="Contrato" EntitySet="Contrato" />
+      <End Role="ContratoAdjunto" EntitySet="ContratoAdjunto" />
+    </AssociationSet>
     <AssociationSet Name="FK__Costo__MonedaID__3429BB53" Association="Self.FK__Costo__MonedaID__3429BB53">
       <End Role="Opcion" EntitySet="Opcion" />
       <End Role="Costo" EntitySet="Costo" />
@@ -2089,6 +2384,58 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
       <End Role="Agrupacion" EntitySet="Agrupacion" />
       <End Role="Opcion" EntitySet="Opcion" />
     </AssociationSet>
+    <AssociationSet Name="FK__OrdenComp__Compr__4D6A6A69" Association="Self.FK__OrdenComp__Compr__4D6A6A69">
+      <End Role="Tercero" EntitySet="Tercero" />
+      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrdenComp__Contr__550B8C31" Association="Self.FK__OrdenComp__Contr__550B8C31">
+      <End Role="Contrato" EntitySet="Contrato" />
+      <End Role="OrdenCompraContrato" EntitySet="OrdenCompraContrato" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrdenComp__Contr__57E7F8DC" Association="Self.FK__OrdenComp__Contr__57E7F8DC">
+      <End Role="Contrato" EntitySet="Contrato" />
+      <End Role="OrdenCompraContrato" EntitySet="OrdenCompraContrato" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrdenComp__Estad__4C764630" Association="Self.FK__OrdenComp__Estad__4C764630">
+      <End Role="Opcion" EntitySet="Opcion" />
+      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrdenComp__Forma__4A8DFDBE" Association="Self.FK__OrdenComp__Forma__4A8DFDBE">
+      <End Role="CondicionPago" EntitySet="CondicionPago" />
+      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrdenComp__ItemI__513AFB4D" Association="Self.FK__OrdenComp__ItemI__513AFB4D">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="OrdenCompraItem" EntitySet="OrdenCompraItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrdenComp__ItemI__5AC46587" Association="Self.FK__OrdenComp__ItemI__5AC46587">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="OrdenCompraItem" EntitySet="OrdenCompraItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrdenComp__Orden__522F1F86" Association="Self.FK__OrdenComp__Orden__522F1F86">
+      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+      <End Role="OrdenCompraItem" EntitySet="OrdenCompraItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrdenComp__Orden__55FFB06A" Association="Self.FK__OrdenComp__Orden__55FFB06A">
+      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+      <End Role="OrdenCompraContrato" EntitySet="OrdenCompraContrato" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrdenComp__Orden__58DC1D15" Association="Self.FK__OrdenComp__Orden__58DC1D15">
+      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+      <End Role="OrdenCompraContrato" EntitySet="OrdenCompraContrato" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrdenComp__Orden__5BB889C0" Association="Self.FK__OrdenComp__Orden__5BB889C0">
+      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+      <End Role="OrdenCompraItem" EntitySet="OrdenCompraItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrdenComp__Solic__4E5E8EA2" Association="Self.FK__OrdenComp__Solic__4E5E8EA2">
+      <End Role="Tercero" EntitySet="Tercero" />
+      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrdenComp__Sucur__4B8221F7" Association="Self.FK__OrdenComp__Sucur__4B8221F7">
+      <End Role="Sucursal" EntitySet="Sucursal" />
+      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+    </AssociationSet>
     <AssociationSet Name="FK__Precio__ItemID__2CBDA3B5" Association="Self.FK__Precio__ItemID__2CBDA3B5">
       <End Role="Item" EntitySet="Item" />
       <End Role="Precio" EntitySet="Precio" />
@@ -2099,10 +2446,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_indutrade.Erp.PuntoEnvio' no tiene
     </AssociationSet>
     <AssociationSet Name="FK__Proforma__Contra__5FBE24CE" Association="Self.FK__Proforma__Contra__5FBE24CE">
       <End Role="Contrato" EntitySet="Contrato" />
-      <End Role="Proforma" EntitySet="Proforma" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Proforma__FormaP__60B24907" Association="Self.FK__Proforma__FormaP__60B24907">
-      <End Role="Opcion" EntitySet="Opcion" />
       <End Role="Proforma" EntitySet="Proforma" />
     </AssociationSet>
     <AssociationSet Name="FK__Proforma__Puerto__61A66D40" Association="Self.FK__Proforma__Puerto__61A66D40">

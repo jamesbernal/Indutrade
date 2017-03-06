@@ -52,6 +52,10 @@
         if (@Model.Calculadora.RowID>0) {
             $('.item').css("display","block");
             $('#DateDetalle').val("@Model.Calculadora.Fecha");
+            $('#idBroker').val(@Model.Calculadora.BrokerID);
+            $('#NombreBroker').val("@Model.Calculadora.Tercero.RazonSocial");
+            $('#cliente').val('@Model.Calculadora.Tercero1.RazonSocial');
+            $('#rowid_cliente').val('@Model.Calculadora.TerceroID');
         }
     }
     $(document).ready(function () {
@@ -63,7 +67,23 @@
                lang: 'es',
                timepicker: false
            });
-        loadPage()
+        loadPage();
+        $('#NombreBroker').autocomplete({
+            source:"Buscar_Tercero",
+            minlength:2,
+            select:function(evento,ui){
+                $('#idBroker').val(ui.item.RowID);
+            }
+
+        })
+        $('#cliente').autocomplete({
+            source:"Buscar_Tercero",
+            minlength:2,
+            select:function(evento,ui){
+                $('#rowid_cliente').val(ui.item.RowID);
+            }
+
+        })
     });
     function Guardar(accion)
     {
@@ -94,7 +114,7 @@
                     {
                         location.href="../Exportacion/Calculadora?rowid="+data;
                     }
-                    
+
                     $('.deshabilitar').attr("disabled",true);
                     ModalProcesandoHiden();
                 },
@@ -160,28 +180,8 @@
                                 <label class="lang">Cliente</label>
                             </div>
                             <div class="col-md-6">
-                                <select name="cliente" id="cliente" required>
-                                    <option value="">-Seleccionar-</option>
-                                    @foreach (Tercero tercero in ((List<Tercero>)ViewBag.Terceros).ToList())
-                                    {
-                                        if (Model.Calculadora.RowID > 0)
-                                        {
-                                            if (Model.Calculadora.TerceroID == tercero.RowID)
-                                            {
-                                                <option value="@tercero.RowID" selected="selected">@tercero.RowIDERP - @tercero.Identificacion - @tercero.RazonSocial</option>
-                                            }
-                                            else
-                                            {
-                                                <option value="@tercero.RowID">@tercero.RowIDERP - @tercero.Identificacion - @tercero.RazonSocial</option>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <option value="@tercero.RowID">@tercero.RowIDERP - @tercero.Identificacion - @tercero.RazonSocial</option>
-                                        }
-
-                                    }
-                                </select>
+                                <input type="text" id="cliente" name="cliente" required />
+                                <input type="hidden" id="rowid_cliente" name="rowid_cliente" />
                             </div>
                         </div>
                         <div class="row">
@@ -259,7 +259,8 @@
                                 <label class="lang">Broker</label>
                             </div>
                             <div class="col-md-6">
-                                <input id="NombreBroker" name="NombreBroker" style="width:100%;" value="@Model.Calculadora.NombreBroker" />
+                                <input id="NombreBroker" name="NombreBroker" style="width:100%;" required  />
+                                <input type="hidden"  name="idBroker" id="idBroker" />
                             </div>
                         </div>
                         <div class="row">
@@ -321,7 +322,7 @@
                                         <label class="lang">Item</label>
                                     </div>
                                     <div class="col-md-7">
-                                        <input type="text" id="item" name="item" />
+                                        <input type="text" id="item" name="item" required />
                                         <input type="hidden" id="rowid_item" name="rowid_item" />
                                     </div>
                                 </div>
@@ -355,7 +356,7 @@
                                         <label class="lang">Cantidad Ton por BL</label>
                                     </div>
                                     <div class="col-md-7">
-                                        <input type="number" step="any" style="background: rgba(0, 114, 199, 0.55); color: white" name="cantidadton" id="cantidadton" onkeyup="ForzarReCalcular(event)" />
+                                        <input type="number" required step="any" style="background: rgba(0, 114, 199, 0.55); color: white" name="cantidadton" id="cantidadton" onkeyup="ForzarReCalcular(event)" />
                                     </div>
                                 </div>
                             </div>
@@ -365,7 +366,7 @@
                                         <label class="lang">Numero Envios</label>
                                     </div>
                                     <div class="col-md-7">
-                                        <input type="number" step="any" style="background: rgba(0, 114, 199, 0.55); color: white" name="numeroenvios" id="numeroenvios" onkeyup="ReCalcular" />
+                                        <input type="number" required step="any" style="background: rgba(0, 114, 199, 0.55); color: white" name="numeroenvios" id="numeroenvios" onkeyup="ReCalcular" />
                                     </div>
                                 </div>
                             </div>
@@ -1854,10 +1855,16 @@
     function GuardarItem()
     {
         debugger
-        ModalProcesandoShow();
+        
         $('.deshabilitar').attr("disabled",false);
         var formData = new FormData(document.getElementById("formItem"));
-
+        var validator = $("#formItem").validate();
+        //$('.deshabilitar').attr("disabled",false);
+        if (!validator.form())
+        {
+            return;
+        }
+        ModalProcesandoShow();
         $.ajax({
             url:"GuardarItem",
             type:"post",

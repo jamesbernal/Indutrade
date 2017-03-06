@@ -388,10 +388,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Booking">
+      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.Booking">
+        <MappingFragment StoreEntitySet="Booking">
+          <ScalarProperty Name="Nota" ColumnName="Nota" />
+          <ScalarProperty Name="TipoLlenadoID" ColumnName="TipoLlenadoID" />
+          <ScalarProperty Name="ProformaID" ColumnName="ProformaID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Calculadora">
       <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.Calculadora">
         <MappingFragment StoreEntitySet="Calculadora">
-          <ScalarProperty Name="NombreBroker" ColumnName="NombreBroker" />
+          <ScalarProperty Name="BrokerID" ColumnName="BrokerID" />
           <ScalarProperty Name="Terminada" ColumnName="Terminada" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
           <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
@@ -593,6 +603,76 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ContratoAdjunto">
+      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.ContratoAdjunto">
+        <MappingFragment StoreEntitySet="ContratoAdjunto">
+          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="Recurso" ColumnName="Recurso" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="ContratoID" ColumnName="ContratoID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrdenCompra">
+      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.OrdenCompra">
+        <MappingFragment StoreEntitySet="OrdenCompra">
+          <ScalarProperty Name="LugarEntrega" ColumnName="LugarEntrega" />
+          <ScalarProperty Name="Despacho" ColumnName="Despacho" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+          <ScalarProperty Name="ERPCodigo" ColumnName="ERPCodigo" />
+          <ScalarProperty Name="SolicitanteID" ColumnName="SolicitanteID" />
+          <ScalarProperty Name="CompradorID" ColumnName="CompradorID" />
+          <ScalarProperty Name="EstadoID" ColumnName="EstadoID" />
+          <ScalarProperty Name="SucursalProveedorID" ColumnName="SucursalProveedorID" />
+          <ScalarProperty Name="FormaPagoID" ColumnName="FormaPagoID" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrdenCompraContrato">
+      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.OrdenCompraContrato">
+        <MappingFragment StoreEntitySet="OrdenCompraContrato">
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+          <ScalarProperty Name="AgregarItems" ColumnName="AgregarItems" />
+          <ScalarProperty Name="ContratoID" ColumnName="ContratoID" />
+          <ScalarProperty Name="OrdenCompraID" ColumnName="OrdenCompraID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrdenCompraItem">
+      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.OrdenCompraItem">
+        <MappingFragment StoreEntitySet="OrdenCompraItem">
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+          <ScalarProperty Name="ValorTotal" ColumnName="ValorTotal" />
+          <ScalarProperty Name="ValorBase" ColumnName="ValorBase" />
+          <ScalarProperty Name="ValorDescuento" ColumnName="ValorDescuento" />
+          <ScalarProperty Name="ValorImpuesto" ColumnName="ValorImpuesto" />
+          <ScalarProperty Name="UnidadEmpaque" ColumnName="UnidadEmpaque" />
+          <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="OrdenCompraID" ColumnName="OrdenCompraID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Proforma">
       <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.Proforma">
         <MappingFragment StoreEntitySet="Proforma">
@@ -606,7 +686,6 @@
           <ScalarProperty Name="PuertoDescargueID" ColumnName="PuertoDescargueID" />
           <ScalarProperty Name="PuertoCargueID" ColumnName="PuertoCargueID" />
           <ScalarProperty Name="ContratoID" ColumnName="ContratoID" />
-          <ScalarProperty Name="FormaPagoID" ColumnName="FormaPagoID" />
           <ScalarProperty Name="Titulo" ColumnName="Titulo" />
           <ScalarProperty Name="RowID" ColumnName="RowID" />
         </MappingFragment>
@@ -615,6 +694,14 @@
     <EntitySetMapping Name="ProformaItemCalculadora">
       <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.ProformaItemCalculadora">
         <MappingFragment StoreEntitySet="ProformaItemCalculadora">
+          <ScalarProperty Name="CifValor" ColumnName="CifValor" />
+          <ScalarProperty Name="SeguroValor" ColumnName="SeguroValor" />
+          <ScalarProperty Name="FleteValor" ColumnName="FleteValor" />
+          <ScalarProperty Name="FobValor" ColumnName="FobValor" />
+          <ScalarProperty Name="CifTonelada" ColumnName="CifTonelada" />
+          <ScalarProperty Name="SeguroTonelada" ColumnName="SeguroTonelada" />
+          <ScalarProperty Name="FleteTonelada" ColumnName="FleteTonelada" />
+          <ScalarProperty Name="FobTonelada" ColumnName="FobTonelada" />
           <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
           <ScalarProperty Name="UsuarioActualizaID" ColumnName="UsuarioActualizaID" />
           <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />

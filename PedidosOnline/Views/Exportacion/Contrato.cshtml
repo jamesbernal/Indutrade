@@ -7,87 +7,81 @@
     a {
         color: #333;
     }
+
     input {
-        width:100%
+        width: 100%;
     }
+
     select {
-        width:100%
+        width: 100%;
+    }
+    textarea {
+        width: 100%;
+    }
+
+    .row {
+        margin-bottom: 10px;
     }
 </style>
 
 <link href="~/Content/Tabs.css" rel="stylesheet" />
 <script type="text/javascript">
+    $.extend($.validator.defaults, {
+        invalidHandler: function (form, validator) {
+            var errors = validator.numberOfInvalids();
+            if (errors) {
+                var message = errors == 1
+                ? 'Completar Campo Vacio.'
+                : 'Completar ' + errors + ' Campos que se encuentran vacios.';
+                Mensajes(message, 'error', '');
+            }
+        }
+    });
+    $.validator.messages.required = 'Campo requerido';
     function guardarContrato(a)
     {
         //debugger
-        ModalProcesandoShow();
-        var RowID = $(".RowID").val();
-        var RowIDPro = $(".RowIDPro").val();
 
-        //if(RowIDPro == ""){
-        //    Mensajes('El campo proforma es requerido!', 'error', '');
-        //    ModalProcesandoHiden();
-        //    return null;
-        //}
-        //if($(".autoc_inspector").val()== ""){
-        //    Mensajes('El campo inspector es requerido!', 'error', '');
-        //    ModalProcesandoHiden();
-        //    return null;
-        //}
-        //if($("#fecha").val()== ""){
-        //    Mensajes('El campo fecha es requerido!', 'error', '');
-        //    ModalProcesandoHiden();
-        //    return null;
-        //}
-        //if($("#periodoE").val()== ""){
-        //    Mensajes('El campo periodo embarque es requerido!', 'error', '');
-        //    ModalProcesandoHiden();
-        //    return null;
-        //}
-        //if($("#transporte").val()== ""){
-        //    Mensajes('El campo transporte es requerido!', 'error', '');
-        //    ModalProcesandoHiden();
-        //    return null;
-        //}
-        var termino=$("#terminos").text();
-        console.log(termino)
-        var formData = new FormData(document.getElementById("form"));
-        formData.append('RowID',RowID,'RowIDPro',RowIDPro,'terminos',termino)
-        $.ajax({
-            type: "post",
-            dataType: "html",
-            data: formData,
-            cache: false,
-            contentType: false,
-            processData: false,
-            url: "RegistrarContrato"
-            //dataType: "html",
-            //data: formData
-                //formulario: $("#form").serialize(),
-                //RowID: RowID,
-                //RowIDPro: RowIDPro
-            ,
-            success: function (data2) {
-                if(a == 1){
-                    if (@Model.RowID >0) {
-                        Mensajes('Guardado Satisfactoriamente','success','');
+        var validator = $("#form").validate();
+        if (validator.form())
+        {
+            ModalProcesandoShow();
+            var RowID = $(".RowID").val();
+            var RowIDPro = $(".RowIDPro").val();
+            var termino=$("#terminos").text();
+            console.log(termino)
+            var formData = new FormData(document.getElementById("form"));
+            formData.append('RowID',RowID,'RowIDPro',RowIDPro,'terminos',termino)
+            $.ajax({
+                type: "post",
+                dataType: "html",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                url: "RegistrarContrato",
+                success: function (data2) {
+                    if(a == 1){
+                        if (@Model.RowID >0) {
+                            Mensajes('Guardado Satisfactoriamente','success','');
+                        }
+                        else
+                        {
+                            location.href="../Exportacion/Contrato?rowid="+data2;
+                        }
+                        ModalProcesandoHiden();
                     }
                     else
                     {
-                        location.href="../Exportacion/Contrato?rowid="+data2;
+                        location.href="../Exportacion/Contratos";
                     }
+                },
+                error: function (request) {
+                    Mensajes(request.responseText, 'error', '');
                     ModalProcesandoHiden();
                 }
-                else
-                {
-                    location.href="../Exportacion/Contratos";
-                }
-            },
-            error: function (request) {
-                Mensajes(request.responseText, 'error', '');
-                ModalProcesandoHiden();
-            }
-        });
+            });
+        }
     }
 
     function cargarItemsContrato(rowid_contrato) {
@@ -154,410 +148,485 @@
             <ul class="nav nav-tabs tabs-top">
                 <li id="li_tab1" class="active"><a href="#tab1" data-toggle="tab">Datos generales</a></li>
                 <li id="li_tab2"><a href="#tab2" data-toggle="tab">Items</a></li>
-                @*<li class="active" id="li_tab1"><a href="#tab_1" id="litab_1" data-toggle="tab" class="lang" key="">Datos generales</a></li>*@
-                @*<li class="item" id="li_tab2"><a href="#tab_2" id="litab_2" data-toggle="tab" class="lang" key="">Items </a></li>*@
+                
             </ul>
         </div>
         <div class="tab-content" style="overflow:hidden">
-            <div class="col-md-12">
-                <form id="form" name="form" onsubmit="return false">
-                    <input type="hidden" class="RowID" id="RowID" name="RowID" value="@Model.RowID" />
-                    <input type="hidden" class="RowIDPro" name="RowIDPro" />
-                    <input type="hidden" class="RowIDCalculadora" name="RowIDCalculadora" value="@Model.CalculadoraID" />
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="Auto_Calculadora" class="lang">Comprador/Calculadora</label>
-                            </div>
-                            <div class="col-md-5">
-                                @if (Model.RowID > 0)
-                                {
-                                    <input type="text" id="Auto_Calculadora" name="Auto_Calculadora" value="@Model.Calculadora.Tercero.Identificacion - @Model.Calculadora.Tercero.RazonSocial  @Model.Calculadora.Opcion.Nombre " placeholder="---" />
-                                    <input type="hidden" id="ClienteID" name="ClienteID"  value="@Model.CalculadoraID" required />
-                                }
-                                else
-                                {
-                                    <input type="text" id="Auto_Calculadora" name="Auto_Calculadora" value="@Model.CalculadoraID" placeholder="---" />
-                                    <input type="hidden" id="ClienteID" name="ClienteID" required />
-                                }
-                                
+            <div  class="tab-pane active" id="tab1">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-8">
+                            <div style="margin-bottom: 20px">
+                                <h4 class="lang" key="">Contrato</h4>
+                                <hr style="margin:0px">
                             </div>
                         </div>
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="intermediario" class="lang" key="INTERMEDIARIO">Intermediario</label>
-                            </div>
-                            <div class="col-md-5">
-                                <input type="text" id="intermediario" name="" class="autocompletar" value="@Model.Tercero1.RazonSocial" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
-                                <input type="hidden" id="valintermediario" name="valintermediario" value="@Model.IntermediarioID"required />
-                            </div>
-                        </div>
-                        <br />
-
-                       
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="fecha" class="lang">Fecha</label>
-                            </div>
-                            <div class="col-md-5">
-                                <input type="text" id="fecha" name="fecha" style="width: 100%" value="@Model.Fecha" readonly="readonly" />
-                            </div>
-                        </div>
-                        <br />
-                        @*<div class="form-group">
-                            <div class="col-md-3">
-                                <label for="intermediario" class="lang">Intermediario</label>
-                            </div>
-                            <div class="col-md-5">
-                                <input type="text" id="intermediario" name="" class="autocompletar" placeholder="---"  value="@Model.IntermediarioID" style="width: 100%" />
-                            </div>
-                        </div>
-                        <br />*@
-                        @*<div class="form-group">
-                                <div class="col-md-3">
-                                    <label for="fecha" class="lang">Fecha</label>
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="text" id="fecha" name="fecha" style="width: 100%"/>
-                                </div>
-                            </div>
-                            <br />*@
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="periodoE" class="lang">Per. embarque</label>
-                            </div>
-                            <div class="col-md-5">
-                                <input type="text" name="periodoE" id="periodoE" value="@Model.Periodo" style="width: 100%" required/>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="TerminosCondiciones" class="lang">Terminos y condiciones</label>
-                            </div>
-                            <div class="col-md-5" id="modal-terminos">
-                                <a class="ui-button-text-icon-primary"  onclick="cargarmodal()">Ver terminos</a>
-                               @*<input type="hidden" name="terminos" id="terminoseviar" />*@
-                            </div>
-                        </div>
-                        <br />
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="autoc_inspector" class="lang">Inspector</label>
-                            </div>
-                            <div class="col-md-5">
-                                <input type="text" id="autoc_inspector" name="autoc_inspector" class="autocompletar" value="@Model.Tercero2.RazonSocial" placeholder="---" style="width: 100%" />
-                                <input type="hidden" id="valautoc_inspector" name="valautoc_inspector" class="" value="@Model.InspectorID" placeholder="---" style="width: 100%" />
-                            </div>
-
-
-                        </div>
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="calidad" class="lang">Seguro</label>
-                            </div>
-                            <div class="col-md-5">
-                                @if (Model.RowID > 0)
-                                {
-                                    if (Model.Seguro == true)
+                        <form id="form" name="form" onsubmit="return false">
+                            <input type="hidden" class="RowID" id="RowID" name="RowID" value="@Model.RowID" />
+                            <input type="hidden" class="RowIDPro" name="RowIDPro" />
+                            <input type="hidden" class="RowIDCalculadora" name="RowIDCalculadora" value="@Model.CalculadoraID" />
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="consecutivo" class="lang">Consecutivo</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="text" id="consecutivo" name="consecutivo" value="@Model.Consecutivo" required />
+                                        </div>
+                                        @if (Model.RowID > 0)
                                     {
-                                        <div class="col-md-4">
-                                            <strong>
-                                                SI
-                                            </strong>
-                                            <input type="radio" class="col-md-6" style="position:absolute" name="seguro" value="true" checked />
-                                        </div>
-                                        <div class="col-md-4">
-                                            <strong>
-                                                NO
-                                            </strong>
-                                            <input type="radio" class="col-md-6" style="position:absolute" name="seguro" value="false" />
-                                        </div>
+                                            <div class="col-md-1">
+                                                <strong><label>- @Model.RowID</label></strong>
+                                            </div>
                                     }
-                                    else
-                                    {
-                                        <div class="col-md-4">
-                                            <strong>
-                                                SI
-                                            </strong>
-                                            <input type="radio" class="col-md-6" style="position:absolute" name="seguro" value="true"  />
-                                        </div>
-                                        <div class="col-md-4">
-                                            <strong>
-                                                NO
-                                            </strong>
-                                            <input type="radio" class="col-md-6" style="position:absolute" name="seguro" value="false" checked />
-                                        </div>
-                                    }
-
-                                }
-                                else
-                                {
-                                    <div class="col-md-4">
-                                        <strong>
-                                            SI
-                                        </strong>
-                                        <input type="radio" class="col-md-6" style="position:absolute" name="seguro" value="true" checked />
                                     </div>
-                                        <div class="col-md-4">
-                                            <strong>
-                                                NO
-                                            </strong>
-                                            <input type="radio" class="col-md-6" style="position:absolute" name="seguro" value="false"/>
-                                        </div>
-                                }
-
-                            </div>
-                        </div>
-                        
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="embarqueP" class="lang">Embarque parcial</label>
-                            </div>
-                            <div class="col-md-5">
-                                @if (Model.RowID > 0)
-                                {
-                                    if (Model.EmbarqueParcial == true)
-                                    {
-                                        <div class="col-md-4">
-                                            <strong>
-                                                SI
-                                            </strong>
-                                            <input type="radio" class="col-md-6" style="position:absolute" name="embarqueP" value="true" checked />
-                                        </div>
-                                        <div class="col-md-4">
-                                            <strong>
-                                                NO
-                                            </strong>
-                                            <input type="radio" class="col-md-6" style="position:absolute" name="embarqueP" value="false" />
-                                        </div>
-                                    }
-                                    if (Model.EmbarqueParcial == false)
-                                    {
-                                        <div class="col-md-4">
-                                            <strong>
-                                                SI
-                                            </strong>
-                                            <input type="radio" class="col-md-6" style="position:absolute" name="embarqueP" value="true"  />
-                                        </div>
-                                        <div class="col-md-4">
-                                            <strong>
-                                                NO
-                                            </strong>
-                                            <input type="radio" class="col-md-6" style="position:absolute" name="embarqueP" value="false" checked />
-                                        </div>
-                                    }
-                                }
-                                else
-                                {
-                                <div class="col-md-4">
-                                    <strong>
-                                        SI
-                                    </strong>
-                                    <input type="radio" class="col-md-6" style="position:absolute" name="embarqueP" value="true" checked />
                                 </div>
-                                <div class="col-md-4">
-                                    <strong>
-                                        NO
-                                    </strong>
-                                    <input type="radio" class="col-md-6" style="position:absolute" name="embarqueP" value="false" />
-                                </div>
-                                }
-                               
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="consecutivo" class="lang">Consecutivo</label>
-                            </div>
-                            <div class="col-md-5">
-                                <input type="text" id="consecutivo" name="consecutivo" value="@Model.Consecutivo" style="width: 100%" />
-                            </div>
-                        </div>
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="vendedor" class="lang">Vendedor</label>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" id="vendedor" name="vendedor" value="@Model.Tercero3.NombreComercial" placeholder="---" />
-                                <input type="hidden" id="valvendedor" name="valvendedor" value="@Model.Tercero3.RowID" placeholder="---" />
-                            </div>
-                        </div>
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="formaP" class="lang">Forma de pago</label>
-                            </div>
-                            <div class="col-md-4">
-                                <select id="formaP" name="formaP" placeholder="Elija una opción">
-                                    @foreach (var formapago in ViewBag.FormasPago)
-                                    {
-                                        if (Model.RowID > 0)
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="Auto_Calculadora" class="lang">Comprador/Calculadora</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            @if (Model.RowID > 0)
                                         {
-                                            if (Model.Opcion1.RowID == formapago.RowID)
+                                                <input type="text" id="Auto_Calculadora" name="Auto_Calculadora" value="@Model.Calculadora.Tercero.Identificacion - @Model.Calculadora.Tercero.RazonSocial  @Model.Calculadora.Opcion.Nombre " placeholder="---" required />
+                                                <input type="hidden" id="ClienteID" name="ClienteID" value="@Model.CalculadoraID" required />
+                                        }
+                                        else
+                                        {
+                                                <input type="text" id="Auto_Calculadora" name="Auto_Calculadora" value="@Model.CalculadoraID" placeholder="---" required />
+                                                <input type="hidden" id="ClienteID" name="ClienteID" required />
+                                        }
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="intermediario" class="lang" key="INTERMEDIARIO">Intermediario</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            @if (Model.RowID > 0)
+                                        {
+                                                <input type="text" id="intermediario" name="" class="autocompletar" value="@Model.Tercero1.RazonSocial" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                                <input type="hidden" id="valintermediario" name="valintermediario" value="@Model.IntermediarioID" required />
+                                        }
+                                        else
+                                        {
+                                                <input type="text" id="intermediario" name="" class="autocompletar" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
+                                                <input type="hidden" id="valintermediario" name="valintermediario" required />
+                                        }
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="periodoE" class="lang">Periodo Embarque</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="text" name="periodoE" id="periodoE" value="@Model.Periodo" style="width: 100%" required />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="calidad" class="lang">Seguro</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            @if (Model.RowID > 0)
+                                        {
+                                            if (Model.Seguro == true)
                                             {
-                                                <option value="@formapago.RowID" selected>@formapago.Nombre</option>
+                                                    <div class="col-md-4">
+                                                        <strong>
+                                                            SI
+                                                        </strong>
+                                                        <input type="radio" class="col-md-6" style="position:absolute" name="seguro" value="true" checked />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <strong>
+                                                            NO
+                                                        </strong>
+                                                        <input type="radio" class="col-md-6" style="position:absolute" name="seguro" value="false" />
+                                                    </div>
                                             }
-                                            else 
+                                            else
                                             {
-                                                <option value="@formapago.RowID">@formapago.Nombre</option>
+                                                    <div class="col-md-4">
+                                                        <strong>
+                                                            SI
+                                                        </strong>
+                                                        <input type="radio" class="col-md-6" style="position:absolute" name="seguro" value="true" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <strong>
+                                                            NO
+                                                        </strong>
+                                                        <input type="radio" class="col-md-6" style="position:absolute" name="seguro" value="false" checked />
+                                                    </div>
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                                <div class="col-md-4">
+                                                    <strong>
+                                                        SI
+                                                    </strong>
+                                                    <input type="radio" class="col-md-6" style="position:absolute" name="seguro" value="true" checked />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <strong>
+                                                        NO
+                                                    </strong>
+                                                    <input type="radio" class="col-md-6" style="position:absolute" name="seguro" value="false" />
+                                                </div>
+                                        }
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="embarqueP" class="lang">Embarque parcial</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            @if (Model.RowID > 0)
+                                        {
+                                            if (Model.EmbarqueParcial == true)
+                                            {
+                                                    <div class="col-md-4">
+                                                        <strong>
+                                                            SI
+                                                        </strong>
+                                                        <input type="radio" class="col-md-6" style="position:absolute" name="embarqueP" value="true" checked />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <strong>
+                                                            NO
+                                                        </strong>
+                                                        <input type="radio" class="col-md-6" style="position:absolute" name="embarqueP" value="false" />
+                                                    </div>
+                                            }
+                                            if (Model.EmbarqueParcial == false)
+                                            {
+                                                    <div class="col-md-4">
+                                                        <strong>
+                                                            SI
+                                                        </strong>
+                                                        <input type="radio" class="col-md-6" style="position:absolute" name="embarqueP" value="true" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <strong>
+                                                            NO
+                                                        </strong>
+                                                        <input type="radio" class="col-md-6" style="position:absolute" name="embarqueP" value="false" checked />
+                                                    </div>
                                             }
                                         }
                                         else
                                         {
-                                            <option value="@formapago.RowID">@formapago.Nombre</option>
+                                                <div class="col-md-4">
+                                                    <strong>
+                                                        SI
+                                                    </strong>
+                                                    <input type="radio" class="col-md-6" name="embarqueP" style="position:absolute" value="true" checked />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <strong>
+                                                        NO
+                                                    </strong>
+                                                    <input type="radio" class="col-md-6" name="embarqueP" style="position:absolute" value="false" />
+                                                </div>
                                         }
-                                    }
-                                </select>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="origen" class="lang">Termino Incoterm</label>
-                            </div>
-                            <div class="col-md-4">
-                                @if (Model.RowID>0)
-                                {
-                                    <input type="text" id="Incoterm" name="Incoterm" value="@Model.Calculadora.Opcion.Nombre" placeholder="@Model.Calculadora.Opcion.Nombre" disabled />
-                                }
-                                else
-                                {
-                                    <input type="text" id="Incoterm" name="Incoterm" disabled />
-                                }
-
-                            </div>
-                        </div>
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="empaque" class="lang">Transporte corresponde</label>
-                            </div>
-                            <div class="col-md-4">
-                                @if (Model.RowID > 0)
-                                {
-                                    <input type="text" id="tranportecorresponde" name="tranportecorresponde" placeholder="@Model.Calculadora.Opcion.Codigo" readonly />
-                                }
-                                else
-                                {
-                                    <input type="text" id="tranportecorresponde" name="tranportecorresponde" placeholder="---" readonly />
-                                }
-
-                            </div>
-                        </div>
-                        <br />
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="formaP" class="lang">Calidad 1</label>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" id="calidad1" name="calidad1" value="@Model.Calidad1" />
-                            </div>
-                        </div>
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label for="formaP" class="lang">Calidad 2 </label>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" id="calidad2" name="calidad2" value="@Model.Calidad2" />
-                            </div>
-                        </div>
-                        <br />
-
-                        @*<div class="form-group">
-                                <label for="producto" class="lang">Producto</label>
-                                <input type="text" id="producto" name="producto" placeholder="---" disabled />
-                            </div>
-                            <div class="form-group">
-                                <label for="producto" class="lang">Cantidad</label>
-                                <input type="text" id="cantidad" name="cantidad" placeholder="---" disabled />
-                            </div>
-                            <div class="form-group">
-                                <label for="precio" class="lang">Precio</label>
-                                <input type="text" id="precio" name="precio" placeholder="---" disabled />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="empaque" class="lang">Empaque</label>
-                                <input type="text" id="empaque" name="empaque" placeholder="---" disabled />
-                            </div>
-                            <div class="form-group">
-                                <label for="empaque" class="lang">Peso</label>
-                                <input type="text" id="peso" name="peso" placeholder="---" disabled />
-                            </div>*@
-                    </div>
-                    <div class="modal fade col-md-12" id="myModal1" data-backdrop="static" data-keyboard="false" style="overflow: auto;">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                   
-                                    <h4 class="modal-title"><b>Terminos Condiciones</b></h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            @if (Model.TerminosCondiciones != null)
-                                            {
-                                                <textarea id="terminos" name="terminos">@Model.TerminosCondiciones</textarea>
-                                            }
-                                            else
-                                            {
-                                                <textarea id="terminos" name="terminos">@ViewBag.Termino.Body</textarea>
-                                            }
-                                            
 
                                         </div>
                                     </div>
                                 </div>
-                            <div class="modal-footer">
-                                <button type="button" class="salir" aria-hidden="true">Verficado</button>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="TerminosCondiciones" class="lang">Terminos y condiciones</label>
+                                        </div>
+                                        <div class="col-md-9" id="modal-terminos">
+                                            <a class="ui-button-text-icon-primary" onclick="cargarmodal()" style="cursor:pointer">Ver/Editar terminos</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="formaP" class="lang">Calidad 1</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <textarea id="calidad1" style="resize:none" name="calidad1" rows="3" required>
+                                                @Model.Calidad1
+                                            </textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                    </div><!-- /.modal -->
-                </form>
+                            <div class="col-md-6">
+                                <div class="row">
+
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="fecha" class="lang">Fecha</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="text" id="fecha" name="fecha" style="width: 100%" value="@Model.Fecha" readonly="readonly" required />
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="vendedor" class="lang">Vendedor</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            @if (Model.RowID > 0)
+                                        {
+                                                <input type="text" id="vendedor" name="vendedor" value="@Model.Tercero3.RazonSocial" placeholder="---" required />
+                                                <input type="hidden" id="valvendedor" name="valvendedor" value="@Model.Tercero3.RowID" placeholder="---" />   /**/
+                                        }
+                                        else
+                                        {
+                                                <input type="text" id="vendedor" name="vendedor" placeholder="---" required />
+                                                <input type="hidden" id="valvendedor" name="valvendedor" placeholder="---" />
+                                        }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="autoc_inspector" class="lang">Inspector</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            @if (Model.RowID > 0)
+                                        {
+                                                <input type="text" id="autoc_inspector" name="autoc_inspector" class="autocompletar" value="@Model.Tercero2.RazonSocial" placeholder="---" style="width: 100%" required />
+                                                <input type="hidden" id="valautoc_inspector" name="valautoc_inspector" class="" value="@Model.InspectorID" placeholder="---" style="width: 100%" />
+                                        }
+                                        else
+                                        {
+                                                <input type="text" id="autoc_inspector" name="autoc_inspector" class="autocompletar" placeholder="---" style="width: 100%" required />
+                                                <input type="hidden" id="valautoc_inspector" name="valautoc_inspector" class="" placeholder="---" style="width: 100%" />
+                                        }
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="formaP" class="lang">Forma de pago</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <select id="formaP" name="formaP" placeholder="Elija una opción" required>
+                                                @foreach (var formapago in ViewBag.FormasPago)
+                                            {
+                                                if (Model.RowID > 0)
+                                                {
+                                                    if (Model.Opcion1.RowID == formapago.RowID)
+                                                    {
+                                                            <option value="@formapago.RowID" selected>@formapago.Nombre</option>
+                                                    }
+                                                    else
+                                                    {
+                                                            <option value="@formapago.RowID">@formapago.Nombre</option>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                        <option value="@formapago.RowID">@formapago.Nombre</option>
+                                                }
+                                            }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="origen" class="lang">Termino Incoterm</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            @if (Model.RowID > 0)
+                                        {
+                                                <input type="text" id="Incoterm" name="Incoterm" value="@Model.Calculadora.Opcion.Nombre" placeholder="@Model.Calculadora.Opcion.Nombre" readonly />
+                                        }
+                                        else
+                                        {
+                                                <input type="text" id="Incoterm" name="Incoterm" readonly />
+                                        }
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="empaque" class="lang">Transporte corresponde</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            @if (Model.RowID > 0)
+                                        {
+                                                <input type="text" id="tranportecorresponde" name="tranportecorresponde" placeholder="@Model.Calculadora.Opcion.Codigo" readonly />
+                                        }
+                                        else
+                                        {
+                                                <input type="text" id="tranportecorresponde" name="tranportecorresponde" placeholder="---" readonly />
+                                        }
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row"></div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="formaP" class="lang">Calidad 2 </label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <textarea id="calidad2" style="resize:none" name="calidad2" rows="3" required>
+                                                @Model.Calidad2
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade col-md-12" id="myModal1" data-backdrop="static" data-keyboard="false" style="overflow: auto;">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+
+                                            <h4 class="modal-title"><b>Terminos Condiciones</b></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    @if (Model.TerminosCondiciones != null)
+                                                {
+                                                        <textarea id="terminos" name="terminos">@Model.TerminosCondiciones</textarea>
+                                                }
+                                                else
+                                                {
+                                                        <textarea id="terminos" name="terminos">@ViewBag.Termino.Body</textarea>
+                                                }
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="salir" aria-hidden="true">Verficado</button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
+                        </form>
+                    </div>
+                </div>
+                @if (Model.RowID>0)
+                {
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="col-md-12">
+                                <div style="margin-bottom: 20px">
+                                    <h4 class="lang" key="PQRS">Recursos</h4>
+                                    <hr style="margin:0px">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        <input type="text" class="" name="descripcion" id="descripcion" placeholder="Descripcion" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="file" class="file_evidencia " name="file_url_evidencia" id="file_url_evidencia" accept="image/*" />
+                                    </div>
+
+
+                                </div>
+                                <div class="row">
+                                    <div style="text-align:right;" class="col-md-6" id="div_guardar_p">
+
+                                        <a href="#" onclick="RegistrarEvidencia();" class="alink btn btn-default" style="margin-left:auto;" id="guardar_p">
+                                            <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;Guardar Evidencia
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-7">
+                            <table class="table table-responsive table-bordered table-hover" id="tablaRecursos">
+                                <thead>
+                                    <tr>
+                                        <th>Recurso</th>
+                                        <th>Descripcion</th>
+                                        <th>Usuario Creacion</th>
+                                        <th>Fecha Creacion</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+                
+            </div>
+            <div id="tab2" class="tab-pane">
+                <div class="col-md-12" style="margin-top:10px;">
+                    <table id="tblProductos" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Ref.</th>
+                                <th>Descripcion</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                                <th>Und. empaque</th>
+                                <th>Peso</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <div id="tab_2" class="tab-pane">
-            <div class="col-md-12" style="margin-top:10px;">
-                <table id="tblProductos" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
-                    <thead>
-                        <tr>
-                            <th>Ref.</th>
-                            <th>Descripcion</th>
-                            <th>Cantidad</th>
-                            <th>Precio</th>
-                            <th>Und. empaque</th>
-                            <th>Peso</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </div>
+        
     </div>
 </div>
 
 
 <script>
     $(document).ready(function(){
+        if (@Model.RowID>0) {
+            CargarEvidencias();
+        }
         $("#terminos").summernote({
             height : '100%'
         });
         $(".salir").click(function(){
             $("#myModal1").modal('hide');
         })
-        cargarItemsContrato($(".RowIDCalculadora").val());
     })
     function cargarmodal(){
         $("#myModal1").modal('show');
@@ -574,9 +643,8 @@
         maxDate: '+3Y',
         inline: true
     });
-    
+
     $('.autocompletar').on('keyup keypress', function (e) {
-        //debugger
         var code = (e.keyCode ? e.keyCode : e.which);
         if (code == 13) { //Enter keycode
             return false;
@@ -587,7 +655,6 @@
         source: "Buscar_Tercero",
         minLenght: 3,
         select: function (evento, ui) {//seleccion al autocompletar
-            //debugger
             if (ui.item != null) {//si hay valor en la seleccion autocompletar
                 $(this).val(ui.item.label);
                 $("#val"+$(this).attr("id")).val(ui.item.RowID)
@@ -601,7 +668,6 @@
         source: "Buscar_Empresa",
         minLenght: 3,
         select: function (evento, ui) {//seleccion al autocompletar
-            //debugger
             if (ui.item != null) {//si hay valor en la seleccion autocompletar
                 $(this).val(ui.item.label);
                 $("#val"+$(this).attr("id")).val(ui.item.RowID)
@@ -613,7 +679,6 @@
     });
 
     $('#Auto_Contrato').on('keyup keypress', function (e) {
-        //debugger
         var code = (e.keyCode ? e.keyCode : e.which);
         if (code == 13) { //Enter keycode
             return false;
@@ -643,48 +708,76 @@
 
         }
     });
-    $("#li_tab1").click(function () {
-        //debugger
-        $("#tblProductos").hide();
-        $("#form").show();
-
-    });
-
-    $("#li_tab2").click(function () {
-        //debugger
-        $("#tblProductos").show();
-        $("#form").hide();
-    });
-
-
-    @*$(document).ready(function () {
-        $("#tblProductos").hide();
-        //debugger
-        if (@Model.RowID > 0)
-        {
-            var titulo = $("#autoc_proforma").val();
-            $.ajax({
-                type: "GET",
-                url: "Datos_Proforma",
-                data:
-                      {
-                          titulo: titulo
-                      },
-                success: function (data) {
-                    $("#vendedor").val(data.vendedor);
-                    $("#comprador").val(data.comprador);
-                    $("#origen").val(data.origen);
-                    $("#destino").val(data.destino);
-                    $("#formaP").val(data.formaPago);
-                    $(".RowIDPro").val(data.RowID);
-                    cargarItemsContrato(data.RowID);
-                },
-                error: function (request) {
-                    Mensajes("Se presento un error", 'error', '');
-
-                }
-            });
+    function CargarEvidencias()
+    {
+        $.ajax({
+            url:"CargarEvidenciasContrato",
+            data:{rowid:@Model.RowID},
+            success:function(data){
+                $('#tablaRecursos tbody').empty();
+                $('#tablaRecursos').append(data);
+            }
+        })
+    }
+    function EliminarEvidencia(rowid)
+    {
+        if (!confirm("Desea Eliminar El Regitro")) {
+            return
         }
-    });*@
+        ModalProcesandoShow();
+        $.ajax({
+            url:"EliminarEvidenciaContrato",
+            data:{rowid:rowid},
+            success:function (data){
+                Mensajes('Eliminado Correctamente','success','');
+                CargarEvidencias();
+                ModalProcesandoHiden();
+            }
+
+        })
+    }
+    function RegistrarEvidencia(){
+        ruta = null;
+        if ($("#file_url_evidencia").val()=='') {
+            Mensajes('Seleccionar Archivo','error','');
+            return
+        }
+        ModalProcesandoShow();
+
+        var formdata = new FormData(); //FormData object
+        var fileInput = $("#file_url_evidencia").get(0).files;
+
+        for (i = 0; i < fileInput.length; i++) {
+            formdata.append("file" + i, fileInput[i]);
+        }
+        
+        formdata.append('descripcion', $('#descripcion').val());
+        formdata.append('rowid', @Model.RowID);
+        //alamacena la imagen dentro del servidor
+        $.ajax({
+            type: "POST",
+            url: "ContratoAdjuntoGuardar",
+            contentType: false,
+            processData: false,
+            data: formdata,
+            success: function (data) {
+                ruta = data;//regresa la ruta donde se almaceno
+                ruta = null;
+                ModalProcesandoHiden();
+                Mensajes('Registro Correctamente ', 'success', '');
+                $("#file_url_evidencia").val('');
+                $('#descripcion').val('');
+                CargarEvidencias()
+            },
+            error: function (request) {
+                ruta = null;
+                ModalProcesandoHiden();
+                Mensajes('Error Cargar Archivo Verifique Tamano ', 'error', '');
+                $("#file_url_evidencia").val('');
+                $('#descripcion').val('');
+            }
+        });
+
+    }
 
 </script>
