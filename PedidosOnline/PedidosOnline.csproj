@@ -179,9 +179,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CompañiaController.cs" />
     <Compile Include="Controllers\CRMController.cs" />
-    <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\ExportacionController.cs" />
     <Compile Include="Controllers\Helper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2030,8 +2028,6 @@
     <Folder Include="Recurso\ImagenPerfil\" />
     <Folder Include="RepositorioArchivos\ArchivosContrato\" />
     <Folder Include="RepositorioArchivos\ArchivosProformas\" />
-    <Folder Include="Views\Compañia\" />
-    <Folder Include="Views\Empresa\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
