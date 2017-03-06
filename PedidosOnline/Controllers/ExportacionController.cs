@@ -828,6 +828,23 @@ namespace PedidosOnline.Controllers
         }
         #endregion
 
+        #region BOOKING
+        public ActionResult Booking(int? RowID){
+            PedidosOnline.Models.Booking objBooking = db.Booking.Where(boo => boo.RowID == RowID).FirstOrDefault();
+            if (objBooking!=null)
+            {
+                return View(objBooking);
+            }
+            else
+            {
+                return View(new Booking());
+
+            }
+            return View();
+        }
+
+        #endregion
+
         //#region :::::ORDEN COMPRA:::::
         //[CheckSessionOut]
         //public ActionResult OrdenCompra(int? rowid, int? rowid_contrato)
@@ -927,7 +944,7 @@ namespace PedidosOnline.Controllers
         //    {
         //        reg = db.OrdenCompra.Where(f => f.RowID == rowid).FirstOrDefault();
         //    }
-           
+
         //    reg.FormaPagoID = int.Parse(Request.Params["formapago"]);
         //    reg.Observaciones = Request.Params["observaciones"];
 
@@ -967,6 +984,182 @@ namespace PedidosOnline.Controllers
 
         //#endregion
 
+        #region ::::::SOLICITUD DE TRANSPORTE::::::
+        [CheckSessionOut]
+        public ActionResult SolicitudTransportes()
+        {
+            List<SolicitudTransporte> Lista = db.SolicitudTransporte.ToList();
+            ViewBag.transportes = Lista;
+            return View(Lista);
+        }
+        [CheckSessionOut]
+        public ActionResult SolicitudTransporte(int? RowID)
+        {
+            ViewBag.plantas = db.Planta.ToList();
+            List<string> tipo = new List<string>();
+            tipo.Add("Térmico");
+            tipo.Add("Acerado - Serpentín");
+            tipo.Add("Lamina Negra");
+            ViewBag.tipo = tipo;
+            List<string> tipo1 = new List<string>();
+            tipo1.Add("Aluminio");
+            tipo1.Add("Plancha");
+            tipo1.Add("Carrocería");
+            ViewBag.tipo1 = tipo1;
+            if (RowID != null || RowID > 0)
+            {
+                ViewBag.tipoV = db.TipoVehiculo.Where(t => t.SolicitudTransporteID == RowID).ToList();
+                SolicitudTransporte solicitud = db.SolicitudTransporte.Where(c => c.RowID == RowID).FirstOrDefault();
+                return View(solicitud);
+            }
+            else
+            {
+                ViewBag.tipoV = null;
+                return View(new SolicitudTransporte());
+            }
+        }
+        [CheckSessionOut]
+        public JsonResult Datos_Proveedor(string proveedor)
+        {
+            //Tercero tercero = db.Tercero.Where(t => t.RazonSocial == proveedor).FirstOrDefault();
+            ContactoERP contacto = db.ContactoERP.Where(p => p.Nombre == proveedor).FirstOrDefault();
+            int RowID = contacto.RowID;
+            var data = new { RowID = RowID };
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        [CheckSessionOut]
+        public JsonResult Solicitud_Buscar_Proveedor()
+        {
+            List<Terceros> data = new List<Terceros>();
+            string terms = Request.Params["term"].Trim().ToUpper();
+            List<Terceros> Lista = (from listado in db.Tercero
+                                    where (listado.ContactoERP.Nombre.Contains(terms))
+                                    select new Terceros()
+                                    {
+                                        RowID = listado.RowID,
+                                        RazonSocial = listado.ContactoERP.Nombre,
+                                        Direccion = listado.ContactoERP.Direccion1,
+                                        Nit = listado.ContactoERP.Identificacion,
+                                        label = listado.ContactoERP.Nombre,
+                                    }).Distinct().OrderBy(f => f.label).ToList();//.Take(15);
+            data.AddRange(Lista.ToList());
+
+
+            var jsonResult = Json(data.OrderBy(f => f.RowID), JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+
+            return jsonResult;
+        }
+        public JsonResult ProformaAutocomplete()
+        {
+            string terms = Request.Params["term"].Trim().ToUpper();
+            var ListaCalc = (from listado in db.Proforma.Where(listado => listado.Titulo.Contains(terms))
+                             select new
+                             {
+                                 RowID = listado.RowID,
+                                 label = listado.Titulo,
+                             }).Distinct().OrderBy(cal => cal.RowID).ToList();
+
+
+            int cn = 0;
+            for (int i = 1; i <= ListaCalc.Count; i++)
+            {
+                try
+                {
+                    int rowidQ = Convert.ToInt32(ListaCalc[i - 1].RowID);
+                    SolicitudTransporte sl = db.SolicitudTransporte.Where(f => f.ProformaID == rowidQ).FirstOrDefault();
+                    if (sl != null)
+                    {
+                        ListaCalc.RemoveAt(i - 1);
+                        i = i - 1;
+                    }
+                    cn = cn + 1;
+                }
+                catch (Exception e)
+                { }
+            }
+            var returnjson = Json(ListaCalc.OrderBy(cal => cal.RowID), JsonRequestBehavior.AllowGet);
+            returnjson.MaxJsonLength = int.MaxValue;
+            return returnjson;
+        }
+        [CheckSessionOutAttribute]
+        public JsonResult RegistrarSolicitudTransporte(FormCollection form, int RowID, int RowIDCon, int RowIDPro, string tipoT)
+        {
+            String mensaje = "";
+            SolicitudTransporte ObjSolicitud = new SolicitudTransporte();
+            try
+            {
+                if (RowID == 0)
+                {
+                    form = DeSerialize(form);
+                    ObjSolicitud.ProformaID = RowIDCon;
+                    ObjSolicitud.ProveedorID = RowIDPro;
+                    ObjSolicitud.FechaCargue = Convert.ToDateTime(form["fechaC"]);
+                    ObjSolicitud.FechaEntrega = Convert.ToDateTime(form["fechaE"]);
+                    ObjSolicitud.RequisitosCargue = form["requisitosC"];
+                    ObjSolicitud.RequisitosDescargue = form["requisitosD"];
+                    //ObjSolicitud.OpcionID = Convert.ToInt32(form["periodoE"]);
+                    ObjSolicitud.Flete = form["flete"];
+                    ObjSolicitud.PlantaCargueID = Convert.ToInt32(form["plantaC"]);
+                    ObjSolicitud.PlantaDescargueID = Convert.ToInt32(form["plantaD"]);
+                    int cantidad = 0;
+                    if (form["cantidadV"] != "")
+                        cantidad = Convert.ToInt32(form["cantidadV"]);
+                    ObjSolicitud.Cantidad = cantidad;
+                    ObjSolicitud.FechaCreacion = UtilTool.GetDateTime();
+                    ObjSolicitud.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
+                    db.SolicitudTransporte.Add(ObjSolicitud);
+                    db.SaveChanges();
+
+                    mensaje = "Se ha ingresado correctamente";
+                }
+                else
+                {
+                    //Actualizar el plantilla
+                    ObjSolicitud = db.SolicitudTransporte.Where(le => le.RowID == RowID).FirstOrDefault();
+                    form = DeSerialize(form);
+                    ObjSolicitud.ProformaID = RowIDCon;
+                    ObjSolicitud.ProveedorID = RowIDPro;
+                    ObjSolicitud.FechaCargue = Convert.ToDateTime(form["fechaC"]);
+                    ObjSolicitud.FechaEntrega = Convert.ToDateTime(form["fechaE"]);
+                    ObjSolicitud.RequisitosCargue = form["requisitosC"];
+                    ObjSolicitud.RequisitosDescargue = form["requisitosD"];
+                    //ObjSolicitud.OpcionID = Convert.ToInt32(form["periodoE"]);
+                    ObjSolicitud.Flete = form["flete"];
+                    ObjSolicitud.PlantaCargueID = Convert.ToInt32(form["plantaC"]);
+                    ObjSolicitud.PlantaDescargueID = Convert.ToInt32(form["plantaD"]);
+                    ObjSolicitud.Cantidad = Convert.ToInt32(form["cantidadV"]);
+                    ObjSolicitud.FechaCreacion = UtilTool.GetDateTime();
+                    ObjSolicitud.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
+                    ObjSolicitud.FechaModificacion = UtilTool.GetDateTime();
+                    ObjSolicitud.UsuarioModificacion = ((Usuario)Session["CurUser"]).NombreUsuario;
+                    db.SaveChanges();
+                    mensaje = "Se ha actualizado correctamente";
+                }
+                List<TipoVehiculo> tiposV = db.TipoVehiculo.Where(t => t.SolicitudTransporteID == ObjSolicitud.RowID).ToList();
+                db.TipoVehiculo.RemoveRange(tiposV);
+                db.SaveChanges();
+                for (int i = 0; i < tipoT.Split(',').Length - 1; i++)
+                {
+                    TipoVehiculo tipo = new TipoVehiculo();
+                    tipo.SolicitudTransporteID = ObjSolicitud.RowID;
+                    tipo.Nombre = tipoT.Split(',')[i];
+                    db.TipoVehiculo.Add(tipo);
+                    db.SaveChanges();
+                }
+
+            }
+            catch (Exception e)
+            {
+                mensaje = "No se ha podido guardar los datos, error : " + e.Message;
+
+            }
+
+            int rowid = ObjSolicitud.RowID;
+            return Json(rowid, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
         #region :::::PROFORMA:::::
 
         [CheckSessionOut]
@@ -1143,7 +1336,7 @@ namespace PedidosOnline.Controllers
             return result;
         }
         [CheckSessionOut]
-        public string GuardarItemsProforma(int? Item, int? rowid, string can, string valor, double? fobton, double? fleteton, double? seguton, double? cifton, double? fobval, double? fleteval, double? seguval, double? cifval)
+        public string GuardarItemsProforma(int? Item, int? rowid, string can, string valor, double? fobton, double? fleteton, double? seguton, double? cifton, double? fobval, double? fleteval, double? seguval, double? cifval, int? por)
         {
             ProformaItemCalculadora proformaitem = db.ProformaItemCalculadora.Where(f => f.ProformaID == rowid).FirstOrDefault();
             if (proformaitem != null)
@@ -1160,6 +1353,7 @@ namespace PedidosOnline.Controllers
                 proformaitem.FobValor = fobval;
                 proformaitem.SeguroTonelada = seguton;
                 proformaitem.SeguroValor = seguval;
+                proformaitem.Porcentaje = por;
             }
             else
             {
@@ -1177,6 +1371,7 @@ namespace PedidosOnline.Controllers
                 proformaitem.FobValor = fobval;
                 proformaitem.SeguroTonelada = seguton;
                 proformaitem.SeguroValor = seguval;
+                proformaitem.Porcentaje = por;
                 db.ProformaItemCalculadora.Add(proformaitem);
             }
             db.SaveChanges();
@@ -1218,6 +1413,9 @@ namespace PedidosOnline.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+
+
 
 
         //#region ::::::METODOS GENERALES::::::

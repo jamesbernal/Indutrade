@@ -2006,6 +2006,8 @@
     <Content Include="Views\Importacion\Contrato.cshtml" />
     <Content Include="Views\Importacion\Contratos.cshtml" />
     <Content Include="Views\Importacion\RecursosContrato.cshtml" />
+    <Content Include="Views\Exportacion\Booking.cshtml" />
+    <Content Include="Views\Maestro\ListaUsuarioSistemas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

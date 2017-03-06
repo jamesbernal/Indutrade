@@ -184,7 +184,7 @@
                                     @if (Model.Proforma.RowID > 0)
                                     {
                                         <div class="col-md-6">
-                                            <input type="text" id="vendedor" name="vendedor" value="@Model.Proforma.Contrato.Tercero.RazonSocial" disabled />
+                                            <input type="text" id="vendedor" name="vendedor" value="@Model.Proforma.Contrato.Tercero3.RazonSocial" disabled />
                                         </div>
                                     }
                                     else
@@ -203,7 +203,7 @@
                                 @if (Model.Proforma.RowID > 0)
                                 {
                                     <div class="col-md-6">
-                                        <input type="text" id="vendedornit" name="vendedornit" value="@Model.Proforma.Contrato.Tercero.Identificacion" disabled />
+                                        <input type="text" id="vendedornit" name="vendedornit" value="@Model.Proforma.Contrato.Tercero3.Identificacion" disabled />
                                     </div>
                                 }
                                 else
@@ -221,7 +221,7 @@
                                 @if (Model.Proforma.RowID > 0)
                                 {
                                     <div class="col-md-6">
-                                        <input type="text" id="vendedortel" name="vendedortel" value="@Model.Proforma.Contrato.Tercero.ContactoERP.Telefono1 " disabled />
+                                        <input type="text" id="vendedortel" name="vendedortel" value="@Model.Proforma.Contrato.Tercero3.ContactoERP.Telefono1 " disabled />
                                     </div>
                                 }
                                 else
@@ -239,7 +239,7 @@
                                 @if (Model.Proforma.RowID > 0)
                                 {
                                     <div class="col-md-6">
-                                        <input type="text" id="vendedordir" name="vendedordir" value="@Model.Proforma.Contrato.Tercero.ContactoERP.Direccion1 " disabled />
+                                        <input type="text" id="vendedordir" name="vendedordir" value="@Model.Proforma.Contrato.Tercero3.ContactoERP.Direccion1 " disabled />
                                     </div>
                                 }
                                 else
@@ -264,7 +264,7 @@
                                     @if (Model.Proforma.RowID > 0)
                                     {
                                         <div class="col-md-6">
-                                            <input type="text" id="comprador" name="comprador" value="@Model.Proforma.Contrato.Tercero3.RazonSocial" disabled />
+                                            <input type="text" id="comprador" name="comprador" value="@Model.Proforma.Contrato.Tercero.RazonSocial" disabled />
                                         </div>
                                     }
                                     else
@@ -283,7 +283,7 @@
                                 @if (Model.Proforma.RowID > 0)
                                 {
                                     <div class="col-md-6">
-                                        <input type="text" id="compradornit" name="compradornit" value="@Model.Proforma.Contrato.Tercero3.Identificacion" disabled />
+                                        <input type="text" id="compradornit" name="compradornit" value="@Model.Proforma.Contrato.Tercero.Identificacion" disabled />
                                     </div>
                                 }
                                 else
@@ -301,7 +301,7 @@
                                 @if (Model.Proforma.RowID > 0)
                                 {
                                     <div class="col-md-6">
-                                        <input type="text" id="compradortel" name="compradortel" value="@Model.Proforma.Contrato.Tercero3.ContactoERP.Telefono1" disabled />
+                                        <input type="text" id="compradortel" name="compradortel" value="@Model.Proforma.Contrato.Tercero.ContactoERP.Telefono1" disabled />
                                     </div>
                                 }
                                 else
@@ -319,7 +319,7 @@
                                 @if (Model.Proforma.RowID > 0)
                                 {
                                     <div class="col-md-6">
-                                        <input type="text" id="compradordir" name="compradordir" value="@Model.Proforma.Contrato.Tercero3.ContactoERP.Direccion1" disabled />
+                                        <input type="text" id="compradordir" name="compradordir" value="@Model.Proforma.Contrato.Tercero.ContactoERP.Direccion1" disabled />
                                     </div>
                                 }
                                 else
@@ -489,6 +489,15 @@
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" id="cif" name="cif" onkeyup="CalcularItems()" style="width: 100%" />
+                                </div>
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <label for="ti" class="lang">Tolerancia %</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="number" max="100" min="0" id="porcentaje" name="porcentaje" style="width: 100%" />
                                 </div>
                                 <br />
                             </div>
@@ -668,6 +677,11 @@
                     ModalProcesandoHiden();
                     return null;
                 }
+                if ($("#porcentaje").val() == "") {
+                    Mensajes('El campo tolerancia % no puede estar vacio!', 'error', '');
+                    ModalProcesandoHiden();
+                    return null;
+                }
                     $.ajax({
                         url:"GuardarItemsProforma",
                         data:{Item: item,
@@ -682,6 +696,7 @@
                             fleteval: $("#fleteval").val(),
                             seguval: $("#seguro").val(),
                             cifval: $("#cifval").val(),
+                            por: $("#porcentaje").val(),
 
                         },
                         success:function(data){

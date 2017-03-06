@@ -23,17 +23,25 @@ namespace ErpPortal.WebApp.Controllers
         {
             PedidosOnlineEntities db = new PedidosOnlineEntities();
             string llamada = "";
-            if (entidad.ToUpper()=="PROFORMA")
+            if (entidad.ToUpper() == "PROFORMA")
             {
-                llamada = "EXEC spPROFORMA_EXPORTAR_PDF " + parm1 + "";
+                llamada = "EXEC ProformaExport " + parm1 + "";
                 DataSet dt = SQLBase.ReturnDataSet(llamada,
                 new SqlConnection(db.Database.Connection.ConnectionString));
                 m_plantillas m_plantilla = db.m_plantillas.Where(f => f.Nombre == "RDL_" + entidad).First();
                 return RDL_UTIL.RDL_Generate_PDF_File_VIEW(Server.MapPath("//"), dt, m_plantilla, entidad);
             }
-            if (entidad.ToUpper()=="CONTRATO")
+            if (entidad.ToUpper() == "CONTRATO")
             {
-                llamada = "EXEC contratos "+parm1+"";
+                llamada = "EXEC contratos " + parm1 + "";
+                DataSet dt = SQLBase.ReturnDataSet(llamada,
+                new SqlConnection(db.Database.Connection.ConnectionString));
+                m_plantillas m_plantilla = db.m_plantillas.Where(f => f.Nombre == "RDL_" + entidad).First();
+                return RDL_UTIL.RDL_Generate_PDF_File_VIEW(Server.MapPath("//"), dt, m_plantilla, entidad);
+            }
+            if (entidad.ToUpper() == "SOLICITUDTRANSPORTE")
+            {
+                llamada = "EXEC SolicitudTransportePDF " + parm1 + "";
                 DataSet dt = SQLBase.ReturnDataSet(llamada,
                 new SqlConnection(db.Database.Connection.ConnectionString));
                 m_plantillas m_plantilla = db.m_plantillas.Where(f => f.Nombre == "RDL_" + entidad).First();
@@ -43,13 +51,10 @@ namespace ErpPortal.WebApp.Controllers
             {
                 return "";
             }
-            
-           
-          
         }
 
 
-#endregion
+        #endregion
     }
 
 

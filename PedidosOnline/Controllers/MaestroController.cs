@@ -247,5 +247,14 @@ namespace PedidosOnline.Controllers
             return Json(respuesta);
         }
         #endregion
+        public ActionResult ListaUsuarioSistemas()
+        {
+            List<Usuario> lista_usuario = db.Usuario.Where(lius => lius.Activo == true).ToList();
+            return View(lista_usuario);
+        }
+        public ActionResult CrearFirma(Usuario user) {
+            return View();
+        }
+
     }
 }
