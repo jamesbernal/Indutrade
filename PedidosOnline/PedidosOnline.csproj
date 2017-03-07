@@ -1981,6 +1981,7 @@
       <DependentUpon>DAO_PedidosOnline.edmx</DependentUpon>
       <LastGenOutput>DAO_PedidosOnline.cs</LastGenOutput>
     </Content>
+    <Content Include="RepositorioArchivos\ImagenesGenerales\default-thumbnail.jpg" />
     <Content Include="Views\Home\Correo.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
