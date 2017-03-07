@@ -84,8 +84,8 @@
     <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaModificacion" Type="date" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.dbo.m_plantillas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.dbo.m_plantillas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="m_plantillas">
     <Key>
       <PropertyRef Name="RowID" />
@@ -116,16 +116,6 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.dbo.m_plantillas' does n
     <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
-  <EntityType Name="Vehiculo">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Placa" Type="varchar" MaxLength="10" />
-    <Property Name="Marca" Type="varchar" MaxLength="50" />
-    <Property Name="Modelo" Type="varchar" MaxLength="50" />
-    <Property Name="Color" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Ciudad">
     <Key>
@@ -244,6 +234,23 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.dbo.m_plantillas' does n
     <Property Name="FechaModificacion" Type="date" />
     <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="ItemImpuesto">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompañiaID" Type="int" />
+    <Property Name="TipoID" Type="int" />
+    <Property Name="ItemID" Type="int" />
+    <Property Name="Llave" Type="varchar" MaxLength="10" />
+    <Property Name="PorcentajeBase" Type="smallmoney" />
+    <Property Name="BaseMinimaCompra" Type="money" />
+    <Property Name="Tasa" Type="smallmoney" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
+    <Property Name="FechaModificacion" Type="datetime" />
+  </EntityType>
   <EntityType Name="ListaPrecio">
     <Key>
       <PropertyRef Name="RowID" />
@@ -287,8 +294,8 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.dbo.m_plantillas' does n
     <Property Name="FechaModificacion" Type="date" />
     <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="PuntoEnvio">
     <Key>
       <PropertyRef Name="RowID" />
@@ -353,6 +360,34 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
     <Property Name="FechaModificacion" Type="date" />
     <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="AutorizacionCargue">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SolicitudTransporteID" Type="int" />
+    <Property Name="EstadoID" Type="int" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="30" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="30" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="BKK" Type="varchar" MaxLength="50" />
+    <Property Name="Empaque" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="AutorizacionCargueVehiculo">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AutorizacionCargueID" Type="int" />
+    <Property Name="TerceroID" Type="int" />
+    <Property Name="Remolque" Type="varchar" MaxLength="50" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="30" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="30" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="VehiculoID" Type="int" />
+  </EntityType>
   <EntityType Name="Booking">
     <Key>
       <PropertyRef Name="RowID" />
@@ -360,7 +395,7 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
     <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ProformaID" Type="int" />
     <Property Name="TipoLlenadoID" Type="int" />
-    <Property Name="Nota" Type="text" />
+    <Property Name="Nota" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Calculadora">
     <Key>
@@ -629,6 +664,7 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
     <Property Name="FechaCreacion" Type="datetime" />
     <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="Retencion" Type="float" />
   </EntityType>
   <EntityType Name="Proforma">
     <Key>
@@ -668,6 +704,36 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
     <Property Name="FleteValor" Type="float" />
     <Property Name="SeguroValor" Type="float" />
     <Property Name="CifValor" Type="float" />
+    <Property Name="Porcentaje" Type="int" />
+  </EntityType>
+  <EntityType Name="SolicitudTransporte">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProformaID" Type="int" Nullable="false" />
+    <Property Name="ProveedorID" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Flete" Type="varchar" MaxLength="100" />
+    <Property Name="OpcionID" Type="int" />
+    <Property Name="PlantaCargueID" Type="int" />
+    <Property Name="FechaCargue" Type="date" />
+    <Property Name="RequisitosCargue" Type="varchar" MaxLength="100" />
+    <Property Name="PlantaDescargueID" Type="int" />
+    <Property Name="FechaEntrega" Type="date" />
+    <Property Name="RequisitosDescargue" Type="varchar" MaxLength="100" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
+    <Property Name="FechaCreacion" Type="date" />
+    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
+    <Property Name="FechaModificacion" Type="date" />
+  </EntityType>
+  <EntityType Name="TipoVehiculo">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SolicitudTransporteID" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Agrupacion">
     <Key>
@@ -696,6 +762,46 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
     <Property Name="FechaCreacion" Type="datetime" />
     <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaModificacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EnvioMail">
+    <Key>
+      <PropertyRef Name="rowid" />
+    </Key>
+    <Property Name="rowid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MTo" Type="nvarchar" MaxLength="70" />
+    <Property Name="MFrom" Type="text" />
+    <Property Name="Asunto" Type="text" />
+    <Property Name="Mensaje" Type="text" />
+    <Property Name="CreadoPor" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="FechaEnviado" Type="datetime" Nullable="false" />
+    <Property Name="sent" Type="int" />
+    <Property Name="Adjunto" Type="text" />
+  </EntityType>
+  <EntityType Name="Estado">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AgrupacionID" Type="int" />
+    <Property Name="Codigo" Type="varchar" MaxLength="50" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
+    <Property Name="FechaModificacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Firma">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
+    <Property Name="Imagen" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TipoFirmaID" Type="int" />
+    <Property Name="UsuarioID" Type="int" />
   </EntityType>
   <EntityType Name="MotoNave">
     <Key>
@@ -732,6 +838,19 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
     <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaModificacion" Type="datetime" />
   </EntityType>
+  <EntityType Name="Parametro">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Codigo" Type="nvarchar" MaxLength="80" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="80" Nullable="false" />
+    <Property Name="Valor" Type="text" />
+    <Property Name="CreadoPor" Type="varchar" MaxLength="50" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="ModificadoPor" Type="varchar" MaxLength="50" />
+    <Property Name="FechaModificacion" Type="datetime" />
+  </EntityType>
   <EntityType Name="Planta">
     <Key>
       <PropertyRef Name="RowID" />
@@ -754,6 +873,26 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
     <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaModificacion" Type="date" />
     <Property Name="UsuarioModificacion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Vehiculo">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TipoVehiculoID" Type="int" />
+    <Property Name="Placa" Type="nvarchar" MaxLength="50" />
+    <Property Name="Año" Type="nvarchar" MaxLength="50" />
+    <Property Name="Modelo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Color" Type="nvarchar" MaxLength="50" />
+    <Property Name="CapacidadKG" Type="int" />
+    <Property Name="Volumen" Type="int" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="Estado" Type="bit" />
+    <Property Name="MarcaID" Type="int" />
+    <Property Name="Rendimiento" Type="int" />
+    <Property Name="PesoVacio" Type="float" />
+    <Property Name="CargaMaxima" Type="float" />
   </EntityType>
   <EntityType Name="Menu">
     <Key>
@@ -874,6 +1013,66 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
       </Principal>
       <Dependent Role="Actividad">
         <PropertyRef Name="TipoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Autorizac__Autor__6F8A7843">
+    <End Role="AutorizacionCargue" Type="Self.AutorizacionCargue" Multiplicity="0..1" />
+    <End Role="AutorizacionCargueVehiculo" Type="Self.AutorizacionCargueVehiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AutorizacionCargue">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="AutorizacionCargueVehiculo">
+        <PropertyRef Name="AutorizacionCargueID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Autorizac__Estad__6BB9E75F">
+    <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+    <End Role="AutorizacionCargue" Type="Self.AutorizacionCargue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estado">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="AutorizacionCargue">
+        <PropertyRef Name="EstadoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Autorizac__Solic__6CAE0B98">
+    <End Role="SolicitudTransporte" Type="Self.SolicitudTransporte" Multiplicity="0..1" />
+    <End Role="AutorizacionCargue" Type="Self.AutorizacionCargue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SolicitudTransporte">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="AutorizacionCargue">
+        <PropertyRef Name="SolicitudTransporteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Autorizac__Terce__707E9C7C">
+    <End Role="Tercero" Type="Self.Tercero" Multiplicity="0..1" />
+    <End Role="AutorizacionCargueVehiculo" Type="Self.AutorizacionCargueVehiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tercero">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="AutorizacionCargueVehiculo">
+        <PropertyRef Name="TerceroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Autorizac__Vehic__04859529">
+    <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="0..1" />
+    <End Role="AutorizacionCargueVehiculo" Type="Self.AutorizacionCargueVehiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehiculo">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="AutorizacionCargueVehiculo">
+        <PropertyRef Name="VehiculoID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1297,6 +1496,42 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Estado__Agrupaci__03C67B1A">
+    <End Role="Agrupacion" Type="Self.Agrupacion" Multiplicity="0..1" />
+    <End Role="Estado" Type="Self.Estado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agrupacion">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Estado">
+        <PropertyRef Name="AgrupacionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Firma__TipoFirma__7760A435">
+    <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
+    <End Role="Firma" Type="Self.Firma" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opcion">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Firma">
+        <PropertyRef Name="TipoFirmaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Firma__UsuarioID__7854C86E">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Firma" Type="Self.Firma" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Firma">
+        <PropertyRef Name="UsuarioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Item__CompañiaID__29E1370A">
     <End Role="Compañia" Type="Self.Compañia" Multiplicity="0..1" />
     <End Role="Item" Type="Self.Item" Multiplicity="*" />
@@ -1306,6 +1541,42 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
       </Principal>
       <Dependent Role="Item">
         <PropertyRef Name="CompañiaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ItemImpue__Compa__1980B20F">
+    <End Role="Compañia" Type="Self.Compañia" Multiplicity="0..1" />
+    <End Role="ItemImpuesto" Type="Self.ItemImpuesto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Compañia">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="ItemImpuesto">
+        <PropertyRef Name="CompañiaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ItemImpue__ItemI__1B68FA81">
+    <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+    <End Role="ItemImpuesto" Type="Self.ItemImpuesto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="ItemImpuesto">
+        <PropertyRef Name="ItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ItemImpue__TipoI__1A74D648">
+    <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
+    <End Role="ItemImpuesto" Type="Self.ItemImpuesto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opcion">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="ItemImpuesto">
+        <PropertyRef Name="TipoID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1381,11 +1652,11 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrdenComp__Estad__4C764630">
-    <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
+  <Association Name="FK__OrdenComp__Estad__04BA9F53">
+    <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
     <End Role="OrdenCompra" Type="Self.OrdenCompra" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Opcion">
+      <Principal Role="Estado">
         <PropertyRef Name="RowID" />
       </Principal>
       <Dependent Role="OrdenCompra">
@@ -2077,6 +2348,30 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Vehiculo__MarcaI__763775D2">
+    <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
+    <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opcion">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Vehiculo">
+        <PropertyRef Name="MarcaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vehiculo__TipoVe__744F2D60">
+    <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
+    <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opcion">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Vehiculo">
+        <PropertyRef Name="TipoVehiculoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Actividad_Contacto">
     <End Role="Contacto" Type="Self.Contacto" Multiplicity="0..1" />
     <End Role="Actividad" Type="Self.Actividad" Multiplicity="*" />
@@ -2086,6 +2381,66 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
       </Principal>
       <Dependent Role="Actividad">
         <PropertyRef Name="ContactoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SolicitudTransporte_Opcion">
+    <End Role="Opcion" Type="Self.Opcion" Multiplicity="0..1" />
+    <End Role="SolicitudTransporte" Type="Self.SolicitudTransporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opcion">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="SolicitudTransporte">
+        <PropertyRef Name="OpcionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SolicitudTransporte_Planta">
+    <End Role="Planta" Type="Self.Planta" Multiplicity="0..1" />
+    <End Role="SolicitudTransporte" Type="Self.SolicitudTransporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Planta">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="SolicitudTransporte">
+        <PropertyRef Name="PlantaCargueID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SolicitudTransporte_Proforma">
+    <End Role="Proforma" Type="Self.Proforma" Multiplicity="1" />
+    <End Role="SolicitudTransporte" Type="Self.SolicitudTransporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proforma">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="SolicitudTransporte">
+        <PropertyRef Name="ProformaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SolicitudTransporte_SolicitudTransporte">
+    <End Role="Planta" Type="Self.Planta" Multiplicity="0..1" />
+    <End Role="SolicitudTransporte" Type="Self.SolicitudTransporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Planta">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="SolicitudTransporte">
+        <PropertyRef Name="PlantaDescargueID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SolicitudTransporte_Tercero">
+    <End Role="Tercero" Type="Self.Tercero" Multiplicity="1" />
+    <End Role="SolicitudTransporte" Type="Self.SolicitudTransporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tercero">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="SolicitudTransporte">
+        <PropertyRef Name="ProveedorID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2101,10 +2456,28 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TipoVehiculo_SolicitudTransporte">
+    <End Role="SolicitudTransporte" Type="Self.SolicitudTransporte" Multiplicity="1" />
+    <End Role="TipoVehiculo" Type="Self.TipoVehiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SolicitudTransporte">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="TipoVehiculo">
+        <PropertyRef Name="SolicitudTransporteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="contratos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="rowid_contrato" Type="int" Mode="In" />
   </Function>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="ProformaExport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SolicitudTransportePDF" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RowID" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
     <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -2145,7 +2518,6 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
     <EntitySet Name="TerceroPotencial" EntityType="Self.TerceroPotencial" Schema="Crm" store:Type="Tables" />
     <EntitySet Name="AgenteNaviera" EntityType="Self.AgenteNaviera" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Vehiculo" EntityType="Self.Vehiculo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="Erp" store:Type="Tables" />
     <EntitySet Name="Compañia" EntityType="Self.Compañia" Schema="Erp" store:Type="Tables" />
     <EntitySet Name="CondicionPago" EntityType="Self.CondicionPago" Schema="Erp" store:Type="Tables" />
@@ -2153,11 +2525,14 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
     <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="Erp" store:Type="Tables" />
     <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="Erp" store:Type="Tables" />
     <EntitySet Name="Item" EntityType="Self.Item" Schema="Erp" store:Type="Tables" />
+    <EntitySet Name="ItemImpuesto" EntityType="Self.ItemImpuesto" Schema="Erp" store:Type="Tables" />
     <EntitySet Name="ListaPrecio" EntityType="Self.ListaPrecio" Schema="Erp" store:Type="Tables" />
     <EntitySet Name="Pais" EntityType="Self.Pais" Schema="Erp" store:Type="Tables" />
     <EntitySet Name="Precio" EntityType="Self.Precio" Schema="Erp" store:Type="Tables" />
     <EntitySet Name="Sucursal" EntityType="Self.Sucursal" Schema="Erp" store:Type="Tables" />
     <EntitySet Name="Tercero" EntityType="Self.Tercero" Schema="Erp" store:Type="Tables" />
+    <EntitySet Name="AutorizacionCargue" EntityType="Self.AutorizacionCargue" Schema="Exportacion" store:Type="Tables" />
+    <EntitySet Name="AutorizacionCargueVehiculo" EntityType="Self.AutorizacionCargueVehiculo" Schema="Exportacion" store:Type="Tables" />
     <EntitySet Name="Booking" EntityType="Self.Booking" Schema="Exportacion" store:Type="Tables" />
     <EntitySet Name="Calculadora" EntityType="Self.Calculadora" Schema="Exportacion" store:Type="Tables" />
     <EntitySet Name="CalculadoraItems" EntityType="Self.CalculadoraItems" Schema="Exportacion" store:Type="Tables" />
@@ -2168,12 +2543,19 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
     <EntitySet Name="OrdenCompraItem" EntityType="Self.OrdenCompraItem" Schema="Exportacion" store:Type="Tables" />
     <EntitySet Name="Proforma" EntityType="Self.Proforma" Schema="Exportacion" store:Type="Tables" />
     <EntitySet Name="ProformaItemCalculadora" EntityType="Self.ProformaItemCalculadora" Schema="Exportacion" store:Type="Tables" />
+    <EntitySet Name="SolicitudTransporte" EntityType="Self.SolicitudTransporte" Schema="Exportacion" store:Type="Tables" />
+    <EntitySet Name="TipoVehiculo" EntityType="Self.TipoVehiculo" Schema="Exportacion" store:Type="Tables" />
     <EntitySet Name="Agrupacion" EntityType="Self.Agrupacion" Schema="Maestro" store:Type="Tables" />
     <EntitySet Name="Costo" EntityType="Self.Costo" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="EnvioMail" EntityType="Self.EnvioMail" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="Estado" EntityType="Self.Estado" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="Firma" EntityType="Self.Firma" Schema="Maestro" store:Type="Tables" />
     <EntitySet Name="MotoNave" EntityType="Self.MotoNave" Schema="Maestro" store:Type="Tables" />
     <EntitySet Name="Opcion" EntityType="Self.Opcion" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="Parametro" EntityType="Self.Parametro" Schema="Maestro" store:Type="Tables" />
     <EntitySet Name="Planta" EntityType="Self.Planta" Schema="Maestro" store:Type="Tables" />
     <EntitySet Name="Puerto" EntityType="Self.Puerto" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="Vehiculo" EntityType="Self.Vehiculo" Schema="Maestro" store:Type="Tables" />
     <EntitySet Name="Menu" EntityType="Self.Menu" Schema="Perfil" store:Type="Tables" />
     <EntitySet Name="Modulo" EntityType="Self.Modulo" Schema="Perfil" store:Type="Tables" />
     <EntitySet Name="Rol" EntityType="Self.Rol" Schema="Perfil" store:Type="Tables" />
@@ -2227,6 +2609,26 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
     <AssociationSet Name="FK__Actividad__TipoI__2D47B39A" Association="Self.FK__Actividad__TipoI__2D47B39A">
       <End Role="Opcion" EntitySet="Opcion" />
       <End Role="Actividad" EntitySet="Actividad" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Autorizac__Autor__6F8A7843" Association="Self.FK__Autorizac__Autor__6F8A7843">
+      <End Role="AutorizacionCargue" EntitySet="AutorizacionCargue" />
+      <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Autorizac__Estad__6BB9E75F" Association="Self.FK__Autorizac__Estad__6BB9E75F">
+      <End Role="Estado" EntitySet="Estado" />
+      <End Role="AutorizacionCargue" EntitySet="AutorizacionCargue" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Autorizac__Solic__6CAE0B98" Association="Self.FK__Autorizac__Solic__6CAE0B98">
+      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
+      <End Role="AutorizacionCargue" EntitySet="AutorizacionCargue" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Autorizac__Terce__707E9C7C" Association="Self.FK__Autorizac__Terce__707E9C7C">
+      <End Role="Tercero" EntitySet="Tercero" />
+      <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Autorizac__Vehic__04859529" Association="Self.FK__Autorizac__Vehic__04859529">
+      <End Role="Vehiculo" EntitySet="Vehiculo" />
+      <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
     </AssociationSet>
     <AssociationSet Name="FK__Booking__Proform__0F6D37F0" Association="Self.FK__Booking__Proform__0F6D37F0">
       <End Role="Proforma" EntitySet="Proforma" />
@@ -2368,9 +2770,33 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
       <End Role="Opcion" EntitySet="Opcion" />
       <End Role="Empresa" EntitySet="Empresa" />
     </AssociationSet>
+    <AssociationSet Name="FK__Estado__Agrupaci__03C67B1A" Association="Self.FK__Estado__Agrupaci__03C67B1A">
+      <End Role="Agrupacion" EntitySet="Agrupacion" />
+      <End Role="Estado" EntitySet="Estado" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Firma__TipoFirma__7760A435" Association="Self.FK__Firma__TipoFirma__7760A435">
+      <End Role="Opcion" EntitySet="Opcion" />
+      <End Role="Firma" EntitySet="Firma" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Firma__UsuarioID__7854C86E" Association="Self.FK__Firma__UsuarioID__7854C86E">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Firma" EntitySet="Firma" />
+    </AssociationSet>
     <AssociationSet Name="FK__Item__CompañiaID__29E1370A" Association="Self.FK__Item__CompañiaID__29E1370A">
       <End Role="Compañia" EntitySet="Compañia" />
       <End Role="Item" EntitySet="Item" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ItemImpue__Compa__1980B20F" Association="Self.FK__ItemImpue__Compa__1980B20F">
+      <End Role="Compañia" EntitySet="Compañia" />
+      <End Role="ItemImpuesto" EntitySet="ItemImpuesto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ItemImpue__ItemI__1B68FA81" Association="Self.FK__ItemImpue__ItemI__1B68FA81">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="ItemImpuesto" EntitySet="ItemImpuesto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ItemImpue__TipoI__1A74D648" Association="Self.FK__ItemImpue__TipoI__1A74D648">
+      <End Role="Opcion" EntitySet="Opcion" />
+      <End Role="ItemImpuesto" EntitySet="ItemImpuesto" />
     </AssociationSet>
     <AssociationSet Name="FK__Menu__ModuloID__6BAEFA67" Association="Self.FK__Menu__ModuloID__6BAEFA67">
       <End Role="Modulo" EntitySet="Modulo" />
@@ -2396,8 +2822,8 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
       <End Role="Contrato" EntitySet="Contrato" />
       <End Role="OrdenCompraContrato" EntitySet="OrdenCompraContrato" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrdenComp__Estad__4C764630" Association="Self.FK__OrdenComp__Estad__4C764630">
-      <End Role="Opcion" EntitySet="Opcion" />
+    <AssociationSet Name="FK__OrdenComp__Estad__04BA9F53" Association="Self.FK__OrdenComp__Estad__04BA9F53">
+      <End Role="Estado" EntitySet="Estado" />
       <End Role="OrdenCompra" EntitySet="OrdenCompra" />
     </AssociationSet>
     <AssociationSet Name="FK__OrdenComp__Forma__4A8DFDBE" Association="Self.FK__OrdenComp__Forma__4A8DFDBE">
@@ -2628,13 +3054,45 @@ warning 6002: The table/view 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' does not
       <End Role="Tercero" EntitySet="Tercero" />
       <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
+    <AssociationSet Name="FK__Vehiculo__MarcaI__763775D2" Association="Self.FK__Vehiculo__MarcaI__763775D2">
+      <End Role="Opcion" EntitySet="Opcion" />
+      <End Role="Vehiculo" EntitySet="Vehiculo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vehiculo__TipoVe__744F2D60" Association="Self.FK__Vehiculo__TipoVe__744F2D60">
+      <End Role="Opcion" EntitySet="Opcion" />
+      <End Role="Vehiculo" EntitySet="Vehiculo" />
+    </AssociationSet>
     <AssociationSet Name="FK_Actividad_Contacto" Association="Self.FK_Actividad_Contacto">
       <End Role="Contacto" EntitySet="Contacto" />
       <End Role="Actividad" EntitySet="Actividad" />
     </AssociationSet>
+    <AssociationSet Name="FK_SolicitudTransporte_Opcion" Association="Self.FK_SolicitudTransporte_Opcion">
+      <End Role="Opcion" EntitySet="Opcion" />
+      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SolicitudTransporte_Planta" Association="Self.FK_SolicitudTransporte_Planta">
+      <End Role="Planta" EntitySet="Planta" />
+      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SolicitudTransporte_Proforma" Association="Self.FK_SolicitudTransporte_Proforma">
+      <End Role="Proforma" EntitySet="Proforma" />
+      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SolicitudTransporte_SolicitudTransporte" Association="Self.FK_SolicitudTransporte_SolicitudTransporte">
+      <End Role="Planta" EntitySet="Planta" />
+      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SolicitudTransporte_Tercero" Association="Self.FK_SolicitudTransporte_Tercero">
+      <End Role="Tercero" EntitySet="Tercero" />
+      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
+    </AssociationSet>
     <AssociationSet Name="fk_TipoRelacionID" Association="Self.fk_TipoRelacionID">
       <End Role="Opcion" EntitySet="Opcion" />
       <End Role="Actividad" EntitySet="Actividad" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TipoVehiculo_SolicitudTransporte" Association="Self.FK_TipoVehiculo_SolicitudTransporte">
+      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
+      <End Role="TipoVehiculo" EntitySet="TipoVehiculo" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

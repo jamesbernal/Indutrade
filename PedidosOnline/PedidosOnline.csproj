@@ -199,6 +199,12 @@
     <Compile Include="Models\Agrupacion.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AutorizacionCargue.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AutorizacionCargueVehiculo.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Booking.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
@@ -253,7 +259,19 @@
     <Compile Include="Models\Empresa.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EnvioMail.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Estado.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Firma.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Item.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ItemImpuesto.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ListaPrecio.cs">
@@ -286,6 +304,9 @@
     <Compile Include="Models\Pais.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Parametro.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Planta.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
@@ -293,6 +314,9 @@
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Proforma.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProformaExport_Result.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProformaItemCalculadora.cs">
@@ -308,6 +332,12 @@
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RolMenu.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SolicitudTransporte.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SolicitudTransportePDF_Result.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\spPROFORMA_EXPORTAR_PDF1_Result.cs">
@@ -335,6 +365,9 @@
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TerceroPotencial.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoVehiculo.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuario.cs">
@@ -1838,6 +1871,23 @@
     <Content Include="Content\js\UTIL_PORTAL.js" />
     <Content Include="Content\Menu-Responsive.css" />
     <Content Include="Content\Pedidos-Ingresado.min.css" />
+    <Content Include="Content\plugins\fancybox-master\.gitignore" />
+    <Content Include="Content\plugins\fancybox-master\dist\jquery.fancybox.css" />
+    <Content Include="Content\plugins\fancybox-master\dist\jquery.fancybox.js" />
+    <Content Include="Content\plugins\fancybox-master\dist\jquery.fancybox.min.css" />
+    <Content Include="Content\plugins\fancybox-master\dist\jquery.fancybox.min.js" />
+    <Content Include="Content\plugins\fancybox-master\docs\index.html" />
+    <Content Include="Content\plugins\fancybox-master\gulpfile.js" />
+    <Content Include="Content\plugins\fancybox-master\src\css\core.css" />
+    <Content Include="Content\plugins\fancybox-master\src\css\fullscreen.css" />
+    <Content Include="Content\plugins\fancybox-master\src\css\slideshow.css" />
+    <Content Include="Content\plugins\fancybox-master\src\css\thumbs.css" />
+    <Content Include="Content\plugins\fancybox-master\src\js\core.js" />
+    <Content Include="Content\plugins\fancybox-master\src\js\fullscreen.js" />
+    <Content Include="Content\plugins\fancybox-master\src\js\guestures.js" />
+    <Content Include="Content\plugins\fancybox-master\src\js\media.js" />
+    <Content Include="Content\plugins\fancybox-master\src\js\slideshow.js" />
+    <Content Include="Content\plugins\fancybox-master\src\js\thumbs.js" />
     <Content Include="Content\plugins\summernote\lang\summernote-ar-AR.js" />
     <Content Include="Content\plugins\summernote\lang\summernote-bg-BG.js" />
     <Content Include="Content\plugins\summernote\lang\summernote-ca-ES.js" />
@@ -2008,6 +2058,7 @@
     <Content Include="Views\Importacion\RecursosContrato.cshtml" />
     <Content Include="Views\Exportacion\Booking.cshtml" />
     <Content Include="Views\Maestro\ListaUsuarioSistemas.cshtml" />
+    <Content Include="Views\Maestro\CrearFirma.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2168,6 +2219,8 @@
     <Content Include="Content\plugins\summernote\font\summernote.eot" />
     <Content Include="Content\plugins\summernote\font\summernote.ttf" />
     <Content Include="Content\plugins\summernote\font\summernote.woff" />
+    <Content Include="Content\plugins\fancybox-master\package.json" />
+    <Content Include="Content\plugins\fancybox-master\README.md" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>

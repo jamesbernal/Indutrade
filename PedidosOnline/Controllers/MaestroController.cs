@@ -252,8 +252,13 @@ namespace PedidosOnline.Controllers
             List<Usuario> lista_usuario = db.Usuario.Where(lius => lius.Activo == true).ToList();
             return View(lista_usuario);
         }
-        public ActionResult CrearFirma(Usuario user) {
-            return View();
+        public ActionResult CrearFirma(int? RowID_Usuario) {
+            Usuario objUsuario = db.Usuario.Where(us => us.RowID == RowID_Usuario).FirstOrDefault();
+            if (objUsuario == null) { 
+                return View(new Usuario());
+            }
+            
+            return View(objUsuario);
         }
 
     }

@@ -61,12 +61,11 @@
                         <tr>
                             <td><a href="@Url.Action("CrearFirma", "Maestro", new { user = Usuario })"><i class="glyphicon glyphicon-search"></i></a></td>
                             <td>
-                                <a onclick="modal_firma(@Usuario)" class="alink" ata-toggle="tooltip" data-placement="bottom" title="Exportar PDF">
+                                <a onclick="modal_firma('@Usuario.RowID')" class="alink" ata-toggle="tooltip" data-placement="bottom" title="Exportar PDF">
                                     <i class="glyphicon glyphicon-file"></i>
                                 </a>
                                 @*<a href="@Url.Action("Export", "Proforma", new { @rowid = @cal.RowID, @rih = Request.Params["rih"] })"><i class="glyphicon glyphicon-export"></i></a>*@
                             </td>
-                            <td>@Usuario.RowID</td>
                             <td>@Usuario.NombreUsuario</td>
                             <td>@Usuario.Tercero.RazonSocial</td>
                             <td>@Usuario.Tercero.Identificacion</td>
@@ -80,8 +79,8 @@
 </div>
 <div id="modal_firma"></div>
 <script>
-    function modal_firma(user){
-        var url = "FirmaUsuario?user=" + user + "";
+    function modal_firma(RowID) {
+        var url = "CrearFirma?RowID_Usuario=" + RowID + "";
         $("#modal_firma").load(url.trim());
     }    
 </script>
