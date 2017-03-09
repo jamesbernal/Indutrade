@@ -22,18 +22,9 @@
                     </span>
                     <span>
                         <a href="javascript:Modal_()" class="alink">
-                            <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Vehiculos</span>
+                            <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" >Vehiculos</span>
                         </a>
                     </span>
-                    @if (Model.RowID != 0)
-                    {
-                        <span>
-                            &nbsp;&nbsp;
-                            <a href="~/Exportacion/SolicitudLlenado" class="alink">
-                                <i class="glyphicon glyphicon-arrow-right"></i><span class="lang" key="Siguiente">Siguiente</span>
-                            </a>
-                        </span>
-                    }
                 </div>
                 <br />
                 <div class="tab-content" style="overflow:hidden">
@@ -85,7 +76,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <div class="col-md-3">
-                                        <label for="autoc_Proforma" class="lang">Vehiculos</label>
+                                        <label fclass="lang">Vehiculos</label>
                                     </div>
                                     <div class="col-md-5">
                                         @if (Model.RowID > 0)
@@ -133,9 +124,8 @@
 </script>
 <script>
     function Modal_() {
-        var urlWithCont = '../Exportacion/ModalVehiculo';
-        $("#Dialog")//Division con id Dialog_Solicitud
+        var urlWithCont = "ModalVehiculo";
+        $("#Dialog")
         .load(urlWithCont.trim())
-        .dialog('open');
     }
 </script>
