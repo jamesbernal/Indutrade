@@ -1,5 +1,202 @@
-﻿
+﻿@model PedidosOnline.Models.Booking
 @{
     ViewBag.Title = "Booking";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    #firma_correo{
+        width:400px;
+        height:75px;
+    }
+</style>
+<div class="col-md-12">
+    <div class="nav">
+        <span>
+            &nbsp;&nbsp;
+            <a href="@Url.Action("Proformas", "Exportacion", new { @rih = Request.Params["rih"] })" class="alink">
+                <i class="glyphicon glyphicon-list-alt"></i>&nbsp;<span class="lang" key="VISTA">Vista&nbsp;&nbsp;</span>
+            </a>
+        </span>
+        <span>
+            <a href="javascript:Guardar()" class="alink">
+                <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
+            </a>
+        </span>
+
+        @*@if (Model.RowID != 0)
+            {
+                <span>
+                    &nbsp;&nbsp;
+                    <a href="~/OrdenCompra/OrdenCompra" class="alink">
+                        <i class="glyphicon glyphicon-arrow-right"></i><span class="lang" key="Siguiente">Siguiente</span>
+                    </a>
+                </span>
+            }*@
+        <div class="tab-content" style="overflow:hidden">
+            <div class="tab-pane active" id="tab_1">
+                <div class="col-sm-12">
+                    <form id="form" name="form" onsubmit="return false">
+                        <input type="hidden" name="RowID_Booking" id="RowID_Booking" value="@Model.RowID" />
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="autocomplete_proforma" class="control-label">Proformas</label>
+                                    <input type="text" id="autocomplete_proforma" placeholder="-----"  required/>
+                                    <input type="hidden" name="proforma_id" id="proforma_id" />
+                                </div>
+
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label class="control-label">Cliente</label>
+                                    <br />
+                                    <label class="control-label" id="cliente">Cliente</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label class="control-label">Cantidad</label>
+                                    <br />
+                                    <label class="control-label" id="cantidad">Cantidad</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group ">
+                                    <div class="form-group">
+                                        <label class="control-label">Producto</label>
+                                        <br />
+                                        <label class="control-label" id="producto">Producto</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label class="control-label">Tipo llenado</label>
+                                    <br />
+                                    <select name="tipo_cargue" id="tipo_cargue" onchange="generar_html()" class="" required>
+                                        <option value="" selected disabled>Elija una opción</option>
+                                        @foreach (var opcion in ViewBag.TipoLlenado)
+                                        {
+                                            <option value="@opcion.RowID">@opcion.Nombre</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                         </div>
+                        <div class="row">
+                            
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label class="control-label">Puerto descargue</label>
+                                    <br />
+                                    <label class="control-label" id="puerto_descargue">Puerto descargue</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label class="control-label">Fecha embarque</label>
+                                    <br />
+                                    <label class="control-label" id="fecha_embarque">Fecha embarque</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label class="control-label">Puerto cargue</label>
+                                    <br />
+                                    <label class="control-label" id="puerto_cargue">Puerto cargue</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label class="control-label">Asunto</label>
+                                    <input type="text" name="asunto" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label class="control-label">Correo de recepción</label>
+                                    <input type="email" name="correo_envio" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <textarea id="nota" name="nota">@ViewBag.Firma</textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $.extend($.validator.defaults, {
+            invalidHandler: function (form, validator) {
+                var errors = validator.numberOfInvalids();
+                if (errors) {
+                    var message = errors == 1
+                    ? 'Completar Campo Vacio.'
+                    : 'Completar ' + errors + ' Campos que se encuentran vacios.';
+                    Mensajes(message, 'error', '');
+                }
+            }
+        });
+        $.validator.messages.required = 'Campo requerido';
+        $.validator.messages.email = 'Campo para correo eléctronico';
+        $("#nota").summernote();
+
+        $("#autocomplete_proforma").autocomplete({
+            source: "InformacionProformaBooking",
+            minLenght: 3,
+            select: function (evento, ui) {//seleccion al autocompletar
+                if (ui.item != null) {
+                    //si hay valor en la seleccion autocompletar
+                    //$("#autocomplete_proforma").val(ui.item.label);
+                }
+            },
+            select: function (event, ui) {
+                $("#proforma_id").val(ui.item.RowID)
+                $("#cliente").text(ui.item.Cliente)
+                $("#cantidad").text(ui.item.Cantidad)
+                var fecha = new Date(parseInt(ui.item.FechaEmbarque.replace('/Date(', ''))).toLocaleDateString();
+                $("#puerto_descargue").text(ui.item.PuertoDescargue);
+                $("#fecha_embarque").text(fecha);
+                $("#puerto_cargue").text(ui.item.PuertoCargue);
+                generar_html();
+            }
+        });
+        
+
+    })
+    function generar_html() {
+        var html = "<li>" + $("#cliente").text() + "</li>";
+        html += "<li>" + $("#cantidad").text() + "</li>";
+        html += "<li>" + $("#tipo_cargue option:selected").text() + "</li>";
+        html += "<li>" + $("#puerto_descargue").text() + "</li>";
+        html += "<li>" + $("#fecha_embarque").text() + "</li>";
+        html += "<li>" + $("#puerto_cargue").text() + "</li>";
+        $("#informacion_general").empty().append(html);
+
+    }
+    function Guardar() {
+        var validator = $("#form").validate();
+        var formData = new FormData(document.getElementById("form"));
+        formData.append("nota", $(".note-editable").html());
+        if (validator.form()) {
+            $.ajax({
+                type: "POST",
+                data:formData,
+                url: "GuardarBooking",
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    Mensajes();
+                },
+                error: function (data) {
+                    Mensajes();
+                }
+            })
+        }
+    }
+</script>
+

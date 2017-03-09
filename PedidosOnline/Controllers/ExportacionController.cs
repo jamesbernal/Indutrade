@@ -49,7 +49,7 @@ namespace PedidosOnline.Controllers
                                         RowID = listado.RowID,
                                         RazonSocial = listado.RazonSocial,
                                         label = listado.RazonSocial,
-
+                                        
 
                                     }).Distinct().OrderBy(f => f.label).ToList();//.Take(15);
             data.AddRange(Lista.ToList());
@@ -65,7 +65,7 @@ namespace PedidosOnline.Controllers
             List<Terceros> data = new List<Terceros>();
             string terms = Request.Params["term"].Trim().ToUpper();
             List<Terceros> Lista = (from listado in db.Tercero
-                                    where (listado.RazonSocial.Contains(terms) && listado.Proveedor == 1)
+                                    where (listado.RazonSocial.Contains(terms) && listado.Proveedor==1)
                                     select new Terceros()
                                     {
                                         RowID = listado.RowID,
@@ -86,19 +86,19 @@ namespace PedidosOnline.Controllers
         {
             List<Terceros> data = new List<Terceros>();
             string terms = Request.Params["term"].Trim().ToUpper();
-            var ListaCalc = (from listado in db.Calculadora.Where(listado => listado.Tercero.RazonSocial.Contains(terms) || listado.Tercero.Identificacion.Contains(terms))
-                             select new
-                             {
-                                 RowID = listado.RowID,
-                                 Fecha = listado.Fecha,
-                                 IdentificacionTercero = listado.Tercero.Identificacion,
-                                 label = string.Concat(listado.Tercero.Identificacion + " ", listado.Tercero.RazonSocial, " ", listado.Opcion.Nombre),
-                                 Contacto = listado.Tercero.ContactoERP.Nombre,
-                                 ContactoTelefono = listado.Tercero.ContactoERP.Telefono1,
-                                 RowIDCliente = listado.Tercero.RowID,
-                                 incoterm = listado.Opcion.Nombre,
-                                 tranportecorresponde = listado.Opcion.Codigo
-                             }).Distinct().OrderBy(cal => cal.RowID).ToList();
+            var ListaCalc = (from listado in db.Calculadora.Where(listado=>listado.Tercero.RazonSocial.Contains(terms)||listado.Tercero.Identificacion.Contains(terms))
+                                           select new
+                                           {
+                                               RowID=listado.RowID,
+                                               Fecha=listado.Fecha,
+                                               IdentificacionTercero= listado.Tercero.Identificacion,
+                                               label=string.Concat(listado.Tercero.Identificacion+" ",listado.Tercero.RazonSocial, " ",listado.Opcion.Nombre),
+                                               Contacto=listado.Tercero.ContactoERP.Nombre,
+                                               ContactoTelefono=listado.Tercero.ContactoERP.Telefono1,
+                                               RowIDCliente = listado.Tercero.RowID,
+                                               incoterm =listado.Opcion.Nombre,
+                                               tranportecorresponde = listado.Opcion.Codigo
+                                           }).Distinct().OrderBy(cal=>cal.RowID).ToList();
             var returnjson = Json(ListaCalc.OrderBy(cal => cal.RowID), JsonRequestBehavior.AllowGet);
             returnjson.MaxJsonLength = int.MaxValue;
             return returnjson;
@@ -133,9 +133,9 @@ namespace PedidosOnline.Controllers
         public string CargarEvidenciasContrato(int? rowid)
         {
             string result = "";
-            foreach (var item in db.ContratoAdjunto.Where(f => f.ContratoID == rowid).ToList())
+            foreach (var item in db.ContratoAdjunto.Where(f=>f.ContratoID==rowid).ToList())
             {
-                result += "<tr><td><a href=\"" + item.Recurso + "\" target=\"_blank\"><i class=\"glyphicon glyphicon-picture\"></i></a></td><td>" + item.Descripcion + "</td><td>" + item.UsuarioCreacion + "</td><td>" + item.FechaCreacion + "</td><td><a onclick=\"EliminarEvidencia(" + item.RowID + ")\"><i class=\"glyphicon glyphicon-trash\"></a></td></tr>";
+                result += "<tr><td><a href=\"" + item.Recurso + "\" target=\"_blank\"><i class=\"glyphicon glyphicon-picture\"></i></a></td><td>" + item.Descripcion+"</td><td>"+item.UsuarioCreacion+"</td><td>"+item.FechaCreacion+ "</td><td><a onclick=\"EliminarEvidencia(" + item.RowID + ")\"><i class=\"glyphicon glyphicon-trash\"></a></td></tr>";
             }
 
             return result;
@@ -183,7 +183,7 @@ namespace PedidosOnline.Controllers
             {
                 Response.StatusCode = 500;
             }
-
+            
             return "";
         }
         [CheckSessionOut]
@@ -829,10 +829,12 @@ namespace PedidosOnline.Controllers
         #endregion
 
         #region BOOKING
-        public ActionResult Booking(int? RowID)
-        {
+        public ActionResult Booking(int? RowID) {
             PedidosOnline.Models.Booking objBooking = db.Booking.Where(boo => boo.RowID == RowID).FirstOrDefault();
-            if (objBooking != null)
+            ViewBag.TipoLlenado = db.Opcion.Where(o => o.Agrupacion.Nombre == "TIPOLLENADO" && o.Activo==true).ToList();
+            Usuario usuariofirma = (Usuario)(Session["curUser"]);
+            ViewBag.Firma ="<ul id='informacion_general'></ul><img id='firma_correo' src='"+ usuariofirma.Firma.Where(t => t.Opcion.Nombre == "FIRMACORREO").FirstOrDefault().Imagen+"'>";
+            if (objBooking!=null)
             {
                 return View(objBooking);
             }
@@ -844,48 +846,62 @@ namespace PedidosOnline.Controllers
             return View();
         }
 
-        #endregion
-
-        #region:::::AUTORIZACION DE CARGUE:::::
-
-        [CheckSessionOut]
-        public ActionResult SolicitudesCargue()
+        public JsonResult InformacionProformaBooking()
         {
-            List<AutorizacionCargue> Lista = db.AutorizacionCargue.OrderBy(f => f.RowID).ToList();
-            ViewBag.ListaAutorizacionCargue = Lista.ToList();
-            return View(Lista);
+            string term = Request.Params["term"].Trim();
+            var InfoProforma = (from listado in db.Proforma.Where(list => list.Contrato.Consecutivo.Contains(term) || list.Titulo.Contains(term))
+                                select new
+                                {
+                                    RowID = listado.RowID,
+                                    Cliente = string.Concat(listado.Contrato.Tercero.RazonSocial, "-", listado.Contrato.Tercero.Identificacion),
+                                    Cantidad = listado.ProformaItemCalculadora.FirstOrDefault().Cantidad,
+                                    PuertoDescargue = string.Concat(listado.Puerto1.Nombre," ",listado.Puerto1.Ciudad.Nombre),
+                                    FechaEmbarque=listado.FechaEnvio,
+                                    PuertoCargue=string.Concat(listado.Puerto.Ciudad.Nombre," ",listado.Puerto.Nombre),
+                                    label=string.Concat(listado.Contrato.Consecutivo," ",listado.Titulo)
+                                }
+                              ).Distinct().OrderBy(l=>l.RowID).ToList();
+            var returnJson = Json(InfoProforma.OrderBy(ip => ip.RowID), JsonRequestBehavior.AllowGet);
+       returnJson.MaxJsonLength = int.MaxValue;
+            return returnJson;
         }
-        [CheckSessionOut]
-        public ActionResult SolicitudCargue(int? rowid)
+        [ValidateInput(false)]
+        public JsonResult GuardarBooking(FormCollection form)
         {
-            AutorizacionCargue AC = new AutorizacionCargue();
-            if (rowid != null && rowid > 0)
+            
+            Models.Booking objBooking = new Models.Booking();
+            objBooking.ProformaID = int.Parse(form["proforma_id"]);
+            objBooking.TipoLlenadoID = int.Parse(form["tipo_cargue"]);
+            objBooking.Nota = form["nota"];
+            int RowID_Booking = int.Parse(form["RowID_Booking"]);
+            string tipo_respuesta = "";
+            string respuesta = "";
+            Usuario objUsuario = (Usuario)(Session["curUser"]);
+            try
             {
-                AC = db.AutorizacionCargue.Where(f => f.RowID == rowid).FirstOrDefault();
+                Utilidades.MailSender.EnviarBooking(objBooking.Nota, form["asunto"], objUsuario, form["correo_envio"]);
+                if (RowID_Booking > 0)
+                {
+                    db.SaveChanges();
+                    tipo_respuesta = "success";
+                    respuesta = "Información guardada correctamente";
+                }
+                else
+                {
+                    db.Booking.Add(objBooking);
+                    db.SaveChanges();
+                    tipo_respuesta = "success";
+                    respuesta = "Información guardada correctamente";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                AC = new AutorizacionCargue();
+                tipo_respuesta = "warning";
+                respuesta = "El correo de recepcion no es correcto, verifique la información";
+                throw;
             }
-            return View(AC);
-        }
-        [CheckSessionOut]
-        public JsonResult ProformaAutocompleteCargue()
-        {
-            string terms = Request.Params["term"].Trim().ToUpper();
-            var ListaCalc = (from listado in db.Proforma.Where(listado => listado.Titulo.Contains(terms))
-                             join aut in db.SolicitudTransporte
-                              on listado.RowID equals aut.ProformaID
-                             select new
-                             {
-                                 RowID = listado.RowID,
-                                 label = listado.Titulo,
-                                 cantidad = listado.SolicitudTransporte.FirstOrDefault() == null ? 0 : listado.SolicitudTransporte.FirstOrDefault().Cantidad,
-                                 solicitud = listado.SolicitudTransporte.FirstOrDefault() == null ? 0 : listado.SolicitudTransporte.FirstOrDefault().RowID
-                             }).Distinct().OrderBy(cal => cal.RowID).ToList();
-            var returnjson = Json(ListaCalc.OrderBy(cal => cal.RowID), JsonRequestBehavior.AllowGet);
-            returnjson.MaxJsonLength = int.MaxValue;
-            return returnjson;
+            
+            return Json(new {tipo_respuesta=tipo_respuesta,respuesta=respuesta },JsonRequestBehavior.AllowGet);
         }
         #endregion
 
@@ -3094,23 +3110,25 @@ namespace PedidosOnline.Controllers
         //    int rowid = ObjSolicitud.RowID;
         //    return Json(rowid, JsonRequestBehavior.AllowGet);
         //}
-        [CheckSessionOut]
-        public ActionResult ModalVehiculo(int? RowID, int? RowID1)
-        {
-            ViewBag.empresa = null;
-            ViewBag.conductor = null;
-            ViewBag.empresas = db.Compañia.ToList();
-            ViewBag.solicitud = RowID1;
-            if (RowID != null && RowID > 0)
-            {
-                Vehiculo solicitud = db.Vehiculo.Where(c => c.RowID == RowID).FirstOrDefault();
-                return View(solicitud);
-            }
-            else
-            {
-                return View(new Vehiculo());
-            }
-        }
+        //[CheckSessionOut]
+        //public ActionResult ModalVehiculo(int? RowID, int RowID1)
+        //{
+        //    ViewBag.empresa = null;
+        //    ViewBag.conductor = null;
+        //    ViewBag.empresas = db.Compañia.ToList();
+        //    ViewBag.solicitud = RowID1;
+        //    if (RowID != null && RowID > 0)
+        //    {
+        //        VehiculoSolicitudLlenado solicitud = db.VehiculoSolicitudLlenado.Where(c => c.RowID == RowID).FirstOrDefault();
+        //        ViewBag.empresa = solicitud.Compañia.Nombre;
+        //        ViewBag.conductor = solicitud.Tercero.ContactoERP.Identificacion;
+        //        return View(solicitud);
+        //    }
+        //    else
+        //    {
+        //        return View(new VehiculoSolicitudLlenado());
+        //    }
+        //}
         //[HttpPost]
         //[CheckSessionOut]
         //public JsonResult Vehiculo(FormCollection form, int RowIDCon, int RowIDVeh, int RowID)
