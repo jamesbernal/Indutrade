@@ -2060,6 +2060,8 @@
     <Content Include="Views\Exportacion\Booking.cshtml" />
     <Content Include="Views\Maestro\ListaUsuarioSistemas.cshtml" />
     <Content Include="Views\Maestro\CrearFirma.cshtml" />
+    <Content Include="Views\Exportacion\SolicitudesCargue.cshtml" />
+    <Content Include="Views\Exportacion\SolicitudCargue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

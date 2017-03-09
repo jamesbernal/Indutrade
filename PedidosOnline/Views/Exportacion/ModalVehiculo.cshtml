@@ -1,11 +1,10 @@
-﻿@model PedidosOnline.Models.VehiculoSolicitudLlenado
+﻿@model PedidosOnline.Models.Vehiculo
 @{
     ViewBag.Title = "ModalVehiculo";
     Layout = null;
 }
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-@*<script type="text/javascript" src="~/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
-    <link href="~/js/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">*@
+
 <style>
     .ui-autocomplete {
         z-index: 99999999999999;
@@ -108,7 +107,7 @@
                 FormData: $("#form1").serialize(),
                 RowIDCon: RowIDCon,
                 RowIDVeh: RowIDVeh,
-                RowID: @ViewBag.solicitud,
+                RowID: '@ViewBag.solicitud',
             },
             success: function (rowid) {
                 ModalProcesandoHiden();
@@ -199,14 +198,6 @@
                                             @*<input type="text" style="width:100%" id="placa" name="placa" value="@Model.Placa" placeholder="---" required="required" />*@
                                         </div>
                                         <div class="form-group">
-                                            <label for="fechaC" class="lang">Fecha Cargue</label>
-                                            <input type="text" id="fechaC" name="fechaC" style="width: 100%" value="@Model.FechaCargue" readonly="readonly" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="lang" for="remolque">Remolque</label>
-                                            <input type="text" style="width:100%" id="remolque" name="remolque" value="@Model.Remolque" placeholder="---" required="required" />
-                                        </div>
-                                        <div class="form-group">
                                             <label class="lang" for="empresaT">Empresa transporte</label>
                                             <select id="empresaT" name="empresaT" style="width: 100%" required>
                                                 <option value="">---</option>
@@ -246,28 +237,6 @@
                                             else
                                             {
                                                 <input type="text" id="autoc_conductor" name="autoc_conductor" placeholder="---" onkeypress="return SoloNumeros(event)" style="width: 100%" autocomplete="off" autofocus required />
-                                            }
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="lang" for="nombre">Nombre</label>
-                                            @if (Model.RowID > 0)
-                                            {
-                                                <input type="text" style="width:100%" id="nombre" name="nombre" value="@Model.Tercero.ContactoERP.Nombre" placeholder="---" disabled="disabled" />
-                                            }
-                                            else
-                                            {
-                                                <input type="text" style="width:100%" id="nombre" name="nombre" value="" placeholder="---" disabled="disabled" />
-                                            }
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="lang" for="celular">Celular</label>
-                                            @if (Model.RowID > 0)
-                                            {
-                                                <input type="text" style="width:100%" id="celular" name="celular" value="@Model.Tercero.ContactoERP.Telefono2" placeholder="---" onkeypress="return SoloNumeros(event)" disabled="disabled" />
-                                            }
-                                            else
-                                            {
-                                                <input type="text" style="width:100%" id="celular" name="celular" value="" placeholder="---" onkeypress="return SoloNumeros(event)" disabled="disabled" />
                                             }
                                         </div>
                                     </div>

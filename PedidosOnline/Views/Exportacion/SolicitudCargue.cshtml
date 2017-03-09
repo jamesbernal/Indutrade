@@ -1,0 +1,141 @@
+﻿@model PedidosOnline.Models.AutorizacionCargue
+@{
+    ViewBag.Title = "SolicitudCargue";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="Dialog"></div>
+<div class="panel">
+    <div class="row">
+        <div class="row" id="div_menu" style="margin-bottom:20px">
+            <div class="col-md-12">
+                <div class="nav">
+                    <span>
+                        &nbsp;&nbsp;
+                        <a href="@Url.Action("SolicitudesCargue","Exportacion",new {  @rih = Request.Params["rih"] })" class="alink">
+                            <i class="glyphicon glyphicon-list-alt"></i>&nbsp;<span class="lang" key="VISTA">Vista&nbsp;&nbsp;</span>
+                        </a>
+                    </span>
+                    <span>
+                        <a href="javascript:guardarSolicitud(1);" class="alink">
+                            <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
+                        </a>
+                    </span>
+                    <span>
+                        <a href="javascript:Modal_()" class="alink">
+                            <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Vehiculos</span>
+                        </a>
+                    </span>
+                    @if (Model.RowID != 0)
+                    {
+                        <span>
+                            &nbsp;&nbsp;
+                            <a href="~/Exportacion/SolicitudLlenado" class="alink">
+                                <i class="glyphicon glyphicon-arrow-right"></i><span class="lang" key="Siguiente">Siguiente</span>
+                            </a>
+                        </span>
+                    }
+                </div>
+                <br />
+                <div class="tab-content" style="overflow:hidden">
+                    <div class="col-md-12">
+                        <form id="form" name="form" onsubmit="return false">
+                            <input type="hidden" class="RowID" name="RowID" value="@Model.RowID" />
+                            @if (Model.RowID > 0)
+                            {
+                                <input type="hidden" class="RowIDCon" name="RowIDCon" value="@Model.RowID" />
+                            }
+                            else
+                            {
+                                <input type="hidden" class="RowIDCon" name="RowIDCon" />
+                            }
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label for="autoc_Proforma" class="lang">Proforma</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        @if (Model.RowID > 0)
+                                        {
+                                            <input type="text" id="autoc_proformas" name="autoc_proformas" value="@Model.SolicitudTransporte.Proforma.Titulo" placeholder="---" style="width: 100%" required />
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="autoc_proformas" name="autoc_proformas" placeholder="---" style="width: 100%" required />
+                                        }
+                                    </div>
+                                 </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label for="autoc_Proforma" class="lang">Solicitud de Transporte</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        @if (Model.RowID > 0)
+                                        {
+                                            <input type="text" id="solicitudT" name="solicitudT" value="@Model.SolicitudTransporteID"  style="width: 100%" required />
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="solicitudT" name="solicitudT" placeholder="---" style="width: 100%" required />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label for="autoc_Proforma" class="lang">Vehiculos</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        @if (Model.RowID > 0)
+                                        {
+                                            <input type="text" id="cantidadV" name="cantidadV" value="@Model.SolicitudTransporte.Cantidad" placeholder="---" style="width: 100%" required />
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="cantidadV" name="cantidadV" placeholder="---" style="width: 100%" required />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $('#autoc_proformas').on('keyup keypress', function (e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) { 
+            return false;
+        }
+    });
+
+    $("#autoc_proformas").autocomplete({
+        source: "ProformaAutocompleteCargue",
+        select: function (evento, ui) {
+            debugger
+            if (ui.item != null) {
+                $("#autoc_proformas").val(ui.item.label);
+                $(".RowIDCon").val(ui.item.RowID);
+                $("#cantidadV").empty();
+                $("#cantidadV").val(ui.item.cantidad);
+                $("#solicitudT").empty();
+                $("#solicitudT").val(ui.item.solicitud);
+                $("#contrato").val(ui.item.label);
+            }
+        },
+    });
+</script>
+<script>
+    function Modal_() {
+        var urlWithCont = '../Exportacion/ModalVehiculo';
+        $("#Dialog")//Division con id Dialog_Solicitud
+        .load(urlWithCont.trim())
+        .dialog('open');
+    }
+</script>
