@@ -829,8 +829,11 @@ namespace PedidosOnline.Controllers
         #endregion
 
         #region BOOKING
-        public ActionResult Booking(int? RowID){
+        public ActionResult Booking(int? RowID) {
             PedidosOnline.Models.Booking objBooking = db.Booking.Where(boo => boo.RowID == RowID).FirstOrDefault();
+            ViewBag.TipoLlenado = db.Opcion.Where(o => o.Agrupacion.Nombre == "TIPOLLENADO" && o.Activo==true).ToList();
+            Usuario usuariofirma = (Usuario)(Session["curUser"]);
+            ViewBag.Firma ="<ul id='informacion_general'></ul><img id='firma_correo' src='"+ usuariofirma.Firma.Where(t => t.Opcion.Nombre == "FIRMACORREO").FirstOrDefault().Imagen+"'>";
             if (objBooking!=null)
             {
                 return View(objBooking);
@@ -843,6 +846,63 @@ namespace PedidosOnline.Controllers
             return View();
         }
 
+        public JsonResult InformacionProformaBooking()
+        {
+            string term = Request.Params["term"].Trim();
+            var InfoProforma = (from listado in db.Proforma.Where(list => list.Contrato.Consecutivo.Contains(term) || list.Titulo.Contains(term))
+                                select new
+                                {
+                                    RowID = listado.RowID,
+                                    Cliente = string.Concat(listado.Contrato.Tercero.RazonSocial, "-", listado.Contrato.Tercero.Identificacion),
+                                    Cantidad = listado.ProformaItemCalculadora.FirstOrDefault().Cantidad,
+                                    PuertoDescargue = string.Concat(listado.Puerto1.Nombre," ",listado.Puerto1.Ciudad.Nombre),
+                                    FechaEmbarque=listado.FechaEnvio,
+                                    PuertoCargue=string.Concat(listado.Puerto.Ciudad.Nombre," ",listado.Puerto.Nombre),
+                                    label=string.Concat(listado.Contrato.Consecutivo," ",listado.Titulo)
+                                }
+                              ).Distinct().OrderBy(l=>l.RowID).ToList();
+            var returnJson = Json(InfoProforma.OrderBy(ip => ip.RowID), JsonRequestBehavior.AllowGet);
+       returnJson.MaxJsonLength = int.MaxValue;
+            return returnJson;
+        }
+        [ValidateInput(false)]
+        public JsonResult GuardarBooking(FormCollection form)
+        {
+            
+            Models.Booking objBooking = new Models.Booking();
+            objBooking.ProformaID = int.Parse(form["proforma_id"]);
+            objBooking.TipoLlenadoID = int.Parse(form["tipo_cargue"]);
+            objBooking.Nota = form["nota"];
+            int RowID_Booking = int.Parse(form["RowID_Booking"]);
+            string tipo_respuesta = "";
+            string respuesta = "";
+            Usuario objUsuario = (Usuario)(Session["curUser"]);
+            try
+            {
+                Utilidades.MailSender.EnviarBooking(objBooking.Nota, form["asunto"], objUsuario, form["correo_envio"]);
+                if (RowID_Booking > 0)
+                {
+                    db.SaveChanges();
+                    tipo_respuesta = "success";
+                    respuesta = "Información guardada correctamente";
+                }
+                else
+                {
+                    db.Booking.Add(objBooking);
+                    db.SaveChanges();
+                    tipo_respuesta = "success";
+                    respuesta = "Información guardada correctamente";
+                }
+            }
+            catch (Exception ex)
+            {
+                tipo_respuesta = "warning";
+                respuesta = "El correo de recepcion no es correcto, verifique la información";
+                throw;
+            }
+            
+            return Json(new {tipo_respuesta=tipo_respuesta,respuesta=respuesta },JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         //#region :::::ORDEN COMPRA:::::

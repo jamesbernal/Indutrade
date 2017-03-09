@@ -83,7 +83,7 @@
         var element = this.$element
 
         reader.onload = function(e) {
-          preview.html('<div class="item"><div class="zoom"><img src="' + e.target.result + '" ' + (preview.css('max-height') != 'none' ? 'style="max-height: ' + preview.css('max-height') + ';"' : '') + ' /><div class="zoom-icon"></div></div></div>')
+            preview.html('<a data-fancybox="gallery" href="' + e.target.result + '"><div class="item"><div class="zoom"><img src="' + e.target.result + '" ' + (preview.css('max-height') != 'none' ? 'style="max-height: ' + preview.css('max-height') + ';max-width:' + preview.css('max-width') + '"' : '') + ' /></a><div class="zoom-icon"></div></div></div>')
                  element.addClass('fileupload-exists').removeClass('fileupload-new');
         }
 

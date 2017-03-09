@@ -254,11 +254,71 @@ namespace PedidosOnline.Controllers
         }
         public ActionResult CrearFirma(int? RowID_Usuario) {
             Usuario objUsuario = db.Usuario.Where(us => us.RowID == RowID_Usuario).FirstOrDefault();
+            ViewBag.TipoFirma = db.Opcion.Where(o => o.Agrupacion.Nombre == "TIPOFIRMA").ToList();
             if (objUsuario == null) { 
                 return View(new Usuario());
             }
             
             return View(objUsuario);
+        }
+        public JsonResult GuardarFirmaUsuario()
+        {
+            Firma objFirma = new Firma();
+            HttpFileCollectionBase archivos;
+            var tipo_firma = Request.Params["tipo_firma"].Split(',');
+            var descripcion = Request.Params["descripcion"].Split(',');
+            int contador_inser = 0;
+            int rowid_usuario = int.Parse(Request.Params["rowid_usuario"]);
+
+            //ViewBag.recursos = db.RecursosProforma.Where(rp => rp.RowID == rowid_proforma).ToList();
+
+            string tipo_respuesta = "";
+            string respuesta = "";
+            string ruta_archivo;
+            if (Request.Files.Count == 0)
+            {
+                respuesta = "No hay archivo para subir, Verifique la informacón";
+                tipo_respuesta = "error";
+                return Json(new { respuesta = respuesta, tipo_respuesta = tipo_respuesta });
+            }
+            else
+            {
+                try
+                {
+                    foreach (string item in Request.Files)
+                    {
+
+                        objFirma.UsuarioID = rowid_usuario;
+                        HttpPostedFileBase file = Request.Files[contador_inser];
+                        string Guid_Img = Guid.NewGuid().ToString();
+                        Guid_Img = Guid_Img.Substring(1, 7);
+                        var nombreArchivo = Guid_Img.Trim()+System.IO.Path.GetExtension(file.FileName);
+                        file.SaveAs(Server.MapPath("~/RepositorioArchivos/FirmaUsuario/" + nombreArchivo));
+                        ruta_archivo = "/RepositorioArchivos/FirmaUsuario/" + nombreArchivo;
+                        objFirma.Descripcion = descripcion[contador_inser];
+                        objFirma.TipoFirmaID = int.Parse(tipo_firma[contador_inser]);
+                        objFirma.Imagen = ruta_archivo;
+                        db.Firma.Add(objFirma);
+                        db.SaveChanges();
+                        contador_inser++;
+
+                    }
+                    respuesta = "Los archivos a sido almacenados";
+                    tipo_respuesta = "success";
+                    return Json(new { respuesta = respuesta, tipo_respuesta = tipo_respuesta });
+                }
+                catch (Exception ex)
+                {
+                    tipo_respuesta = "error";
+                    return Json(new { respuesta = ex, tipo_respuesta = tipo_respuesta }, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+
+
+            /* = Request.Files["archivo_recurso"];*/
+            return Json("");
+
         }
 
     }
