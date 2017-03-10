@@ -948,21 +948,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="AutorizacionCargueVehiculo">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo">
-        <MappingFragment StoreEntitySet="AutorizacionCargueVehiculo">
-          <ScalarProperty Name="RemolqueID" ColumnName="RemolqueID" />
-          <ScalarProperty Name="VehiculoID" ColumnName="VehiculoID" />
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
-          <ScalarProperty Name="TerceroID" ColumnName="TerceroID" />
-          <ScalarProperty Name="AutorizacionCargueID" ColumnName="AutorizacionCargueID" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="SolicitudTransporte">
       <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.SolicitudTransporte">
         <MappingFragment StoreEntitySet="SolicitudTransporte">
@@ -1151,6 +1136,21 @@
           <ScalarProperty Name="UsuarioCreacionID" ColumnName="UsuarioCreacionID" />
           <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
           <ScalarProperty Name="ProformaItemID" ColumnName="ProformaItemID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AutorizacionCargueVehiculo">
+      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo">
+        <MappingFragment StoreEntitySet="AutorizacionCargueVehiculo">
+          <ScalarProperty Name="VehiculoID" ColumnName="VehiculoID" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+          <ScalarProperty Name="RemolqueID" ColumnName="RemolqueID" />
+          <ScalarProperty Name="TerceroID" ColumnName="TerceroID" />
+          <ScalarProperty Name="AutorizacionCargueID" ColumnName="AutorizacionCargueID" />
           <ScalarProperty Name="RowID" ColumnName="RowID" />
         </MappingFragment>
       </EntityTypeMapping>

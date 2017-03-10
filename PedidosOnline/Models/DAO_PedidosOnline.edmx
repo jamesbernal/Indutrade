@@ -3739,7 +3739,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
           </AssociationSet>
           <EntitySet Name="ItemImpuesto" EntityType="DB_9CAC35_indutradeModel.ItemImpuesto" />
           <EntitySet Name="AutorizacionCargue" EntityType="DB_9CAC35_indutradeModel.AutorizacionCargue" />
-          <EntitySet Name="AutorizacionCargueVehiculo" EntityType="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" />
           <EntitySet Name="SolicitudTransporte" EntityType="DB_9CAC35_indutradeModel.SolicitudTransporte" />
           <EntitySet Name="TipoVehiculo" EntityType="DB_9CAC35_indutradeModel.TipoVehiculo" />
           <EntitySet Name="EnvioMail" EntityType="DB_9CAC35_indutradeModel.EnvioMail" />
@@ -3758,17 +3757,9 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
             <End Role="Opcion" EntitySet="Opcion" />
             <End Role="ItemImpuesto" EntitySet="ItemImpuesto" />
           </AssociationSet>
-          <AssociationSet Name="FK__Autorizac__Terce__707E9C7C" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Terce__707E9C7C">
-            <End Role="Tercero" EntitySet="Tercero" />
-            <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
-          </AssociationSet>
           <AssociationSet Name="FK_SolicitudTransporte_Tercero" Association="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Tercero">
             <End Role="Tercero" EntitySet="Tercero" />
             <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Autorizac__Autor__6F8A7843" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Autor__6F8A7843">
-            <End Role="AutorizacionCargue" EntitySet="AutorizacionCargue" />
-            <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
           </AssociationSet>
           <AssociationSet Name="FK__Autorizac__Estad__6BB9E75F" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Estad__6BB9E75F">
             <End Role="Estado" EntitySet="Estado" />
@@ -3821,10 +3812,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
           <Parameter Name="RowID" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="Vehiculo" EntityType="DB_9CAC35_indutradeModel.Vehiculo" />
-          <AssociationSet Name="FK__Autorizac__Vehic__04859529" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Vehic__04859529">
-            <End Role="Vehiculo" EntitySet="Vehiculo" />
-            <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
-          </AssociationSet>
           <AssociationSet Name="FK__Vehiculo__MarcaI__763775D2" Association="DB_9CAC35_indutradeModel.FK__Vehiculo__MarcaI__763775D2">
             <End Role="Opcion" EntitySet="Opcion" />
             <End Role="Vehiculo" EntitySet="Vehiculo" />
@@ -3835,10 +3822,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
           </AssociationSet>
           <EntitySet Name="DetalleRegistroLlenado" EntityType="DB_9CAC35_indutradeModel.DetalleRegistroLlenado" />
           <EntitySet Name="EncabezadoRegistroLlenado" EntityType="DB_9CAC35_indutradeModel.EncabezadoRegistroLlenado" />
-          <AssociationSet Name="FK__Autorizac__Remol__4DF47A4E" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Remol__4DF47A4E">
-            <End Role="Vehiculo" EntitySet="Vehiculo" />
-            <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
-          </AssociationSet>
           <AssociationSet Name="FK__DetalleRe__Carro__483BA0F8" Association="DB_9CAC35_indutradeModel.FK__DetalleRe__Carro__483BA0F8">
             <End Role="Vehiculo" EntitySet="Vehiculo" />
             <End Role="DetalleRegistroLlenado" EntitySet="DetalleRegistroLlenado" />
@@ -3858,6 +3841,23 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
           <AssociationSet Name="FK__Encabezad__Usuar__446B1014" Association="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__446B1014">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="EncabezadoRegistroLlenado" EntitySet="EncabezadoRegistroLlenado" />
+          </AssociationSet>
+          <EntitySet Name="AutorizacionCargueVehiculo" EntityType="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" />
+          <AssociationSet Name="FK__Autorizac__Terce__4C0C31DC" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Terce__4C0C31DC">
+            <End Role="Tercero" EntitySet="Tercero" />
+            <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Autorizac__Autor__4B180DA3" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Autor__4B180DA3">
+            <End Role="AutorizacionCargue" EntitySet="AutorizacionCargue" />
+            <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Autorizac__Remol__4DF47A4E" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Remol__4DF47A4E">
+            <End Role="Vehiculo" EntitySet="Vehiculo" />
+            <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Autorizac__Vehic__4D005615" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Vehic__4D005615">
+            <End Role="Vehiculo" EntitySet="Vehiculo" />
+            <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -4306,8 +4306,8 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
           <NavigationProperty Name="OrdenCompra1" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Solic__4E5E8EA2" FromRole="Tercero" ToRole="OrdenCompra" />
           <NavigationProperty Name="PuntoEnvio" Relationship="DB_9CAC35_indutradeModel.FK__PuntoEnvi__Vende__3BFFE745" FromRole="Tercero" ToRole="PuntoEnvio" />
           <NavigationProperty Name="Usuario" Relationship="DB_9CAC35_indutradeModel.FK__Usuario__Tercero__251C81ED" FromRole="Tercero" ToRole="Usuario" />
-          <NavigationProperty Name="AutorizacionCargueVehiculo" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Terce__707E9C7C" FromRole="Tercero" ToRole="AutorizacionCargueVehiculo" />
           <NavigationProperty Name="SolicitudTransporte" Relationship="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Tercero" FromRole="Tercero" ToRole="SolicitudTransporte" />
+          <NavigationProperty Name="AutorizacionCargueVehiculo" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Terce__4C0C31DC" FromRole="Tercero" ToRole="AutorizacionCargueVehiculo" />
         </EntityType>
         <EntityType Name="Booking">
           <Key>
@@ -6258,27 +6258,9 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="BKK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Empaque" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="AutorizacionCargueVehiculo" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Autor__6F8A7843" FromRole="AutorizacionCargue" ToRole="AutorizacionCargueVehiculo" />
           <NavigationProperty Name="Estado" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Estad__6BB9E75F" FromRole="AutorizacionCargue" ToRole="Estado" />
           <NavigationProperty Name="SolicitudTransporte" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Solic__6CAE0B98" FromRole="AutorizacionCargue" ToRole="SolicitudTransporte" />
-        </EntityType>
-        <EntityType Name="AutorizacionCargueVehiculo">
-          <Key>
-            <PropertyRef Name="RowID" />
-          </Key>
-          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AutorizacionCargueID" Type="Int32" />
-          <Property Name="TerceroID" Type="Int32" />
-          <Property Name="UsuarioCreacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-          <Property Name="UsuarioModificacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="VehiculoID" Type="Int32" />
-          <NavigationProperty Name="Tercero" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Terce__707E9C7C" FromRole="AutorizacionCargueVehiculo" ToRole="Tercero" />
-          <NavigationProperty Name="AutorizacionCargue" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Autor__6F8A7843" FromRole="AutorizacionCargueVehiculo" ToRole="AutorizacionCargue" />
-          <NavigationProperty Name="Vehiculo" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Vehic__04859529" FromRole="AutorizacionCargueVehiculo" ToRole="Vehiculo" />
-          <Property Name="RemolqueID" Type="Int32" />
-          <NavigationProperty Name="Vehiculo1" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Remol__4DF47A4E" FromRole="AutorizacionCargueVehiculo" ToRole="Vehiculo" />
+          <NavigationProperty Name="AutorizacionCargueVehiculo" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Autor__4B180DA3" FromRole="AutorizacionCargue" ToRole="AutorizacionCargueVehiculo" />
         </EntityType>
         <EntityType Name="SolicitudTransporte">
           <Key>
@@ -6411,18 +6393,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Autorizac__Terce__707E9C7C">
-          <End Type="DB_9CAC35_indutradeModel.Tercero" Role="Tercero" Multiplicity="0..1" />
-          <End Type="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" Role="AutorizacionCargueVehiculo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tercero">
-              <PropertyRef Name="RowID" />
-            </Principal>
-            <Dependent Role="AutorizacionCargueVehiculo">
-              <PropertyRef Name="TerceroID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SolicitudTransporte_Tercero">
           <End Type="DB_9CAC35_indutradeModel.Tercero" Role="Tercero" Multiplicity="1" />
           <End Type="DB_9CAC35_indutradeModel.SolicitudTransporte" Role="SolicitudTransporte" Multiplicity="*" />
@@ -6432,18 +6402,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
             </Principal>
             <Dependent Role="SolicitudTransporte">
               <PropertyRef Name="ProveedorID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Autorizac__Autor__6F8A7843">
-          <End Type="DB_9CAC35_indutradeModel.AutorizacionCargue" Role="AutorizacionCargue" Multiplicity="0..1" />
-          <End Type="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" Role="AutorizacionCargueVehiculo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AutorizacionCargue">
-              <PropertyRef Name="RowID" />
-            </Principal>
-            <Dependent Role="AutorizacionCargueVehiculo">
-              <PropertyRef Name="AutorizacionCargueID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6643,24 +6601,12 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
           <Property Name="Rendimiento" Type="Int32" />
           <Property Name="PesoVacio" Type="Double" />
           <Property Name="CargaMaxima" Type="Double" />
-          <NavigationProperty Name="AutorizacionCargueVehiculo" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Vehic__04859529" FromRole="Vehiculo" ToRole="AutorizacionCargueVehiculo" />
           <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__Vehiculo__MarcaI__763775D2" FromRole="Vehiculo" ToRole="Opcion" />
           <NavigationProperty Name="Opcion1" Relationship="DB_9CAC35_indutradeModel.FK__Vehiculo__TipoVe__744F2D60" FromRole="Vehiculo" ToRole="Opcion" />
-          <NavigationProperty Name="AutorizacionCargueVehiculo1" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Remol__4DF47A4E" FromRole="Vehiculo" ToRole="AutorizacionCargueVehiculo" />
           <NavigationProperty Name="DetalleRegistroLlenado" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Carro__483BA0F8" FromRole="Vehiculo" ToRole="DetalleRegistroLlenado" />
+          <NavigationProperty Name="AutorizacionCargueVehiculo" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Remol__4DF47A4E" FromRole="Vehiculo" ToRole="AutorizacionCargueVehiculo" />
+          <NavigationProperty Name="AutorizacionCargueVehiculo1" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Vehic__4D005615" FromRole="Vehiculo" ToRole="AutorizacionCargueVehiculo" />
         </EntityType>
-        <Association Name="FK__Autorizac__Vehic__04859529">
-          <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="0..1" />
-          <End Type="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" Role="AutorizacionCargueVehiculo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vehiculo">
-              <PropertyRef Name="RowID" />
-            </Principal>
-            <Dependent Role="AutorizacionCargueVehiculo">
-              <PropertyRef Name="VehiculoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Vehiculo__MarcaI__763775D2">
           <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="0..1" />
           <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="*" />
@@ -6719,18 +6665,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
           <NavigationProperty Name="Usuario" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__4376EBDB" FromRole="EncabezadoRegistroLlenado" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__446B1014" FromRole="EncabezadoRegistroLlenado" ToRole="Usuario" />
         </EntityType>
-        <Association Name="FK__Autorizac__Remol__4DF47A4E">
-          <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="0..1" />
-          <End Type="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" Role="AutorizacionCargueVehiculo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vehiculo">
-              <PropertyRef Name="RowID" />
-            </Principal>
-            <Dependent Role="AutorizacionCargueVehiculo">
-              <PropertyRef Name="RemolqueID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__DetalleRe__Carro__483BA0F8">
           <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="0..1" />
           <End Type="DB_9CAC35_indutradeModel.DetalleRegistroLlenado" Role="DetalleRegistroLlenado" Multiplicity="*" />
@@ -6788,6 +6722,72 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
             </Principal>
             <Dependent Role="EncabezadoRegistroLlenado">
               <PropertyRef Name="UsuarioModificacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AutorizacionCargueVehiculo">
+          <Key>
+            <PropertyRef Name="RowID" />
+          </Key>
+          <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AutorizacionCargueID" Type="Int32" />
+          <Property Name="TerceroID" Type="Int32" />
+          <Property Name="RemolqueID" Type="Int32" />
+          <Property Name="UsuarioCreacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="VehiculoID" Type="Int32" />
+          <NavigationProperty Name="Tercero" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Terce__4C0C31DC" FromRole="AutorizacionCargueVehiculo" ToRole="Tercero" />
+          <NavigationProperty Name="AutorizacionCargue" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Autor__4B180DA3" FromRole="AutorizacionCargueVehiculo" ToRole="AutorizacionCargue" />
+          <NavigationProperty Name="Vehiculo" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Remol__4DF47A4E" FromRole="AutorizacionCargueVehiculo" ToRole="Vehiculo" />
+          <NavigationProperty Name="Vehiculo1" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Vehic__4D005615" FromRole="AutorizacionCargueVehiculo" ToRole="Vehiculo" />
+        </EntityType>
+        <Association Name="FK__Autorizac__Terce__4C0C31DC">
+          <End Type="DB_9CAC35_indutradeModel.Tercero" Role="Tercero" Multiplicity="0..1" />
+          <End Type="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" Role="AutorizacionCargueVehiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tercero">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="AutorizacionCargueVehiculo">
+              <PropertyRef Name="TerceroID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Autorizac__Autor__4B180DA3">
+          <End Type="DB_9CAC35_indutradeModel.AutorizacionCargue" Role="AutorizacionCargue" Multiplicity="0..1" />
+          <End Type="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" Role="AutorizacionCargueVehiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AutorizacionCargue">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="AutorizacionCargueVehiculo">
+              <PropertyRef Name="AutorizacionCargueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Autorizac__Remol__4DF47A4E">
+          <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="0..1" />
+          <End Type="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" Role="AutorizacionCargueVehiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="AutorizacionCargueVehiculo">
+              <PropertyRef Name="RemolqueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Autorizac__Vehic__4D005615">
+          <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="0..1" />
+          <End Type="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" Role="AutorizacionCargueVehiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculo">
+              <PropertyRef Name="RowID" />
+            </Principal>
+            <Dependent Role="AutorizacionCargueVehiculo">
+              <PropertyRef Name="VehiculoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7744,21 +7744,6 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AutorizacionCargueVehiculo">
-            <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo">
-              <MappingFragment StoreEntitySet="AutorizacionCargueVehiculo">
-                <ScalarProperty Name="RemolqueID" ColumnName="RemolqueID" />
-                <ScalarProperty Name="VehiculoID" ColumnName="VehiculoID" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
-                <ScalarProperty Name="TerceroID" ColumnName="TerceroID" />
-                <ScalarProperty Name="AutorizacionCargueID" ColumnName="AutorizacionCargueID" />
-                <ScalarProperty Name="RowID" ColumnName="RowID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SolicitudTransporte">
             <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.SolicitudTransporte">
               <MappingFragment StoreEntitySet="SolicitudTransporte">
@@ -7947,6 +7932,21 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
                 <ScalarProperty Name="UsuarioCreacionID" ColumnName="UsuarioCreacionID" />
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
                 <ScalarProperty Name="ProformaItemID" ColumnName="ProformaItemID" />
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AutorizacionCargueVehiculo">
+            <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo">
+              <MappingFragment StoreEntitySet="AutorizacionCargueVehiculo">
+                <ScalarProperty Name="VehiculoID" ColumnName="VehiculoID" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="RemolqueID" ColumnName="RemolqueID" />
+                <ScalarProperty Name="TerceroID" ColumnName="TerceroID" />
+                <ScalarProperty Name="AutorizacionCargueID" ColumnName="AutorizacionCargueID" />
                 <ScalarProperty Name="RowID" ColumnName="RowID" />
               </MappingFragment>
             </EntityTypeMapping>
