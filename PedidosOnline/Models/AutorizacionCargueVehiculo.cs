@@ -24,7 +24,7 @@ public partial class AutorizacionCargueVehiculo
 
     public Nullable<int> TerceroID { get; set; }
 
-    public string Remolque { get; set; }
+    public Nullable<int> RemolqueID { get; set; }
 
     public string UsuarioCreacion { get; set; }
 
@@ -43,6 +43,8 @@ public partial class AutorizacionCargueVehiculo
     public virtual AutorizacionCargue AutorizacionCargue { get; set; }
 
     public virtual Vehiculo Vehiculo { get; set; }
+
+    public virtual Vehiculo Vehiculo1 { get; set; }
 
 }
 

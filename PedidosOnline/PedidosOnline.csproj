@@ -256,7 +256,13 @@
     <Compile Include="Models\Departamento.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetalleRegistroLlenado.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Empresa.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EncabezadoRegistroLlenado.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EnvioMail.cs">
@@ -2063,6 +2069,8 @@
     <Content Include="Views\Maestro\CrearFirma.cshtml" />
     <Content Include="Views\Exportacion\SolicitudesCargue.cshtml" />
     <Content Include="Views\Exportacion\SolicitudCargue.cshtml" />
+    <Content Include="Views\Exportacion\FormatoRegistroLlenado.cshtml" />
+    <Content Include="Views\Exportacion\Bookings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

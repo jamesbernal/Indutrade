@@ -15,45 +15,43 @@ namespace PedidosOnline.Models
 using System;
     using System.Collections.Generic;
     
-public partial class AutorizacionCargue
+public partial class EncabezadoRegistroLlenado
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public AutorizacionCargue()
+    public EncabezadoRegistroLlenado()
     {
 
-        this.AutorizacionCargueVehiculo = new HashSet<AutorizacionCargueVehiculo>();
+        this.DetalleRegistroLlenado = new HashSet<DetalleRegistroLlenado>();
 
     }
 
 
     public int RowID { get; set; }
 
-    public Nullable<int> SolicitudTransporteID { get; set; }
-
-    public Nullable<int> EstadoID { get; set; }
-
-    public string UsuarioCreacion { get; set; }
+    public Nullable<int> ProformaItemID { get; set; }
 
     public Nullable<System.DateTime> FechaCreacion { get; set; }
 
-    public string UsuarioModificacion { get; set; }
+    public Nullable<int> UsuarioCreacionID { get; set; }
 
     public Nullable<System.DateTime> FechaModificacion { get; set; }
 
-    public string BKK { get; set; }
+    public Nullable<int> UsuarioModificacionID { get; set; }
 
-    public string Empaque { get; set; }
+    public string Observaciones { get; set; }
 
 
-
-    public virtual Estado Estado { get; set; }
-
-    public virtual SolicitudTransporte SolicitudTransporte { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<AutorizacionCargueVehiculo> AutorizacionCargueVehiculo { get; set; }
+    public virtual ICollection<DetalleRegistroLlenado> DetalleRegistroLlenado { get; set; }
+
+    public virtual ProformaItemCalculadora ProformaItemCalculadora { get; set; }
+
+    public virtual Usuario Usuario { get; set; }
+
+    public virtual Usuario Usuario1 { get; set; }
 
 }
 

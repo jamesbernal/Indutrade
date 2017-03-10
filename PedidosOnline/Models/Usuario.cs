@@ -36,6 +36,10 @@ public partial class Usuario
 
         this.Firma = new HashSet<Firma>();
 
+        this.EncabezadoRegistroLlenado = new HashSet<EncabezadoRegistroLlenado>();
+
+        this.EncabezadoRegistroLlenado1 = new HashSet<EncabezadoRegistroLlenado>();
+
     }
 
 
@@ -92,6 +96,14 @@ public partial class Usuario
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Firma> Firma { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<EncabezadoRegistroLlenado> EncabezadoRegistroLlenado { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<EncabezadoRegistroLlenado> EncabezadoRegistroLlenado1 { get; set; }
 
 }
 
