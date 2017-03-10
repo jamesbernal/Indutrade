@@ -62,9 +62,9 @@ public partial class Tercero
 
         this.Usuario = new HashSet<Usuario>();
 
-        this.AutorizacionCargueVehiculo = new HashSet<AutorizacionCargueVehiculo>();
-
         this.SolicitudTransporte = new HashSet<SolicitudTransporte>();
+
+        this.AutorizacionCargueVehiculo = new HashSet<AutorizacionCargueVehiculo>();
 
     }
 
@@ -189,11 +189,11 @@ public partial class Tercero
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<AutorizacionCargueVehiculo> AutorizacionCargueVehiculo { get; set; }
+    public virtual ICollection<SolicitudTransporte> SolicitudTransporte { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<SolicitudTransporte> SolicitudTransporte { get; set; }
+    public virtual ICollection<AutorizacionCargueVehiculo> AutorizacionCargueVehiculo { get; set; }
 
 }
 

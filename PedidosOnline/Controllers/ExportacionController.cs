@@ -835,19 +835,26 @@ namespace PedidosOnline.Controllers
             PedidosOnline.Models.Booking objBooking = db.Booking.Where(boo => boo.RowID == RowID).FirstOrDefault();
             ViewBag.TipoLlenado = db.Opcion.Where(o => o.Agrupacion.Nombre == "TIPOLLENADO" && o.Activo == true).ToList();
             Usuario usuariofirma = (Usuario)(Session["curUser"]);
-            ViewBag.Firma = "<ul id='informacion_general'></ul><img id='firma_correo' src='" + usuariofirma.Firma.Where(t => t.Opcion.Nombre == "FIRMACORREO").FirstOrDefault().Imagen + "'>";
-            if (objBooking != null)
+            ViewBag.Firma ="<ul id='informacion_general'></ul><img id='firma_correo' src='"+ usuariofirma.Firma.Where(t => t.Opcion.Nombre == "FIRMACORREO").FirstOrDefault().Imagen+"'>";
+            if (objBooking!=null)
             {
                 return View(objBooking);
             }
             else
             {
+                ViewBag.Firma = "<ul id='informacion_general'></ul><img id='firma_correo' src='" + usuariofirma.Firma.Where(t => t.Opcion.Nombre == "FIRMACORREO").FirstOrDefault().Imagen + "'>";
+
                 return View(new Booking());
 
             }
             return View();
         }
 
+        public ActionResult Bookings()
+        {
+            ViewBag.ListaBookings = db.Booking.Where(boo=>boo.Proforma.ProformaItemCalculadora.Count!=0).ToList();
+            return View();
+        }
         public JsonResult InformacionProformaBooking()
         {
             string term = Request.Params["term"].Trim();
@@ -857,10 +864,10 @@ namespace PedidosOnline.Controllers
                                     RowID = listado.RowID,
                                     Cliente = string.Concat(listado.Contrato.Tercero.RazonSocial, "-", listado.Contrato.Tercero.Identificacion),
                                     Cantidad = listado.ProformaItemCalculadora.FirstOrDefault().Cantidad,
-                                    PuertoDescargue = string.Concat(listado.Puerto1.Nombre, " ", listado.Puerto1.Ciudad.Nombre),
-                                    FechaEmbarque = listado.FechaEnvio,
-                                    PuertoCargue = string.Concat(listado.Puerto.Ciudad.Nombre, " ", listado.Puerto.Nombre),
-                                    label = string.Concat(listado.Contrato.Consecutivo, " ", listado.Titulo)
+                                    PuertoDescargue = string.Concat(listado.Puerto1.Nombre," ",listado.Puerto1.Ciudad.Nombre),
+                                    FechaEmbarque=listado.FechaEnvio,
+                                    PuertoCargue=string.Concat(listado.Puerto.Ciudad.Nombre," ",listado.Puerto.Nombre),
+                                    label=string.Concat(listado.Contrato.Consecutivo," ",listado.Titulo)
                                 }
                               ).Distinct().OrderBy(l => l.RowID).ToList();
             var returnJson = Json(InfoProforma.OrderBy(ip => ip.RowID), JsonRequestBehavior.AllowGet);
@@ -875,6 +882,8 @@ namespace PedidosOnline.Controllers
             objBooking.ProformaID = int.Parse(form["proforma_id"]);
             objBooking.TipoLlenadoID = int.Parse(form["tipo_cargue"]);
             objBooking.Nota = form["nota"];
+            objBooking.Asunto = form["asunto"];
+            objBooking.CorreoEnvio = form["correo_envio"];
             int RowID_Booking = int.Parse(form["RowID_Booking"]);
             string tipo_respuesta = "";
             string respuesta = "";
@@ -1203,145 +1212,6 @@ namespace PedidosOnline.Controllers
         }
         #endregion
 
-        //#region :::::ORDEN COMPRA:::::
-        //[CheckSessionOut]
-        //public ActionResult OrdenCompra(int? rowid, int? rowid_contrato)
-        //{
-        //    ViewBag.FormaPago = db.CondicionPago.ToList();
-        //    Models.OrdenCompra reg = new Models.OrdenCompra();
-        //    if (rowid > 0)
-        //    {
-        //        reg = db.OrdenCompra.Where(f => f.RowID == rowid).FirstOrDefault();
-        //    }
-        //    else
-        //    {
-        //        reg.Tercero = new Tercero();
-        //        reg.Tercero1 = new Tercero();
-        //        reg.Opcion = new Opcion();
-        //        reg.CondicionPago = new CondicionPago();
-        //        reg.Sucursal = new Sucursal();
-        //        reg.Sucursal.Tercero = new Tercero();
-        //    }
-        //    return View(reg);
-        //}
-        //[CheckSessionOut]
-        //public JsonResult BuscarTerceroSucursal(string term)
-        //{
-        //    var result = (from reg in db.Sucursal.Where(f => f.Tercero.RazonSocial.Contains(term) || f.Tercero.Identificacion.Contains(term) || f.Nombre.Contains(term))
-        //                  select new
-        //                  {
-        //                      label = reg.Tercero.RazonSocial + "-" + reg.Nombre,
-        //                      nit = reg.Tercero.Identificacion,
-        //                      rowid = reg.RowID,
-        //                      ciudad = reg.ContactoERP.Ciudad.Nombre + "," + reg.ContactoERP.Ciudad.Departamento.Pais.Nombre,
-        //                      telefono = reg.ContactoERP.Telefono1,
-        //                      direccion = reg.ContactoERP.Direccion1,
-        //                      iva = ""
-        //                  });
-
-        //    return Json(result, JsonRequestBehavior.AllowGet);
-        //}
-        //[CheckSessionOut]
-        //public JsonResult TerceroInformacion(int rowid)
-        //{
-        //    var result = (from reg in db.Tercero.Where(f => f.RowID == rowid)
-        //                  select new
-        //                  {
-        //                      label = reg.RazonSocial,
-        //                      nit = reg.Identificacion,
-        //                      rowid = reg.RowID,
-        //                      ciudad = reg.ContactoERP.Ciudad.Nombre + "," + reg.ContactoERP.Ciudad.Departamento.Pais.Nombre,
-        //                      telefono = reg.ContactoERP.Telefono1,
-        //                      direccion = reg.ContactoERP.Direccion1
-        //                  });
-
-        //    return Json(result, JsonRequestBehavior.AllowGet);
-        //}
-        //[CheckSessionOut]
-        //public ActionResult OrdenCompras()
-        //{
-        //    List<OrdenCompra> lista = db.OrdenCompra.ToList();
-        //    return View(lista);
-        //}
-        //[CheckSessionOut]
-        //public JsonResult SucursalesTerceroInformacion(int? rowid)
-        //{
-        //    var result = (from reg in db.Sucursal.Where(f => f.RowID == rowid)
-        //                  select new
-        //                  {
-        //                      label = reg.Tercero.RazonSocial + "-" + reg.Nombre,
-        //                      nit = reg.Tercero.Identificacion,
-        //                      rowid = reg.RowID,
-        //                      ciudad = reg.ContactoERP.Ciudad.Nombre + "," + reg.ContactoERP.Ciudad.Departamento.Pais.Nombre,
-        //                      telefono = reg.ContactoERP.Telefono1,
-        //                      direccion = reg.ContactoERP.Direccion1,
-        //                      iva = ""
-        //                  });
-
-        //    return Json(result, JsonRequestBehavior.AllowGet);
-        //}
-        //[CheckSessionOut]
-        //public string TerceroSucursales(int rowid)
-        //{
-
-        //    //Sucursal sucursal = db.Sucursal.Where(f => f.RowID == rowid).FirstOrDefault();
-        //    string resultado = "<option value=''>-Seleccionar-</option>";
-        //    foreach (Sucursal item in db.Sucursal.Where(f => f.TerceroID == rowid).ToList())
-        //    {
-        //        resultado += "<option value='" + item.RowID + "'>" +item.Codigo+" "+ item.Nombre + "</option>";
-        //    }
-        //    return resultado;
-        //}
-
-        //[CheckSessionOut]
-        //public string GuardarOrdenCompra()
-        //{
-        //    OrdenCompra reg = new Models.OrdenCompra();
-        //    int rowid = int.Parse(Request.Params["rowid"]);
-        //    if (rowid > 0)
-        //    {
-        //        reg = db.OrdenCompra.Where(f => f.RowID == rowid).FirstOrDefault();
-        //    }
-
-        //    reg.FormaPagoID = int.Parse(Request.Params["formapago"]);
-        //    reg.Observaciones = Request.Params["observaciones"];
-
-        //    reg.Fecha = DateTime.Now;
-        //    if (reg.RowID == 0)
-        //    {
-        //        reg.FechaCreacion = DateTime.Now;
-        //        reg.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
-        //        db.OrdenCompra.Add(reg);
-        //        db.SaveChanges();
-        //        Contrato c = db.Contrato.Where(f => f.RowID == reg.ContratoID).FirstOrDefault();
-        //        foreach (var item in db.CalculadoraItems.Where(f => f.CalculadoraID == reg.Contrato.Proforma.CalculadoraID))
-        //        {
-        //            OrdenCompraItem OCItem = new Models.OrdenCompraItem();
-        //            OCItem.ItemID = item.ItemID;
-        //            OCItem.OrdenCompraID = reg.RowID;
-        //            OCItem.UnidadEmpaque = item.Item.Unidad;
-        //            OCItem.Cantidad = item.CantidadTonelada;
-        //            OCItem.ValorUnitario = double.Parse(item.MPPCUSDCalculado.ToString());
-        //            OCItem.ValorImpuesto = (((OCItem.Cantidad * OCItem.ValorUnitario) * item.Item.Impuesto) / 100);
-        //            OCItem.ValorBase = OCItem.Cantidad * OCItem.ValorUnitario;
-        //            OCItem.ValorTotal = OCItem.ValorBase + OCItem.ValorImpuesto;
-        //            OCItem.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
-        //            OCItem.FechaCreacion = DateTime.Now;
-        //            db.OrdenCompraItem.Add(OCItem);
-        //            db.SaveChanges();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        reg.UsuarioModificacion = ((Usuario)Session["CurUser"]).NombreUsuario;
-        //        reg.FechaModificacion = DateTime.Now;
-        //    }
-
-        //    return reg.RowID.ToString();
-        //}
-
-        //#endregion
-
         #region ::::::SOLICITUD DE TRANSPORTE::::::
         [CheckSessionOut]
         public ActionResult SolicitudTransportes()
@@ -1412,31 +1282,12 @@ namespace PedidosOnline.Controllers
         public JsonResult ProformaAutocomplete()
         {
             string terms = Request.Params["term"].Trim().ToUpper();
-            var ListaCalc = (from listado in db.Proforma.Where(listado => listado.Titulo.Contains(terms))
+            var ListaCalc = (from listado in db.Proforma.Where(listado => listado.Titulo.Contains(terms) && listado.SolicitudTransporte.Count == 0)
                              select new
                              {
                                  RowID = listado.RowID,
                                  label = listado.Titulo,
                              }).Distinct().OrderBy(cal => cal.RowID).ToList();
-
-
-            int cn = 0;
-            for (int i = 1; i <= ListaCalc.Count; i++)
-            {
-                try
-                {
-                    int rowidQ = Convert.ToInt32(ListaCalc[i - 1].RowID);
-                    SolicitudTransporte sl = db.SolicitudTransporte.Where(f => f.ProformaID == rowidQ).FirstOrDefault();
-                    if (sl != null)
-                    {
-                        ListaCalc.RemoveAt(i - 1);
-                        i = i - 1;
-                    }
-                    cn = cn + 1;
-                }
-                catch (Exception e)
-                { }
-            }
             var returnjson = Json(ListaCalc.OrderBy(cal => cal.RowID), JsonRequestBehavior.AllowGet);
             returnjson.MaxJsonLength = int.MaxValue;
             return returnjson;
@@ -1772,6 +1623,391 @@ namespace PedidosOnline.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion
+        #region Formato Registro lenado
+         public ActionResult FormatoRegistroLlenado(int? RowID_Encabezado)
+        {
+            EncabezadoRegistroLlenado objEncabezado = db.EncabezadoRegistroLlenado.Where(enc => enc.RowID == RowID_Encabezado).FirstOrDefault();
+            if (objEncabezado!=null)
+            {
+                return View(objEncabezado);
+            }
+            else
+            {
+                return View(new EncabezadoRegistroLlenado());
+            }
+            return View();
+        }
+        public JsonResult auto_completa_proforma()
+       {
+            string terms = Request.Params["term"].Trim().ToUpper();
+
+            var lol = db.Proforma.Where(pr => pr.Contrato.Consecutivo.Contains(terms) || pr.Titulo.Contains(terms)).ToList();
+            var proformas = (from Lista in db.Proforma.Where(pr => pr.Contrato.Consecutivo.Contains(terms) || pr.Titulo.Contains(terms) && pr.ProformaItemCalculadora.Count!=0)
+                             select new 
+                             {
+                                 RowID=Lista.RowID,
+                                 label=string.Concat(Lista.Contrato.Consecutivo," ",Lista.Titulo),
+                                 cantidad=Lista.ProformaItemCalculadora.Count,
+                             }
+                            ).Where(ca=>ca.cantidad!=0).Distinct().ToList();
+            var returnjason = Json(proformas, JsonRequestBehavior.AllowGet);
+            returnjason.MaxJsonLength = int.MaxValue;
+            return returnjason;
+        }
+        public string opcion_producto(int RowIDProforma)
+        {
+            var objItemProforma = db.ProformaItemCalculadora.Where(pi => pi.ProformaID == RowIDProforma).ToList();
+            string html = "";
+            foreach (var item in objItemProforma)
+            {
+                html += "<option value='"+item.ItemCalculadoraID+"'>"+item.CalculadoraItems.Item.Referencia+"</option>";
+            }
+            return  html;
+        }
+        public JsonResult GuardarEncabezadoRegLlen(FormCollection form_encabezado)
+        {
+            Usuario objUsuario = (Usuario)(Session["curUser"]);
+            EncabezadoRegistroLlenado objEncaRegLlen = new EncabezadoRegistroLlenado();
+            if (form_encabezado["RowID"] == null)
+            {
+                objEncaRegLlen.ProformaItemID = int.Parse(form_encabezado["proforma_id"]);
+                objEncaRegLlen.Observaciones = form_encabezado["observacion"];
+                objEncaRegLlen.FechaCreacion = Utilidades.UtilTool.GetDateTime();
+                objEncaRegLlen.UsuarioCreacionID = objUsuario.RowID;
+                db.EncabezadoRegistroLlenado.Add(objEncaRegLlen);
+                db.SaveChanges();
+            }
+            else
+            {
+                objEncaRegLlen.ProformaItemID = int.Parse(form_encabezado["proforma_id"]);
+                objEncaRegLlen.Observaciones = form_encabezado["observacion"];
+                objEncaRegLlen.FechaModificacion = Utilidades.UtilTool.GetDateTime();
+                objEncaRegLlen.UsuarioModificacionID = objUsuario.RowID;
+                db.SaveChanges();
+
+            }
+            return Json(objEncaRegLlen.RowID);
+        }
+        #endregion
+
+
+        #region:::::AUTORIZACION DE CARGUE:::::
+
+        [CheckSessionOut]
+        public ActionResult SolicitudesCargue()
+        {
+            List<AutorizacionCargue> Lista = db.AutorizacionCargue.OrderBy(f => f.RowID).ToList();
+            ViewBag.ListaAutorizacionCargue = Lista.ToList();
+            return View(Lista);
+        }
+        [CheckSessionOut]
+        public ActionResult SolicitudCargue(int? rowid)
+        {
+            AutorizacionCargue AC = new AutorizacionCargue();
+            if (rowid != null && rowid > 0)
+            {
+                AC = db.AutorizacionCargue.Where(f => f.RowID == rowid).FirstOrDefault();
+            }
+            else
+            {
+                AC = new AutorizacionCargue();
+            }
+            return View(AC);
+        }
+        [CheckSessionOut]
+        public JsonResult ProformaAutocompleteCargue()
+        {
+            string terms = Request.Params["term"].Trim().ToUpper();
+            var ListaCalc = (from listado in db.Proforma.Where(listado => listado.Titulo.Contains(terms))
+                             join aut in db.SolicitudTransporte
+                              on listado.RowID equals aut.ProformaID
+                             select new
+                             {
+                                 RowID = listado.RowID,
+                                 label = listado.Titulo,
+                                 cantidad = listado.SolicitudTransporte.FirstOrDefault() == null ? 0 : listado.SolicitudTransporte.FirstOrDefault().Cantidad,
+                                 solicitud = listado.SolicitudTransporte.FirstOrDefault() == null ? 0 : listado.SolicitudTransporte.FirstOrDefault().RowID
+                             }).Distinct().OrderBy(cal => cal.RowID).ToList();
+            var returnjson = Json(ListaCalc.OrderBy(cal => cal.RowID), JsonRequestBehavior.AllowGet);
+            returnjson.MaxJsonLength = int.MaxValue;
+            return returnjson;
+        }
+        [CheckSessionOut]
+        public JsonResult VehiculoAutocomplete()
+        {
+            string terms = Request.Params["term"].Trim().ToUpper();
+            var ListaCalc = (from vehiculo in db.Vehiculo.Where(vehiculo => vehiculo.Placa.Contains(terms) && vehiculo.Opcion1.Codigo == "VEHICULO" && vehiculo.Estado == true)
+                             select new
+                             {
+                                 RowID = vehiculo.RowID,
+                                 label = vehiculo.Placa,
+                             }).Distinct().OrderBy(cal => cal.RowID).ToList();
+            var returnjson = Json(ListaCalc.OrderBy(cal => cal.RowID), JsonRequestBehavior.AllowGet);
+            returnjson.MaxJsonLength = int.MaxValue;
+            return returnjson;
+        }
+        [CheckSessionOut]
+        public JsonResult RemolqueAutocomplete()
+        {
+            string terms = Request.Params["term"].Trim().ToUpper();
+            var ListaCalc = (from vehiculo in db.Vehiculo.Where(vehiculo => vehiculo.Placa.Contains(terms) && vehiculo.Opcion1.Codigo == "REMOLQUE" && vehiculo.Estado == true)
+                             select new
+                             {
+                                 RowID = vehiculo.RowID,
+                                 label = vehiculo.Placa,
+                             }).Distinct().OrderBy(cal => cal.RowID).ToList();
+            var returnjson = Json(ListaCalc.OrderBy(cal => cal.RowID), JsonRequestBehavior.AllowGet);
+            returnjson.MaxJsonLength = int.MaxValue;
+            return returnjson;
+        }
+        [CheckSessionOut]
+        [ValidateInput(false)]
+        public string AddVehiculo(int? rowid, int? vehiculo, int? remolque, int? conductor, int? solicitud)
+        {
+            string result = "";
+            if (rowid != 0)
+            {
+                if (conductor == null && remolque == null && conductor == null)
+                {
+                    List<AutorizacionCargueVehiculo> lista3 = new List<AutorizacionCargueVehiculo>();
+                    lista3 = db.AutorizacionCargueVehiculo.Where(f => f.AutorizacionCargueID == rowid).ToList();
+                    foreach (var item in lista3)
+                    {
+                        result += "<tr><td><td><td><input type='text' value='" + item.Vehiculo.Placa + "' readonly /></td>" +
+                          "<td><input type='text' value='" + item.Vehiculo1.Placa + "' readonly /></td>" +
+                          "<td><input type='text' value='" + item.Tercero.RazonSocial + "' readonly /></td>" +
+                          "</tr>";
+                    }
+                }
+                else
+                {
+                    List<AutorizacionCargueVehiculo> lista = db.AutorizacionCargueVehiculo.Where(f => f.AutorizacionCargueID == rowid).ToList();
+                    foreach (var item in lista)
+                    {
+                        if (item.TerceroID == conductor)
+                        {
+                            Response.StatusCode = 500;
+                            return "Conductor ya agregado";
+                        }
+                        if (item.Vehiculo.RowID == vehiculo)
+                        {
+                            Response.StatusCode = 500;
+                            return "Vehiculo ya agregado";
+                        }
+                        if (item.Vehiculo1.RowID == remolque)
+                        {
+                            Response.StatusCode = 500;
+                            return "Remolque ya agregado";
+                        }
+
+                    }
+                    AutorizacionCargueVehiculo aut = new AutorizacionCargueVehiculo();
+                    List<AutorizacionCargueVehiculo> lista2 = new List<AutorizacionCargueVehiculo>();
+
+                    aut.AutorizacionCargueID = rowid;
+                    aut.FechaCreacion = DateTime.Now;
+                    aut.RemolqueID = remolque;
+                    aut.VehiculoID = vehiculo;
+                    aut.TerceroID = conductor;
+                    aut.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
+                    db.AutorizacionCargueVehiculo.Add(aut);
+                    db.SaveChanges();
+
+                    lista2 = db.AutorizacionCargueVehiculo.Where(f => f.AutorizacionCargueID == rowid).ToList();
+                    foreach (var item in lista2)
+                    {
+                        item.Tercero = db.Tercero.Where(f => f.RowID == item.TerceroID).FirstOrDefault();
+                        result += "<tr><td><td><td><input type='text' value='" + item.Vehiculo.Placa + "' readonly /></td>" +
+                          "<td><input type='text' value='" + item.Vehiculo1.Placa + "' readonly /></td>" +
+                          "<td><input type='text' value='" + item.Tercero.RazonSocial + "' readonly /></td>" +
+                          "</tr>";
+                    }
+                }
+            }
+            return result;
+        }
+        [HttpPost]
+        public JsonResult GuardarAutorizacionCargueEncabezado(FormCollection form)
+        {
+            AutorizacionCargue ac = new AutorizacionCargue();
+            ac.FechaCreacion = DateTime.Now;
+            ac.SolicitudTransporteID = int.Parse(form["solicitudT"]);
+            ac.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
+            Estado es = db.Estado.Where(f => f.Codigo == "ELABORACION").FirstOrDefault();
+            ac.EstadoID = es.RowID;
+            db.AutorizacionCargue.Add(ac);
+            db.SaveChanges();
+            return Json(ac.RowID);
+        }
+        #endregion
+
+        #region:::::Modal Vehiculos:::::
+        [CheckSessionOut]
+        public ActionResult ModalVehiculo()
+        {
+            ViewBag.TipoVehiculo = db.Opcion.Where(f => f.Agrupacion.Nombre == "TIPOVEHICULO").ToList();
+            return View(new Vehiculo());
+        }
+        [HttpPost]
+        public JsonResult GuardarVehiculo(FormCollection form)
+        { 
+            Vehiculo ObjVehiculo = new Vehiculo(); 
+            ObjVehiculo.Placa = form["placa"];
+            ObjVehiculo.Año = form["Año"].ToString();
+            ObjVehiculo.CapacidadKG = int.Parse(form["Capacidad"]);
+            ObjVehiculo.CargaMaxima = double.Parse(form["Carga"]);
+            ObjVehiculo.Color = form["Color"];
+            ObjVehiculo.Rendimiento = form["Rendimiento"] == null? 0:int.Parse(form["Rendimiento"]);
+            ObjVehiculo.TipoVehiculoID = int.Parse(form["tipo"]);
+            ObjVehiculo.Volumen = form["Volumen"] == null ? 0 : int.Parse(form["Volumen"]);
+            ObjVehiculo.Estado = true;
+            ObjVehiculo.FechaCreacion = DateTime.Now;
+            db.Vehiculo.Add(ObjVehiculo);
+            db.SaveChanges();
+            return Json("");
+        }
+        
+        #endregion
+
+        //#region :::::ORDEN COMPRA:::::
+        //[CheckSessionOut]
+        //public ActionResult OrdenCompra(int? rowid, int? rowid_contrato)
+        //{
+        //    ViewBag.FormaPago = db.CondicionPago.ToList();
+        //    Models.OrdenCompra reg = new Models.OrdenCompra();
+        //    if (rowid > 0)
+        //    {
+        //        reg = db.OrdenCompra.Where(f => f.RowID == rowid).FirstOrDefault();
+        //    }
+        //    else
+        //    {
+        //        reg.Tercero = new Tercero();
+        //        reg.Tercero1 = new Tercero();
+        //        reg.Opcion = new Opcion();
+        //        reg.CondicionPago = new CondicionPago();
+        //        reg.Sucursal = new Sucursal();
+        //        reg.Sucursal.Tercero = new Tercero();
+        //    }
+        //    return View(reg);
+        //}
+        //[CheckSessionOut]
+        //public JsonResult BuscarTerceroSucursal(string term)
+        //{
+        //    var result = (from reg in db.Sucursal.Where(f => f.Tercero.RazonSocial.Contains(term) || f.Tercero.Identificacion.Contains(term) || f.Nombre.Contains(term))
+        //                  select new
+        //                  {
+        //                      label = reg.Tercero.RazonSocial + "-" + reg.Nombre,
+        //                      nit = reg.Tercero.Identificacion,
+        //                      rowid = reg.RowID,
+        //                      ciudad = reg.ContactoERP.Ciudad.Nombre + "," + reg.ContactoERP.Ciudad.Departamento.Pais.Nombre,
+        //                      telefono = reg.ContactoERP.Telefono1,
+        //                      direccion = reg.ContactoERP.Direccion1,
+        //                      iva = ""
+        //                  });
+
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
+        //[CheckSessionOut]
+        //public JsonResult TerceroInformacion(int rowid)
+        //{
+        //    var result = (from reg in db.Tercero.Where(f => f.RowID == rowid)
+        //                  select new
+        //                  {
+        //                      label = reg.RazonSocial,
+        //                      nit = reg.Identificacion,
+        //                      rowid = reg.RowID,
+        //                      ciudad = reg.ContactoERP.Ciudad.Nombre + "," + reg.ContactoERP.Ciudad.Departamento.Pais.Nombre,
+        //                      telefono = reg.ContactoERP.Telefono1,
+        //                      direccion = reg.ContactoERP.Direccion1
+        //                  });
+
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
+        //[CheckSessionOut]
+        //public ActionResult OrdenCompras()
+        //{
+        //    List<OrdenCompra> lista = db.OrdenCompra.ToList();
+        //    return View(lista);
+        //}
+        //[CheckSessionOut]
+        //public JsonResult SucursalesTerceroInformacion(int? rowid)
+        //{
+        //    var result = (from reg in db.Sucursal.Where(f => f.RowID == rowid)
+        //                  select new
+        //                  {
+        //                      label = reg.Tercero.RazonSocial + "-" + reg.Nombre,
+        //                      nit = reg.Tercero.Identificacion,
+        //                      rowid = reg.RowID,
+        //                      ciudad = reg.ContactoERP.Ciudad.Nombre + "," + reg.ContactoERP.Ciudad.Departamento.Pais.Nombre,
+        //                      telefono = reg.ContactoERP.Telefono1,
+        //                      direccion = reg.ContactoERP.Direccion1,
+        //                      iva = ""
+        //                  });
+
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
+        //[CheckSessionOut]
+        //public string TerceroSucursales(int rowid)
+        //{
+
+        //    //Sucursal sucursal = db.Sucursal.Where(f => f.RowID == rowid).FirstOrDefault();
+        //    string resultado = "<option value=''>-Seleccionar-</option>";
+        //    foreach (Sucursal item in db.Sucursal.Where(f => f.TerceroID == rowid).ToList())
+        //    {
+        //        resultado += "<option value='" + item.RowID + "'>" +item.Codigo+" "+ item.Nombre + "</option>";
+        //    }
+        //    return resultado;
+        //}
+
+        //[CheckSessionOut]
+        //public string GuardarOrdenCompra()
+        //{
+        //    OrdenCompra reg = new Models.OrdenCompra();
+        //    int rowid = int.Parse(Request.Params["rowid"]);
+        //    if (rowid > 0)
+        //    {
+        //        reg = db.OrdenCompra.Where(f => f.RowID == rowid).FirstOrDefault();
+        //    }
+
+        //    reg.FormaPagoID = int.Parse(Request.Params["formapago"]);
+        //    reg.Observaciones = Request.Params["observaciones"];
+
+        //    reg.Fecha = DateTime.Now;
+        //    if (reg.RowID == 0)
+        //    {
+        //        reg.FechaCreacion = DateTime.Now;
+        //        reg.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
+        //        db.OrdenCompra.Add(reg);
+        //        db.SaveChanges();
+        //        Contrato c = db.Contrato.Where(f => f.RowID == reg.ContratoID).FirstOrDefault();
+        //        foreach (var item in db.CalculadoraItems.Where(f => f.CalculadoraID == reg.Contrato.Proforma.CalculadoraID))
+        //        {
+        //            OrdenCompraItem OCItem = new Models.OrdenCompraItem();
+        //            OCItem.ItemID = item.ItemID;
+        //            OCItem.OrdenCompraID = reg.RowID;
+        //            OCItem.UnidadEmpaque = item.Item.Unidad;
+        //            OCItem.Cantidad = item.CantidadTonelada;
+        //            OCItem.ValorUnitario = double.Parse(item.MPPCUSDCalculado.ToString());
+        //            OCItem.ValorImpuesto = (((OCItem.Cantidad * OCItem.ValorUnitario) * item.Item.Impuesto) / 100);
+        //            OCItem.ValorBase = OCItem.Cantidad * OCItem.ValorUnitario;
+        //            OCItem.ValorTotal = OCItem.ValorBase + OCItem.ValorImpuesto;
+        //            OCItem.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
+        //            OCItem.FechaCreacion = DateTime.Now;
+        //            db.OrdenCompraItem.Add(OCItem);
+        //            db.SaveChanges();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        reg.UsuarioModificacion = ((Usuario)Session["CurUser"]).NombreUsuario;
+        //        reg.FechaModificacion = DateTime.Now;
+        //    }
+
+        //    return reg.RowID.ToString();
+        //}
+
+        //#endregion
+
 
 
 
@@ -2073,7 +2309,6 @@ namespace PedidosOnline.Controllers
         //            ObjSolicitud.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
         //            db.CartaLlenadoPuerto.Add(ObjSolicitud);
         //            db.SaveChanges();
-
         //            mensaje = "Se ha ingresado correctamente";
         //        }
         //        else
@@ -3409,25 +3644,7 @@ namespace PedidosOnline.Controllers
         //    int rowid = ObjSolicitud.RowID;
         //    return Json(rowid, JsonRequestBehavior.AllowGet);
         //}
-        //[CheckSessionOut]
-        //public ActionResult ModalVehiculo(int? RowID, int RowID1)
-        //{
-        //    ViewBag.empresa = null;
-        //    ViewBag.conductor = null;
-        //    ViewBag.empresas = db.Compañia.ToList();
-        //    ViewBag.solicitud = RowID1;
-        //    if (RowID != null && RowID > 0)
-        //    {
-        //        VehiculoSolicitudLlenado solicitud = db.VehiculoSolicitudLlenado.Where(c => c.RowID == RowID).FirstOrDefault();
-        //        ViewBag.empresa = solicitud.Compañia.Nombre;
-        //        ViewBag.conductor = solicitud.Tercero.ContactoERP.Identificacion;
-        //        return View(solicitud);
-        //    }
-        //    else
-        //    {
-        //        return View(new VehiculoSolicitudLlenado());
-        //    }
-        //}
+
         //[HttpPost]
         //[CheckSessionOut]
         //public JsonResult Vehiculo(FormCollection form, int RowIDCon, int RowIDVeh, int RowID)

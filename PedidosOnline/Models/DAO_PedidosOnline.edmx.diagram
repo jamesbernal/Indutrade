@@ -153,7 +153,6 @@
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Usuario__RolID__24285DB4" />
         <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.ItemImpuesto" Width="1.5" PointX="13" PointY="23.625" />
         <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.AutorizacionCargue" Width="1.5" PointX="15" PointY="32.25" />
-        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" Width="1.5" PointX="17.25" PointY="41.25" />
         <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.SolicitudTransporte" Width="1.5" PointX="9.75" PointY="31.125" />
         <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.TipoVehiculo" Width="1.5" PointX="12" PointY="33" />
         <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.EnvioMail" Width="1.5" PointX="8.375" PointY="8.75" />
@@ -163,9 +162,7 @@
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__ItemImpue__Compa__1980B20F" />
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__ItemImpue__ItemI__1B68FA81" />
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__ItemImpue__TipoI__1A74D648" />
-        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Autorizac__Terce__707E9C7C" />
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Tercero" />
-        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Autorizac__Autor__6F8A7843" />
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Autorizac__Estad__6BB9E75F" />
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Autorizac__Solic__6CAE0B98" />
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Estad__04BA9F53" />
@@ -178,9 +175,20 @@
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Firma__TipoFirma__7760A435" />
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Firma__UsuarioID__7854C86E" />
         <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Vehiculo" Width="1.5" PointX="3.75" PointY="57.5" />
-        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Autorizac__Vehic__04859529" />
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Vehiculo__MarcaI__763775D2" />
         <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Vehiculo__TipoVe__744F2D60" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.DetalleRegistroLlenado" Width="1.5" PointX="14.25" PointY="61" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.EncabezadoRegistroLlenado" Width="1.5" PointX="12" PointY="64.875" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__DetalleRe__Carro__483BA0F8" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__DetalleRe__Encab__47477CBF" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Encabezad__Profo__4282C7A2" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__4376EBDB" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__446B1014" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" Width="1.5" PointX="17.625" PointY="45.5" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Autorizac__Terce__4C0C31DC" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Autorizac__Autor__4B180DA3" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Autorizac__Remol__4DF47A4E" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Autorizac__Vehic__4D005615" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
