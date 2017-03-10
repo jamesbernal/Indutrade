@@ -1,288 +1,201 @@
-﻿@model PedidosOnline.Models.
+﻿@model PedidosOnline.Models.Vehiculo
 @{
     ViewBag.Title = "ModalVehiculo";
     Layout = null;
 }
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-@*<script type="text/javascript" src="~/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
-    <link href="~/js/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">*@
-<style>
-    .ui-autocomplete {
-        z-index: 99999999999999;
-    }
-</style>
 <script>
-    function SoloNumeros(e) {
+
+    function Guardar() {
+
+        if ($("#placa").val() == "") {
+            Mensajes('El campo placa puede estar vacio!', 'error', '');
+            return null;
+        }
+        if ($("#Año").val() == "") {
+            Mensajes('El campo Año puede estar vacio!', 'error', '');
+            return null;
+        }
+        if ($("#tipo").val() == "") {
+            Mensajes('El campo tipo puede estar vacio!', 'error', '');
+            return null;
+        }
+        var formData = new FormData(document.getElementById("form"));
         debugger
-        var key = window.Event ? e.which : e.keyCode
-        return (key >= 48 && key <= 57 || key == 46)
-    }
-    $(document).ready(function () {
-
-        ModalProcesandoHiden();
-
-        $("#myModal1").modal('show');
-
-        $(".salir").click(function () {
-            $("#myModal1").modal('hide')
-        });
-
-        if ('@Request.Params["Msj"]' != '') {
-            alert('@Request.Params["Msj"]');
-        }
-        $('#autoc_conductor').on('keyup keypress', function (e) {
-            debugger
-            var code = (e.keyCode ? e.keyCode : e.which);
-            if (code == 13) { //Enter keycode
-                return false;
-            }
-        });
-        $("#autoc_conductor").autocomplete({
-            source: "Buscar_Conductor",//metodo del cntrolador
-            minLenght: 3,
-            select: function (evento, ui) {//seleccion al autocompletar
-                debugger
-                if (ui.item != null) {//si hay valor en la seleccion autocompletar
-                    $(".RowIDCon").val(ui.item.RowID);
-                    $("#autoc_conductor").val(ui.item.label);
-                    $("#nombre").val(ui.item.RazonSocial);
-                    $("#celular").val(ui.item.Telefono);
-                }
-            },
-            change: function (event, ui) {
-
-            }
-        });
-
-        $('#autoc_vehiculo').on('keyup keypress', function (e) {
-            debugger
-            var code = (e.keyCode ? e.keyCode : e.which);
-            if (code == 13) { //Enter keycode
-                return false;
-            }
-        });
-        $("#autoc_vehiculo").autocomplete({
-            source: "Solicitud_Buscar_Vehiculo",//metodo del cntrolador
-            minLenght: 3,
-            select: function (evento, ui) {//seleccion al autocompletar
-                debugger
-                if (ui.item != null) {//si hay valor en la seleccion autocompletar
-                    $(".RowIDVeh").val(ui.item.RowID);
-                    $("#autoc_vehiculo").val(ui.item.label);
-                }
-            },
-            change: function (event, ui) {
-
-            }
-        });
-    });
-    //===== Validation =====//
-    $.extend($.validator.defaults, {
-        invalidHandler: function (form, validator) {
-            var errors = validator.numberOfInvalids();
-            if (errors) {
-                var message = errors == 1
-                ? 'Completar Campo Vacio.'
-                : 'Completar ' + errors + ' Campos que se encuentran vacios.';
-                Mensajes(message, 'error', '');
-            }
-        }
-    });
-    $.validator.messages.required = 'Campo requerido';
-    $.validator.messages.email = 'Email invalido';
-
-    /**********************************************************/
-    /*FUNCIONES                                               */
-    /**********************************************************/
-    function EnviarVehiculo(accion) {
-    debugger
-        //accion = 1 guardar, 2 guardar y cerrar, 3: editar
-        $('#accion').val(accion);
-        //$("#form").submit();
-        var RowIDCon = $(".RowIDCon").val();
-        var RowIDVeh = $(".RowIDVeh").val();
         $.ajax({
             type: "POST",
-            url: "/Exportacion/Vehiculo",
-            data: {
-                FormData: $("#form1").serialize(),
-                RowIDCon: RowIDCon,
-                RowIDVeh: RowIDVeh,
-                RowID: @ViewBag.solicitud,
-            },
-            success: function (rowid) {
-                ModalProcesandoHiden();
-                Mensajes('Datos almacenados exitosamente', 'success', '');
-                $("#rowid").val(rowid);
-                if (accion == 2) {//guardar y salir
-                    $("#myModal1").modal('hide');
+            url: "GuardarVehiculo",
+            contentType: false,
+            processData: false,
+            
+            data: formData,
+            success: function (data) {
+                if(data != null)
+                {
+                    $("input").val('');
                 }
-                cargarVehiculos();
-
-            },
-            error: function (request) {
-                ModalProcesandoHiden();
-                Mensajes(request.responseText, 'error', '');
             }
+
         });
     }
 
-    function Guardar(accion) {
-        var validator = $("#form1").validate();
-        if (!validator.form())
-            return;
-        ModalProcesandoShow();
-        EnviarVehiculo(accion);
-    }
 
 </script>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
 <div class="modal fade" id="myModal1" data-backdrop="static" data-keyboard="false" style="overflow: hidden;">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close salir" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><b>Vehículo</b></h4>
-            </div>
-            <div class="modal-body">
-                <div class="row" id="div_btns">
-                    <div class="nav" style="margin-left:30px">
-                        <span>
-                            <a href="javascript:Guardar(1);" class="alink">
-                                <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
-                            </a>
-                        </span>
-                        <span>
-                            &nbsp;&nbsp;
-                            <a href="javascript:Guardar(2);" class="alink">
-                                <i class="glyphicon glyphicon-floppy-disk"></i><span class="lang" key="GUARDAR_&_CERRAR">&nbsp;Guardar&nbsp;&&nbsp;Cerrar</span>
-                            </a>
-                        </span>
-                        <span>
-                            &nbsp;&nbsp;
-                            <a href="javascript:$('#form1')[0].reset();" class="alink">
-                                <i class="glyphicon glyphicon-trash"></i><span class="lang" key="GUARDAR_&_CERRAR">&nbsp;Limpiar</span>
-                            </a>
-                        </span>
-                        <span>
-                            &nbsp;&nbsp;
-                            <a href="#" class="alink" data-dismiss="modal" title="Salir">
-                                <i class="glyphicon glyphicon-log-in"></i>&nbsp;Salir
-                            </a>
-                        </span>
-                    </div>
+        <form id="form" name="form" onsubmit="return false">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close salir" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>Vehículo</b></h4>
                 </div>
-                <br />
-                <div class="row">
-                    <div class="col-md-12">
-                        <div style="height:400px;overflow:auto">
-                            <form id="form1" name="form1" method="post">
-                                <input type="hidden" class="RowIDCon" name="RowIDCon" />
-                                <input type="hidden" class="RowIDVeh" name="RowIDVeh" />
-                                <div class="col-md-6">
-                                    <h4 class="lang" key="DATOS_GENERALES">Datos Generales</h4>
-                                    <hr style="margin:0">
-                                    <br />
-                                    <div class="col-md-12">
-                                        <input type="hidden" id="accion" name="accion" />
-                                        <input type="hidden" id="rowid" name="rowid" value="@Model.RowID" />
-                                        <div class="form-group">
-                                            @*<label class="lang" for="placa" key="PLACA">Placa</label>*@
-                                            <label class="lang" for="autoc_vehiculo">Placa</label>
-                                            @if (Model.RowID > 0)
-                                            {
-                                                <input type="text" id="autoc_vehiculo" name="autoc_vehiculo" value="ViewBag.vehiculo" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
-                                            }
-                                            else
-                                            {
-                                                <input type="text" id="autoc_vehiculo" name="autoc_vehiculo" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
-                                            }
-                                            @*<input type="text" style="width:100%" id="placa" name="placa" value="@Model.Placa" placeholder="---" required="required" />*@
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="fechaC" class="lang">Fecha Cargue</label>
-                                            <input type="text" id="fechaC" name="fechaC" style="width: 100%" value="@Model.FechaCargue" readonly="readonly" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="lang" for="remolque">Remolque</label>
-                                            <input type="text" style="width:100%" id="remolque" name="remolque" value="@Model.Remolque" placeholder="---" required="required" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="lang" for="empresaT">Empresa transporte</label>
-                                            <select id="empresaT" name="empresaT" style="width: 100%" required>
-                                                <option value="">---</option>
-                                                @foreach (var empresas in ViewBag.empresas)
-                                                {
-                                                    if (Model.RowID > 0)
-                                                    {
-                                                        if (ViewBag.empresa == @empresas.RowID)
-                                                        {
-                                                            <option value="@empresas.RowID" selected>@empresas.Nombre</option>
-                                                        }
-                                                        else
-                                                        {
-                                                            <option value="@empresas.RowID">@empresas.Nombre</option>
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        <option value="@empresas.RowID">@empresas.Nombre</option>
-                                                    }
-                                                }
-                                            </select>
-                                        </div>
+                <div class="modal-body">
+                    <div class="row" id="div_btns">
+                        <div class="nav" style="margin-left:30px">
+                            <span>
+                                <a href="javascript:Guardar(1);" class="alink">
+                                    <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
+                                </a>
+                            </span>
+                        </div>
+                        <br />
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label for="fecha" class="lang">Placa</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" id="placa" name="placa" />
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <h4 class="lang" key="INFORMACION_CONTACTO">Información conductor</h4>
-                                    <hr style="margin:0">
-                                    <br />
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="lang" for="autoc_conductor">Cedula conductor</label>
-                                            @if (Model.RowID > 0)
-                                            {
-                                                <input type="text" id="autoc_conductor" name="autoc_conductor" value="ViewBag.conductor" onkeypress="return SoloNumeros(event)" placeholder="---" style="width: 100%" autocomplete="off" autofocus required />
-                                            }
-                                            else
-                                            {
-                                                <input type="text" id="autoc_conductor" name="autoc_conductor" placeholder="---" onkeypress="return SoloNumeros(event)" style="width: 100%" autocomplete="off" autofocus required />
-                                            }
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="lang" for="nombre">Nombre</label>
-                                            @if (Model.RowID > 0)
-                                            {
-                                                <input type="text" style="width:100%" id="nombre" name="nombre" value="@Model.Tercero.ContactoERP.Nombre" placeholder="---" disabled="disabled" />
-                                            }
-                                            else
-                                            {
-                                                <input type="text" style="width:100%" id="nombre" name="nombre" value="" placeholder="---" disabled="disabled" />
-                                            }
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="lang" for="celular">Celular</label>
-                                            @if (Model.RowID > 0)
-                                            {
-                                                <input type="text" style="width:100%" id="celular" name="celular" value="@Model.Tercero.ContactoERP.Telefono2" placeholder="---" onkeypress="return SoloNumeros(event)" disabled="disabled" />
-                                            }
-                                            else
-                                            {
-                                                <input type="text" style="width:100%" id="celular" name="celular" value="" placeholder="---" onkeypress="return SoloNumeros(event)" disabled="disabled" />
-                                            }
-                                        </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label for="Año" class="lang">Año</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" id="Año" name="Año" />
                                     </div>
                                 </div>
-                            </form>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label for="fecha" class="lang">Modelo</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" id="Modelo" name="Modelo" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label for="fecha" class="lang">Rendimiento</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" id="Rendimiento" name="Rendimiento" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label for="fecha" class="lang">Color</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="color" id="Color" name="Color" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label>Tipo Vehiculo</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select id="tipo" name="tipo" required>
+                                            <option value="" selected>-Seleccionar-</option>
+                                            @foreach (PedidosOnline.Models.Opcion op in ((List<PedidosOnline.Models.Opcion>)ViewBag.TipoVehiculo).ToList())
+                                            {
+                                                <option value="@op.RowID">@op.Codigo</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label for="fecha" class="lang">Capacidad</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" id="Capacidad" name="Capacidad" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label for="fecha" class="lang">Volumen</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" id="Volumen" name="Volumen" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label for="fecha" class="lang">Peso Vacio</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" id="Peso" name="Peso" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label for="fecha" class="lang">Carga Maxima</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" id="Carga" name="Carga" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </form>
+    </div>
+</div>
 <script>
+    $("#myModal1").modal('show');
+
+
     $('#fechaC').datepicker({
-dateFormat: 'dd/mm/yy',
+        dateFormat: 'dd/mm/yy',
         minDate: 0,
         maxDate: '+3Y',
         inline: true
