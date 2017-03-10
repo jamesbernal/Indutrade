@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Bookings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+
+    $(document).ready(function () {
+        $('.table').dataTable({
+            " processing": true,
+            "bFilter": true,
+            "bPaginate": true,
+            "info": false,
+            "bDestroy":true,
+            aLengthMenu: [
+            [15, 25, 50, 100, -1],
+            [15, 25, 50, 100, "All"]
+            ],
+            "iDisplayLength": 15
+
+        });
+
+    });
+</script>
+
+<div class="row" id="div_menu" style="margin-bottom:20px">
+    <div class="col-md-12">
+        <div class="col-md-2">
+            <span>
+                <a href="@Url.Action( "Bookings","Exportacion",new {   @rih = Request.Params["rih"] })" class="alink">
+                    <i class="glyphicon glyphicon-plus"></i>&nbsp;<SPAN class="lang" key="NUEVO">Nuevo</SPAN>
+                </a>
+            </span>
+        </div>
+    </div>
+</div>
+<table id="table" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Contrato</th>
+            <th>Proforma</th>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Tipo llenado</th>
+            <th>Puerto descargue</th>
+            <th>Fecha embarque</th>
+            <th>Puerto cargue</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (PedidosOnline.Models.Booking  booking in ViewBag.ListaBookings)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Booking", "Exportacion", new { RowID = booking.RowID, @rih = Request.Params["rih"] })"><i class="glyphicon glyphicon-search"> </i></a>
+                </td>
+                <td>@booking.Proforma.Contrato.Consecutivo</td>
+                <td>@booking.Proforma.Titulo</td>
+                <td>@booking.Proforma.Contrato.Tercero.RazonSocial - @booking.Proforma.Contrato.Tercero.Identificacion</td>
+                <td>@booking.Opcion.Nombre </td>
+                <td>@string.Concat(booking.Proforma.Puerto1.Nombre, " ", booking.Proforma.Puerto1.Ciudad.Nombre)</td>
+                <td>@booking.Proforma.FechaEnvio</td>
+                <td>@booking.Proforma.ProformaItemCalculadora.FirstOrDefault().CalculadoraItems.Item.Referencia</td>
+                <td>@booking.Proforma.ProformaItemCalculadora.FirstOrDefault().CalculadoraItems.Item.Referencia</td>
+                <td>@string.Concat(booking.Proforma.Puerto.Ciudad.Nombre, " ", booking.Proforma.Puerto.Nombre)</td>
+            </tr>
+        }
+    </tbody>
+</table>

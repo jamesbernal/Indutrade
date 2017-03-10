@@ -380,6 +380,8 @@
     <EntitySetMapping Name="Booking">
       <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.Booking">
         <MappingFragment StoreEntitySet="Booking">
+          <ScalarProperty Name="CorreoEnvio" ColumnName="CorreoEnvio" />
+          <ScalarProperty Name="Asunto" ColumnName="Asunto" />
           <ScalarProperty Name="Nota" ColumnName="Nota" />
           <ScalarProperty Name="TipoLlenadoID" ColumnName="TipoLlenadoID" />
           <ScalarProperty Name="ProformaID" ColumnName="ProformaID" />

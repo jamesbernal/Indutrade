@@ -396,6 +396,8 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
     <Property Name="ProformaID" Type="int" />
     <Property Name="TipoLlenadoID" Type="int" />
     <Property Name="Nota" Type="nvarchar(max)" />
+    <Property Name="Asunto" Type="varchar" MaxLength="100" />
+    <Property Name="CorreoEnvio" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Calculadora">
     <Key>

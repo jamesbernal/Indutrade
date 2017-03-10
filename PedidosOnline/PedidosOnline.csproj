@@ -2061,6 +2061,7 @@
     <Content Include="Views\Exportacion\Booking.cshtml" />
     <Content Include="Views\Maestro\ListaUsuarioSistemas.cshtml" />
     <Content Include="Views\Maestro\CrearFirma.cshtml" />
+    <Content Include="Views\Exportacion\Bookings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

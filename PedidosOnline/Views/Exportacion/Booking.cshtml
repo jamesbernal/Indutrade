@@ -13,7 +13,7 @@
     <div class="nav">
         <span>
             &nbsp;&nbsp;
-            <a href="@Url.Action("Proformas", "Exportacion", new { @rih = Request.Params["rih"] })" class="alink">
+            <a href="@Url.Action("Bookings", "Exportacion", new { @rih = Request.Params["rih"] })" class="alink">
                 <i class="glyphicon glyphicon-list-alt"></i>&nbsp;<span class="lang" key="VISTA">Vista&nbsp;&nbsp;</span>
             </a>
         </span>
@@ -41,86 +41,214 @@
                             <div class="col-sm-2">
                                 <div class="form-group">
                                     <label for="autocomplete_proforma" class="control-label">Proformas</label>
-                                    <input type="text" id="autocomplete_proforma" placeholder="-----"  required/>
-                                    <input type="hidden" name="proforma_id" id="proforma_id" />
+                                    @if (Model.RowID>0)
+                                    {
+                                        <input type="text" id="autocomplete_proforma" value="@Model.Proforma.Contrato.Consecutivo @Model.Proforma.Contrato.Consecutivo" placeholder="-----" required />
+                                        <input type="hidden" name="proforma_id" id="proforma_id" value="@Model.ProformaID" />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" id="autocomplete_proforma" placeholder="-----" required />
+                                        <input type="hidden" name="proforma_id" id="proforma_id" />
+                                    }
+                                    
                                 </div>
 
                             </div>
                             <div class="col-sm-2">
                                 <div class="form-group">
-                                    <label class="control-label">Cliente</label>
-                                    <br />
-                                    <label class="control-label" id="cliente">Cliente</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label class="control-label">Cantidad</label>
-                                    <br />
-                                    <label class="control-label" id="cantidad">Cantidad</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <div class="form-group ">
-                                    <div class="form-group">
-                                        <label class="control-label">Producto</label>
+                                    @if (Model.RowID > 0)
+                                    {
+                                        <label class="control-label">Cliente</label>
                                         <br />
-                                        <label class="control-label" id="producto">Producto</label>
-                                    </div>
+                                        <label class="control-label" id="cliente">@string.Concat(Model.Proforma.Contrato.Tercero.RazonSocial, "-", Model.Proforma.Contrato.Tercero.Identificacion)</label>
+
+                                    }
+                                    else
+                                    {
+                                        <label class="control-label">Cliente</label>
+                                        <br />
+                                        <label class="control-label" id="cliente">Cliente</label>
+                                    }
+                                    
                                 </div>
                             </div>
                             <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label class="control-label">Tipo llenado</label>
-                                    <br />
-                                    <select name="tipo_cargue" id="tipo_cargue" onchange="generar_html()" class="" required>
-                                        <option value="" selected disabled>Elija una opción</option>
-                                        @foreach (var opcion in ViewBag.TipoLlenado)
-                                        {
-                                            <option value="@opcion.RowID">@opcion.Nombre</option>
-                                        }
-                                    </select>
-                                </div>
+                                @if (Model.RowID > 0)
+                                {
+                                    <div class="form-group">
+                                        <label class="control-label">Cantidad</label>
+                                        <br />
+                                        <label class="control-label" id="cantidad">@Model.Proforma.ProformaItemCalculadora.FirstOrDefault().Cantidad</label>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-group">
+                                        <label class="control-label">Cantidad</label>
+                                        <br />
+                                        <label class="control-label" id="cantidad">Cantidad</label>
+                                    </div>
+                                }
+                                
+                            </div>
+                            <div class="col-sm-2">
+                                @if (Model.RowID > 0)
+                                {
+                                    <div class="form-group ">
+                                        <div class="form-group">
+                                            <label class="control-label">Producto</label>
+                                            <br />
+                                            <label class="control-label" id="producto">@Model.Proforma.ProformaItemCalculadora.FirstOrDefault().CalculadoraItems.Item.Referencia</label>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-group ">
+                                        <div class="form-group">
+                                            <label class="control-label">Producto</label>
+                                            <br />
+                                            <label class="control-label" id="producto">Producto</label>
+                                        </div>
+                                    </div>
+                                }
+                                
+                            </div>
+                            <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label class="control-label">Tipo llenado</label>
+                                        <br />
+                                        <select name="tipo_cargue" id="tipo_cargue" onchange="generar_html()" class="" required>
+                                            <option value="" selected disabled>Elija una opción</option>
+                                            @foreach (var opcion in ViewBag.TipoLlenado)
+                                            {
+                                                if (Model.RowID > 0)
+                                                {
+                                                    if (Model.TipoLlenadoID == opcion.RowID)
+                                                    {
+                                                        <option value="@opcion.RowID" selected>@opcion.Nombre</option>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@opcion.RowID">@opcion.Nombre</option>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <option value="@opcion.RowID">@opcion.Nombre</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
                             </div>
                          </div>
                         <div class="row">
                             
                             <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label class="control-label">Puerto descargue</label>
-                                    <br />
-                                    <label class="control-label" id="puerto_descargue">Puerto descargue</label>
-                                </div>
+                                @if (Model.RowID > 0)
+                                {
+                                    <div class="form-group">
+                                        <label class="control-label">Puerto descargue</label>
+                                        <br />
+                                        <label class="control-label" id="puerto_descargue">@string.Concat(Model.Proforma.Puerto1.Ciudad.Nombre," ",Model.Proforma.Puerto1.Nombre)</label>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-group">
+                                        <label class="control-label">Puerto descargue</label>
+                                        <br />
+                                        <label class="control-label" id="puerto_descargue">Puerto descargue</label>
+                                    </div>
+                                }
+                               
                             </div>
                             <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label class="control-label">Fecha embarque</label>
-                                    <br />
-                                    <label class="control-label" id="fecha_embarque">Fecha embarque</label>
-                                </div>
+                                @if (Model.RowID > 0)
+                                {
+                                    <div class="form-group">
+                                        <label class="control-label">Fecha embarque</label>
+                                        <br />
+                                        <label class="control-label" id="fecha_embarque">@Model.Proforma.FechaEnvio</label>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-group">
+                                        <label class="control-label">Fecha embarque</label>
+                                        <br />
+                                        <label class="control-label" id="fecha_embarque">Fecha embarque</label>
+                                    </div>
+                                }
+                                
                             </div>
                             <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label class="control-label">Puerto cargue</label>
-                                    <br />
-                                    <label class="control-label" id="puerto_cargue">Puerto cargue</label>
-                                </div>
+                                @if (Model.RowID > 0)
+                                {
+                                    <div class="form-group">
+                                        <label class="control-label">Puerto cargue</label>
+                                        <br />
+                                        <label class="control-label" id="puerto_cargue">@string.Concat(Model.Proforma.Puerto.Ciudad.Nombre," ",Model.Proforma.Puerto.Nombre)</label>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-group">
+                                        <label class="control-label">Puerto cargue</label>
+                                        <br />
+                                        <label class="control-label" id="puerto_cargue">Puerto cargue</label>
+                                    </div>
+                                }
+                                
                             </div>
                             <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label class="control-label">Asunto</label>
-                                    <input type="text" name="asunto" required />
-                                </div>
+                                @if (Model.RowID > 0)
+                                {
+                                    <div class="form-group">
+                                        <label class="control-label">Asunto</label>
+                                        <input type="text" name="asunto" required value="@Model.Asunto" />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-group">
+                                        <label class="control-label">Asunto</label>
+                                        <input type="text" name="asunto" required />
+                                    </div>
+                                }
+                                
                             </div>
                             <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label class="control-label">Correo de recepción</label>
-                                    <input type="email" name="correo_envio" required />
-                                </div>
+                                @if (Model.RowID > 0)
+                                {
+                                    <div class="form-group">
+                                        <label class="control-label">Correo de recepción</label>
+                                        <input type="email" name="correo_envio" value="@Model.CorreoEnvio" required />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-group">
+                                        <label class="control-label">Correo de recepción</label>
+                                        <input type="email" name="correo_envio" required />
+                                    </div>
+                                }
+                                
                             </div>
                         </div>
                         <div class="row">
-                            <textarea id="nota" name="nota">@ViewBag.Firma</textarea>
+                            @if (Model.RowID > 0)
+                            {
+                                <textarea id="nota" name="">@Model.Nota</textarea >
+                                                       /**/
+                            }
+                            else
+                            {
+                                <textarea id="nota" name="">@ViewBag.Firma</textarea>
+
+                            }
                         </div>
                     </form>
                 </div>
@@ -157,6 +285,7 @@
             select: function (event, ui) {
                 $("#proforma_id").val(ui.item.RowID)
                 $("#cliente").text(ui.item.Cliente)
+                $("#producto").text(ui.item.Producto)
                 $("#cantidad").text(ui.item.Cantidad)
                 var fecha = new Date(parseInt(ui.item.FechaEmbarque.replace('/Date(', ''))).toLocaleDateString();
                 $("#puerto_descargue").text(ui.item.PuertoDescargue);
@@ -171,6 +300,7 @@
     function generar_html() {
         var html = "<li>" + $("#cliente").text() + "</li>";
         html += "<li>" + $("#cantidad").text() + "</li>";
+        html += "<li>" + $("#producto").text() + "</li>";
         html += "<li>" + $("#tipo_cargue option:selected").text() + "</li>";
         html += "<li>" + $("#puerto_descargue").text() + "</li>";
         html += "<li>" + $("#fecha_embarque").text() + "</li>";

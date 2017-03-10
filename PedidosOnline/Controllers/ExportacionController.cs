@@ -833,19 +833,25 @@ namespace PedidosOnline.Controllers
             PedidosOnline.Models.Booking objBooking = db.Booking.Where(boo => boo.RowID == RowID).FirstOrDefault();
             ViewBag.TipoLlenado = db.Opcion.Where(o => o.Agrupacion.Nombre == "TIPOLLENADO" && o.Activo==true).ToList();
             Usuario usuariofirma = (Usuario)(Session["curUser"]);
-            ViewBag.Firma ="<ul id='informacion_general'></ul><img id='firma_correo' src='"+ usuariofirma.Firma.Where(t => t.Opcion.Nombre == "FIRMACORREO").FirstOrDefault().Imagen+"'>";
             if (objBooking!=null)
             {
                 return View(objBooking);
             }
             else
             {
+                ViewBag.Firma = "<ul id='informacion_general'></ul><img id='firma_correo' src='" + usuariofirma.Firma.Where(t => t.Opcion.Nombre == "FIRMACORREO").FirstOrDefault().Imagen + "'>";
+
                 return View(new Booking());
 
             }
             return View();
         }
 
+        public ActionResult Bookings()
+        {
+            ViewBag.ListaBookings = db.Booking.Where(boo=>boo.Proforma.ProformaItemCalculadora.Count!=0).ToList();
+            return View();
+        }
         public JsonResult InformacionProformaBooking()
         {
             string term = Request.Params["term"].Trim();
@@ -857,6 +863,7 @@ namespace PedidosOnline.Controllers
                                     Cantidad = listado.ProformaItemCalculadora.FirstOrDefault().Cantidad,
                                     PuertoDescargue = string.Concat(listado.Puerto1.Nombre," ",listado.Puerto1.Ciudad.Nombre),
                                     FechaEmbarque=listado.FechaEnvio,
+                                    Producto=listado.ProformaItemCalculadora.FirstOrDefault().CalculadoraItems.Item.Referencia,
                                     PuertoCargue=string.Concat(listado.Puerto.Ciudad.Nombre," ",listado.Puerto.Nombre),
                                     label=string.Concat(listado.Contrato.Consecutivo," ",listado.Titulo)
                                 }
@@ -873,6 +880,8 @@ namespace PedidosOnline.Controllers
             objBooking.ProformaID = int.Parse(form["proforma_id"]);
             objBooking.TipoLlenadoID = int.Parse(form["tipo_cargue"]);
             objBooking.Nota = form["nota"];
+            objBooking.Asunto = form["asunto"];
+            objBooking.CorreoEnvio = form["correo_envio"];
             int RowID_Booking = int.Parse(form["RowID_Booking"]);
             string tipo_respuesta = "";
             string respuesta = "";

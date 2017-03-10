@@ -26,6 +26,10 @@ public partial class Booking
 
     public string Nota { get; set; }
 
+    public string Asunto { get; set; }
+
+    public string CorreoEnvio { get; set; }
+
 
 
     public virtual Proforma Proforma { get; set; }

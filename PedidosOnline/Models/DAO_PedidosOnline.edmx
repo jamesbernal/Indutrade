@@ -401,6 +401,8 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
           <Property Name="ProformaID" Type="int" />
           <Property Name="TipoLlenadoID" Type="int" />
           <Property Name="Nota" Type="nvarchar(max)" />
+          <Property Name="Asunto" Type="varchar" MaxLength="100" />
+          <Property Name="CorreoEnvio" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Calculadora">
           <Key>
@@ -4165,6 +4167,8 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
           <Property Name="Nota" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Proforma" Relationship="DB_9CAC35_indutradeModel.FK__Booking__Proform__0F6D37F0" FromRole="Booking" ToRole="Proforma" />
           <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__Booking__TipoLle__10615C29" FromRole="Booking" ToRole="Opcion" />
+          <Property Name="Asunto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoEnvio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Calculadora">
           <Key>
@@ -6908,6 +6912,8 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
           <EntitySetMapping Name="Booking">
             <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.Booking">
               <MappingFragment StoreEntitySet="Booking">
+                <ScalarProperty Name="CorreoEnvio" ColumnName="CorreoEnvio" />
+                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
                 <ScalarProperty Name="Nota" ColumnName="Nota" />
                 <ScalarProperty Name="TipoLlenadoID" ColumnName="TipoLlenadoID" />
                 <ScalarProperty Name="ProformaID" ColumnName="ProformaID" />
