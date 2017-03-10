@@ -256,7 +256,13 @@
     <Compile Include="Models\Departamento.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetalleRegistroLlenado.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Empresa.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EncabezadoRegistroLlenado.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EnvioMail.cs">

@@ -898,31 +898,12 @@ namespace PedidosOnline.Controllers
         public JsonResult ProformaAutocomplete()
         {
             string terms = Request.Params["term"].Trim().ToUpper();
-            var ListaCalc = (from listado in db.Proforma.Where(listado => listado.Titulo.Contains(terms))
+            var ListaCalc = (from listado in db.Proforma.Where(listado => listado.Titulo.Contains(terms) && listado.SolicitudTransporte.Count == 0)
                              select new
                              {
                                  RowID = listado.RowID,
                                  label = listado.Titulo,
                              }).Distinct().OrderBy(cal => cal.RowID).ToList();
-
-
-            int cn = 0;
-            for (int i = 1; i <= ListaCalc.Count; i++)
-            {
-                try
-                {
-                    int rowidQ = Convert.ToInt32(ListaCalc[i - 1].RowID);
-                    SolicitudTransporte sl = db.SolicitudTransporte.Where(f => f.ProformaID == rowidQ).FirstOrDefault();
-                    if (sl != null)
-                    {
-                        ListaCalc.RemoveAt(i - 1);
-                        i = i - 1;
-                    }
-                    cn = cn + 1;
-                }
-                catch (Exception e)
-                { }
-            }
             var returnjson = Json(ListaCalc.OrderBy(cal => cal.RowID), JsonRequestBehavior.AllowGet);
             returnjson.MaxJsonLength = int.MaxValue;
             return returnjson;
@@ -1378,6 +1359,113 @@ namespace PedidosOnline.Controllers
             returnjson.MaxJsonLength = int.MaxValue;
             return returnjson;
         }
+        [CheckSessionOut]
+        public JsonResult VehiculoAutocomplete()
+        {
+            string terms = Request.Params["term"].Trim().ToUpper();
+            var ListaCalc = (from vehiculo in db.Vehiculo.Where(vehiculo => vehiculo.Placa.Contains(terms) && vehiculo.Opcion1.Codigo == "VEHICULO" && vehiculo.Estado == true)
+                             select new
+                             {
+                                 RowID = vehiculo.RowID,
+                                 label = vehiculo.Placa,
+                             }).Distinct().OrderBy(cal => cal.RowID).ToList();
+            var returnjson = Json(ListaCalc.OrderBy(cal => cal.RowID), JsonRequestBehavior.AllowGet);
+            returnjson.MaxJsonLength = int.MaxValue;
+            return returnjson;
+        }
+        [CheckSessionOut]
+        public JsonResult RemolqueAutocomplete()
+        {
+            string terms = Request.Params["term"].Trim().ToUpper();
+            var ListaCalc = (from vehiculo in db.Vehiculo.Where(vehiculo => vehiculo.Placa.Contains(terms) && vehiculo.Opcion1.Codigo == "REMOLQUE" && vehiculo.Estado == true)
+                             select new
+                             {
+                                 RowID = vehiculo.RowID,
+                                 label = vehiculo.Placa,
+                             }).Distinct().OrderBy(cal => cal.RowID).ToList();
+            var returnjson = Json(ListaCalc.OrderBy(cal => cal.RowID), JsonRequestBehavior.AllowGet);
+            returnjson.MaxJsonLength = int.MaxValue;
+            return returnjson;
+        }
+        [CheckSessionOut]
+        [ValidateInput(false)]
+        public string AddVehiculo(int? rowid, int? vehiculo, int? remolque, int? conductor, int? solicitud)
+        {
+            string result = "";
+            if (rowid != 0)
+            {
+                if (conductor == null && remolque == null && conductor == null)
+                {
+                    List<AutorizacionCargueVehiculo> lista3 = new List<AutorizacionCargueVehiculo>();
+                    lista3 = db.AutorizacionCargueVehiculo.Where(f => f.AutorizacionCargueID == rowid).ToList();
+                    foreach (var item in lista3)
+                    {
+                        result += "<tr><td><td><td><input type='text' value='" + item.Vehiculo.Placa + "' readonly /></td>" +
+                          "<td><input type='text' value='" + item.Vehiculo1.Placa + "' readonly /></td>" +
+                          "<td><input type='text' value='" + item.Tercero.RazonSocial + "' readonly /></td>" +
+                          "</tr>";
+                    }
+                }
+                else
+                {
+                    List<AutorizacionCargueVehiculo> lista = db.AutorizacionCargueVehiculo.Where(f => f.AutorizacionCargueID == rowid).ToList();
+                    foreach (var item in lista)
+                    {
+                        if (item.TerceroID == conductor)
+                        {
+                            Response.StatusCode = 500;
+                            return "Conductor ya agregado";
+                        }
+                        if (item.Vehiculo.RowID == vehiculo)
+                        {
+                            Response.StatusCode = 500;
+                            return "Vehiculo ya agregado";
+                        }
+                        if (item.Vehiculo1.RowID == remolque)
+                        {
+                            Response.StatusCode = 500;
+                            return "Remolque ya agregado";
+                        }
+
+                    }
+                    AutorizacionCargueVehiculo aut = new AutorizacionCargueVehiculo();
+                    List<AutorizacionCargueVehiculo> lista2 = new List<AutorizacionCargueVehiculo>();
+
+                    aut.AutorizacionCargueID = rowid;
+                    aut.FechaCreacion = DateTime.Now;
+                    aut.RemolqueID = remolque;
+                    aut.VehiculoID = vehiculo;
+                    aut.TerceroID = conductor;
+                    aut.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
+                    db.AutorizacionCargueVehiculo.Add(aut);
+                    db.SaveChanges();
+
+                    lista2 = db.AutorizacionCargueVehiculo.Where(f => f.AutorizacionCargueID == rowid).ToList();
+                    foreach (var item in lista2)
+                    {
+                        item.Tercero = db.Tercero.Where(f => f.RowID == item.TerceroID).FirstOrDefault();
+                        result += "<tr><td><td><td><input type='text' value='" + item.Vehiculo.Placa + "' readonly /></td>" +
+                          "<td><input type='text' value='" + item.Vehiculo1.Placa + "' readonly /></td>" +
+                          "<td><input type='text' value='" + item.Tercero.RazonSocial + "' readonly /></td>" +
+                          "</tr>";
+                    }
+                }
+            }
+            return result;
+        }
+        [HttpPost]
+        public JsonResult GuardarAutorizacionCargueEncabezado(FormCollection form)
+        {
+            AutorizacionCargue ac = new AutorizacionCargue();
+            ac.FechaCreacion = DateTime.Now;
+            ac.SolicitudTransporteID = int.Parse(form["solicitudT"]);
+            ac.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
+            Estado es = db.Estado.Where(f => f.Codigo == "ELABORACION").FirstOrDefault();
+            ac.EstadoID = es.RowID;
+            db.AutorizacionCargue.Add(ac);
+            db.SaveChanges();
+            return Json(ac.RowID);
+        }
         #endregion
 
         #region:::::Modal Vehiculos:::::
@@ -1390,7 +1478,7 @@ namespace PedidosOnline.Controllers
         [HttpPost]
         public JsonResult GuardarVehiculo(FormCollection form)
         { 
-            Vehiculo ObjVehiculo = new Vehiculo();
+            Vehiculo ObjVehiculo = new Vehiculo(); 
             ObjVehiculo.Placa = form["placa"];
             ObjVehiculo.Año = form["Año"].ToString();
             ObjVehiculo.CapacidadKG = int.Parse(form["Capacidad"]);
@@ -1405,6 +1493,7 @@ namespace PedidosOnline.Controllers
             db.SaveChanges();
             return Json("");
         }
+        
         #endregion
 
         //#region :::::ORDEN COMPRA:::::
@@ -1847,7 +1936,6 @@ namespace PedidosOnline.Controllers
         //            ObjSolicitud.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
         //            db.CartaLlenadoPuerto.Add(ObjSolicitud);
         //            db.SaveChanges();
-
         //            mensaje = "Se ha ingresado correctamente";
         //        }
         //        else

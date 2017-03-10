@@ -24,6 +24,10 @@ public partial class Vehiculo
 
         this.AutorizacionCargueVehiculo = new HashSet<AutorizacionCargueVehiculo>();
 
+        this.AutorizacionCargueVehiculo1 = new HashSet<AutorizacionCargueVehiculo>();
+
+        this.DetalleRegistroLlenado = new HashSet<DetalleRegistroLlenado>();
+
     }
 
 
@@ -66,6 +70,14 @@ public partial class Vehiculo
     public virtual Opcion Opcion { get; set; }
 
     public virtual Opcion Opcion1 { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<AutorizacionCargueVehiculo> AutorizacionCargueVehiculo1 { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<DetalleRegistroLlenado> DetalleRegistroLlenado { get; set; }
 
 }
 
