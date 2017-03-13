@@ -1348,6 +1348,7 @@ namespace PedidosOnline.Controllers
          public ActionResult FormatoRegistroLlenado(int? RowID_Encabezado)
         {
             EncabezadoRegistroLlenado objEncabezado = db.EncabezadoRegistroLlenado.Where(enc => enc.RowID == RowID_Encabezado).FirstOrDefault();
+            //ViewBag.Carrotanque
             if (objEncabezado!=null)
             {
                 return View(objEncabezado);
@@ -1410,7 +1411,41 @@ namespace PedidosOnline.Controllers
             return Json(objEncaRegLlen.RowID);
         }
         #endregion
+        public JsonResult GuardarDetalleRegLlen(FormCollection form_detalle, int RowID)
+        {
+            Usuario objUsuario = (Usuario)(Session["curUser"]);
+            DetalleRegistroLlenado objDetaRegLlen = new DetalleRegistroLlenado();
+            if (form_detalle["RowID"] == null)
+            {
+                objDetaRegLlen.EncabezadoRegistroLlenadoID =(RowID);
+                objDetaRegLlen.CarroTanqueID = int.Parse(form_detalle["carrotanque"]);
+                objDetaRegLlen.FechaCreacion = UtilTool.GetDateTime();
+                objDetaRegLlen.FechaInspeccion = DateTime.Parse(form_detalle["fecha_inspeccion"]);
+                objDetaRegLlen.NumeroCTU_IT = (form_detalle["num_ctu_isotank"]);
+                objDetaRegLlen.NumeroFlexitanks = (form_detalle["no_flexitanks"]);
+                objDetaRegLlen.InspeccionAntinarcoticos = bool.Parse(form_detalle["inspeccion_antinarcoticos"]);
+                objDetaRegLlen.TipoSello = (form_detalle["tipo_sello"]);
+                objDetaRegLlen.FechaLlegada = DateTime.Parse(form_detalle["fecha_llegada"]==null?DateTime.MinValue.ToString(): form_detalle["fecha_llegada"].ToString());
+                db.DetalleRegistroLlenado.Add(objDetaRegLlen);
+                db.SaveChanges();
+            }
+            else
+            {
+                objDetaRegLlen.EncabezadoRegistroLlenadoID = (RowID);
+                objDetaRegLlen.CarroTanqueID = int.Parse(form_detalle["carrotanque"]);
+                objDetaRegLlen.FechaCreacion = UtilTool.GetDateTime();
+                objDetaRegLlen.FechaInspeccion = DateTime.Parse(form_detalle["fecha_inspeccion"]);
+                objDetaRegLlen.NumeroCTU_IT = (form_detalle["num_ctu_isotank"]);
+                objDetaRegLlen.NumeroFlexitanks = (form_detalle["no_flexitanks"]);
+                objDetaRegLlen.InspeccionAntinarcoticos = bool.Parse(form_detalle["inspeccion_antinarcoticos"]);
+                objDetaRegLlen.TipoSello = (form_detalle["tipo_sello"]);
+                objDetaRegLlen.FechaLlegada = DateTime.Parse(form_detalle["fecha_llegada"] == null ? DateTime.MinValue.ToString() : form_detalle["fecha_llegada"].ToString());
+                db.SaveChanges();
 
+            }
+            return Json(objDetaRegLlen.RowID);
+        }
+        
 
         #region:::::AUTORIZACION DE CARGUE:::::
 
