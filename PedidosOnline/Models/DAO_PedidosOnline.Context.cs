@@ -119,8 +119,6 @@ public partial class PedidosOnlineEntities : DbContext
 
     public virtual DbSet<AutorizacionCargue> AutorizacionCargue { get; set; }
 
-    public virtual DbSet<AutorizacionCargueVehiculo> AutorizacionCargueVehiculo { get; set; }
-
     public virtual DbSet<SolicitudTransporte> SolicitudTransporte { get; set; }
 
     public virtual DbSet<TipoVehiculo> TipoVehiculo { get; set; }
@@ -135,9 +133,11 @@ public partial class PedidosOnlineEntities : DbContext
 
     public virtual DbSet<Vehiculo> Vehiculo { get; set; }
 
-    public virtual DbSet<DetalleRegistroLlenado> DetalleRegistroLlenado { get; set; }
-
     public virtual DbSet<EncabezadoRegistroLlenado> EncabezadoRegistroLlenado { get; set; }
+
+    public virtual DbSet<AutorizacionCargueVehiculo> AutorizacionCargueVehiculo { get; set; }
+
+    public virtual DbSet<DetalleRegistroLlenado> DetalleRegistroLlenado { get; set; }
 
 
     public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)

@@ -1692,39 +1692,115 @@ namespace PedidosOnline.Controllers
         #endregion
         public JsonResult GuardarDetalleRegLlen(FormCollection form_detalle, int RowID)
         {
-            Usuario objUsuario = (Usuario)(Session["curUser"]);
-            DetalleRegistroLlenado objDetaRegLlen = new DetalleRegistroLlenado();
-            if (form_detalle["RowID"] == null)
-            {
-                objDetaRegLlen.EncabezadoRegistroLlenadoID =(RowID);
-                objDetaRegLlen.CarroTanqueID = int.Parse(form_detalle["carrotanque"]);
-                objDetaRegLlen.FechaCreacion = UtilTool.GetDateTime();
-                objDetaRegLlen.FechaInspeccion = DateTime.Parse(form_detalle["fecha_inspeccion"]);
-                objDetaRegLlen.NumeroCTU_IT = (form_detalle["num_ctu_isotank"]);
-                objDetaRegLlen.NumeroFlexitanks = (form_detalle["no_flexitanks"]);
-                objDetaRegLlen.InspeccionAntinarcoticos = bool.Parse(form_detalle["inspeccion_antinarcoticos"]);
-                objDetaRegLlen.TipoSello = (form_detalle["tipo_sello"]);
-                objDetaRegLlen.FechaLlegada = DateTime.Parse(form_detalle["fecha_llegada"]==null?DateTime.MinValue.ToString(): form_detalle["fecha_llegada"].ToString());
-                db.DetalleRegistroLlenado.Add(objDetaRegLlen);
-                db.SaveChanges();
-            }
-            else
-            {
-                objDetaRegLlen.EncabezadoRegistroLlenadoID = (RowID);
-                objDetaRegLlen.CarroTanqueID = int.Parse(form_detalle["carrotanque"]);
-                objDetaRegLlen.FechaCreacion = UtilTool.GetDateTime();
-                objDetaRegLlen.FechaInspeccion = DateTime.Parse(form_detalle["fecha_inspeccion"]);
-                objDetaRegLlen.NumeroCTU_IT = (form_detalle["num_ctu_isotank"]);
-                objDetaRegLlen.NumeroFlexitanks = (form_detalle["no_flexitanks"]);
-                objDetaRegLlen.InspeccionAntinarcoticos = bool.Parse(form_detalle["inspeccion_antinarcoticos"]);
-                objDetaRegLlen.TipoSello = (form_detalle["tipo_sello"]);
-                objDetaRegLlen.FechaLlegada = DateTime.Parse(form_detalle["fecha_llegada"] == null ? DateTime.MinValue.ToString() : form_detalle["fecha_llegada"].ToString());
-                db.SaveChanges();
 
+             Usuario objUsuario = (Usuario)(Session["curUser"]);
+            DetalleRegistroLlenado objDetaRegLlen = new DetalleRegistroLlenado();
+            var lol = form_detalle["RowID_Detalle"];
+            try
+            {
+                if (form_detalle["RowID_Detalle"] == null || form_detalle["RowID_Detalle"]=="")
+                {
+                    objDetaRegLlen.EncabezadoRegistroLlenadoID = (RowID);
+                    objDetaRegLlen.VehiculoID = int.Parse(form_detalle["vehiculoID"]);
+                    objDetaRegLlen.FechaCreacion = UtilTool.GetDateTime();
+                    objDetaRegLlen.FechaInspeccion = DateTime.Parse(form_detalle["fecha_inspeccion"]);
+                    objDetaRegLlen.NumeroCTU_IT = (form_detalle["num_ctu_isotank"]);
+                    objDetaRegLlen.ProveedorFlexitanks = form_detalle["proveedor_flexitanks"];
+                    objDetaRegLlen.NumeroFlexitanks = (form_detalle["no_flexitanks"]);
+                    objDetaRegLlen.InspeccionAntinarcoticos = bool.Parse(form_detalle["inspeccion_antinarcoticos"]);
+                    objDetaRegLlen.Sello = form_detalle["sellos"];
+                    objDetaRegLlen.TipoSello = (form_detalle["tipo_sellos"]);
+                    objDetaRegLlen.RemolqueID = int.Parse(form_detalle["remolqueID"]);
+                    objDetaRegLlen.FechaLlegada = form_detalle["fecha_llegada"] == "" ? DateTime.MaxValue : DateTime.Parse(form_detalle["fecha_llegada"].ToString());
+                    db.DetalleRegistroLlenado.Add(objDetaRegLlen);
+                    db.SaveChanges();
+                    return Json(new { tipo_respuesta = "success", respuesta = "Información guardada" });
+                }
+                else
+                {
+                    int RowID_Detalle = int.Parse(form_detalle["RowID_Detalle"]);
+                    objDetaRegLlen = db.DetalleRegistroLlenado.Where(d => d.RowID == RowID_Detalle).FirstOrDefault();
+                    objDetaRegLlen.EncabezadoRegistroLlenadoID = (RowID);
+                    objDetaRegLlen.VehiculoID = int.Parse(form_detalle["vehiculoID"]);
+                    objDetaRegLlen.FechaCreacion = UtilTool.GetDateTime();
+                    objDetaRegLlen.FechaInspeccion = DateTime.Parse(form_detalle["fecha_inspeccion"]);
+                    objDetaRegLlen.NumeroCTU_IT = (form_detalle["num_ctu_isotank"]);
+                    objDetaRegLlen.ProveedorFlexitanks = form_detalle["proveedor_flexitanks"];
+                    objDetaRegLlen.NumeroFlexitanks = (form_detalle["no_flexitanks"]);
+                    objDetaRegLlen.InspeccionAntinarcoticos = bool.Parse(form_detalle["inspeccion_antinarcoticos"]);
+                    objDetaRegLlen.Sello = form_detalle["sellos"];
+                    objDetaRegLlen.TipoSello = (form_detalle["tipo_sellos"]);
+                    objDetaRegLlen.RemolqueID = int.Parse(form_detalle["remolqueID"]);
+                    objDetaRegLlen.FechaLlegada = form_detalle["fecha_llegada"] == "" ? DateTime.MaxValue : DateTime.Parse(form_detalle["fecha_llegada"].ToString());
+                    db.SaveChanges();
+                    return Json(new { tipo_respuesta = "success", respuesta = "Información actualizada" });
+
+                }
             }
+            catch (Exception ex)
+            {
+                return Json(new { tipo_respuesta = "warning", respuesta = ex.Message });
+                throw;
+            }
+           
             return Json(objDetaRegLlen.RowID);
         }
-        
+        public string InformacionTablaRegis(int? RowID)
+        {
+            var objEncabezado = db.EncabezadoRegistroLlenado.Where(erll => erll.RowID == RowID).FirstOrDefault();
+            string html_tabla = "";
+            if (objEncabezado.DetalleRegistroLlenado.Count>0)
+            {
+                foreach (var item in objEncabezado.DetalleRegistroLlenado.ToList())
+                {
+                    html_tabla += "<tr>";
+                    html_tabla += "<td>" + item.FechaInspeccion + "</td>";
+                    html_tabla += "<td>" + item.NumeroCTU_IT + "</td>";
+                    html_tabla += "<td>" + item.NumeroFlexitanks + "</td>";
+                    html_tabla += "<td>" + item.ProveedorFlexitanks + "</td><td>";
+                    html_tabla += item.InspeccionAntinarcoticos.Value == true ? "SI" : "NO";
+                    html_tabla += "</td><td>" + item.Sello + "</td>";
+                    html_tabla += "<td>" + item.TipoSello + "</td>";
+                    html_tabla += "<td>" + item.Vehiculo.Placa + "</td>";
+                    html_tabla += "<td>" + item.Vehiculo1.Placa + "</td>";
+                    html_tabla += "<td>" + item.FechaLlegada.ToString() + "</td>";
+                    html_tabla += "<td><a onclick='CargarDetalle(" + item.RowID + ")'><i class='glyphicon-edit'></i></a><a onclick='eliminar(" + item.RowID + ")'><i class='glyphicon-remove'></i></a></td>";
+                    html_tabla += "</tr>";
+
+                }
+            }
+            return html_tabla;
+        }
+        public JsonResult EliminarRegLlen(int RowID)
+        {
+            DetalleRegistroLlenado objDetalle = db.DetalleRegistroLlenado.Where(detRegLlen => detRegLlen.RowID == RowID).FirstOrDefault();
+            db.DetalleRegistroLlenado.Remove(objDetalle);
+            db.SaveChanges();
+            return Json(new { Respuest = "Registro eliminado" },JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult CargarDetalle(int? RowID)
+        {
+            var Detalle = (from listado in db.DetalleRegistroLlenado.Where(drll => drll.RowID == RowID)
+                           select new
+                           {
+                               RowID = listado.RowID,
+                               FechaInsp=listado.FechaInspeccion,
+                               Vehiculo=listado.Vehiculo.Placa,
+                               VehiculoID=listado.VehiculoID,
+                               Remolque =listado.Vehiculo1.Placa,
+                               RemolqueID = listado.RemolqueID,
+                               FechaLlegada=listado.FechaLlegada,
+                               NumeroCTU=listado.NumeroCTU_IT,
+                               NumeroFlexi=listado.NumeroFlexitanks,
+                               InspeAnti=listado.InspeccionAntinarcoticos,
+                               Sello=listado.Sello,
+                               TipoSello=listado.Sello,
+                               Proveedor=listado.ProveedorFlexitanks
+                           }).FirstOrDefault();
+            var returnjson = Json(Detalle, JsonRequestBehavior.AllowGet);
+            returnjson.MaxJsonLength = int.MaxValue;
+            return returnjson;
+        }
 
         #region:::::AUTORIZACION DE CARGUE:::::
 

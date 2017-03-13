@@ -22,7 +22,7 @@ public partial class DetalleRegistroLlenado
 
     public Nullable<int> EncabezadoRegistroLlenadoID { get; set; }
 
-    public Nullable<int> CarroTanqueID { get; set; }
+    public Nullable<int> VehiculoID { get; set; }
 
     public Nullable<System.DateTime> FechaCreacion { get; set; }
 
@@ -40,11 +40,17 @@ public partial class DetalleRegistroLlenado
 
     public Nullable<System.DateTime> FechaLlegada { get; set; }
 
+    public Nullable<int> RemolqueID { get; set; }
+
+    public string ProveedorFlexitanks { get; set; }
+
 
 
     public virtual Vehiculo Vehiculo { get; set; }
 
     public virtual EncabezadoRegistroLlenado EncabezadoRegistroLlenado { get; set; }
+
+    public virtual Vehiculo Vehiculo1 { get; set; }
 
 }
 

@@ -620,7 +620,7 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
     </Key>
     <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="EncabezadoRegistroLlenadoID" Type="int" />
-    <Property Name="CarroTanqueID" Type="int" />
+    <Property Name="VehiculoID" Type="int" />
     <Property Name="FechaCreacion" Type="datetime" />
     <Property Name="FechaInspeccion" Type="datetime" />
     <Property Name="NumeroCTU_IT" Type="varchar" MaxLength="100" />
@@ -629,6 +629,8 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
     <Property Name="Sello" Type="varchar" MaxLength="100" />
     <Property Name="TipoSello" Type="varchar" MaxLength="100" />
     <Property Name="FechaLlegada" Type="datetime" />
+    <Property Name="RemolqueID" Type="int" />
+    <Property Name="ProveedorFlexitanks" Type="varchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="EncabezadoRegistroLlenado">
     <Key>
@@ -1522,7 +1524,7 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
         <PropertyRef Name="RowID" />
       </Principal>
       <Dependent Role="DetalleRegistroLlenado">
-        <PropertyRef Name="CarroTanqueID" />
+        <PropertyRef Name="VehiculoID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1535,6 +1537,18 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
       </Principal>
       <Dependent Role="DetalleRegistroLlenado">
         <PropertyRef Name="EncabezadoRegistroLlenadoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetalleRe__Remol__64D7DFA6">
+    <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="0..1" />
+    <End Role="DetalleRegistroLlenado" Type="Self.DetalleRegistroLlenado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehiculo">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="DetalleRegistroLlenado">
+        <PropertyRef Name="RemolqueID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2876,6 +2890,10 @@ advertencia 6002: La tabla o vista 'DB_9CAC35_INDUTRAILPOPROD.Erp.PuntoEnvio' no
     </AssociationSet>
     <AssociationSet Name="FK__DetalleRe__Encab__47477CBF" Association="Self.FK__DetalleRe__Encab__47477CBF">
       <End Role="EncabezadoRegistroLlenado" EntitySet="EncabezadoRegistroLlenado" />
+      <End Role="DetalleRegistroLlenado" EntitySet="DetalleRegistroLlenado" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetalleRe__Remol__64D7DFA6" Association="Self.FK__DetalleRe__Remol__64D7DFA6">
+      <End Role="Vehiculo" EntitySet="Vehiculo" />
       <End Role="DetalleRegistroLlenado" EntitySet="DetalleRegistroLlenado" />
     </AssociationSet>
     <AssociationSet Name="FK__Empresa__ErpID__15DA3E5D" Association="Self.FK__Empresa__ErpID__15DA3E5D">

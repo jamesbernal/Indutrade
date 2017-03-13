@@ -265,7 +265,7 @@ namespace PedidosOnline.Controllers
         {
             Firma objFirma = new Firma();
             HttpFileCollectionBase archivos;
-            var tipo_firma = Request.Params["tipo_firma"].Split(',');
+             var tipo_firma = Request.Params["tipo_firma"].Split(',');
             var descripcion = Request.Params["descripcion"].Split(',');
             int contador_inser = 0;
             int rowid_usuario = int.Parse(Request.Params["rowid_usuario"]);

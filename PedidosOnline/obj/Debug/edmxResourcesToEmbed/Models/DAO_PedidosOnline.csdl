@@ -588,16 +588,7 @@
       <End Role="Opcion" EntitySet="Opcion" />
       <End Role="Vehiculo" EntitySet="Vehiculo" />
     </AssociationSet>
-    <EntitySet Name="DetalleRegistroLlenado" EntityType="DB_9CAC35_indutradeModel.DetalleRegistroLlenado" />
     <EntitySet Name="EncabezadoRegistroLlenado" EntityType="DB_9CAC35_indutradeModel.EncabezadoRegistroLlenado" />
-    <AssociationSet Name="FK__DetalleRe__Carro__483BA0F8" Association="DB_9CAC35_indutradeModel.FK__DetalleRe__Carro__483BA0F8">
-      <End Role="Vehiculo" EntitySet="Vehiculo" />
-      <End Role="DetalleRegistroLlenado" EntitySet="DetalleRegistroLlenado" />
-    </AssociationSet>
-    <AssociationSet Name="FK__DetalleRe__Encab__47477CBF" Association="DB_9CAC35_indutradeModel.FK__DetalleRe__Encab__47477CBF">
-      <End Role="EncabezadoRegistroLlenado" EntitySet="EncabezadoRegistroLlenado" />
-      <End Role="DetalleRegistroLlenado" EntitySet="DetalleRegistroLlenado" />
-    </AssociationSet>
     <AssociationSet Name="FK__Encabezad__Profo__4282C7A2" Association="DB_9CAC35_indutradeModel.FK__Encabezad__Profo__4282C7A2">
       <End Role="ProformaItemCalculadora" EntitySet="ProformaItemCalculadora" />
       <End Role="EncabezadoRegistroLlenado" EntitySet="EncabezadoRegistroLlenado" />
@@ -626,6 +617,19 @@
     <AssociationSet Name="FK__Autorizac__Vehic__4D005615" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Vehic__4D005615">
       <End Role="Vehiculo" EntitySet="Vehiculo" />
       <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
+    </AssociationSet>
+    <EntitySet Name="DetalleRegistroLlenado" EntityType="DB_9CAC35_indutradeModel.DetalleRegistroLlenado" />
+    <AssociationSet Name="FK__DetalleRe__Carro__483BA0F8" Association="DB_9CAC35_indutradeModel.FK__DetalleRe__Carro__483BA0F8">
+      <End Role="Vehiculo" EntitySet="Vehiculo" />
+      <End Role="DetalleRegistroLlenado" EntitySet="DetalleRegistroLlenado" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetalleRe__Encab__47477CBF" Association="DB_9CAC35_indutradeModel.FK__DetalleRe__Encab__47477CBF">
+      <End Role="EncabezadoRegistroLlenado" EntitySet="EncabezadoRegistroLlenado" />
+      <End Role="DetalleRegistroLlenado" EntitySet="DetalleRegistroLlenado" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetalleRe__Remol__64D7DFA6" Association="DB_9CAC35_indutradeModel.FK__DetalleRe__Remol__64D7DFA6">
+      <End Role="Vehiculo" EntitySet="Vehiculo" />
+      <End Role="DetalleRegistroLlenado" EntitySet="DetalleRegistroLlenado" />
     </AssociationSet>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -3371,9 +3375,10 @@
     <Property Name="CargaMaxima" Type="Double" />
     <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__Vehiculo__MarcaI__763775D2" FromRole="Vehiculo" ToRole="Opcion" />
     <NavigationProperty Name="Opcion1" Relationship="DB_9CAC35_indutradeModel.FK__Vehiculo__TipoVe__744F2D60" FromRole="Vehiculo" ToRole="Opcion" />
-    <NavigationProperty Name="DetalleRegistroLlenado" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Carro__483BA0F8" FromRole="Vehiculo" ToRole="DetalleRegistroLlenado" />
     <NavigationProperty Name="AutorizacionCargueVehiculo" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Remol__4DF47A4E" FromRole="Vehiculo" ToRole="AutorizacionCargueVehiculo" />
     <NavigationProperty Name="AutorizacionCargueVehiculo1" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Vehic__4D005615" FromRole="Vehiculo" ToRole="AutorizacionCargueVehiculo" />
+    <NavigationProperty Name="DetalleRegistroLlenado" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Carro__483BA0F8" FromRole="Vehiculo" ToRole="DetalleRegistroLlenado" />
+    <NavigationProperty Name="DetalleRegistroLlenado1" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Remol__64D7DFA6" FromRole="Vehiculo" ToRole="DetalleRegistroLlenado" />
   </EntityType>
   <Association Name="FK__Vehiculo__MarcaI__763775D2">
     <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="0..1" />
@@ -3399,24 +3404,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="DetalleRegistroLlenado">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="EncabezadoRegistroLlenadoID" Type="Int32" />
-    <Property Name="CarroTanqueID" Type="Int32" />
-    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-    <Property Name="FechaInspeccion" Type="DateTime" Precision="3" />
-    <Property Name="NumeroCTU_IT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="NumeroFlexitanks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="InspeccionAntinarcoticos" Type="Boolean" />
-    <Property Name="Sello" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="TipoSello" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="FechaLlegada" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Vehiculo" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Carro__483BA0F8" FromRole="DetalleRegistroLlenado" ToRole="Vehiculo" />
-    <NavigationProperty Name="EncabezadoRegistroLlenado" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Encab__47477CBF" FromRole="DetalleRegistroLlenado" ToRole="EncabezadoRegistroLlenado" />
-  </EntityType>
   <EntityType Name="EncabezadoRegistroLlenado">
     <Key>
       <PropertyRef Name="RowID" />
@@ -3428,35 +3415,11 @@
     <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
     <Property Name="UsuarioModificacionID" Type="Int32" />
     <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="DetalleRegistroLlenado" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Encab__47477CBF" FromRole="EncabezadoRegistroLlenado" ToRole="DetalleRegistroLlenado" />
     <NavigationProperty Name="ProformaItemCalculadora" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Profo__4282C7A2" FromRole="EncabezadoRegistroLlenado" ToRole="ProformaItemCalculadora" />
     <NavigationProperty Name="Usuario" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__4376EBDB" FromRole="EncabezadoRegistroLlenado" ToRole="Usuario" />
     <NavigationProperty Name="Usuario1" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__446B1014" FromRole="EncabezadoRegistroLlenado" ToRole="Usuario" />
+    <NavigationProperty Name="DetalleRegistroLlenado" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Encab__47477CBF" FromRole="EncabezadoRegistroLlenado" ToRole="DetalleRegistroLlenado" />
   </EntityType>
-  <Association Name="FK__DetalleRe__Carro__483BA0F8">
-    <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.DetalleRegistroLlenado" Role="DetalleRegistroLlenado" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Vehiculo">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="DetalleRegistroLlenado">
-        <PropertyRef Name="CarroTanqueID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__DetalleRe__Encab__47477CBF">
-    <End Type="DB_9CAC35_indutradeModel.EncabezadoRegistroLlenado" Role="EncabezadoRegistroLlenado" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.DetalleRegistroLlenado" Role="DetalleRegistroLlenado" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EncabezadoRegistroLlenado">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="DetalleRegistroLlenado">
-        <PropertyRef Name="EncabezadoRegistroLlenadoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__Encabezad__Profo__4282C7A2">
     <End Type="DB_9CAC35_indutradeModel.ProformaItemCalculadora" Role="ProformaItemCalculadora" Multiplicity="0..1" />
     <End Type="DB_9CAC35_indutradeModel.EncabezadoRegistroLlenado" Role="EncabezadoRegistroLlenado" Multiplicity="*" />
@@ -3556,6 +3519,63 @@
       </Principal>
       <Dependent Role="AutorizacionCargueVehiculo">
         <PropertyRef Name="VehiculoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DetalleRegistroLlenado">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EncabezadoRegistroLlenadoID" Type="Int32" />
+    <Property Name="VehiculoID" Type="Int32" />
+    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="FechaInspeccion" Type="DateTime" Precision="3" />
+    <Property Name="NumeroCTU_IT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="NumeroFlexitanks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="InspeccionAntinarcoticos" Type="Boolean" />
+    <Property Name="Sello" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="TipoSello" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FechaLlegada" Type="DateTime" Precision="3" />
+    <Property Name="RemolqueID" Type="Int32" />
+    <NavigationProperty Name="Vehiculo" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Carro__483BA0F8" FromRole="DetalleRegistroLlenado" ToRole="Vehiculo" />
+    <NavigationProperty Name="EncabezadoRegistroLlenado" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Encab__47477CBF" FromRole="DetalleRegistroLlenado" ToRole="EncabezadoRegistroLlenado" />
+    <NavigationProperty Name="Vehiculo1" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Remol__64D7DFA6" FromRole="DetalleRegistroLlenado" ToRole="Vehiculo" />
+    <Property Name="ProveedorFlexitanks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK__DetalleRe__Carro__483BA0F8">
+    <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.DetalleRegistroLlenado" Role="DetalleRegistroLlenado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehiculo">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="DetalleRegistroLlenado">
+        <PropertyRef Name="VehiculoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetalleRe__Encab__47477CBF">
+    <End Type="DB_9CAC35_indutradeModel.EncabezadoRegistroLlenado" Role="EncabezadoRegistroLlenado" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.DetalleRegistroLlenado" Role="DetalleRegistroLlenado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EncabezadoRegistroLlenado">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="DetalleRegistroLlenado">
+        <PropertyRef Name="EncabezadoRegistroLlenadoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetalleRe__Remol__64D7DFA6">
+    <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.DetalleRegistroLlenado" Role="DetalleRegistroLlenado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehiculo">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="DetalleRegistroLlenado">
+        <PropertyRef Name="RemolqueID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

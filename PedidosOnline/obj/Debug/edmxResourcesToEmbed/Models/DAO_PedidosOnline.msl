@@ -1110,23 +1110,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DetalleRegistroLlenado">
-      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.DetalleRegistroLlenado">
-        <MappingFragment StoreEntitySet="DetalleRegistroLlenado">
-          <ScalarProperty Name="FechaLlegada" ColumnName="FechaLlegada" />
-          <ScalarProperty Name="TipoSello" ColumnName="TipoSello" />
-          <ScalarProperty Name="Sello" ColumnName="Sello" />
-          <ScalarProperty Name="InspeccionAntinarcoticos" ColumnName="InspeccionAntinarcoticos" />
-          <ScalarProperty Name="NumeroFlexitanks" ColumnName="NumeroFlexitanks" />
-          <ScalarProperty Name="NumeroCTU_IT" ColumnName="NumeroCTU_IT" />
-          <ScalarProperty Name="FechaInspeccion" ColumnName="FechaInspeccion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="CarroTanqueID" ColumnName="CarroTanqueID" />
-          <ScalarProperty Name="EncabezadoRegistroLlenadoID" ColumnName="EncabezadoRegistroLlenadoID" />
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="EncabezadoRegistroLlenado">
       <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.EncabezadoRegistroLlenado">
         <MappingFragment StoreEntitySet="EncabezadoRegistroLlenado">
@@ -1151,6 +1134,25 @@
           <ScalarProperty Name="RemolqueID" ColumnName="RemolqueID" />
           <ScalarProperty Name="TerceroID" ColumnName="TerceroID" />
           <ScalarProperty Name="AutorizacionCargueID" ColumnName="AutorizacionCargueID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleRegistroLlenado">
+      <EntityTypeMapping TypeName="DB_9CAC35_indutradeModel.DetalleRegistroLlenado">
+        <MappingFragment StoreEntitySet="DetalleRegistroLlenado">
+          <ScalarProperty Name="ProveedorFlexitanks" ColumnName="ProveedorFlexitanks" />
+          <ScalarProperty Name="RemolqueID" ColumnName="RemolqueID" />
+          <ScalarProperty Name="FechaLlegada" ColumnName="FechaLlegada" />
+          <ScalarProperty Name="TipoSello" ColumnName="TipoSello" />
+          <ScalarProperty Name="Sello" ColumnName="Sello" />
+          <ScalarProperty Name="InspeccionAntinarcoticos" ColumnName="InspeccionAntinarcoticos" />
+          <ScalarProperty Name="NumeroFlexitanks" ColumnName="NumeroFlexitanks" />
+          <ScalarProperty Name="NumeroCTU_IT" ColumnName="NumeroCTU_IT" />
+          <ScalarProperty Name="FechaInspeccion" ColumnName="FechaInspeccion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="VehiculoID" ColumnName="VehiculoID" />
+          <ScalarProperty Name="EncabezadoRegistroLlenadoID" ColumnName="EncabezadoRegistroLlenadoID" />
           <ScalarProperty Name="RowID" ColumnName="RowID" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -89,7 +89,9 @@
         <div class="tab-pane " id="tab_2">
             <div class="col-md-12" style="margin-top:20px;">
                 <form id="form_detalle">
-                    <table class="table table-hover table-responsive">
+                    <input type="hidden" id="RowID_Detalle" name="RowID_Detalle" />
+
+                    <table class="table table-hover table-responsive" id="table_items">
                         <thead>
                             <tr>
                                 <th>Fecha de inspecciòn</th>
@@ -99,36 +101,41 @@
                                 <th>Inspección Antinarcoticos</th>
                                 <th>Sellos</th>
                                 <th>Tipo de Sellos</th>
-                                <th>Placas Carrotanques</th>
+                                <th>Vehiculo</th>
+                                <th>Remolque</th>
                                 <th>Hora Llegada Vehiculo</th>
                             </tr>
                             <tr>
                                 <th><input type="text" name="fecha_inspeccion" class="fecha_inspeccion" style="width:90px;" id="fecha_inspeccion" required/></th>
-                                <th><input type="text" name="num_ctu_isotank" class="num_ctu_isotank col-sm-12" required/></th>
-                                <th><input type="text" name="no_flexitanks" required/></th>
-                                <th><input type="text" name="proveedor_flexitanks" /></th>
+                                <th><input type="text" name="num_ctu_isotank" id="num_ctu_isotank" class="num_ctu_isotank col-sm-12" required/></th>
+                                <th><input type="text" name="no_flexitanks" id="no_flexitanks" required/></th>
+                                <th><input type="text" name="proveedor_flexitanks" id="proveedor_flexitanks" /></th>
                                 <th>
-                                    <input type="radio" name="inspeccion_antinarcoticos" checked/> SI &nbsp;
-                                    <input type="radio" name="inspeccion_antinarcoticos" /> NO</th>
+                                    <input type="radio" name="inspeccion_antinarcoticos" class="inspeccion_antinarcoticos" value="true" checked/> SI &nbsp;
+                                    <input type="radio" name="inspeccion_antinarcoticos" class="inspeccion_antinarcoticos" value="false" /> NO</th>
                                 <th>
-                                    <input type="text" name="sellos" class="sellos" required/>
+                                    <input type="text" name="sellos" id="sellos" class="sellos" required/>
                                 </th>
                                 <th>
-                                    <input type="text" name="tipo_sellos" style="width:80px;" required/>
+                                    <input type="text" name="tipo_sellos" id="tipo_sellos" style="width:80px;" required/>
                                     
                                 </th>
                                 <th>
-                                    <select name="Carrotanques" style="width:90px;" required>
-                                        <option value="value">text</option>
-                                    </select>
+                                    <input id="Vehiculo" name="Vehiculo" type="text" style="width:90px;" placeholder="AAA 123" required>
+                                    <input name="vehiculoID" type="hidden" id="vehiculoID"  value="" required>
                                 </th>
                                 <th>
-                                    <input type="text" name="fecha_llegada" class="col-sm-12" />
+                                    <input name="Remolque" id="Remolque" type="text" style="width:90px;" placeholder="AAA 123" required>
+                                    <input name="remolqueID" type="hidden" value="" id="remolqueID" required>
                                 </th>
                                 <th>
-                                    <button onclick="enviar_formulario()"><i class="glyphicon-edit"></i></button>
+                                    <input type="text" name="fecha_llegada" id="fecha_llegada" class="col-sm-12" />
+                                </th>
+                                <th>
+                                    <a onclick="guardardetalle()"><i class="glyphicon-edit"></i></a>
                                 </th>
                             </tr>
+                            
                             
                         </thead>
                         <tbody></tbody>
@@ -141,6 +148,51 @@
 
 </div>
 <script>
+    function CargarDetalle(RowID){
+        $.ajax({
+            url:"CargarDetalle",
+            type:"POST",
+            data:{
+                RowID:RowID
+            },
+            success:function(data){
+                debugger
+                $("#RowID_Detalle").val(data.RowID);
+                var fecha=new Date(parseInt(data.FechaInsp.replace('/Date(', ''))).toLocaleDateString();
+                $("#fecha_inspeccion").val(fecha);
+                $("#num_ctu_isotank").val(data.NumeroCTU);
+                $("#no_flexitanks").val(data.NumeroFlexi);
+                $("#proveedor_flexitanks").val(data.Proveedor);
+                $("#sellos").val(data.Sello);
+                $("#tipo_sellos").val(data.TipoSello);
+                $("#Remolque").val(data.Remolque);
+                $("#remolqueID").val(data.RemolqueID);
+                fecha=new Date(parseInt(data.FechaLlegada.replace('/Date(', ''))).toLocaleDateString();
+                $("#fecha_llegada").val(fecha);
+                $("#Vehiculo").val(data.Vehiculo);
+                $("#vehiculoID").val(data.VehiculoID);
+            },error:function(){
+
+            }
+        })
+    }
+
+    $("#Remolque").autocomplete({
+        source:"RemolqueAutocomplete",
+        select:function(evento,ui){
+            debugger
+            $("#Remolque").val(ui.item.label);
+            $("#remolqueID").val(ui.item.RowID);
+        }
+    });
+    $("#Vehiculo").autocomplete({
+        source:"VehiculoAutocomplete",
+        select:function(evento,ui){
+            debugger
+            $("#Vehiculo").val(ui.item.label);
+            $("#vehiculoID").val(ui.item.RowID);
+        }
+    });
     $("#auto_proforma").autocomplete({
         source: "auto_completa_proforma",
         select: function (evento, ui) {
@@ -179,7 +231,20 @@
         $.validator.messages.required = 'Campo requerido';
         $.validator.messages.email = 'Campo para correo eléctronico';
 
-        $("#fecha_inspeccion").datepicker();
+        $("#fecha_inspeccion").datepicker({
+            dateFormat: 'dd/mm/yy',
+            minDate: 0,
+            maxDate: '+3Y',
+            inline: true
+        });
+        $("#fecha_llegada").datepicker({
+            dateFormat: 'dd/mm/yy',
+            minDate: 0,
+            maxDate: '+3Y',
+            inline: true
+        });
+        
+        TraerInformacion(@Model.RowID)
         if (@Model.RowID>0) {
             $(".item").slideDown();
         }
@@ -219,7 +284,8 @@
         var validar = $("#form_detalle").validate();
         if (validar.form()) {
             var formData = new FormData(document.getElementById("form_detalle"));
-            formData.append("RowID", $("#encaRowID").val())
+            formData.append("RowID", $("#encaRowID").val());
+            debugger
             $.ajax({
                 type: "POST",
                 contentType: false,
@@ -227,12 +293,46 @@
                 url: "GuardarDetalleRegLlen",
                 data: formData,
                 success: function (data) {
-                    debugger
+                    TraerInformacion($("#encaRowID").val());
+                    ModalProcesandoHiden();
+
                 },
                 error: function (data) {
+                    ModalProcesandoHiden();
+
                     debugger
                 }
             })
+        }
+    }
+    function TraerInformacion(RowID){
+        $.ajax({
+            url:"InformacionTablaRegis",
+            type:"POST",
+            data:{RowID:RowID},
+            success:function(data){
+                $("#table_items tbody").empty().append(data);
+            },
+            error:function(data){
+                Mensajes("Error al retornar la información","warning","");
+            }
+        })
+    }
+    function eliminar(RowID){
+        var Confirmacion=confirm("Desea eliminar el registro");
+        if (Confirmacion==true) {
+            $.ajax({
+                url:"EliminarRegLlen",
+                data:{RowID:RowID},
+                success:function(){
+                    Mensaje("Registro eliminado","success","");
+                },
+                error:function(){
+                }
+            })
+        }
+        else{
+
         }
     }
 </script>
