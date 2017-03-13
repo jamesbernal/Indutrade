@@ -1773,9 +1773,9 @@ namespace PedidosOnline.Controllers
                     lista3 = db.AutorizacionCargueVehiculo.Where(f => f.AutorizacionCargueID == rowid).ToList();
                     foreach (var item in lista3)
                     {
-                        result += "<tr><td><td><td><input type='text' value='" + item.Vehiculo.Placa + "' readonly /></td>" +
-                          "<td><input type='text' value='" + item.Vehiculo1.Placa + "' readonly /></td>" +
-                          "<td><input type='text' value='" + item.Tercero.RazonSocial + "' readonly /></td>" +
+                        result += "<tr><td><td><td><input type='text' value='" + item.Vehiculo.Placa + "'  /></td>" +
+                          "<td><input type='text' value='" + item.Vehiculo1.Placa + "'  /></td>" +
+                          "<td><input type='text' value='" + item.Tercero.RazonSocial + "'  /></td>" +
                           "</tr>";
                     }
                 }
@@ -1789,12 +1789,12 @@ namespace PedidosOnline.Controllers
                             Response.StatusCode = 500;
                             return "Conductor ya agregado";
                         }
-                        if (item.Vehiculo.RowID == vehiculo)
+                        if (item.Vehiculo1.RowID == vehiculo)
                         {
                             Response.StatusCode = 500;
                             return "Vehiculo ya agregado";
                         }
-                        if (item.Vehiculo1.RowID == remolque)
+                        if (item.Vehiculo.RowID == remolque)
                         {
                             Response.StatusCode = 500;
                             return "Remolque ya agregado";
@@ -1817,9 +1817,9 @@ namespace PedidosOnline.Controllers
                     foreach (var item in lista2)
                     {
                         item.Tercero = db.Tercero.Where(f => f.RowID == item.TerceroID).FirstOrDefault();
-                        result += "<tr><td><td><td><input type='text' value='" + item.Vehiculo.Placa + "' readonly /></td>" +
-                          "<td><input type='text' value='" + item.Vehiculo1.Placa + "' readonly /></td>" +
-                          "<td><input type='text' value='" + item.Tercero.RazonSocial + "' readonly /></td>" +
+                        result += "<tr><td><td><td><input type='text' value='" + item.Vehiculo.Placa + "'  /></td>" +
+                          "<td><input type='text' value='" + item.Vehiculo1.Placa + "'  /></td>" +
+                          "<td><input type='text' value='" + item.Tercero.RazonSocial + "'  /></td>" +
                           "</tr>";
                     }
                 }
@@ -1837,8 +1837,41 @@ namespace PedidosOnline.Controllers
             ac.EstadoID = es.RowID;
             db.AutorizacionCargue.Add(ac);
             db.SaveChanges();
+
             return Json(ac.RowID);
         }
+        [HttpPost]
+        public JsonResult ActualizarAutorizacion(int? rowid, string bkk,string embalaje)
+        {
+            AutorizacionCargue ac = db.AutorizacionCargue.Where(f => f.RowID == rowid).FirstOrDefault();
+            ac.FechaModificacion = DateTime.Now;
+            ac.BKK = bkk;
+            ac.Empaque = embalaje;
+            ac.UsuarioModificacion = ((Usuario)Session["CurUser"]).NombreUsuario;
+            Estado es = db.Estado.Where(f => f.Codigo == "LLENADO").FirstOrDefault();
+            ac.EstadoID = es.RowID;
+            db.SaveChanges();
+            return Json(ac.RowID);
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public JsonResult EnviarAutorizacionCargue(int? rowid, string correoenvio, string cuerpocorreo, string asunto)
+        {
+            AutorizacionCargue objAutoriCarg = db.AutorizacionCargue.Where(l => l.RowID == rowid).FirstOrDefault();
+            objAutoriCarg.EstadoID = db.Estado.Where(li => li.Nombre == "AUTORIZACION").FirstOrDefault().RowID;
+            db.SaveChanges();
+            Usuario objUsuario = (Usuario)(Session["curUser"]);
+            try
+            {
+                Utilidades.MailSender.EnviarBooking(cuerpocorreo, asunto, objUsuario, correoenvio);
+                return Json(new { tipo_respuesta = "success", respuesta = "Correo enviado" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { tipo_respuesta = "warning", respuesta = ex.Message });
+                throw;
+            }
+         }
         #endregion
 
         #region:::::Modal Vehiculos:::::

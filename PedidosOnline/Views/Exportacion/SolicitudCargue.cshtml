@@ -6,24 +6,57 @@
 <script>
     function guardarSolicitud()
     {
-        if ($("#solicitudT").val() == "") {
-            Mensajes('Cargue una proforma primero!', 'error', '');
-            return null;
-        }
-        var formData = new FormData(document.getElementById("form"));
-        $.ajax({
-            type: "POST",
-            url: "GuardarAutorizacionCargueEncabezado",
-            contentType: false,
-            processData: false,
-            data: formData,
-            success: function (data) {
-                if(data != null)
-                {
-                    location.href="../Exportacion/SolicitudCargue?rowid="+data;
+        if(@Model.RowID > 0)
+        {
+            if('@Model.Estado.Nombre' == 'AUTORIZACION' || '@Model.Estado.Nombre' == 'LLENADO')
+            {
+                if ($("#Empaque").val() == "") {
+                    Mensajes('El campo Empaque es requerido!', 'error', '');
+                    return null;
                 }
+                if ($("#BKK").val() == "") {
+                    Mensajes('El campo BKK es requerido!', 'error', '');
+                    return null;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "ActualizarAutorizacion",
+                    data:
+                        {
+                            rowid: @Model.RowID,
+                            bkk: $("#BKK").val(),
+                            embalaje: $("#Empaque").val(),
+                        },
+                    success: function (data) {
+                        if(data != null)
+                        {
+                            location.href="../Exportacion/SolicitudCargue?rowid="+data;
+                        }
+                    }
+                });
             }
-        });
+        }
+        else
+        {
+            if ($("#solicitudT").val() == "") {
+                Mensajes('Cargue una proforma primero!', 'error', '');
+                return null;
+            }
+            var formData = new FormData(document.getElementById("form"));
+            $.ajax({
+                type: "POST",
+                url: "GuardarAutorizacionCargueEncabezado",
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    if(data != null)
+                    {
+                        location.href="../Exportacion/SolicitudCargue?rowid="+data;
+                    }
+                }
+            });
+        }
     }
 </script>
 <div id="Dialog"></div>
@@ -56,7 +89,7 @@
                     else
                     {
                         <input type="hidden" class="RowIDCon" name="RowIDCon" />
-                    }s
+                    }
                 </div>
             </div>
             <br />
@@ -131,6 +164,51 @@
                             </div>
                         </div>
                         <br />
+                        @if (Model.RowID > 0)
+                        {
+                            if (Model.Estado.Nombre == "AUTORIZACION" || Model.Estado.Nombre == "LLENADO")
+                            {
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="col-md-3">
+                                                    <label fclass="lang">BKK</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    @if (Model.RowID > 0)
+                                                    {
+                                                        <input type="text" id="BKK" name="BKK" value="@Model.BKK" style="width: 100%" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="text" id="BKK" name="BKK" placeholder="---" style="width: 100%" />
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="col-md-3">
+                                                    <label fclass="lang">Empaque</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    @if (Model.RowID > 0)
+                                                    {
+                                                        <input type="text" id="Empaque" name="Empaque" value="@Model.Empaque" style="width: 100%" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="text" id="Empaque" name="Empaque" placeholder="---" style="width: 100%" />
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            <br />
+                        }
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="col-md-4">
@@ -199,15 +277,35 @@
                 </div>
                 <div class="tab-pane item" id="tab_2">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <div class="col-md-6">
-                                    <textarea id="correo"></textarea>
+                                <div class="col-md-2">
+                                    <label fclass="lang">Destinatario</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" id="envio" name="envio" placeholder="---" style="width: 100%" />
+                                </div>
+                                <div class="col-md-2">
+                                    <label fclass="lang">Asunto</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" id="asunto" name="asunto" placeholder="---" style="width: 100%" />
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>  
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <div id="correo" name="correo">
+                                    </div>
+                                    <button type="button" class="btn btn-primary" onclick="EnviarCorreo()">Enviar Correo</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -217,8 +315,20 @@
 
     $(document).ready(function()
     {
-        $("#correo").summernote()
         AddVehiculosCargue();
+        $("#correo").append("<div contenteditable='false' style='pointer-events: none;' ><table class='table table-hover table-responsive table-condensed' id='tabItems'  >"+
+                                           "<thead>"+
+                                               "<tr>"+
+                                                   "<th></th>"+
+                                                   "<th></th>"+
+                                                  " <th>Vehiculo</th>"+
+                                                   "<th>Remolque</th>"+
+                                                   "<th>Conductor</th>"+
+                                               "</tr>"+
+                                           "</thead>"+
+                                           "<tbody></tbody>"+
+                                       "</table> </div><br /><br />");
+        $("#correo").summernote()
     });
 
     $('#autoc_proformas').on('keyup keypress', function (e) {
@@ -248,7 +358,7 @@
         var urlWithCont = "ModalVehiculo";
         $("#Dialog")
         .load(urlWithCont.trim())
-        
+
     }
 
     function cargarV() {
@@ -311,11 +421,11 @@
                 $("#resultado").val(data);
                 $('#tablaItems tbody').empty();
                 $('#tablaItems tbody').append(data);
-                $("#correo").summernote('destoy');
-                $("#correo").summernote('code',data);
+                $('#tabItems tbody').empty();
+                $('#tabItems tbody').append(data);
             }
         });
-        
+
     }
     function AddVehiculo()
     {
@@ -348,6 +458,8 @@
                         $("#resultado").val(data);
                         $('#tablaItems tbody').empty();
                         $('#tablaItems tbody').append(data);
+                        $('#tabItems tbody').empty();
+                        $('#tabItems tbody').append(data);
                         $("#correo").summernote('code',data);
                     },
                     error:function(status,error)
@@ -359,7 +471,7 @@
                 });
             }
             else
-            { 
+            {
                 Mensajes('no puede ingresar mas vehiculos!', 'error', '');
             }
         }
@@ -367,7 +479,25 @@
         {
             Mensajes('Guarde el encabezado primero!', 'error', '');
         }
-        
     }
-
+</script>
+<script>
+    function EnviarCorreo() {
+        $.ajax({
+            type: "POST",
+            url: "EnviarAutorizacionCargue",
+            data:{
+                rowid:@Model.RowID,
+                correoenvio: $("#envio").val(),
+                cuerpocorreo: $(".note-editable").html(),
+                asunto: $("#asunto").val(),
+            },
+            success: function (data) {
+                Mensajes();
+            },
+            error: function (data) {
+                Mensajes();
+            }
+        });
+    }
 </script>
