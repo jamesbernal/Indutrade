@@ -16,7 +16,7 @@
                 <span>
                     <a href="javascript:guardar(1);" class="alink">
                         <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
-                    </a>
+                    </a>  
                 </span>
                 <span>
                     &nbsp;&nbsp;
@@ -31,23 +31,30 @@
     <div class="tabbable tabbable-custom tabs-top">
         <ul class="nav nav-tabs tabs-top">
             <li class="active"><a href="#tab_1" id="litab_1" data-toggle="tab" class="lang" key="">Informacion General Calculadora</a></li>
-            <li class="item"><a href="#tab_2" id="litab_2" data-toggle="tab" class="lang" key="">Items </a></li>
-            <li class="item" style="display:none"><a href="#tab_3" id="litab_3" data-toggle="tab" class="lang" key="">Balance </a></li>
+            <li class="item" style="display:none;"><a href="#tab_2" id="litab_2" data-toggle="tab" class="lang" key="">Items </a></li>
+            @*<li class="item" style="display:none"><a href="#tab_3" id="litab_3" data-toggle="tab" class="lang" key="">Balance </a></li>*@
         </ul>
     </div>
     <div class="tab-content" style="overflow:hidden">
         <div class="tab-pane active" id="tab_1">
             <div class="col-sm-12" style="margin-top:20px;">
-                <form id="form_encabezado" name="form_encabezado
-                      " onsubmit="return false">
+                <form id="form_encabezado" name="form_encabezado" onsubmit="return false">
                     <input type="hidden" id="encaRowID" name="encaRowID" value="@Model.RowID"/>
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="auto_proforma" class="control-label">Proforma</label>
                                 <br />
-                                <input type="text" id="auto_proforma" placeholder="------" class="col-sm-10" name="" required/>
-                                <input type="hidden" id="proforma_id" class="col-sm-10" name="proforma_id" />
+                                @if (Model.RowID > 0)
+                                {
+                                    <input type="text" id="auto_proforma" placeholder="------" class="col-sm-10" value="@Model.ProformaItemCalculadora.Proforma.Contrato.Consecutivo - @Model.ProformaItemCalculadora.Proforma.Titulo" name="" required />
+                                    <input type="hidden" id="proforma_id" class="col-sm-10" name="proforma_id" value="@Model.ProformaItemCalculadora.ProformaID" />
+                                }
+                                else
+                                {
+                                    <input type="text" id="auto_proforma" placeholder="------" class="col-sm-10" name="" required />
+                                    <input type="hidden" id="proforma_id" class="col-sm-10" name="proforma_id" />
+                                }
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -55,7 +62,16 @@
                                 <label class="control-label">Producto </label>
                                 <br />
                                 <select name="producto_id" id="producto_id" class="col-sm-10" required>
-                                    <option value="" id="primera_opcion" selected disabled>Elija un producto</option>
+                                    @if (Model.RowID > 0)
+                                    {
+                                        <option value="" id="primera_opcion" selected >@Model.ProformaItemCalculadora.CalculadoraItems.Item.Referencia</option>
+
+                                    }
+                                    else
+                                    {
+                                        <option value="" id="primera_opcion" selected disabled>Elija un producto</option>
+
+                                    }
                                 </select>
                             </div>
                         </div>
@@ -73,64 +89,50 @@
         <div class="tab-pane " id="tab_2">
             <div class="col-md-12" style="margin-top:20px;">
                 <form id="form_detalle">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <div class="form-group">
-                                <label class="control-label">Carrotanque</label>
-                                <br />
-                                <input type="text" name="" />
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="form-group">
-                                <label class="control-label">Carrotanque</label>
-                                <br />
-                                <input type="text" name="" />
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="form-group">
-                                <label class="control-label">Carrotanque</label>
-                                <br />
-                                <input type="text" name="" />
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="form-group">
-                                <label class="control-label">Carrotanque</label>
-                                <br />
-                                <input type="text" name="" />
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="form-group">
-                                <label class="control-label">Carrotanque</label>
-                                <br />
-                                <input type="text" name="" />
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="form-group">
-                                <label class="control-label">Carrotanque</label>
-                                <br />
-                                <input type="text" name="" />
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="form-group">
-                                <label class="control-label">Carrotanque</label>
-                                <br />
-                                <input type="text" name="" />
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="form-group">
-                                <label class="control-label">Carrotanque</label>
-                                <br />
-                                <input type="text" name="" />
-                            </div>
-                        </div>
-                    </div>
+                    <table class="table table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Fecha de inspecciòn</th>
+                                <th>Número CTU / ISOTANK</th>
+                                <th>No. Flexitanks</th>
+                                <th>Proveedor Flexitanks</th>
+                                <th>Inspección Antinarcoticos</th>
+                                <th>Sellos</th>
+                                <th>Tipo de Sellos</th>
+                                <th>Placas Carrotanques</th>
+                                <th>Hora Llegada Vehiculo</th>
+                            </tr>
+                            <tr>
+                                <th><input type="text" name="fecha_inspeccion" class="fecha_inspeccion" style="width:90px;" id="fecha_inspeccion" required/></th>
+                                <th><input type="text" name="num_ctu_isotank" class="num_ctu_isotank col-sm-12" required/></th>
+                                <th><input type="text" name="no_flexitanks" required/></th>
+                                <th><input type="text" name="proveedor_flexitanks" /></th>
+                                <th>
+                                    <input type="radio" name="inspeccion_antinarcoticos" checked/> SI &nbsp;
+                                    <input type="radio" name="inspeccion_antinarcoticos" /> NO</th>
+                                <th>
+                                    <input type="text" name="sellos" class="sellos" required/>
+                                </th>
+                                <th>
+                                    <input type="text" name="tipo_sellos" style="width:80px;" required/>
+                                    
+                                </th>
+                                <th>
+                                    <select name="Carrotanques" style="width:90px;" required>
+                                        <option value="value">text</option>
+                                    </select>
+                                </th>
+                                <th>
+                                    <input type="text" name="fecha_llegada" class="col-sm-12" />
+                                </th>
+                                <th>
+                                    <button onclick="enviar_formulario()"><i class="glyphicon-edit"></i></button>
+                                </th>
+                            </tr>
+                            
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </form>
             </div>
         </div>
@@ -176,6 +178,11 @@
         });
         $.validator.messages.required = 'Campo requerido';
         $.validator.messages.email = 'Campo para correo eléctronico';
+
+        $("#fecha_inspeccion").datepicker();
+        if (@Model.RowID>0) {
+            $(".item").slideDown();
+        }
     })
     function guardar(caso) {
         if (caso==1) {
@@ -198,6 +205,28 @@
                 url: "GuardarEncabezadoRegLlen",
                 data: formData,
                 success: function (data) {
+                    $("#encaRowID").val(data);
+                    $(".item").slideDown();
+                },
+                error: function (data) {
+                    $("#encaRowID").val(data);
+                }
+            })
+        }
+        
+    }
+    function guardardetalle() {
+        var validar = $("#form_detalle").validate();
+        if (validar.form()) {
+            var formData = new FormData(document.getElementById("form_detalle"));
+            formData.append("RowID", $("#encaRowID").val())
+            $.ajax({
+                type: "POST",
+                contentType: false,
+                processData: false,
+                url: "GuardarDetalleRegLlen",
+                data: formData,
+                success: function (data) {
                     debugger
                 },
                 error: function (data) {
@@ -205,7 +234,5 @@
                 }
             })
         }
-        
     }
-    
 </script>
