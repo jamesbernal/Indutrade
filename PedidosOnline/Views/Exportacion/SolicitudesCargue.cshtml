@@ -38,13 +38,16 @@
                             <a href="@Url.Action("SolicitudCargue", "Exportacion", new { @rowid = @cal.RowID, @rih = Request.Params["rih"] })"><i class="glyphicon glyphicon-search"> </i></a>
                         </td>
                         <td>
-                            #@cal.SolicitudTransporte.Proforma.Titulo
+                            @cal.SolicitudTransporte.Proforma.Titulo
                         </td>
                         <td>
                             @cal.FechaCreacion
                         </td>
                         <td>
                             @cal.BKK
+                        </td>
+                        <td>
+                            @cal.Empaque
                         </td>
                         <td>
                             @cal.AutorizacionCargueVehiculo.Count

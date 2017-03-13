@@ -24,8 +24,6 @@ public partial class AutorizacionCargueVehiculo
 
     public Nullable<int> TerceroID { get; set; }
 
-    public Nullable<int> RemolqueID { get; set; }
-
     public string UsuarioCreacion { get; set; }
 
     public Nullable<System.DateTime> FechaCreacion { get; set; }
@@ -35,6 +33,8 @@ public partial class AutorizacionCargueVehiculo
     public Nullable<System.DateTime> FechaModificacion { get; set; }
 
     public Nullable<int> VehiculoID { get; set; }
+
+    public Nullable<int> RemolqueID { get; set; }
 
 
 

@@ -3,6 +3,29 @@
     ViewBag.Title = "SolicitudCargue";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script>
+    function guardarSolicitud()
+    {
+        if ($("#solicitudT").val() == "") {
+            Mensajes('Cargue una proforma primero!', 'error', '');
+            return null;
+        }
+        var formData = new FormData(document.getElementById("form"));
+        $.ajax({
+            type: "POST",
+            url: "GuardarAutorizacionCargueEncabezado",
+            contentType: false,
+            processData: false,
+            data: formData,
+            success: function (data) {
+                if(data != null)
+                {
+                    location.href="../Exportacion/SolicitudCargue?rowid="+data;
+                }
+            }
+        });
+    }
+</script>
 <div id="Dialog"></div>
 <div class="panel">
     <div class="row">
@@ -16,92 +39,191 @@
                         </a>
                     </span>
                     <span>
-                        <a href="javascript:guardarSolicitud(1);" class="alink">
+                        <a href="javascript:guardarSolicitud();" class="alink">
                             <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
                         </a>
                     </span>
                     <span>
                         <a href="javascript:Modal_()" class="alink">
-                            <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" >Vehiculos</span>
+                            <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang">Vehiculos</span>
                         </a>
                     </span>
+                    <input type="hidden" class="RowID" name="RowID" value="@Model.RowID" />
+                    @if (Model.RowID > 0)
+                    {
+                        <input type="hidden" class="RowIDCon" name="RowIDCon" value="@Model.RowID" />
+                    }
+                    else
+                    {
+                        <input type="hidden" class="RowIDCon" name="RowIDCon" />
+                    }s
                 </div>
+            </div>
+            <br />
+            <div class="tabbable tabbable-custom tabs-top">
                 <br />
-                <div class="tab-content" style="overflow:hidden">
-                    <div class="col-md-12">
-                        <form id="form" name="form" onsubmit="return false">
-                            <input type="hidden" class="RowID" name="RowID" value="@Model.RowID" />
-                            @if (Model.RowID > 0)
-                            {
-                                <input type="hidden" class="RowIDCon" name="RowIDCon" value="@Model.RowID" />
-                            }
-                            else
-                            {
-                                <input type="hidden" class="RowIDCon" name="RowIDCon" />
-                            }
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <div class="col-md-3">
-                                        <label for="autoc_Proforma" class="lang">Proforma</label>
+                <ul class="nav nav-tabs tabs-top">
+                    <li class="active"><a href="#tab_1" id="litab_1" data-toggle="tab" class="lang" key="">Informacion General</a></li>
+                    @if (Model.RowID > 0)
+                    {
+                        <li class="item" style=""><a href="#tab_2" id="litab_2" data-toggle="tab" class="lang" key="">Correo</a></li>
+                    }
+                </ul>
+            </div>
+            <br />
+            <div class="tab-content" style="overflow:hidden">
+                <div class="tab-pane active" id="tab_1">
+                    <form id="form" name="form" onsubmit="return false">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="autoc_Proforma" class="lang">Proforma</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            @if (Model.RowID > 0)
+                                            {
+                                                <input type="text" id="autoc_proformas" name="autoc_proformas" value="@Model.SolicitudTransporte.Proforma.Titulo" placeholder="---" style="width: 100%" required />
+                                            }
+                                            else
+                                            {
+                                                <input type="text" id="autoc_proformas" name="autoc_proformas" placeholder="---" style="width: 100%" required />
+                                            }
+                                        </div>
                                     </div>
-                                    <div class="col-md-5">
-                                        @if (Model.RowID > 0)
-                                        {
-                                            <input type="text" id="autoc_proformas" name="autoc_proformas" value="@Model.SolicitudTransporte.Proforma.Titulo" placeholder="---" style="width: 100%" required />
-                                        }
-                                        else
-                                        {
-                                            <input type="text" id="autoc_proformas" name="autoc_proformas" placeholder="---" style="width: 100%" required />
-                                        }
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="autoc_Proforma" class="lang">Solicitud de Transporte</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            @if (Model.RowID > 0)
+                                            {
+                                                <input type="text" id="solicitudT" name="solicitudT" value="@Model.SolicitudTransporteID" style="width: 100%" readonly />
+                                            }
+                                            else
+                                            {
+                                                <input type="text" id="solicitudT" name="solicitudT" placeholder="---" style="width: 100%" readonly />
+                                            }
+                                        </div>
                                     </div>
-                                 </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label fclass="lang">Vehiculos</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            @if (Model.RowID > 0)
+                                            {
+                                                <input type="text" id="cantidadV" name="cantidadV" value="@Model.SolicitudTransporte.Cantidad" placeholder="---" style="width: 100%" readonly />
+                                            }
+                                            else
+                                            {
+                                                <input type="text" id="cantidadV" name="cantidadV" placeholder="---" style="width: 100%" readonly />
+                                            }
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <div class="col-md-3">
-                                        <label for="autoc_Proforma" class="lang">Solicitud de Transporte</label>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label fclass="lang">Vehiculo</label>
+                                            <input type="hidden" id="idvehiculo" name="idvehiculo" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="vehiculosAuto" name="vehiculosAuto" placeholder="---" onkeydown="cargarV()" style="width: 100%" />
+                                        </div>
                                     </div>
-                                    <div class="col-md-5">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label fclass="lang">Remolque</label>
+                                            <input type="hidden" id="idremolque" name="idremolque" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="remolqueAuto" name="remolqueAuto" placeholder="---" onkeydown="cargarR()" style="width: 100%" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label fclass="lang">Conductor</label>
+                                            <input type="hidden" id="idconductor" name="idconductor" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" id="TerceroA" name="TerceroA" placeholder="---" onkeydown="cargarT()" style="width: 100%" />
+                                        </div>
                                         @if (Model.RowID > 0)
                                         {
-                                            <input type="text" id="solicitudT" name="solicitudT" value="@Model.SolicitudTransporteID"  style="width: 100%" required />
-                                        }
-                                        else
-                                        {
-                                            <input type="text" id="solicitudT" name="solicitudT" placeholder="---" style="width: 100%" required />
+                                            <button type="button" class="btn btn-primary" onclick="AddVehiculo()">Agregar</button>
                                         }
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <div class="col-md-3">
-                                        <label fclass="lang">Vehiculos</label>
-                                    </div>
-                                    <div class="col-md-5">
-                                        @if (Model.RowID > 0)
-                                        {
-                                            <input type="text" id="cantidadV" name="cantidadV" value="@Model.SolicitudTransporte.Cantidad" placeholder="---" style="width: 100%" required />
-                                        }
-                                        else
-                                        {
-                                            <input type="text" id="cantidadV" name="cantidadV" placeholder="---" style="width: 100%" required />
-                                        }
+                                    <div class="row">
+                                        <input type="hidden" id="resultado" name="resultado" />
+                                        <table class="table table-hover table-responsive table-condensed" id="tablaItems">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th>Vehiculo</th>
+                                                    <th>Remolque</th>
+                                                    <th>Conductor</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
                                     </div>
                                 </div>
+                                <br />
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
+                <div class="tab-pane item" id="tab_2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <textarea id="correo"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
             </div>
         </div>
     </div>
 </div>
+
 <script type="text/javascript">
+
+    $(document).ready(function()
+    {
+        $("#correo").summernote()
+        AddVehiculosCargue();
+    });
 
     $('#autoc_proformas').on('keyup keypress', function (e) {
         var code = (e.keyCode ? e.keyCode : e.which);
-        if (code == 13) { 
+        if (code == 13) {
             return false;
         }
     });
@@ -117,7 +239,6 @@
                 $("#cantidadV").val(ui.item.cantidad);
                 $("#solicitudT").empty();
                 $("#solicitudT").val(ui.item.solicitud);
-                $("#contrato").val(ui.item.label);
             }
         },
     });
@@ -127,5 +248,126 @@
         var urlWithCont = "ModalVehiculo";
         $("#Dialog")
         .load(urlWithCont.trim())
+        
     }
+
+    function cargarV() {
+        if ($("#solicitudT").val() == "") {
+            Mensajes('Cargue una proforma primero!', 'error', '');
+            return null;
+        }
+        $("#vehiculosAuto").autocomplete({
+            source: "VehiculoAutocomplete",
+            select: function (evento, ui) {
+                debugger
+                if (ui.item != null) {
+                    $("#idvehiculo").val(ui.item.RowID)
+                }
+            },
+        });
+    }
+    function cargarR() {
+        if ($("#solicitudT").val() == "") {
+            Mensajes('Cargue una proforma primero!', 'error', '');
+            return null;
+        }
+        $("#remolqueAuto").autocomplete({
+            source: "RemolqueAutocomplete",
+            select: function (evento, ui) {
+                debugger
+                if (ui.item != null) {
+                    $("#idremolque").val(ui.item.RowID)
+                }
+            },
+        });
+    }
+    function cargarT() {
+        if ($("#solicitudT").val() == "") {
+            Mensajes('Cargue una proforma primero!', 'error', '');
+            return null;
+        }
+        $("#TerceroA").autocomplete({
+            source: "Buscar_Tercero",
+            select: function (evento, ui) {
+                debugger
+                if (ui.item != null) {
+                    $("#idconductor").val(ui.item.RowID)
+                }
+            },
+        });
+    }
+    function AddVehiculosCargue()
+    {
+        $.ajax({
+            url:"AddVehiculo",
+            data:{
+                rowid: @Model.RowID,
+                vehiculo: $("#idvehiculo").val(),
+                remolque:  $("#idremolque").val(),
+                conductor: $("#idconductor").val(),
+                solicitud: $("#solicitudT").val(),
+            },
+            success:function(data){
+                $("#resultado").val(data);
+                $('#tablaItems tbody').empty();
+                $('#tablaItems tbody').append(data);
+                $("#correo").summernote('destoy');
+                $("#correo").summernote('code',data);
+            }
+        });
+        
+    }
+    function AddVehiculo()
+    {
+        if(@Model.RowID > 0)
+        {
+            if ($("#idremolque").val() == "") {
+                Mensajes('seleccione un remolque!', 'error', '');
+                return null;
+            }
+            if ($("#idvehiculo").val() == "") {
+                Mensajes('seleccione un vehiculo!', 'error', '');
+                return null;
+            }
+            if ($("#idconductor").val() == "") {
+                Mensajes('seleccione un conductor!', 'error', '');
+                return null;
+            }
+            var row =$("#tablaItems tbody tr").length;
+            if((row + 1) <= $("#cantidadV").val()){
+                $.ajax({
+                    url:"AddVehiculo",
+                    data:{
+                        rowid: @Model.RowID,
+                        vehiculo: $("#idvehiculo").val(),
+                        remolque:  $("#idremolque").val(),
+                        conductor: $("#idconductor").val(),
+                        solicitud: $("#solicitudT").val(),
+                    },
+                    success:function(data){
+                        $("#resultado").val(data);
+                        $('#tablaItems tbody').empty();
+                        $('#tablaItems tbody').append(data);
+                        $("#correo").summernote('code',data);
+                    },
+                    error:function(status,error)
+                    {
+                        ModalProcesandoHiden();
+                        Mensajes(status.responseText,'error','');
+                    }
+
+                });
+            }
+            else
+            { 
+                Mensajes('no puede ingresar mas vehiculos!', 'error', '');
+            }
+        }
+        else
+        {
+            Mensajes('Guarde el encabezado primero!', 'error', '');
+        }
+        
+    }
+
 </script>

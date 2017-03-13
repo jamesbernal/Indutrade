@@ -68,7 +68,6 @@
         {
             ModalProcesandoShow();
             var formData = new FormData(document.getElementById("formPrincial"));
-            formData.append('observaciones', $('#observaciones').val());
             $.ajax({
                 url: "GuardarOrdenCompra",
                 type:"post",
@@ -89,7 +88,7 @@
                 error:function(error)
                 {
                     ModalProcesandoHiden();
-                    Mensajes(error,'error','');
+                    Mensajes("Error de Proceso, Por favor Intentelo de Nuevo",'error','');
                 }
             })
         }
@@ -156,7 +155,7 @@
                                     <label class="lang">Proveedor</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="proveedor" id="proveedor" />
+                                    <input type="text" name="proveedor" id="proveedor" value="@Model.Sucursal.Tercero.RazonSocial" />
                                     <input type="hidden" name="rowid_proveedor" id="rowid_proveedor" value="@Model.Sucursal.TerceroID" />
                                 </div>
                             </div>
@@ -175,7 +174,7 @@
                                     <label class="lang">Nit</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="proveedor_nit" id="proveedor_nit" disabled />
+                                    <input type="text" name="proveedor_nit" id="proveedor_nit" disabled value="@Model.Sucursal.Tercero.Identificacion" />
                                 </div>
                             </div>
                             <div class="row">
@@ -183,7 +182,7 @@
                                     <label class="lang">Telefono</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="proveedor_telefono" id="proveedor_telefono" disabled />
+                                    <input type="text" name="proveedor_telefono" id="proveedor_telefono" disabled value="@Model.Sucursal.Tercero.ContactoERP.Telefono1" />
                                 </div>
                             </div>
                             <div class="row">
@@ -191,7 +190,7 @@
                                     <label class="lang">Direccion</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="proveedor_direccion" id="proveedor_direccion" disabled />
+                                    <input type="text" name="proveedor_direccion" id="proveedor_direccion" disabled value="@Model.Sucursal.Tercero.ContactoERP.Direccion1" />
                                 </div>
                             </div>
                             <div class="row">
@@ -199,7 +198,7 @@
                                     <label class="lang">Ciudad</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="proveedor_ciudad" id="proveedor_ciudad" disabled />
+                                    <input type="text" name="proveedor_ciudad" id="proveedor_ciudad" disabled value="@Model.Sucursal.Tercero.ContactoERP.Ciudad.Nombre" />
                                 </div>
                             </div>
                             <div class="row">
@@ -210,71 +209,6 @@
                                     <input type="text" name="Fecha" id="Fecha" value="@DateTime.Now" disabled />
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="lang">Comprador</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" name="comprador" id="comprador"  value="@Model.Tercero.RazonSocial" />
-                                    <input type="hidden" name="compradorid" id="compradorid" value="@Model.CompradorID" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="lang">Solicitante</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" name="solicitante" id="solicitante" value="@Model.Tercero1.RazonSocial" />
-                                    <input type="hidden" name="solicitanteid" id="solicitanteid" value="@Model.SolicitanteID" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="lang">Nit</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" name="facturacion_nit" id="facturacion_nit" disabled />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="lang">Telefono</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" name="facturacion_telefono" id="facturacion_telefono" disabled />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="lang">Direccion</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" name="facturacion_direccion" id="facturacion_direccion" disabled />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="lang">Ciudad</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" name="facturacion_ciudad" id="facturacion_ciudad" disabled />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="lang">IVA</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" name="facturacion_iva" id="facturacion_iva" disabled />
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
                             <div class="row">
                                 <div class="col-md-3">
                                     <label class="lang">Condicion de Pago</label>
@@ -308,7 +242,7 @@
                                     <label class="lang">Despacho</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" id="despacho" name="despacho" />
+                                    <input type="text" id="despacho" name="despacho" value="@Model.Despacho" />
                                 </div>
                             </div>
                             <div class="row">
@@ -316,7 +250,67 @@
                                     <label class="lang">Lugar Entrega</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" id="lugar_entrega" name="lugar_entrega" />
+                                    <input type="text" id="lugar_entrega" name="lugar_entrega" value="@Model.LugarEntrega" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Comprador</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="comprador" id="comprador"  value="@Model.Tercero.RazonSocial" />
+                                    <input type="hidden" name="compradorid" id="compradorid" value="@Model.CompradorID" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Solicitante</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="solicitante" id="solicitante" value="@Model.Tercero1.RazonSocial" />
+                                    <input type="hidden" name="solicitanteid" id="solicitanteid" value="@Model.SolicitanteID" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Nit</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="facturacion_nit" id="facturacion_nit" value="@Model.Tercero.Identificacion" disabled />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Telefono</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="facturacion_telefono" id="facturacion_telefono" value="@Model.Tercero.ContactoERP.Telefono1" disabled />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Direccion</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="facturacion_direccion" id="facturacion_direccion" value="@Model.Tercero.ContactoERP.Direccion1"  disabled />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Ciudad</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="facturacion_ciudad" id="facturacion_ciudad" value="@Model.Tercero.ContactoERP.Ciudad.Nombre" disabled />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Observaciones</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <textarea id="observaciones" name="observaciones" rows="4" style="resize:none">@Model.Observaciones</textarea>
                                 </div>
                             </div>
                         </div>
@@ -327,7 +321,55 @@
         <div id="tab_2" class="tab-pane">
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-hover table-responsive table-condensed" id="tablaItems">
+                    <div style="margin-bottom: 20px">
+                        <h4 class="lang" key=" ">Contratos</h4>
+                        <hr style="margin:0px">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="lang">Contrato</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="contrato" id="contrato" style="width:100%" placeholder="Contratos.." value="" />
+                            <input type="hidden" name="contratoid" id="contratoid" value="" />
+                        </div>
+                        <div class="col-md-5">
+                            <button type="button" onclick="guardarContrato()" class="btn btn-primary">Agregar Contrato</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-hover table-responsive table-condensed table-bordered" id="tablaContratos">
+                        <thead>
+                            <tr>
+                                <th>Contrato</th>
+                                <th>Agrego items</th>
+                                <th>Fecha </th>
+                                <th>Usuario</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div style="margin-bottom: 20px">
+                        <h4 class="lang" key=" ">Productos Agregados</h4>
+                        <hr style="margin:0px">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-hover table-responsive table-condensed table-bordered" id="tablaItems">
                         <thead>
                             <tr>
                                 <th>Item</th>
@@ -337,24 +379,39 @@
                                 <th>Valor Base</th>
                                 <th>Valor Impuesto</th>
                                 <th>Valor Total</th>
+                                <th>Accion</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="itemc" name="itemc" placeholder="Productos" type="text" style="width:100%" />
+                                    <input id="itemid" type="hidden" />
+                                </td>
+                                <td>
+                                    <input  readonly id="embalaje" style="width:100%" />
+                                </td>
+                                <td>
+                                    <input  id="cantidad" type="number" placeholder="Cantidad" onkeyup="ActualizarDatos()" style="width:100%" readonly />
+                                </td>
+                                <td>
+                                    <input id="valor" type="number" placeholder="Valor unitario"  onkeyup="ActualizarDatos()" readonly step="any" style="width:100%" />
+                                </td>
+                                <td>
+                                    <input id="valorbase"  readonly type="text" style="width:100%"/>
+                                </td>
+                                <td>
+                                    <input  id="valorimpuesto" readonly type="text" style="width:100%"/>
+                                </td>
+                                <td>
+                                    <input id="valortotal" readonly type="text" style="width:100%" />
+                                </td>
+                                <td>
+                                    <a href="javascript:AgregarItem()"><i class="glyphicon glyphicon-save" ></i></a>
+                                    <a href="javascript:LimpiarCamposItem()"><i class="glyphicon glyphicon-trash"></i></a>
+                                </td>
                             </tr>
                         </thead>
                         <tbody></tbody>
                     </table>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label>Observaciones</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <textarea id="observaciones" name="observaciones" rows="4" style="resize:none">@Model.Observaciones</textarea>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -364,7 +421,9 @@
 
     function pageLoad()
     {
-        
+        if (@Model.RowID>0) {
+            CargarSucursalProveedor(@Model.Sucursal.TerceroID);
+        }   
     }
 
     $(document).ready(function () {
@@ -379,6 +438,25 @@
                 CargarSucursalProveedor(ui.item.RowID);
             }
         });
+        $('#itemc').keyup(function(){
+            if ($('#itemc').val()=='') {
+                $('#itemid').val('');
+                $('#cantidad').attr('readonly','readonly');
+                $('#valor').attr('readonly','readonly');
+                $('#valor').val('');
+                $('#cantidad').val('');
+            }
+        })
+        $('#itemc').autocomplete({
+            source:"ItemsAutocomplete",
+            minLength:1,
+            select:function(evento,ui)
+            {
+                $('#valor').removeAttr('readonly');
+                $('#cantidad').removeAttr('readonly');
+                $('#itemid').val(ui.item.rowid)
+            }
+        })
         $('#comprador').autocomplete({
             source: "Buscar_Tercero",
             minLength: 1,
@@ -406,6 +484,9 @@
             {
                 $('#sucursalproveedor').empty();
                 $('#sucursalproveedor').append(data);
+                if (@Model.RowID>0) {
+                    $('#sucursalproveedor').val(@Model.SucursalProveedorID);
+                }
             }
         });
     }
@@ -417,7 +498,7 @@
             success: function (data) {
                 $('#proveedor_nit').val(data[0].nit);
                 $('#proveedor_ciudad').val(data[0].ciudad);
-                $('#proveedor_telefono').val(data[0].ciudad);
+                $('#proveedor_telefono').val(data[0].telefono);
                 $('#proveedor_direccion').val(data[0].direccion);
             }
         });
@@ -441,71 +522,250 @@
     $(document).ready(function () {
         if (@Model.RowID>0) {
             $('#item').show();
-            CargarItems();
+            debugger
+            cargarTablaContratos();
+            cargarItems();
         }
+        $('#contrato').autocomplete({
+            source:"BuscarContratos",
+            minLength:1,
+            select:function(evento,ui){
+                $('#contratoid').val(ui.item.rowid);
+                //$('#embalaje').val(ui.item.embalaje)
+            }
+        })
     });
-    function CargarItems()
+    function eliminarItem(rowid)
+    {
+        if (confirm("Desea Eliminar el Item")) {
+            $.ajax({
+                url:"eliminarItemOC",
+                data:{
+                    rowid:rowid
+                },
+                success:function(data){
+                    cargarItems()
+                    Mensajes('Item eliminado','success','');
+                },
+                error:function(eve){
+                    Mensajes('Error, intente de nuevo','error','');
+                }
+            })
+        }
+    }
+    function AgregarItem()
+    {
+        if ($('#itemid').val()=='' || $('#cantidad').val()==''|| $('#valor').val()=='') {
+            Mensajes('Se debe llenar toda la informacion','error','');
+            return;
+        }
+        ModalProcesandoShow();
+        $.ajax({
+            url:"AgregarItemOC",
+            data:{
+                cantidad:$('#cantidad').val(),
+                valor:$('#valor').val(),
+                itemid:$('#itemid').val(),
+                oc:'@Model.RowID'
+            },
+            success:function(data)
+            {
+                ModalProcesandoHiden();
+                LimpiarCamposItem();
+                cargarItems();
+                Mensajes(data,'success','');
+            },
+            error:function(e,error)
+            {
+                Mensajes(e.responseText,'error','');
+            }
+
+        })
+    }
+    function LimpiarCamposItem()
+    {
+        $('#valor').val('');
+        $('#valor').attr('readonly','readonly');
+        $('#cantidad').val('');
+        $('#cantidad').attr('readonly','readonly');
+        $('#itemid').val('');
+        $('#itemc').val('');
+        $('#valortotal').val('');
+        $('#valorimpuesto').val('');
+
+    }
+
+    function ActualizarDatos()
+    {
+        var cantidad=0;
+        var valorunitario=0;
+        if ($('#cantidad').val()!="") {
+            cantidad=$('#cantidad').val();
+        }
+        if ($('#valor').val()!="") {
+            valorunitario=$('#valor').val();
+        }
+        $.ajax({
+            url:"ValoresItem",
+            data:{
+                cantidad:cantidad,
+                valorunitario:valorunitario,
+                iditem:$('#itemid').val()
+            },
+            success:function(data)
+            {
+                $('#valorbase').val(data.valorbase);
+                $('#valorimpuesto').val(data.valorimpuesto);
+                $('#valortotal').val(data.valorTotal);
+            }
+        
+        })
+    }
+    function eliminarContrato(rowid)
+    {
+        if (confirm("Desea Eliminar el contrato de la Orden Compra")) {
+            $.ajax({
+                url:"eliminarContratoOrdenCompra",
+                data:{rowid:rowid},
+                success:function()
+                {
+                    cargarTablaContratos();
+                    Mensajes('Eliminado correctamente','success','');
+                },
+                error:function()
+                {
+                    Mensajes('Error en Proceso, vuelva a intentar','error','');
+                }
+            })
+        }
+    }
+    function cargarTablaContratos()
     {
         $.ajax({
-            url:"ItemsOrdenCompra",
+            url:"CargarContratosOrdenCompra",
+            data:{rowid:@Model.RowID},
+            success:function(data)
+            {
+                $('#tablaContratos tbody').empty();
+                $('#tablaContratos tbody').append(data);
+                pluginTablaContrato();
+            }
+        })
+
+    }
+    function guardarContrato()
+    {
+        if ($('#contratoid').val()=="") {
+            Mensajes('Seleccionar un Contrato','error','');
+            return;
+        }
+        var item=0;
+        if (confirm("Desea agregar Items de el contrato a la proforma")) {
+            item=1;
+        }
+        else
+        {
+            item=0
+        }
+        ModalProcesandoShow();
+        $.ajax({
+            url:"AgregarContrato",
+            data:{
+                oc:@Model.RowID,
+                contrato:$('#contratoid').val(),
+                item:item
+            },
+            success:function(data)
+            {
+                ModalProcesandoHiden();
+                Mensajes(data,'success','');
+                cargarTablaContratos()
+            },
+            error:function(status,error)
+            {
+                
+                ModalProcesandoHiden();
+                Mensajes(status.responseText,'error','');
+            }
+        })
+    }
+
+    function pluginTablaContrato()
+    {
+        //$('#tablaContratos').dataTable({
+        //    " processing": true,
+        //    "bFilter": true,
+        //    "bPaginate": true,
+        //    "info": false,
+        //    "bDestroy":true,
+        //    aLengthMenu: [
+        //    [15, 25, 50, 100, -1],
+        //    [15, 25, 50, 100, "All"]
+        //    ],
+        //    "iDisplayLength": 15
+
+        //});
+        //$('#tablaContratos').removeAttr("style");
+    }
+    function ActualizarDatosItem(obj,rowid,dato)
+    {
+        var valor=$(obj).val();
+        if (valor=="") {
+            valor=0;
+        }
+        $.ajax({
+            url:"ActualizacionItemOC",
+            data:{
+                valor:valor,
+                rowid:rowid,
+                dato:dato
+            },
+            success:function(data)
+            {
+                debugger
+                $('#valorimpuesto'+rowid).empty().text(data.valorimpuesto);
+                $('#valorbase'+rowid).empty().text(data.valorbase);
+                $('#valortotal'+rowid).empty().text(data.valorTotal);
+            }
+        })
+    }
+    function cargarItems()
+    {
+        debugger
+        $.ajax({
+            url:"ItemsOC",
             data:{rowid:@Model.RowID},
             success:function(data){
+                debugger
                 $('#tablaItems tbody').empty();
                 $('#tablaItems tbody').append(data);
-            }
-
-        })
-    }
-    function ActualizarItem(rowid)
-    {
-        var cantidad=$('#cant'+rowid).val();
-        var valor=$('#valor'+rowid).val();
-        $.ajax({
-            url:"ActualizarCantidad",
-            data:{rowid:rowid,
-                cantidad:cantidad,
-                valor:valor
+                pluginTablaItems();
             },
-            success:function(data){
-
-            },
-            error:function(error){
-                Mensajes('Error al Actualizar la Cantidad','error','');
-            }
-        });
-    }
-
-    function CalcularCampos(rowid)
-    {
-        var cantidad=$('#cant'+rowid).val();
-        var valorUnitario=$('#valor'+rowid).val();
-        $.ajax({
-            url:"ActualizarValores",
-            data:{rowid:rowid,cantidad:cantidad,valorUnitario:valorUnitario},
-            success:function(data){
-                $('#valortotal'+rowid).html(data.ValorTotal);
-                $('#valorimpuesto'+rowid).html(data.ValorImpuesto);
-                $('#valorbase'+rowid).html(data.ValorBase);
-                CalcularTotales();
+            error:function(data){
+                ModalProcesandoHiden();
+                Mensajes("Error Cargar Items",'error','');
+                
             }
         })
+        
     }
-    function CalcularTotales()
+    function pluginTablaItems()
     {
-        $.ajax({
-            url:"Totales",
-            data:{rowid:@Model.RowID},
-            success:function(data){
-                $('#totalcantidad').html(data.Cantidad);
-                $('#totalunitario').html(data.Valorunitario);
-                $('#totalbase').html(data.valorbase);
-                $('#totalimpuesto').html(data.valorimpuesto);
-                $('#totaltotal').html(data.valortotal);
-            }
-        })
+        //$('#tablaItems').dataTable({
+        //    " processing": true,
+        //    "bFilter": true,
+        //    "bPaginate": true,
+        //    "info": false,
+        //    "bDestroy":true,
+        //    aLengthMenu: [
+        //    [15, 25, 50, 100, -1],
+        //    [15, 25, 50, 100, "All"]
+        //    ],
+        //    "iDisplayLength": 15
+
+        //});
+        //$('#tablaItems').removeAttr("style");
     }
-
-
 
 </script>
 <!--ITEM-->

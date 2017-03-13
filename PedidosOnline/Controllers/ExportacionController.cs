@@ -119,7 +119,30 @@ namespace PedidosOnline.Controllers
             returnjson.MaxJsonLength = int.MaxValue;
             return returnjson;
         }
+        public JsonResult ItemsAutocomplete()
+        {
+            string term = Request.Params["term"];
 
+            try
+            {
+                var data = (from item in db.Item
+                                                 .Where(f => f.Descripcion.Contains(term)
+                                                 || f.Referencia.Contains(term.Trim())).ToList()
+                            select new
+                            {
+                                embalaje = item.Unidad,
+                                rowid = item.RowID,
+                                nombre = item.Referencia + " " + item.Descripcion,
+                                label = item.Referencia + " " + item.Descripcion
+                            }).Distinct().OrderBy(f => f.label).Take(15);
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+        }
+        
         #endregion
 
         #region:::::CONTRATO:::::
@@ -454,28 +477,7 @@ namespace PedidosOnline.Controllers
             return Build;
             #endregion
         }
-        public JsonResult ItemsAutocomplete()
-        {
-            string term = Request.Params["term"];
 
-            try
-            {
-                var data = (from item in db.Item
-                                                 .Where(f => f.Descripcion.Contains(term)
-                                                 || f.Referencia.Contains(term.Trim())).ToList()
-                            select new
-                            {
-                                rowid = item.RowID,
-                                nombre = item.Referencia + " " + item.Descripcion,
-                                label = item.Referencia + " " + item.Descripcion
-                            }).Distinct().OrderBy(f => f.label).Take(15);
-                return Json(data, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception e)
-            {
-                return Json(null, JsonRequestBehavior.AllowGet);
-            }
-        }
         public string GuardarItem()
         {
             CalculadoraItems obj = new CalculadoraItems();
@@ -831,8 +833,9 @@ namespace PedidosOnline.Controllers
         #region BOOKING
         public ActionResult Booking(int? RowID) {
             PedidosOnline.Models.Booking objBooking = db.Booking.Where(boo => boo.RowID == RowID).FirstOrDefault();
-            ViewBag.TipoLlenado = db.Opcion.Where(o => o.Agrupacion.Nombre == "TIPOLLENADO" && o.Activo==true).ToList();
+            ViewBag.TipoLlenado = db.Opcion.Where(o => o.Agrupacion.Nombre == "TIPOLLENADO" && o.Activo == true).ToList();
             Usuario usuariofirma = (Usuario)(Session["curUser"]);
+            ViewBag.Firma ="<ul id='informacion_general'></ul><img id='firma_correo' src='"+ usuariofirma.Firma.Where(t => t.Opcion.Nombre == "FIRMACORREO").FirstOrDefault().Imagen+"'>";
             if (objBooking!=null)
             {
                 return View(objBooking);
@@ -863,19 +866,18 @@ namespace PedidosOnline.Controllers
                                     Cantidad = listado.ProformaItemCalculadora.FirstOrDefault().Cantidad,
                                     PuertoDescargue = string.Concat(listado.Puerto1.Nombre," ",listado.Puerto1.Ciudad.Nombre),
                                     FechaEmbarque=listado.FechaEnvio,
-                                    Producto=listado.ProformaItemCalculadora.FirstOrDefault().CalculadoraItems.Item.Referencia,
                                     PuertoCargue=string.Concat(listado.Puerto.Ciudad.Nombre," ",listado.Puerto.Nombre),
                                     label=string.Concat(listado.Contrato.Consecutivo," ",listado.Titulo)
                                 }
-                              ).Distinct().OrderBy(l=>l.RowID).ToList();
+                              ).Distinct().OrderBy(l => l.RowID).ToList();
             var returnJson = Json(InfoProforma.OrderBy(ip => ip.RowID), JsonRequestBehavior.AllowGet);
-       returnJson.MaxJsonLength = int.MaxValue;
+            returnJson.MaxJsonLength = int.MaxValue;
             return returnJson;
         }
         [ValidateInput(false)]
         public JsonResult GuardarBooking(FormCollection form)
         {
-            
+
             Models.Booking objBooking = new Models.Booking();
             objBooking.ProformaID = int.Parse(form["proforma_id"]);
             objBooking.TipoLlenadoID = int.Parse(form["tipo_cargue"]);
@@ -909,8 +911,304 @@ namespace PedidosOnline.Controllers
                 respuesta = "El correo de recepcion no es correcto, verifique la información";
                 throw;
             }
+
+            return Json(new { tipo_respuesta = tipo_respuesta, respuesta = respuesta }, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+
+        #region ::::::ORDEN COMPRA:::::::
+        [CheckSessionOut]
+        public ActionResult OrdenCompras()
+        {
+            return View(db.OrdenCompra.ToList());
+        }
+        [CheckSessionOut]
+        public ActionResult OrdenCompra(int? rowid)
+        {
+            ViewBag.FormaPago = db.CondicionPago.ToList();
+            Models.OrdenCompra reg = new Models.OrdenCompra();
+            if (rowid > 0)
+            {
+                reg = db.OrdenCompra.Where(f => f.RowID == rowid).FirstOrDefault();
+            }
+            else
+            {
+                reg.Tercero = new Tercero();
+                reg.Tercero.ContactoERP = new ContactoERP();
+                reg.Tercero.ContactoERP.Ciudad = new Ciudad();
+                reg.Tercero1 = new Tercero();
+                reg.Opcion = new Opcion();
+                reg.CondicionPago = new CondicionPago();
+                reg.Sucursal = new Sucursal();
+                reg.Sucursal.Tercero = new Tercero();
+                reg.Sucursal.Tercero.ContactoERP = new ContactoERP();
+                reg.Sucursal.Tercero.ContactoERP.Ciudad = new Ciudad();
+            }
+            return View(reg);
+        }
+        public JsonResult TerceroInformacion(int? rowid)
+        {
+            var ListaCalc = (from Tercero in db.Tercero.Where(f => f.RowID == rowid)
+                             select new
+                             {
+                                 nit = Tercero.Identificacion,
+                                 ciudad = Tercero.ContactoERP.Ciudad.Nombre,
+                                 direccion = Tercero.ContactoERP.Direccion1,
+                                 telefono = Tercero.ContactoERP.Telefono1
+
+                             });
+            var returnjson = Json(ListaCalc, JsonRequestBehavior.AllowGet);
+            returnjson.MaxJsonLength = int.MaxValue;
+            return returnjson;
+        }
+        public string TerceroSucursales(int? rowid)
+        {
+            string resultado = "<option value=''>-Seleccionar-</option>";
+            foreach (var item in db.Sucursal.Where(f => f.TerceroID == rowid))
+            {
+                resultado += "<option value='" + item.RowID + "'>" + item.Codigo + "-" + item.Nombre + "</option>";
+            }
+            return resultado;
+        }
+        public string GuardarOrdenCompra()
+        {
+            OrdenCompra reg = new Models.OrdenCompra();
+            int rowid = int.Parse(Request.Params["rowid"]);
+            if (rowid > 0)
+            {
+                reg = db.OrdenCompra.Where(f => f.RowID == rowid).FirstOrDefault();
+                reg.FechaModificacion = DateTime.Now;
+                reg.UsuarioModificacion = ((Usuario)Session["curUser"]).NombreUsuario;
+            }
+            else {
+                reg.FechaCreacion = DateTime.Now;
+                reg.UsuarioCreacion = ((Usuario)Session["curUser"]).NombreUsuario;
+                reg.Fecha = DateTime.Now;
+            }
+
+            reg.FormaPagoID = int.Parse(Request.Params["formapago"]);
+            reg.Observaciones = Request.Params["observaciones"];
+            reg.SucursalProveedorID = int.Parse(Request.Params["sucursalproveedor"]);
+            reg.Despacho = Request.Params["despacho"];
+            reg.LugarEntrega = Request.Params["lugar_entrega"];
+            reg.CompradorID = int.Parse(Request.Params["compradorid"]);
+            reg.SolicitanteID = int.Parse(Request.Params["solicitanteid"]);
+            db.OrdenCompra.Add(reg);
+            db.SaveChanges();
+            return reg.RowID.ToString();
+        }
+        public void eliminarContratoOrdenCompra(int? rowid)
+        {
+            db.OrdenCompraContrato.Remove(db.OrdenCompraContrato.Where(f => f.RowID == rowid).FirstOrDefault());
+            db.SaveChanges();
+        }
+        public string AgregarItemOC()
+        {
+            double cantidad = double.Parse(Request.Params["cantidad"]);
+            double valor = double.Parse(Request.Params["valor"]);
+            int itemid = int.Parse(Request.Params["itemid"]);
+            int oc = int.Parse(Request.Params["oc"]);
+            if (db.OrdenCompraItem.Where(f=>f.ItemID==itemid && f.OrdenCompraID==oc ).FirstOrDefault()!=null)
+            {
+                Response.StatusCode = 500;
+                return "Item ya Agregado a Orden de compra";
+            }
+            double? valorTotal = 0;
+            double? valorimpuesto = 0;
+            double? valorbase = 0;
+            Item item_erp = db.Item.Where(f => f.RowID == itemid).FirstOrDefault();
+            List<ItemImpuesto> ImpuestosCompra = db.ItemImpuesto.Where(f => f.ItemID == itemid && f.Opcion.Nombre == "COMPRA").ToList();
+            foreach (var item in ImpuestosCompra)
+            {
+                valorimpuesto += (double?)(((cantidad * valor)) * (double?)item.Tasa) / 100;
+            }
+            valorbase = cantidad * valor;
+            valorTotal = valorbase + valorimpuesto;
+            OrdenCompraItem reg = new OrdenCompraItem
+            {
+                ValorBase=valorbase,
+                ValorTotal=valorTotal,
+                Cantidad=cantidad,
+                ValorUnitario=valor,
+                ItemID=itemid,
+                OrdenCompraID=oc,
+                FechaCreacion=DateTime.Now,
+                UsuarioCreacion=((Usuario)Session["curUser"]).NombreUsuario,
+                UnidadEmpaque= item_erp.Unidad
+            };
+            db.OrdenCompraItem.Add(reg);
+            db.SaveChanges();
+            return "Agregado Correctamente";
+        }
+        public void eliminarItemOC(int? rowid)
+        {
+            db.OrdenCompraItem.Remove(db.OrdenCompraItem.Where(f=>f.RowID==rowid).FirstOrDefault());
+            db.SaveChanges();
+        }
+        public JsonResult ActualizacionItemOC()
+        {
+            double? valor = double.Parse(Request.Params["valor"]);
+            int rowid = int.Parse(Request.Params["rowid"]);
+            string data = Request.Params["dato"];
+
+            OrdenCompraItem Oc = db.OrdenCompraItem.Where(f => f.RowID == rowid).FirstOrDefault();
+            if (data=="VALOR")
+            {
+                Oc.ValorUnitario = valor;
+            }
+            else if (data=="CANTIDAD")
+            {
+                Oc.Cantidad = valor;
+            }
             
-            return Json(new {tipo_respuesta=tipo_respuesta,respuesta=respuesta },JsonRequestBehavior.AllowGet);
+            double? valorTotal = 0;
+            double? valorimpuesto = 0;
+            double? valorbase = 0;
+            List<ItemImpuesto> ImpuestosCompra = db.ItemImpuesto.Where(f => f.ItemID == Oc.ItemID && f.Opcion.Nombre == "COMPRA").ToList();
+            foreach (var item in ImpuestosCompra)
+            {
+                valorimpuesto += (double?)(((Oc.Cantidad * Oc.ValorUnitario)) * (double?)item.Tasa) / 100;
+            }
+            valorbase = Oc.Cantidad * Oc.ValorUnitario;
+            valorTotal = valorbase + valorimpuesto;
+            object resultado = new
+            {
+                valorimpuesto = valorimpuesto,
+                valorbase = valorbase,
+                valorTotal = valorTotal
+            };
+            Oc.ValorImpuesto = valorimpuesto;
+            Oc.ValorBase = valorbase;
+            Oc.ValorTotal = valorTotal;
+            db.SaveChanges();
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+
+        }
+        public string ItemsOC(int?rowid)
+        {
+            string resultado = "";
+            foreach (var item in db.OrdenCompraItem.Where(f=>f.OrdenCompraID==rowid).ToList())
+            {
+                resultado += 
+                "<tr>"+
+                    "<td>"+item.Item.Referencia+" "+item.Item.Descripcion+"</td>"+
+                    "<td>"+item.Item.Unidad+"</td>" +
+                    "<td><input type='number' value='"+item.Cantidad+"' onkeyup=\"ActualizarDatosItem(this,"+item.RowID+",'CANTIDAD')\"  /></td>" +
+                    "<td><input type='number' value='" + item.ValorUnitario + "'  onkeyup=\"ActualizarDatosItem(this," + item.RowID + ",'VALOR')\"  /></td>" +
+                    "<td><span id='valorbase" + item.RowID+"'>"+item.ValorBase+"</span></td>" +
+                    "<td><span id='valorimpuesto" + item.RowID + "'>"+item.ValorImpuesto+"</span></td>" +
+                    "<td><span id='valortotal" + item.RowID + "'>"+item.ValorTotal+"</span></td>" +
+                    "<td><a href='javascript:eliminarItem("+item.RowID+")'><i class='glyphicon glyphicon-trash' ><i></a></td>" +
+                "</tr>";
+            }
+
+
+            return resultado;
+        }
+        public string CargarContratosOrdenCompra(int? rowid)
+        {
+            string resultado = "";
+            foreach (var item in db.OrdenCompraContrato.Where(f => f.OrdenCompraID == rowid))
+            {
+                resultado += "<tr><td>" + item.Contrato.Consecutivo + "</td><td>" + (item.AgregarItems == true ? "Si" : "No") + "</td><td>" + item.FechaCreacion + "</td><td>" + item.UsuarioCreacion + "</td><td><a href='javascript:eliminarContrato(" + item.RowID + ")'><i class='glyphicon glyphicon-trash'/></a></td></tr>";
+            }
+
+            return resultado;
+
+        }
+        public JsonResult ValoresItem()
+        {
+            double? cantidad = double.Parse(Request.Params["cantidad"]);
+            double? valorunitario = double.Parse(Request.Params["valorunitario"]);
+            int iditem = int.Parse(Request.Params["iditem"]);
+            double? valorTotal = 0;
+            double? valorimpuesto = 0;
+            double? valorbase = 0;
+
+            List<ItemImpuesto> ImpuestosCompra = db.ItemImpuesto.Where(f => f.ItemID == iditem && f.Opcion.Nombre == "COMPRA").ToList();
+            foreach (var item in ImpuestosCompra)
+            {
+                valorimpuesto += (double?)(((cantidad * valorunitario)) * (double?)item.Tasa) / 100;
+            }
+            valorbase = cantidad * valorunitario;
+            valorTotal = valorbase + valorimpuesto;
+            object data = new
+            {
+                valorimpuesto = valorimpuesto,
+                valorbase = valorbase,
+                valorTotal = valorTotal
+            };
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        public string AgregarContrato()
+        {
+            try
+            {
+                int ordencompra = int.Parse(Request.Params["oc"]);
+                int contrato = int.Parse(Request.Params["contrato"]);
+                int agregoItem = int.Parse(Request.Params["item"]);
+                if (db.OrdenCompraContrato.Where(f => f.OrdenCompraID == ordencompra && f.ContratoID == contrato).FirstOrDefault() != null)
+                {
+                    Response.StatusCode = 500;
+                    return "Contrato ya agregado a la orden de compra";
+                }
+                OrdenCompraContrato oc = new OrdenCompraContrato
+                {
+                    OrdenCompraID = ordencompra,
+                    ContratoID = contrato,
+                    AgregarItems = agregoItem == 1 ? true : false,
+                    UsuarioCreacion = ((Usuario)Session["curUser"]).NombreUsuario,
+                    FechaCreacion = DateTime.Now
+                };
+                db.OrdenCompraContrato.Add(oc);
+                db.SaveChanges();
+                Models.Contrato C = db.Contrato.Where(f => f.RowID == contrato).FirstOrDefault();
+                if (agregoItem == 1)
+                {
+                    foreach (var item in db.CalculadoraItems.Where(f => f.CalculadoraID == C.CalculadoraID).ToList())
+                    {
+                        if (db.OrdenCompraItem.Where(f => f.OrdenCompraID == ordencompra && f.ItemID == item.ItemID).FirstOrDefault() != null)
+                        {
+                            continue;
+                        }
+                        OrdenCompraItem reg = new OrdenCompraItem();
+                        reg.OrdenCompraID = ordencompra;
+                        reg.ItemID = item.ItemID;
+                        reg.Cantidad = item.CantidadTonelada;
+                        reg.FechaCreacion = DateTime.Now;
+                        reg.UsuarioCreacion = ((Usuario)Session["curUser"]).NombreUsuario;
+                        reg.ValorUnitario = 0;
+                        reg.ValorTotal = 0;
+                        reg.ValorImpuesto = 0;
+                        reg.UnidadEmpaque = item.Item.Embalaje;
+                        reg.ValorBase = 0;
+                        reg.ValorDescuento = 0;
+                        db.OrdenCompraItem.Add(reg);
+                        db.SaveChanges();
+                    }
+                }
+                return "Agregado Correctamente";
+            }
+            catch (Exception)
+            {
+                Response.StatusCode = 500;
+                return "Verificar Informacion";
+            }
+
+        }
+        public JsonResult BuscarContratos()
+        {
+            string terms = Request.Params["term"].Trim().ToUpper();
+            var ListaCalc = (from Contrato in db.Contrato.Where(f => f.Consecutivo.Contains(terms))
+                             select new
+                             {
+                                 rowid= Contrato.RowID,
+                                 label=Contrato.Consecutivo
+                             });
+            var returnjson = Json(ListaCalc, JsonRequestBehavior.AllowGet);
+            returnjson.MaxJsonLength = int.MaxValue;
+            return returnjson;
         }
         #endregion
 
@@ -984,31 +1282,12 @@ namespace PedidosOnline.Controllers
         public JsonResult ProformaAutocomplete()
         {
             string terms = Request.Params["term"].Trim().ToUpper();
-            var ListaCalc = (from listado in db.Proforma.Where(listado => listado.Titulo.Contains(terms))
+            var ListaCalc = (from listado in db.Proforma.Where(listado => listado.Titulo.Contains(terms) && listado.SolicitudTransporte.Count == 0)
                              select new
                              {
                                  RowID = listado.RowID,
                                  label = listado.Titulo,
                              }).Distinct().OrderBy(cal => cal.RowID).ToList();
-
-
-            int cn = 0;
-            for (int i = 1; i <= ListaCalc.Count; i++)
-            {
-                try
-                {
-                    int rowidQ = Convert.ToInt32(ListaCalc[i - 1].RowID);
-                    SolicitudTransporte sl = db.SolicitudTransporte.Where(f => f.ProformaID == rowidQ).FirstOrDefault();
-                    if (sl != null)
-                    {
-                        ListaCalc.RemoveAt(i - 1);
-                        i = i - 1;
-                    }
-                    cn = cn + 1;
-                }
-                catch (Exception e)
-                { }
-            }
             var returnjson = Json(ListaCalc.OrderBy(cal => cal.RowID), JsonRequestBehavior.AllowGet);
             returnjson.MaxJsonLength = int.MaxValue;
             return returnjson;
@@ -1488,6 +1767,113 @@ namespace PedidosOnline.Controllers
             returnjson.MaxJsonLength = int.MaxValue;
             return returnjson;
         }
+        [CheckSessionOut]
+        public JsonResult VehiculoAutocomplete()
+        {
+            string terms = Request.Params["term"].Trim().ToUpper();
+            var ListaCalc = (from vehiculo in db.Vehiculo.Where(vehiculo => vehiculo.Placa.Contains(terms) && vehiculo.Opcion1.Codigo == "VEHICULO" && vehiculo.Estado == true)
+                             select new
+                             {
+                                 RowID = vehiculo.RowID,
+                                 label = vehiculo.Placa,
+                             }).Distinct().OrderBy(cal => cal.RowID).ToList();
+            var returnjson = Json(ListaCalc.OrderBy(cal => cal.RowID), JsonRequestBehavior.AllowGet);
+            returnjson.MaxJsonLength = int.MaxValue;
+            return returnjson;
+        }
+        [CheckSessionOut]
+        public JsonResult RemolqueAutocomplete()
+        {
+            string terms = Request.Params["term"].Trim().ToUpper();
+            var ListaCalc = (from vehiculo in db.Vehiculo.Where(vehiculo => vehiculo.Placa.Contains(terms) && vehiculo.Opcion1.Codigo == "REMOLQUE" && vehiculo.Estado == true)
+                             select new
+                             {
+                                 RowID = vehiculo.RowID,
+                                 label = vehiculo.Placa,
+                             }).Distinct().OrderBy(cal => cal.RowID).ToList();
+            var returnjson = Json(ListaCalc.OrderBy(cal => cal.RowID), JsonRequestBehavior.AllowGet);
+            returnjson.MaxJsonLength = int.MaxValue;
+            return returnjson;
+        }
+        [CheckSessionOut]
+        [ValidateInput(false)]
+        public string AddVehiculo(int? rowid, int? vehiculo, int? remolque, int? conductor, int? solicitud)
+        {
+            string result = "";
+            if (rowid != 0)
+            {
+                if (conductor == null && remolque == null && conductor == null)
+                {
+                    List<AutorizacionCargueVehiculo> lista3 = new List<AutorizacionCargueVehiculo>();
+                    lista3 = db.AutorizacionCargueVehiculo.Where(f => f.AutorizacionCargueID == rowid).ToList();
+                    foreach (var item in lista3)
+                    {
+                        result += "<tr><td><td><td><input type='text' value='" + item.Vehiculo.Placa + "' readonly /></td>" +
+                          "<td><input type='text' value='" + item.Vehiculo1.Placa + "' readonly /></td>" +
+                          "<td><input type='text' value='" + item.Tercero.RazonSocial + "' readonly /></td>" +
+                          "</tr>";
+                    }
+                }
+                else
+                {
+                    List<AutorizacionCargueVehiculo> lista = db.AutorizacionCargueVehiculo.Where(f => f.AutorizacionCargueID == rowid).ToList();
+                    foreach (var item in lista)
+                    {
+                        if (item.TerceroID == conductor)
+                        {
+                            Response.StatusCode = 500;
+                            return "Conductor ya agregado";
+                        }
+                        if (item.Vehiculo.RowID == vehiculo)
+                        {
+                            Response.StatusCode = 500;
+                            return "Vehiculo ya agregado";
+                        }
+                        if (item.Vehiculo1.RowID == remolque)
+                        {
+                            Response.StatusCode = 500;
+                            return "Remolque ya agregado";
+                        }
+
+                    }
+                    AutorizacionCargueVehiculo aut = new AutorizacionCargueVehiculo();
+                    List<AutorizacionCargueVehiculo> lista2 = new List<AutorizacionCargueVehiculo>();
+
+                    aut.AutorizacionCargueID = rowid;
+                    aut.FechaCreacion = DateTime.Now;
+                    aut.RemolqueID = remolque;
+                    aut.VehiculoID = vehiculo;
+                    aut.TerceroID = conductor;
+                    aut.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
+                    db.AutorizacionCargueVehiculo.Add(aut);
+                    db.SaveChanges();
+
+                    lista2 = db.AutorizacionCargueVehiculo.Where(f => f.AutorizacionCargueID == rowid).ToList();
+                    foreach (var item in lista2)
+                    {
+                        item.Tercero = db.Tercero.Where(f => f.RowID == item.TerceroID).FirstOrDefault();
+                        result += "<tr><td><td><td><input type='text' value='" + item.Vehiculo.Placa + "' readonly /></td>" +
+                          "<td><input type='text' value='" + item.Vehiculo1.Placa + "' readonly /></td>" +
+                          "<td><input type='text' value='" + item.Tercero.RazonSocial + "' readonly /></td>" +
+                          "</tr>";
+                    }
+                }
+            }
+            return result;
+        }
+        [HttpPost]
+        public JsonResult GuardarAutorizacionCargueEncabezado(FormCollection form)
+        {
+            AutorizacionCargue ac = new AutorizacionCargue();
+            ac.FechaCreacion = DateTime.Now;
+            ac.SolicitudTransporteID = int.Parse(form["solicitudT"]);
+            ac.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
+            Estado es = db.Estado.Where(f => f.Codigo == "ELABORACION").FirstOrDefault();
+            ac.EstadoID = es.RowID;
+            db.AutorizacionCargue.Add(ac);
+            db.SaveChanges();
+            return Json(ac.RowID);
+        }
         #endregion
 
         #region:::::Modal Vehiculos:::::
@@ -1500,7 +1886,7 @@ namespace PedidosOnline.Controllers
         [HttpPost]
         public JsonResult GuardarVehiculo(FormCollection form)
         { 
-            Vehiculo ObjVehiculo = new Vehiculo();
+            Vehiculo ObjVehiculo = new Vehiculo(); 
             ObjVehiculo.Placa = form["placa"];
             ObjVehiculo.Año = form["Año"].ToString();
             ObjVehiculo.CapacidadKG = int.Parse(form["Capacidad"]);
@@ -1515,6 +1901,7 @@ namespace PedidosOnline.Controllers
             db.SaveChanges();
             return Json("");
         }
+        
         #endregion
 
         //#region :::::ORDEN COMPRA:::::
@@ -1957,7 +2344,6 @@ namespace PedidosOnline.Controllers
         //            ObjSolicitud.UsuarioCreacion = ((Usuario)Session["CurUser"]).NombreUsuario;
         //            db.CartaLlenadoPuerto.Add(ObjSolicitud);
         //            db.SaveChanges();
-
         //            mensaje = "Se ha ingresado correctamente";
         //        }
         //        else
