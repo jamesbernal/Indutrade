@@ -1623,6 +1623,7 @@ namespace PedidosOnline.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
         #region Formato Registro lenado
          public ActionResult FormatoRegistroLlenado(int? RowID_Encabezado)
         {

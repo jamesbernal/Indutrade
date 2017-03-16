@@ -55,6 +55,7 @@
                 <tr>
                     <th></th>
                     <th class="lang">#</th>
+                    <th></th>
                     <th class="lang">Fecha</th>
                     <th class="lang">Proveedor</th>
                     <th class="lang">Facturar a</th>
@@ -72,6 +73,12 @@
                             <a href="@Url.Action("OrdenCompra", "Exportacion", new { @rowid = @cal.RowID, @rih = Request.Params["rih"] })"><i class="glyphicon glyphicon-search"> </i></a>
                         </td>
                         <td>
+                            <a href="javascript:UtilExportarPDF('ORDENCOMPRA',@cal.RowID)" class="alink" ata-toggle="tooltip" data-placement="bottom" title="Exportar PDF">
+                                <i class="glyphicon glyphicon-file"></i>
+                            </a>
+                            @*<a href="@Url.Action("Export", "Proforma", new { @rowid = @cal.RowID, @rih = Request.Params["rih"] })"><i class="glyphicon glyphicon-export"></i></a>*@
+                        </td>
+                        <td>
                             @cal.RowID
                         </td>
                         <td>
@@ -81,10 +88,10 @@
                             @cal.Sucursal.Tercero.RazonSocial
                         </td>
                         <td>
-                            @*@cal.Sucursal1.Tercero.RazonSocial*@
+                            @cal.Tercero.RazonSocial
                         </td>
                         <td>
-                            @cal.Opcion.Nombre
+                            @cal.CondicionPago.Descripcion
                         </td>
                         <td>
                             @cal.UsuarioCreacion
