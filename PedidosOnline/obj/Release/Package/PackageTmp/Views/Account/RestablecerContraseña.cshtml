@@ -1,0 +1,83 @@
+﻿@model ErpPortal.WebApp.Models.RestablecerContraseñaModel
+@{
+   ViewBag.Title = "RestablecerContraseña";
+}
+<link rel="stylesheet" href="/js/login.css" type="text/css" media="all" />
+
+<link href="~/js/mainmenu/css/theme_2_animation_2.css" rel="stylesheet">
+<script src="~/js/mainmenu/javascript/animated_horizontal_submenu.js"></script>
+<link href="~/js/mainmenu/css/menu_animation.css" rel="stylesheet">
+<link href="~/js/select2/select2.css" rel="stylesheet" />
+<script type="text/javascript" src="~/js/select2/select2.min.js?v=166"></script> <!-- Styled select boxes -->
+<style>
+    #socialLoginForm {
+        position: absolute;
+        left: 40%;
+        top: 30px;
+        margin-left: 50px;
+        float: none;
+        width: 379px;
+        */
+        /* height: 100%; */
+        min-height: 100%;
+        margin: 0;
+        display: inline-block;
+        vertical-align: central;
+        padding: 0;
+        border: 0;
+    }
+    input[type="submit"],
+    input[type="button"],
+    button {
+        font-family: "Segoe UI Webfont","Ebrima","Nirmala UI","Gadugi","Segoe Xbox Symbol","Segoe UI Symbol","Meiryo UI","Khmer UI","Tunga","Lao UI","Raavi","Iskoola Pota","Latha","Leelawadee","Microsoft YaHei UI","Microsoft JhengHei UI","Malgun Gothic","Estrangelo Edessa","Microsoft Himalaya","Microsoft New Tai Lue","Microsoft PhagsPa","Microsoft Tai Le","Microsoft Yi Baiti","Mongolian Baiti","MV Boli","Myanmar Text","Cambria Math";
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 1.25rem;
+        padding-bottom: .227px;
+        padding-top: .227px;
+        padding-bottom: .227px;
+        padding-top: .227px;
+        padding: 3px;
+    }
+</style>
+
+
+    <section class="social" id="socialLoginForm" style="font-size: 15px; font-family: 'Segoe UI Light','Segoe UI Web Light','Segoe UI Web Regular','Segoe UI','Segoe UI Symbol','HelveticaNeue-Light','Helvetica Neue','Arial,sans-serif'; width: 379px; min-height: 100%; margin: 0; display: inline-block; padding: 0; border: 0; ">
+    
+    <img src="~/Images/pedidosonlinelogopeque.jpg" />
+        <br />
+        <br />
+        <br />
+        <h2 class="tittabla" style="font-weight:normal;">Restablecer Contraseña</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+       
+        <fieldset>
+            <legend></legend>
+            <ol>
+                <li>
+                    @Html.LabelFor(m => m.Password)
+                </li>
+                <li>
+                    @Html.PasswordFor(m => m.Password)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.ConfirmPassword)
+                </li>
+                <li>
+                    @Html.PasswordFor(m => m.ConfirmPassword)
+                </li>
+                @Html.HiddenFor(m => m.ReturnToken)
+                @Html.HiddenFor(m => m.user)
+            </ol>
+            <input id="bluebtn" class="btn" type="submit" value="Cambiar Contraseña" />
+            <a id="graybtn" class="btn" href="/Home/Index">Cancelar</a> 
+        </fieldset>
+         @Html.ValidationSummary()
+        <h2>@ViewBag.Message</h2>
+    }
+</section>

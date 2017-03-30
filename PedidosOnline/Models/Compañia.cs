@@ -24,6 +24,8 @@ public partial class Compañia
 
         this.Item = new HashSet<Item>();
 
+        this.ItemImpuesto = new HashSet<ItemImpuesto>();
+
         this.Sucursal = new HashSet<Sucursal>();
 
         this.Sucursal1 = new HashSet<Sucursal>();
@@ -31,8 +33,6 @@ public partial class Compañia
         this.Sucursal2 = new HashSet<Sucursal>();
 
         this.Sucursal3 = new HashSet<Sucursal>();
-
-        this.ItemImpuesto = new HashSet<ItemImpuesto>();
 
     }
 
@@ -65,6 +65,10 @@ public partial class Compañia
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
+    public virtual ICollection<ItemImpuesto> ItemImpuesto { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
     public virtual ICollection<Sucursal> Sucursal { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -78,10 +82,6 @@ public partial class Compañia
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Sucursal> Sucursal3 { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<ItemImpuesto> ItemImpuesto { get; set; }
 
 }
 

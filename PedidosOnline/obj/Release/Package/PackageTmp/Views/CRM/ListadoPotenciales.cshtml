@@ -1,0 +1,98 @@
+﻿@model IEnumerable<PedidosOnline.Models.TerceroPotencial>
+@{
+    ViewBag.Title = "Listado_Potenciales";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+
+    $(document).ready(function () {
+        $('table').dataTable({
+            " processing": true,
+            "bFilter": true,
+            "bPaginate": true,
+            "info": false,
+            "bDestroy": true,
+            aLengthMenu: [
+            [11, 25, 50, 100, -1],
+            [11, 25, 50, 100, "All"]
+            ],
+            "iDisplayLength": 11
+
+        });
+
+    });
+    function ExportarExcel() {//permite exportar desde el data procedure con la palabra clave
+        UtilExportarExcel('CLI.POTENCIALES', $("#DataTables_Table_0_wrapper").find("input").val());
+    }
+</script>
+<div class="nav">
+    <span>
+        <a href="@Url.Action( "Cliente_Nuevo","CRM",new {@nm="Nuevo Cliente", @rih=Request.Params["rih"] })" class="alink" style="z-index:99999999;">
+            <i class="glyphicon glyphicon-plus"></i>&nbsp;<span class="lang" key="NUEVO">Nuevo</span>
+        </a>
+    </span>
+    <span>
+        &nbsp;&nbsp;
+        <a href="javascript:ExportarExcel();" class="alink">
+            <i class="glyphicon glyphicon-export"></i>&nbsp;<span class="lang" key="EXPORTAR">Exportar</span>
+        </a>
+    </span>
+</div>
+<br />
+<div class="row ">
+    <div class="col-md-12">
+        <table class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive" style="margin-right:20px;">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="lang" key="RAZON_SOCIAL">Razon Social</th>
+                    <th class="lang" key="ID">ID</th>
+                    <th class="lang" key="ESTADO">Estado</th>
+                    <th class="lang" key="TEL_EMPRESA">Tel. Empresa</th>
+                    <th class="lang" key="CONTACTO">Contacto</th>
+                    <th class="lang" key="CELULAR">Celular</th>
+                    <th class="lang" key="EMAIL">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.ToList() != null)
+                {<!--Esto me lo imprime en pantalla porque el if no tiene el aroa, pero si lo pongo me imprime error-->
+                    foreach (var potencial in @Model.ToList())
+                    {
+                        potencial.Contacto = potencial.Contacto != null ? potencial.Contacto : new PedidosOnline.Models.Contacto();
+                        <tr>
+                            <td>
+                                <a href="@Url.Action("Cliente_Nuevo", "CRM", new { @rowid = @potencial.RowID,@nm="Modificar Cliente", @rih=Request.Params["rih"] })"><i class="glyphicon glyphicon-pencil"> </i></a>
+                            </td>
+                            <td>
+                                @potencial.RazonSocial
+                            </td>
+                            <td>
+                                @potencial.Identificacion
+                            </td>
+                            <td>
+                                @if (potencial.Opcion != null)
+                                {
+                                    @potencial.Opcion.Nombre
+                                }
+                            </td>
+                            <td>
+                                @potencial.Contacto.Telefono1
+                            </td>
+                            <td>
+                                @potencial.Contacto.Nombre @potencial.Contacto.Apellido
+                            </td>
+                            <td>
+                                @potencial.Contacto.Telefono2
+                            </td>
+                            <td>
+                                <a href="mailto:@potencial.Contacto.Email">@potencial.Contacto.Email</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

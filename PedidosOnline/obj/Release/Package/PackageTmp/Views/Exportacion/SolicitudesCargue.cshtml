@@ -1,0 +1,63 @@
+﻿@using PedidosOnline.Models;
+@model List<PedidosOnline.Models.AutorizacionCargue>
+@{
+    ViewBag.Title = "Solicitudes de Cargue";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row ">
+    <div style="margin-bottom:20px">
+        <div class="col-md-12">
+            <div class="nav">
+                <span>
+                    <a href="@Url.Action( "SolicitudCargue","Exportacion",new {   @rih = Request.Params["rih"] })" class="alink">
+                        <i class="glyphicon glyphicon-plus"></i>&nbsp;<SPAN class="lang" key="NUEVO">Nuevo</SPAN>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <table id="table" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="lang">Proforma</th>
+                    <th class="lang">Fecha Creacion</th>
+                    <th class="lang">BKK</th>
+                    <th class="lang">Empaque</th>
+                    <th class="lang">Vehiculos</th>
+                </tr>
+            </thead>
+            <tbody style="text-align:center;">
+                @foreach (AutorizacionCargue cal in ViewBag.ListaAutorizacionCargue)
+                {
+
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("SolicitudCargue", "Exportacion", new { @rowid = @cal.RowID, @rih = Request.Params["rih"] })"><i class="glyphicon glyphicon-search"> </i></a>
+                        </td>
+                        <td>
+                            @cal.SolicitudTransporte.Proforma.Titulo
+                        </td>
+                        <td>
+                            @cal.FechaCreacion
+                        </td>
+                        <td>
+                            @cal.BKK
+                        </td>
+                        <td>
+                            @cal.Empaque
+                        </td>
+                        <td>
+                            @cal.AutorizacionCargueVehiculo.Count
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,81 @@
+﻿@using PedidosOnline.Models;
+@model List<PedidosOnline.Models.Factura>
+@{
+    ViewBag.Title = "Listado Facturas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row ">
+    <div style="margin-bottom:20px">
+        <div class="col-md-12">
+            <div class="nav">
+                <span>
+                    <a href="@Url.Action( "Factura","Exportacion",new {   @rih = Request.Params["rih"] })" class="alink">
+                        <i class="glyphicon glyphicon-plus"></i>&nbsp;<SPAN class="lang" key="NUEVO">Nuevo</SPAN>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <table id="table" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th class="lang">Proforma</th>
+                    <th class="lang">Fecha Creacion</th>
+                    <th class="lang">FOB</th>
+                    <th class="lang">Seguro</th>
+                    <th class="lang">Flete</th>
+                    <th class="lang">Cantidad</th>
+                    <th class="lang">Valor Unitario</th>
+                    <th class="lang">Valor Toal</th>
+                </tr>
+            </thead>
+            <tbody style="text-align:center;">
+                @foreach (Factura fac in ViewBag.ListaFacturas)
+                {
+
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Factura", "Exportacion", new { @rowid = @fac.RowID, @rih = Request.Params["rih"] })"><i class="glyphicon glyphicon-search"> </i></a>
+                        </td>
+                        <td>
+                            <a href="javascript:UtilExportarPDF('Factura',@fac.RowID)" class="alink" ata-toggle="tooltip" data-placement="bottom" title="Exportar PDF">
+                                <i class="glyphicon glyphicon-file"></i>
+                            </a>
+                        </td>
+                        <td>
+                            @fac.Proforma.Titulo
+                        </td>
+                        <td>
+                            @fac.FechaCreacion
+                        </td>
+                        <td>
+                            @fac.FOB
+                        </td>
+                        <td>
+                            @fac.Seguro
+                        </td>
+                        <td>
+                            @fac.Flete
+                        </td>
+                        <td>
+                            @fac.Cantidad
+                        </td>
+                        <td>
+                            @fac.ValorUnitario
+                        </td>
+                        <td>
+                            @fac.Total
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

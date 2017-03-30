@@ -1,0 +1,236 @@
+﻿@model PedidosOnline.Models.Puerto
+@{
+    ViewBag.Title = "Puerto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    a {
+        color: #333;
+    }
+</style>
+<script>
+    function valida_formulario() {
+        debugger;
+        hasChangue = false;
+        var validator = $("#formulario_puerto").validate();
+        if (validator.form()) {
+            guardar_puerto();
+        }
+    }
+
+    $(document).ready(function () {
+        debugger;
+        //CargarDepartamento();
+        //CargarCiudad();
+    })
+
+</script>
+<script>
+    function guardar_puerto() {
+        $.ajax({
+            type: "POST",
+            url: "/Maestro/GuardarPuerto",
+            data: {
+                formulario: $("#formulario_puerto").serialize(),
+                RowID_Puerto: jQuery(".RowID_Puerto").val(),
+            },
+
+            success: function (data) {
+                debugger;
+
+                window.location = "/Maestro/ListadoPuerto"
+
+            },
+            error: function (data) {
+                sweetAlert("", data.respuesta, "warning");
+            }
+
+        });
+    }
+
+
+    function CargarCiudad() {
+        $.ajax({
+            type: "POST",
+            url: "/Maestro/CargarCiudad",
+            data: {
+                rowid: $("#departamento").val(),
+            },
+            success: function (data) {
+                debugger;
+
+                $("#ciudad").empty()
+                $("#ciudad").append("<option disabled selected value='' >Seleccione una Opción</option>").trigger("chosen:updated");
+                data.forEach(function (Ciudad) {
+                        $("#ciudad").append("<option value='" + Ciudad.RowId + "' >" + Ciudad.Nombre
+                        + "</option>").trigger("chosen:updated");
+                        $("#ciudad").trigger("chosen:updated");
+                  });
+            },
+            error: function (data) {
+                swal("ERROR", data, "error");
+            }
+        });
+    }
+
+    function CargarDepartamento() {
+        debugger;
+        $.ajax({
+            type: "POST",
+            url: "/Maestro/CargarDepartamento",
+            data: {
+                rowid: $("#pais").val(),
+            },
+            success: function (data) {
+                $("#departamento").empty()
+                $("#departamento").append("<option disabled selected value='' >Seleccione una Opción</option>").trigger("chosen:updated");
+                data.forEach(function (Departamento) {
+                       $("#departamento").append("<option value='" + Departamento.RowId + "' >" + Departamento.Nombre
+                       +"</option>").trigger("chosen:updated");
+                        $("#departamento").trigger("chosen:updated");
+                });
+            },
+            error: function (data) {
+                swal("ERROR", data, "error");
+            }
+        });
+    }
+</script>
+
+
+<div class="panel">
+
+    <div class="row" id="div_menu" style="margin-bottom:20px">
+        <div class="col-md-12">
+            <div class="nav">
+                <span>
+                    &nbsp;&nbsp;
+                    <a href="@Url.Action("ListadoPuerto","Maestro",new {  @rih = Request.Params["rih"] })" class="alink">
+                        <i class="glyphicon glyphicon-list-alt"></i>&nbsp;<span class="lang" key="VISTA">Vista&nbsp;&nbsp;</span>
+                    </a>
+                </span>
+                <span>
+                    <a href="javascript:valida_formulario();" class="alink">
+                        <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
+                    </a>
+                </span>
+                <span>
+                    &nbsp;&nbsp;
+                    <a href="javascript:valida_formulario();" class="alink">
+                        <i class="glyphicon glyphicon-floppy-disk"></i><span class="lang" key="GUARDAR_&_CERRAR">&nbsp;Guardar&nbsp;&&nbsp;Cerrar</span>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="tabbable tabbable-custom tabs-top">
+        <ul class="nav nav-tabs tabs-top">
+            <li id="li_tab1" class="active"><a href="#tab1" data-toggle="tab">Datos generales</a></li>
+        </ul>
+    </div>
+
+
+
+    <div class="tab-content" style="overflow:hidden">
+        <div class="col-md-12">
+
+            <form id="formulario_puerto" data-toggle="validator" role="form">
+                <input type="hidden" class="RowID_Puerto" name="RowID_Puerto" value="@Model.RowID" />
+                <input type="hidden" class="RowID_Detalle" name="RowID_Detalle" />
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">*Nombre:</label>
+                                <input name="nombre" id="nombre" class="form-control" value="@Model.Nombre" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">*País:</label>
+                                <select name="pais" id="pais" class="chosen form-control" required onchange="javascript:CargarDepartamento()">
+                                    <option value="" disabled selected>Seleccione una opcion</option>
+                                    @foreach (PedidosOnline.Models.Pais pais in ViewBag.Pais)
+                                    {
+
+                                        if (Model.RowID != 0 && @Model.Ciudad.Departamento.PaisID != null && @Model.Ciudad.Departamento.PaisID.Equals(@pais.RowID))
+                                        {
+                                            <option value="@pais.RowID" selected>@pais.Nombre</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@pais.RowID">@pais.Nombre</option>
+                                        }
+                                    }
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">*Departamento:</label>
+                                <select name="departamento" id="departamento" class="chosen form-control" onchange="javascript:CargarCiudad()" required>
+                                    <option value="" disabled selected>Seleccione una opcion</option>
+                                    @foreach (PedidosOnline.Models.Departamento departamento in ViewBag.Departamento)
+                                    {
+                                        if (Model.RowID != 0 && @Model.Ciudad.DepartamentoID != null && @Model.Ciudad.DepartamentoID.Equals(@departamento.RowID))
+                                        {
+                                            <option value="@departamento.RowID" selected>@departamento.Nombre</option>
+
+                                        }
+                                        else
+                                        {
+                                            <option value="@departamento.RowID">@departamento.Nombre</option>
+
+
+                                        }
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">*Ciudad:</label>
+                                <select name="ciudad" id="ciudad" class="chosen form-control" required>
+                                    <option value="" disabled selected>Seleccione una opcion</option>
+                                    @foreach (PedidosOnline.Models.Ciudad ciudad in ViewBag.Ciudad)
+                                    {
+                                        if (Model.RowID != 0 && @Model.CiudadID != null && @Model.CiudadID.Equals(@ciudad.RowID))
+                                        {
+                                            <option value="@ciudad.RowID" selected>@ciudad.Nombre</option>
+
+                                        }
+                                        else
+                                        {
+                                            <option value="@ciudad.RowID">@ciudad.Nombre</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    @*@if (Model.RowID == 0)
+                        {
+
+
+                            <button type="submit" class="btn btn-success" onclick="javascript:valida_formulario()" style="float: right;  width:100px">
+                                <i class="glyphicon glyphicon-ok"></i>  Guardar
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-success" onclick="javascript:valida_formulario()" style="float: right;  width:100px">
+                                <i class="glyphicon glyphicon-floppy-disk"></i>  Actualizar
+                            </button>
+                        }*@
+                </div>
+
+            </form>
+        </div>
+    </div>
+        </div>
+

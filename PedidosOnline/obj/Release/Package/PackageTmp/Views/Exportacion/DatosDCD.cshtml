@@ -1,0 +1,430 @@
+﻿@model PedidosOnline.Models.DCD
+@{
+    ViewBag.Title = "Datos DCD";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Tabs.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#ccontrato').autocomplete({
+            source: '/Exportacion/BuscarContrato',
+            minLength: 1,
+            select: function (evento,ui) {
+                $('#comprador').empty();
+                $('#comprador').val(ui.item.nombrecomp);
+                $('#compradornit').empty();
+                $('#compradornit').val(ui.item.nitcomp);
+                $('#vendedor').empty();
+                $('#vendedor').val(ui.item.nombreven);
+                $('#vendedornit').empty();
+                $('#vendedornit').val(ui.item.nitven);
+                TablaBalance();
+            }
+        })
+    })
+    function guardarDCD(a) {
+        //debugger
+        ModalProcesandoShow();
+
+        var RowID = $(".RowID").val();
+        var RowIDPro = $(".RowIDPro").val();
+
+        if ($("#ccontrato").val() == "") {
+            Mensajes('El campo Contrato es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+        if ($("#fecha").val() == "") {
+            Mensajes('El campo fecha Expedicion es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+        if ($("#Reprensentanteleg").val() == "") {
+            Mensajes('El campo Representante legal es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+        if ($("#NroConvenio").val() == "") {
+            Mensajes('El nro de convenio es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "GuardarDCD",
+            data: {
+                formulario: $("#form").serialize(),
+                RowID: RowID,
+                RowIDContrato: $("#ccontrato").val()
+            },
+            success: function (data2) {
+                debugger
+                if(a == 1)
+                {
+                    
+                    location.href = "../Exportacion/DatosDCD?rowid="+data2;
+                    ModalProcesandoHiden();
+                }
+                else
+                {
+                    ModalProcesandoHiden();
+                    location.href = "../Exportacion/DCD";
+                }
+            },
+            error: function (request) {
+                Mensajes(request.responseText, 'error', '');
+                ModalProcesandoHiden();
+            }
+        });
+    }
+
+</script>
+
+<h2>Datos DCD</h2>
+
+<div class="col-md-12">
+    <div class="nav">
+        <span>
+            &nbsp;&nbsp;
+            <a href="@Url.Action("DCD","Exportacion",new {  @rih = Request.Params["rih"] })" class="alink">
+                <i class="glyphicon glyphicon-list-alt"></i>&nbsp;<span class="lang" key="VISTA">Vista&nbsp;&nbsp;</span>
+            </a>
+        </span>
+        <span>
+            <a href="javascript:guardarDCD(1);" class="alink">
+                <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
+            </a>
+        </span>
+        <span>
+            &nbsp;&nbsp;
+            <a href="javascript:guardarDCD(2);" class="alink">
+                <i class="glyphicon glyphicon-floppy-disk"></i><span class="lang" key="GUARDAR_&_CERRAR">&nbsp;Guardar&nbsp;&&nbsp;Cerrar</span>
+            </a>
+        </span>
+
+        @if (Model.RowID != 0)
+        {
+            <span>
+                &nbsp;&nbsp;
+                <a href="~/OrdenCompra/OrdenCompra" class="alink">
+                    <i class="glyphicon glyphicon-arrow-right"></i><span class="lang" key="Siguiente">Siguiente</span>
+                </a>
+            </span>
+        }
+        <div class="tab-content" style="overflow:hidden">
+            <div class="col-md-12">
+                <form id="form" name="form" onsubmit="return false">
+                    <input type="hidden" class="RowID" id="RowID" name="RowID" value="@Model.RowID" />
+                    <div class="col-md-4">
+                        <br />
+                        <br/>
+                        <h4>Quien asume el compromiso de destino</h4>
+                        <br/>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="RazonS" class="lang">No Contrato</label>
+                            </div>
+                            <div class="col-md-5">
+                                @if (Model.RowID > 0)
+                                {
+                                    <input type="text" id="ccontrato" name="ccontrato" value="@Model.Contrato.RowID "  style="width: 100%"/>
+                                }
+                                else
+                                {
+                                    <input type="text" id="ccontrato" name="ccontrato"  style="width: 100%" />
+                                }
+                            </div>                            
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="fecha" class="lang">Fecha</label>
+                                </div>
+                                @if (Model.RowID > 0)
+                                {
+                                    <div class="col-md-5">
+                                        <input type="text" id="fecha" name="fecha" style="width: 100%" value="@Model.FechaExpedicion" readonly="readonly" />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-md-5">
+                                        <input type="text" id="fecha" name="fecha" style="width: 100%"  />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <br />
+                        <br/>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="RazonS" class="lang">Razon Social</label>
+                            </div>
+                            <div class="col-md-5">
+                                @if (Model.RowID > 0)
+                                {
+                                    <input type="text" id="comprador" name="comprador" value="@Model.Contrato.Proforma.Tercero.RazonSocial" style="width: 100%" readonly="readonly" />
+                                }
+                                else
+                                {
+                                    <input type="text" id="comprador" name="comprador" value="" style="width: 100%" readonly="readonly"/>
+                                }
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">NIT</label>
+                            </div>
+                            <div class="col-md-5">
+                                @if (Model.RowID > 0)
+                                {
+                                    <input type="text" id="compradornit" name="compradornit" value="@Model.Contrato.Proforma.Tercero.Identificacion" style="width: 100%" readonly="readonly" />
+                                }
+                                else
+                                {
+                                    <input type="text" id="compradornit" name="compradornit" value="" style="width: 100%" readonly="readonly"/>
+                                }
+                            </div>
+                        </div>
+                       <br/>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">Telefono</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="compradortel" name="compradortel" value="" style="width: 100%" readonly="readonly"/>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">Direccion</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="compradordireccion" name="compradordireccion" value="" style="width: 100%" readonly="readonly"/>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">Ciudad</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="compradorciu" name="compradorciu" value="" style="width: 100%" readonly="readonly"/>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="NroConvenio" class="lang">No Convenio - CMCD:</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="NroConvenio" name="NroConvenio" value="@Model.NroConvenio" style="width: 100%" />
+                            </div>
+                        </div>
+                        <br />
+                        <br />      
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">Representante Legal</label>
+                            </div>
+                            @if (Model.RowID > 0)
+                            {
+                                <div class="col-md-5">
+                                    <input type="text" id="Reprensentanteleg" name="Reprensentanteleg"  value="@Model.RepresentanteLegal" style="width: 100%" />
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-5">
+                                    <input type="text" id="Reprensentanteleg" name="Reprensentanteleg" placeholder="---" value="" style="width: 100%" />
+                                </div>
+                            }
+                        </div>
+                        <br />                      
+                    </div>
+                    <div class="col-md-6">
+                        <br />
+                        <br />
+                        <h4>Productor nacional que realiza la venta</h4>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="RazonS" class="lang">Razon Social</label>
+                            </div>
+                            <div class="col-md-5">
+                                @if (Model.RowID > 0)
+                                {
+                                    <input type="text" id="vendedor" name="vendedor" value="@Model.Contrato.Proforma.Tercero1.RazonSocial" style="width: 100%" readonly="readonly"/>
+                                }
+                                else
+                                {
+                                    <input type="text" id="vendedor" name="vendedor" value="" style="width: 100%" readonly="readonly"/>
+                                }
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">NIT</label>
+                            </div>
+                            <div class="col-md-5">
+                                @if (Model.RowID > 0)
+                                {
+                                    <input type="text" id="vendedornit" name="vendedornit" value="@Model.Contrato.Proforma.Tercero1.Identificacion" style="width: 100%" readonly="readonly"/>
+                                }
+                                else
+                                {
+                                    <input type="text" id="vendedornit" name="vendedornit" value="" style="width: 100%" readonly="readonly"/>
+                                }
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">Telefono</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="vendedortel" name="vendedortel" value="" style="width: 100%" readonly="readonly"/>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">Direccion</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="vendedordireccion" name="vendedordireccion" value="" style="width: 100%" readonly="readonly"/>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">Ciudad</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="vendedorciu" name="vendedorciu" value="" style="width: 100%" readonly="readonly"/>
+                            </div>
+                        </div>
+                        <br />
+                        <h4>Periodo de compensaciones y cesiones</h4>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="Mes" class="lang">Mes</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="Mes" name="Mes" value="@Model.Mes" maxlength="5" style="width: 100%" />
+                            </div>
+                            
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">Año</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="ano" name="ano" value="@Model.Año" maxlength="6" style="width: 100%" />
+                            </div>
+                        </div>
+                        <br />
+                        <h4>Producto adquirido para destinarlo:</h4>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">En</label>
+                            </div>
+                            <div class="col-md-5">
+
+                                <select id="Destinarlo" name="Destinarlo" style="width: 100%" required>
+                                    <option value="">---</option>
+                                    <option value="">En el mismo estado</option>
+                                    <option value="">Producto procesado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                    <div>
+                        <div id="tab_3" class="tab-pane">
+                            <div >
+                                <div >
+                                    <table id="tableBalance" class="table table-resposive table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <td>Item</td>
+                                                <td>Empaque</td>
+                                                <td>Cantidad</td>
+                                                <td>Envio</td>
+                                                <td>Cantidad Contenedores</td>
+                                                <td>TRM</td>
+                                                <td>Valor Compra</td>
+                                                <td>Valor Total</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#Reprensentanteleg').on('keypress', function (e) {
+            //debugger
+            var code = (e.keyCode ? e.keyCode : e.which);
+            if (code == 13) { //Enter keycode
+                return false;
+            }
+        });
+
+        $("#Reprensentanteleg").autocomplete({
+                                                    source: "Buscar_Representante",
+            minLenght: 3,
+            select: function (evento, ui) {//seleccion al autocompletar
+                if (ui.item != null) {//si hay valor en la seleccion autocompletar
+                $("#Reprensentanteleg").val(ui.item.label);
+                                            }
+                                                    },
+            change: function (event, ui) {
+
+            }
+        });
+
+        $('#fecha').datepicker({
+            dateFormat: 'dd/mm/yy',
+            minDate: 0,
+            maxDate: '+3Y',
+            inline: true
+        });
+    });
+
+    function TablaBalance()
+    {
+        $.ajax({
+            url:"BalanceCalculadora",
+            asyn:false,
+            data:{
+                formulario: $("#form").serialize(),
+                rowid: $('#ccontrato').val()
+            },
+            success:function(data){
+                $('#tableBalance tbody').empty();
+                $('#tableBalance tbody').append(data);
+                //ReCalcular();
+            }
+        })
+
+    }
+
+
+</script>

@@ -1,0 +1,59 @@
+﻿@using PedidosOnline.Models;
+@model List<PedidosOnline.Models.FEP>
+@{
+    ViewBag.Title = "Listado Remision FEP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    a {
+        color: #333;
+    }
+</style>
+
+<div class="panel">
+    <div class="row">
+        <div>
+            <div class="nav">
+                <span>
+                    &nbsp;&nbsp;
+                    <a href="@Url.Action("DatoFEP", "Exportacion")" class="alink">
+                        <i class="glyphicon glyphicon-plus"></i>&nbsp;<span class="lang" key="NUEVO">Nuevo</span>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <table id="tblfep" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>NO. DCD</th>
+                        <th>Comprador</th>
+                        <th>Vendedor</th>
+                        <th>No Dex</th>
+                        <th>No Certificado CP</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (PedidosOnline.Models.FEP Datofep in ViewBag.listaFEP)
+                    {
+                        <tr>
+                            <td>@Datofep.RowID</td>
+                            <td>@Datofep.DCDID</td>
+                            <td>@Datofep.DCD.Contrato.Proforma.Tercero.RazonSocial</td>
+                            <td>@Datofep.DCD.Contrato.Proforma.Tercero1.RazonSocial</td>
+                            <td>@Datofep.Dex</td>
+                            <td>@Datofep.NCertificadoCP</td>                            
+                            <td><a href="@Url.Action("DatoFEP", "Exportacion", new { RowID = Datofep.RowID })"><i class="glyphicon glyphicon-pencil"></i></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

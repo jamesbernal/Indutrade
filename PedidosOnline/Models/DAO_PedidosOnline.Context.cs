@@ -59,6 +59,8 @@ public partial class PedidosOnlineEntities : DbContext
 
     public virtual DbSet<Item> Item { get; set; }
 
+    public virtual DbSet<ItemImpuesto> ItemImpuesto { get; set; }
+
     public virtual DbSet<ListaPrecio> ListaPrecio { get; set; }
 
     public virtual DbSet<Pais> Pais { get; set; }
@@ -68,6 +70,10 @@ public partial class PedidosOnlineEntities : DbContext
     public virtual DbSet<Sucursal> Sucursal { get; set; }
 
     public virtual DbSet<Tercero> Tercero { get; set; }
+
+    public virtual DbSet<AutorizacionCargue> AutorizacionCargue { get; set; }
+
+    public virtual DbSet<AutorizacionCargueVehiculo> AutorizacionCargueVehiculo { get; set; }
 
     public virtual DbSet<Booking> Booking { get; set; }
 
@@ -79,7 +85,17 @@ public partial class PedidosOnlineEntities : DbContext
 
     public virtual DbSet<ContratoAdjunto> ContratoAdjunto { get; set; }
 
-    public virtual DbSet<OrdenCompra> OrdenCompra { get; set; }
+    public virtual DbSet<DetalleMatrizBL> DetalleMatrizBL { get; set; }
+
+    public virtual DbSet<DetalleRegistroLlenado> DetalleRegistroLlenado { get; set; }
+
+    public virtual DbSet<EncabezadoMatrizBL> EncabezadoMatrizBL { get; set; }
+
+    public virtual DbSet<EncabezadoRegistroLlenado> EncabezadoRegistroLlenado { get; set; }
+
+    public virtual DbSet<Factura> Factura { get; set; }
+
+    public virtual DbSet<ListaEmpaque> ListaEmpaque { get; set; }
 
     public virtual DbSet<OrdenCompraContrato> OrdenCompraContrato { get; set; }
 
@@ -89,17 +105,33 @@ public partial class PedidosOnlineEntities : DbContext
 
     public virtual DbSet<ProformaItemCalculadora> ProformaItemCalculadora { get; set; }
 
+    public virtual DbSet<SolicitudTransporte> SolicitudTransporte { get; set; }
+
+    public virtual DbSet<TipoVehiculo> TipoVehiculo { get; set; }
+
     public virtual DbSet<Agrupacion> Agrupacion { get; set; }
 
+    public virtual DbSet<ArchivoAdjunto> ArchivoAdjunto { get; set; }
+
     public virtual DbSet<Costo> Costo { get; set; }
+
+    public virtual DbSet<EnvioMail> EnvioMail { get; set; }
+
+    public virtual DbSet<Estado> Estado { get; set; }
+
+    public virtual DbSet<Firma> Firma { get; set; }
 
     public virtual DbSet<MotoNave> MotoNave { get; set; }
 
     public virtual DbSet<Opcion> Opcion { get; set; }
 
+    public virtual DbSet<Parametro> Parametro { get; set; }
+
     public virtual DbSet<Planta> Planta { get; set; }
 
     public virtual DbSet<Puerto> Puerto { get; set; }
+
+    public virtual DbSet<Vehiculo> Vehiculo { get; set; }
 
     public virtual DbSet<Menu> Menu { get; set; }
 
@@ -115,29 +147,7 @@ public partial class PedidosOnlineEntities : DbContext
 
     public virtual DbSet<PuntoEnvio> PuntoEnvio { get; set; }
 
-    public virtual DbSet<ItemImpuesto> ItemImpuesto { get; set; }
-
-    public virtual DbSet<AutorizacionCargue> AutorizacionCargue { get; set; }
-
-    public virtual DbSet<AutorizacionCargueVehiculo> AutorizacionCargueVehiculo { get; set; }
-
-    public virtual DbSet<SolicitudTransporte> SolicitudTransporte { get; set; }
-
-    public virtual DbSet<TipoVehiculo> TipoVehiculo { get; set; }
-
-    public virtual DbSet<EnvioMail> EnvioMail { get; set; }
-
-    public virtual DbSet<Estado> Estado { get; set; }
-
-    public virtual DbSet<Firma> Firma { get; set; }
-
-    public virtual DbSet<Parametro> Parametro { get; set; }
-
-    public virtual DbSet<Vehiculo> Vehiculo { get; set; }
-
-    public virtual DbSet<DetalleRegistroLlenado> DetalleRegistroLlenado { get; set; }
-
-    public virtual DbSet<EncabezadoRegistroLlenado> EncabezadoRegistroLlenado { get; set; }
+    public virtual DbSet<OrdenCompra> OrdenCompra { get; set; }
 
 
     public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)

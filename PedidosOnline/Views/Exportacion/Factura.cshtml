@@ -1,0 +1,582 @@
+﻿@model PedidosOnline.Models.Factura
+@{
+    ViewBag.Title = "Factura";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Tabs.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=2.0, maximum-scale=1.0, minimum-scale=1.0">
+<script type="text/javascript" src="~/Content/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
+<link href="~/Content/js/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">
+<style>
+    a {
+        color: #333;
+    }
+</style>
+<style>
+    label {
+        width: 100%;
+    }
+</style>
+<style>
+    input {
+        width: 100%;
+    }
+</style>
+
+<div class="col-md-12">
+    <div class="nav">
+        <span>
+            &nbsp;&nbsp;
+            <a href="@Url.Action("ListadoFacturas","Exportacion",new {  @rih = Request.Params["rih"] })" class="alink">
+                <i class="glyphicon glyphicon-list-alt"></i>&nbsp;<span class="lang" key="VISTA">Vista&nbsp;&nbsp;</span>
+            </a>
+        </span>
+        <span>
+            <a href="javascript:Guardar()" class="alink">
+                <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
+            </a>
+        </span>
+        <div class="tabbable tabbable-custom tabs-top">
+            <br />
+            <ul class="nav nav-tabs tabs-top">
+                <li class="active"><a href="#tab_1" id="litab_1" data-toggle="tab" class="lang" key="">Informacion General Factura</a></li>
+                @if (Model.RowID > 0)
+                {
+                    <li class="item" style=""><a href="#tab_2" id="litab_2" data-toggle="tab" class="lang" key="">Items</a></li>
+                }
+            </ul>
+        </div>
+        <div class="tab-content" style="overflow:hidden">
+            <div class="tab-pane active" id="tab_1">
+                <div class="col-md-12">
+                    <form id="form" name="form" onsubmit="return false">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="hidden" class="RowID" id="RowID" name="RowID" value="@Model.RowID" />
+                                <div class="col-md-6">
+                                    <br />
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="ti" class="lang">Proforma</label>
+                                            <input type="hidden" class="RowProforma" id="RowProforma" name="RowProforma" />
+                                        </div>
+                                        @if (Model.RowID > 0)
+                                        {
+                                            <div class="col-md-6">
+                                                <input type="text" id="proformaA" name="proformaA" value="@Model.Proforma.Titulo" disabled/>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-6">
+                                                <input type="text" id="proformaA" name="proformaA" />
+                                            </div>
+                                        }
+                                        <br />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <div class="col-md-3">
+                                                <label for="fecha" class="lang">Vendedor</label>
+                                            </div>
+                                            @if (Model.RowID > 0)
+                                            {
+                                                <div class="col-md-6">
+                                                    <input type="text" id="vendedor" name="vendedor" value="@Model.Proforma.Contrato.Tercero3.RazonSocial" disabled />
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="col-md-6">
+                                                    <input type="text" id="vendedor" name="vendedor" value="" disabled />
+                                                </div>
+                                            }
+                                        </div>
+                                        <br />
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="ti" class="lang">Nit</label>
+                                        </div>
+                                        @if (Model.RowID > 0)
+                                        {
+                                            <div class="col-md-6">
+                                                <input type="text" id="vendedornit" name="vendedornit" value="@Model.Proforma.Contrato.Tercero3.Identificacion" disabled />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-6">
+                                                <input type="text" id="vendedornit" name="vendedornit" value="" disabled />
+                                            </div>
+                                        }
+                                        <br />
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="ti" class="lang">Telefono</label>
+                                        </div>
+                                        @if (Model.RowID > 0)
+                                        {
+                                            <div class="col-md-6">
+                                                <input type="text" id="vendedortel" name="vendedortel" value="@Model.Proforma.Contrato.Tercero3.ContactoERP.Telefono1 " disabled />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-6">
+                                                <input type="text" id="vendedortel" name="vendedortel" value="" disabled />
+                                            </div>
+                                        }
+                                        <br />
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="ti" class="lang">Direccion</label>
+                                        </div>
+                                        @if (Model.RowID > 0)
+                                        {
+                                            <div class="col-md-6">
+                                                <input type="text" id="vendedordir" name="vendedordir" value="@Model.Proforma.Contrato.Tercero3.ContactoERP.Direccion1 " disabled />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-6">
+                                                <input type="text" id="vendedordir" name="vendedordir" value="" disabled />
+                                            </div>
+                                        }
+                                        <br />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <div class="col-md-3">
+                                                <label for="fecha" class="lang">Contrato</label>
+                                            </div>
+                                            @if (Model.RowID > 0)
+                                            {
+                                                <div class="col-md-6">
+                                                    <input type="text" id="contrato" name="contrato" value="@Model.Proforma.Contrato.Consecutivo" disabled />
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="col-md-6">
+                                                    <input type="text" id="contrato" name="contrato" required disabled />
+                                                </div>
+                                            }
+                                        </div>
+                                        <br />
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <div class="col-md-3">
+                                                <label for="fecha" class="lang">Comprador</label>
+                                            </div>
+                                            @if (Model.RowID > 0)
+                                            {
+                                                <div class="col-md-6">
+                                                    <input type="text" id="comprador" name="comprador" value="@Model.Proforma.Contrato.Tercero.RazonSocial" disabled />
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="col-md-6">
+                                                    <input type="text" id="comprador" name="comprador" value="" disabled />
+                                                </div>
+                                            }
+                                        </div>
+                                        <br />
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="ti" class="lang">Nit</label>
+                                        </div>
+                                        @if (Model.RowID > 0)
+                                        {
+                                            <div class="col-md-6">
+                                                <input type="text" id="compradornit" name="compradornit" value="@Model.Proforma.Contrato.Tercero.Identificacion" disabled />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-6">
+                                                <input type="text" id="compradornit" name="compradornit" disabled />
+                                            </div>
+                                        }
+                                        <br />
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="ti" class="lang">Telefono</label>
+                                        </div>
+                                        @if (Model.RowID > 0)
+                                        {
+                                            <div class="col-md-6">
+                                                <input type="text" id="compradortel" name="compradortel" value="@Model.Proforma.Contrato.Tercero.ContactoERP.Telefono1" disabled />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-6">
+                                                <input type="text" id="compradortel" name="compradortel" disabled />
+                                            </div>
+                                        }
+                                        <br />
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label for="ti" class="lang">Direccion</label>
+                                        </div>
+                                        @if (Model.RowID > 0)
+                                        {
+                                            <div class="col-md-6">
+                                                <input type="text" id="compradordir" name="compradordir" value="@Model.Proforma.Contrato.Tercero.ContactoERP.Direccion1" disabled />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-6">
+                                                <input type="text" id="compradordir" name="compradordir" disabled />
+                                            </div>
+                                        }
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <br />
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="lang">Fob</label>
+                                        </div>
+                                        @if (Model.RowID > 0)
+                                        {
+                                            <div class="col-md-8">
+                                                <input type="text" id="fob" name="fob" value="@Model.FOB" disabled />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-8">
+                                                <input type="text" id="fob" name="fob" required onkeyup="CalcularTotales()" />
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="lang">Flete</label>
+                                        </div>
+                                        @if (Model.RowID > 0)
+                                        {
+                                            <div class="col-md-8">
+                                                <input type="text" id="flete" name="flete" value="@Model.Flete" disabled />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-8">
+                                                <input type="text" id="flete" name="flete" required onkeyup="CalcularTotales()" />
+                                            </div>
+                                        }
+                                    </div>
+                                    <br />
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="lang">Seguro</label>
+                                        </div>
+                                        @if (Model.RowID > 0)
+                                        {
+                                            <div class="col-md-8">
+                                                <input type="text" id="seguro" name="seguro" value="@Model.Seguro" disabled />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-8">
+                                                <input type="text" id="seguro" name="seguro" required onkeyup="CalcularTotales()" />
+                                            </div>
+                                        }
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <br />
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="lang">Cantidad</label>
+                                        </div>
+                                        @if (Model.RowID > 0)
+                                        {
+                                            <div class="col-md-8">
+                                                <input type="text" id="cantidad" name="cantidad" value="@Model.Cantidad" disabled />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-8">
+                                                <input type="text" id="cantidad" name="cantidad" required onkeyup="CalcularTotales()" />
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="lang">Precio unitario</label>
+                                        </div>
+                                        @if (Model.RowID > 0)
+                                        {
+                                            <div class="col-md-8">
+                                                <input type="text" id="unitario" name="unitario" value="@Model.ValorUnitario" disabled />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-8">
+                                                <input type="text" id="unitario" name="unitario" required />
+                                            </div>
+                                        }
+                                    </div>
+                                    <br />
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="lang">Valor Total</label>
+                                        </div>
+                                        @if (Model.RowID > 0)
+                                        {
+                                            <div class="col-md-8">
+                                                <input type="text" id="total" name="total" value="@Model.Total" disabled />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-8">
+                                                <input type="text" id="total" name="total" required />
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       <div class="row">
+                        <div class="col-md-11">
+                            <div class="col-md-4">
+                                @if (Model.RowID > 0)
+                                { 
+                                    <div class="form-group">
+                                        <div class="col-md-5">
+                                            <label for="TerminosCondiciones" class="lang">Factura Final</label>
+                                        </div>
+                                        <div class="col-md-7" id="modal-terminos">
+                                            <a class="ui-button-text-icon-primary" onclick="cargarmodal()" style="cursor:pointer">Ver/Editar</a>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                          </div>
+                       </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade col-md-12" id="myModal1" data-backdrop="static" data-keyboard="false" style="overflow: auto;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><b>Factura Final</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @if (!String.IsNullOrEmpty(Model.Nota))
+                                {
+                                    <textarea id="terminos" name="terminos">@Model.Nota</textarea>
+                                }
+                                else
+                                {
+                                    if (Model.RowID > 0)
+                                    {
+                                            <textarea id="terminos" name="terminos">
+                                                <span lang="ES-CO" style="font-size:8.5pt;line-height:150%;font-family:&quot;Arial&quot;,sans-serif;mso-fareast-font-family:Arial">
+                                                    <h5 >@Model.Proforma.ProformaItemCalculadora.First().CalculadoraItems.Item.Descripcion</h5>
+                                                    <p>
+                                                        <strong>FOB:</strong> @Model.FOB<br />
+                                                        <strong>SEGURO:</strong> @Model.Seguro<br />
+                                                        <strong>FLETE:</strong> @Model.Flete<br />
+                                                        <strong>CIF:</strong> @Model.ValorUnitario<br />
+                                                        <strong>NET WWEIGHT:</strong> @Model.Cantidad<br />
+                                                        <strong>CONTRACT No.</strong> @Model.Proforma.Contrato.Consecutivo<br />
+                                                        <strong>PAYMENT TERMS:</strong> 45 DAYS AFTER BL<br />
+                                                        <strong>PORT OF LOADING/AIRPORT OF DEP.</strong><br />
+                                                            @Model.Proforma.Puerto.Nombre<br />
+                                                        <strong>PORT OF DISCHARGE/AIRPORT OF DEST.</strong><br />
+                                                            @Model.Proforma.Puerto1.Nombre<br />
+                                                        <strong>Banco beneficiario:</strong> Bancolombia Panama S.A<br />
+                                                        <strong>
+                                                            Payment: Basis the bill of loading quantity, payment will be made in United States Dollars<br />
+                                                            for full invoice value by an irrevocable documentary letter of credit established through<br />
+                                                            a bank acceptable to seller, for payment without offset, deduction or courter claim, at sight<br />
+                                                            (Seller shall advise advising bank in advance)<br />
+                                                            Certificate: SGS Certificate in Loading Port<br />
+                                                            Bank's name:<br />
+                                                            Banco beneficiario: Bancolombia Panamá, S.A.<br />
+                                                            Dirección: Plaza Marbella, CL aquilino de la guardia y calle 47. Panamá. Rep. de Panamá<br />
+                                                            Sw ift: COLOPAPA<br />
+                                                            Banco Intermediario: Citibank NY<br />
+                                                            Direccion: CITIBANK de Nueva York 111 Wall Street New York N.Y. 10043<br />
+                                                            Código Sw if t/BIC :CITIUS33<br />
+                                                            Beneficiario: Indutrade Colombia S.A.S<br />
+                                                            Cuenta: 80100004285
+                                                         </strong>
+                                                    </p>
+                                                </span>
+                                            </textarea>
+                                        }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="salir" aria-hidden="true">Verficado</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#proformaA').on('keypress', function (e) {
+            var code = (e.keyCode ? e.keyCode : e.which);
+            if (code == 13) { //Enter keycode
+                return false;
+            }
+        });
+        $("#terminos").summernote();
+
+        $(".salir").click(function () {
+            $("#myModal1").modal('hide');
+            GuardarTerminos();
+        })
+
+        $("#proformaA").autocomplete({
+            source: "Proforma_Factura",
+            select: function (evento, ui) {
+                if (ui.item != null) {
+                    $("#proformaA").val(ui.item.label);
+                    $("#RowProforma").val(ui.item.RowID);
+                }
+            },
+            select: function (event, ui) {
+                $.ajax({
+                    url: "CargarProforma_Factura",
+                    asyn: false,
+                    data: {
+                        RowID: ui.item.RowID
+                    },
+                    success: function (data) {
+                        $('#contrato').empty();
+                        $('#contrato').val(data[0].contrato);
+                        $('#vendedor').empty();
+                        $('#vendedor').val(data[0].vendedornom);
+                        $('#vendedornit').empty();
+                        $('#vendedornit').val(data[0].vendedornit)
+                        $('#vendedortel').empty();
+                        $('#vendedortel').val(data[0].vendedortel)
+                        $('#vendedordir').empty();
+                        $('#vendedordir').val(data[0].vendedordir)
+                        $('#comprador').empty();
+                        $('#comprador').val(data[0].comprador);
+                        $('#compradornit').empty();
+                        $('#compradornit').val(data[0].compradornit)
+                        $('#compradortel').empty();
+                        $('#compradortel').val(data[0].compradortel)
+                        $('#compradordir').empty();
+                        $('#compradordir').val(data[0].compradordir)
+                        $("#RowProforma").val(ui.item.RowID);
+
+                    }
+                })
+            }
+        });
+
+    });
+    function cargarmodal() {
+        $("#myModal1").modal('show');
+    }
+
+    function CalcularTotales() {
+        $.ajax({
+            url: "CalcularTotales",
+            data: {
+                fob: $("#fob").val(),
+                flete: $("#flete").val(),
+                seguro: $("#seguro").val(),
+                cantidad: $("#cantidad").val(),
+            },
+            success: function (data) {
+                debugger
+                $('#unitario').val(data.unitario);
+                $('#total').val(data.ValorTotal);
+            }
+        })
+    }
+
+    function Guardar() {
+        var validator = $("#form").validate();
+        if (validator.form()) {
+            var formData = new FormData(document.getElementById("form"));
+            ModalProcesandoShow();
+            $.ajax({
+                url: "GuardarFactura",
+                type: "post",
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+
+                    location.href = "../Exportacion/Factura?rowid=" + data;
+                    ModalProcesandoHiden();
+                },
+                error: function (error) {
+                    ModalProcesandoHiden();
+                    Mensajes(error, 'error', '');
+                }
+            })
+        }
+    }
+
+    function GuardarTerminos() {
+        $.ajax({
+            type: "POST",
+            url: "GuardarFormatoFactura",
+            data:{
+                rowid:@Model.RowID,
+                nota: $(".note-editable").html(),
+            },
+            success: function (data) {
+                $("#myModal1").modal('hide');
+            },
+            error: function (data) {
+                Mensajes('Error , Por favor intente de Nuevo','error','');
+            }
+        });
+    }
+</script>

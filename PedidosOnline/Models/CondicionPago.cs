@@ -22,9 +22,9 @@ public partial class CondicionPago
     public CondicionPago()
     {
 
-        this.OrdenCompra = new HashSet<OrdenCompra>();
-
         this.Sucursal = new HashSet<Sucursal>();
+
+        this.OrdenCompra = new HashSet<OrdenCompra>();
 
     }
 
@@ -49,11 +49,11 @@ public partial class CondicionPago
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<OrdenCompra> OrdenCompra { get; set; }
+    public virtual ICollection<Sucursal> Sucursal { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Sucursal> Sucursal { get; set; }
+    public virtual ICollection<OrdenCompra> OrdenCompra { get; set; }
 
 }
 

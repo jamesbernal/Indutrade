@@ -1,0 +1,110 @@
+﻿@model IEnumerable<PedidosOnline.Models.Contacto>
+@{
+    ViewBag.Title = "ListadoContacto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/js/select2/select2.css" rel="stylesheet" />
+<script type="text/javascript" src="~/js/select2/select2.min.js?v=166"></script> <!-- Styled select boxes -->
+<script>
+    $(document).ready(function () {
+        $('table').dataTable({
+            " processing": true,
+            "bFilter": true,
+            "bPaginate": true,
+            "info": false,
+            "bDestroy": true,
+            aLengthMenu: [
+            [11, 25, 50, 100, -1],
+            [11, 25, 50, 100, "All"]
+            ],
+            "iDisplayLength": 11
+
+        });
+
+    });
+    function ExportarExcel() {//permite exportar desde el data procedure con la palabra clave
+        UtilExportarExcel('CONTACTOS', $("#table_filter").find("input").val());
+    }
+</script>
+
+<div class="nav">
+    <span>
+        <a href="@Url.Action( "Contacto","CRM",new { @rih=Request.Params["rih"] })" class="alink">
+            <i class="glyphicon glyphicon-plus"></i>&nbsp;Nuevo
+        </a>
+    </span>
+    <span>
+        &nbsp;&nbsp;
+        <a href="javascript:ExportarExcel();" class="alink">
+            <i class="glyphicon glyphicon-export"></i>&nbsp;<span class="lang alink" key="EXPORTAR">Exportar</span>
+        </a>
+    </span>
+</div>
+<br />
+
+<div class="row ">
+    <div class="col-md-12">
+        <table id="table" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="lang" key="IDENTIFICACION">Identificación</th>
+                    <th class="lang" key="SUCURSAL">Sucursal</th>
+                    <th class="lang" key="NOMBRES">Nombres</th>
+                    <th class="lang" key="APELLIDOS">Apellidos</th>
+                    <th class="lang" key="CORREO">Correo</th>
+                    <th class="lang" key="TELEFONO">Teléfono</th>
+                    <th class="lang" key="CELULAR">Celular</th>
+                    <th class="lang" key="CARGO">Cargo</th>
+                    <th class="lang" key="AREA">Area</th>
+                    @*<th class="lang" key="FECHA_CREACION">Fecha Creación</th>*@
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (PedidosOnline.Models.Contacto contacto in @Model.ToList())
+                {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Contacto", "CRM", new { @rowid = @contacto.RowID,   @rih = Request.Params["rih"]   })"><i class="glyphicon glyphicon-pencil"> </i></a>
+                        </td>
+                        <td>
+                            @contacto.Identificacion
+                        </td>
+                        <td>
+                            @*@if (contacto.SucursalID != null) {
+                                    @contacto.Sucursales.NombreSucursal
+                                }*@
+                        </td>
+                        <td>
+                            @contacto.Nombre
+                        </td>
+                        <td>
+                            @contacto.Apellido
+                        </td>
+                        <td>
+                            <a href="mailto:@contacto.Email">@contacto.Email</a>
+                        </td>
+                        <td>
+                            @contacto.Telefono1
+                        </td>
+                        <td>
+                            @contacto.Celular
+                        </td>
+                        <td>
+                            @contacto.Cargo
+                        </td>
+                        <td>
+                            @contacto.Area
+                        </td>
+                        @*<td>
+                                @contacto.fecha_creacion
+                            </td>*@
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

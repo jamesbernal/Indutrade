@@ -1,0 +1,130 @@
+﻿@model IEnumerable<PedidosOnline.Utilidades.ModalReferencias>
+@{
+    ViewBag.Title = "Modal_Referencias";
+    Layout = null;
+}
+<link href="~/Content/Tabs.css" rel="stylesheet" />
+<link href="~/Content/js/select2/select2.css" rel="stylesheet" />
+<script type="text/javascript" src="~/Content/js/select2/select2.min.js?v=166"></script> <!-- Styled select boxes -->
+<script>
+    var IsData = {};
+    //$(document).ready(function () {
+
+    ModalProcesandoHiden();//Siempre debe de ir para que el modal abra
+
+    $("#myModal1").modal('show');//Siempre debe de ir para que el modal se muestre
+
+    $(".seleccion").click(function () {
+        IsData.Valor = $(this).val();
+        if ($(this).val().length == 0 || IsData.Valor == "on") {
+            IsData.Valor = ''
+            IsData.rowid = '';
+        }
+        else {
+            IsData.rowid = $(this).data("rowid");
+        }
+    });
+
+    $('#table').dataTable({
+        "processing": true,
+        "bFilter": true,
+        "bPaginate": true,
+        "info": false,
+        "bDestroy": true,
+        aLengthMenu: [
+            [50, 100, -1],
+            [50, 100, "All"]
+        ],
+        "iDisplayLength": 50
+    });
+
+    //});
+
+    function Confirmar() {
+        if (IsData.Valor != undefined && IsData.Valor != "") {
+
+            $("#relacionado_a").val(IsData.Valor);
+            $("#rowid_contacto").val(IsData.rowid);
+            try {
+                $("#rowid_relacion").val(IsData.rowid);
+            } catch (e) { }
+
+            $("#myModal1").modal('hide');
+        }
+        else {
+            alert("[Error] Debe seleccionar almenos un registro");
+        }
+    }
+
+</script>
+
+<div class="modal fade" id="myModal1" data-backdrop="static" data-keyboard="false" style="overflow: hidden;">
+    <div class="modal-dialog" style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close salir" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="lang modal-title" key="@ViewBag.titulo"><b>@ViewBag.titulo</b></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" id="div_btns">
+                    <div class="col-md-12">
+                        <div class="nav" style="margin-left:30px">
+                            <span>
+                                <a href="#" class="alink" title="Confirmar" onclick="Confirmar();">
+                                    <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;Confirmar
+                                </a>
+                            </span>
+                            <span>
+                                &nbsp;&nbsp;
+                                <a href="#" class="alink" data-dismiss="modal" title="Salir">
+                                    <i class="glyphicon glyphicon-log-in"></i>&nbsp;Salir
+                                </a>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_3_1">
+                                <br />
+                                <div class="row" style="margin-right: 15px;margin-left: 15px;">
+                                    <div class="col-md-12">
+                                        <div style="overflow-y:auto;height:350px">
+                                            <table id="table" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive datatable">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th class="lang" key="@ViewBag.columna1">@ViewBag.columna1</th>
+                                                        <th class="lang" key="@ViewBag.columna2">@ViewBag.columna2</th>
+                                                        <th class="lang" key="@ViewBag.columna3">@ViewBag.columna3</th>
+                                                        <th class="lang" key="@ViewBag.columna4">@ViewBag.columna4</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var reg in Model.ToList())
+                                                    {
+                                                        <tr>
+                                                            <td style="width:10%">
+                                                                <input type="radio" class="seleccion" name="seleccion" data-rowid="@reg.rowid" data-valor="@reg.valor" value="@reg.valor">
+                                                            </td>
+                                                            <td>@reg.columna1</td>
+                                                            <td>@reg.columna2</td>
+                                                            <td>@reg.columna3</td>
+                                                            <td>@reg.columna4</td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

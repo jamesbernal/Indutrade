@@ -41,6 +41,12 @@
       <Parameter Name="rowid_proforma" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="spSOLICITUD_TRASNPORTE_EXPORTAR_PDF" ReturnType="Collection(DB_9CAC35_indutradeModel.spSOLICITUD_TRASNPORTE_EXPORTAR_PDF_Result)" />
+    <FunctionImport Name="ProformaExport" ReturnType="Collection(DB_9CAC35_indutradeModel.ProformaExport_Result)">
+      <Parameter Name="RowID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SolicitudTransportePDF" ReturnType="Collection(DB_9CAC35_indutradeModel.SolicitudTransportePDF_Result)">
+      <Parameter Name="RowID" Mode="In" Type="Int32" />
+    </FunctionImport>
     <EntitySet Name="Actividad" EntityType="DB_9CAC35_indutradeModel.Actividad" />
     <EntitySet Name="Contacto" EntityType="DB_9CAC35_indutradeModel.Contacto" />
     <EntitySet Name="TerceroPotencial" EntityType="DB_9CAC35_indutradeModel.TerceroPotencial" />
@@ -53,27 +59,43 @@
     <EntitySet Name="Departamento" EntityType="DB_9CAC35_indutradeModel.Departamento" />
     <EntitySet Name="Empresa" EntityType="DB_9CAC35_indutradeModel.Empresa" />
     <EntitySet Name="Item" EntityType="DB_9CAC35_indutradeModel.Item" />
+    <EntitySet Name="ItemImpuesto" EntityType="DB_9CAC35_indutradeModel.ItemImpuesto" />
     <EntitySet Name="ListaPrecio" EntityType="DB_9CAC35_indutradeModel.ListaPrecio" />
     <EntitySet Name="Pais" EntityType="DB_9CAC35_indutradeModel.Pais" />
     <EntitySet Name="Precio" EntityType="DB_9CAC35_indutradeModel.Precio" />
     <EntitySet Name="Sucursal" EntityType="DB_9CAC35_indutradeModel.Sucursal" />
     <EntitySet Name="Tercero" EntityType="DB_9CAC35_indutradeModel.Tercero" />
+    <EntitySet Name="AutorizacionCargue" EntityType="DB_9CAC35_indutradeModel.AutorizacionCargue" />
+    <EntitySet Name="AutorizacionCargueVehiculo" EntityType="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" />
     <EntitySet Name="Booking" EntityType="DB_9CAC35_indutradeModel.Booking" />
     <EntitySet Name="Calculadora" EntityType="DB_9CAC35_indutradeModel.Calculadora" />
     <EntitySet Name="CalculadoraItems" EntityType="DB_9CAC35_indutradeModel.CalculadoraItems" />
     <EntitySet Name="Contrato" EntityType="DB_9CAC35_indutradeModel.Contrato" />
     <EntitySet Name="ContratoAdjunto" EntityType="DB_9CAC35_indutradeModel.ContratoAdjunto" />
-    <EntitySet Name="OrdenCompra" EntityType="DB_9CAC35_indutradeModel.OrdenCompra" />
+    <EntitySet Name="DetalleMatrizBL" EntityType="DB_9CAC35_indutradeModel.DetalleMatrizBL" />
+    <EntitySet Name="DetalleRegistroLlenado" EntityType="DB_9CAC35_indutradeModel.DetalleRegistroLlenado" />
+    <EntitySet Name="EncabezadoMatrizBL" EntityType="DB_9CAC35_indutradeModel.EncabezadoMatrizBL" />
+    <EntitySet Name="EncabezadoRegistroLlenado" EntityType="DB_9CAC35_indutradeModel.EncabezadoRegistroLlenado" />
+    <EntitySet Name="Factura" EntityType="DB_9CAC35_indutradeModel.Factura" />
+    <EntitySet Name="ListaEmpaque" EntityType="DB_9CAC35_indutradeModel.ListaEmpaque" />
     <EntitySet Name="OrdenCompraContrato" EntityType="DB_9CAC35_indutradeModel.OrdenCompraContrato" />
     <EntitySet Name="OrdenCompraItem" EntityType="DB_9CAC35_indutradeModel.OrdenCompraItem" />
     <EntitySet Name="Proforma" EntityType="DB_9CAC35_indutradeModel.Proforma" />
     <EntitySet Name="ProformaItemCalculadora" EntityType="DB_9CAC35_indutradeModel.ProformaItemCalculadora" />
+    <EntitySet Name="SolicitudTransporte" EntityType="DB_9CAC35_indutradeModel.SolicitudTransporte" />
+    <EntitySet Name="TipoVehiculo" EntityType="DB_9CAC35_indutradeModel.TipoVehiculo" />
     <EntitySet Name="Agrupacion" EntityType="DB_9CAC35_indutradeModel.Agrupacion" />
+    <EntitySet Name="ArchivoAdjunto" EntityType="DB_9CAC35_indutradeModel.ArchivoAdjunto" />
     <EntitySet Name="Costo" EntityType="DB_9CAC35_indutradeModel.Costo" />
+    <EntitySet Name="EnvioMail" EntityType="DB_9CAC35_indutradeModel.EnvioMail" />
+    <EntitySet Name="Estado" EntityType="DB_9CAC35_indutradeModel.Estado" />
+    <EntitySet Name="Firma" EntityType="DB_9CAC35_indutradeModel.Firma" />
     <EntitySet Name="MotoNave" EntityType="DB_9CAC35_indutradeModel.MotoNave" />
     <EntitySet Name="Opcion" EntityType="DB_9CAC35_indutradeModel.Opcion" />
+    <EntitySet Name="Parametro" EntityType="DB_9CAC35_indutradeModel.Parametro" />
     <EntitySet Name="Planta" EntityType="DB_9CAC35_indutradeModel.Planta" />
     <EntitySet Name="Puerto" EntityType="DB_9CAC35_indutradeModel.Puerto" />
+    <EntitySet Name="Vehiculo" EntityType="DB_9CAC35_indutradeModel.Vehiculo" />
     <EntitySet Name="Menu" EntityType="DB_9CAC35_indutradeModel.Menu" />
     <EntitySet Name="Modulo" EntityType="DB_9CAC35_indutradeModel.Modulo" />
     <EntitySet Name="Rol" EntityType="DB_9CAC35_indutradeModel.Rol" />
@@ -169,6 +191,10 @@
       <End Role="Compañia" EntitySet="Compañia" />
       <End Role="Item" EntitySet="Item" />
     </AssociationSet>
+    <AssociationSet Name="FK__ItemImpue__Compa__1980B20F" Association="DB_9CAC35_indutradeModel.FK__ItemImpue__Compa__1980B20F">
+      <End Role="Compañia" EntitySet="Compañia" />
+      <End Role="ItemImpuesto" EntitySet="ItemImpuesto" />
+    </AssociationSet>
     <AssociationSet Name="FK__Sucursal__Compañ__336AA144" Association="DB_9CAC35_indutradeModel.FK__Sucursal__Compañ__336AA144">
       <End Role="Compañia" EntitySet="Compañia" />
       <End Role="Sucursal" EntitySet="Sucursal" />
@@ -184,10 +210,6 @@
     <AssociationSet Name="FK__Sucursal__Compañ__77AABCF8" Association="DB_9CAC35_indutradeModel.FK__Sucursal__Compañ__77AABCF8">
       <End Role="Compañia" EntitySet="Compañia" />
       <End Role="Sucursal" EntitySet="Sucursal" />
-    </AssociationSet>
-    <AssociationSet Name="FK__OrdenComp__Forma__4A8DFDBE" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Forma__4A8DFDBE">
-      <End Role="CondicionPago" EntitySet="CondicionPago" />
-      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
     </AssociationSet>
     <AssociationSet Name="FK__Sucursal__Condic__789EE131" Association="DB_9CAC35_indutradeModel.FK__Sucursal__Condic__789EE131">
       <End Role="CondicionPago" EntitySet="CondicionPago" />
@@ -229,6 +251,10 @@
       <End Role="Item" EntitySet="Item" />
       <End Role="CalculadoraItems" EntitySet="CalculadoraItems" />
     </AssociationSet>
+    <AssociationSet Name="FK__ItemImpue__ItemI__1B68FA81" Association="DB_9CAC35_indutradeModel.FK__ItemImpue__ItemI__1B68FA81">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="ItemImpuesto" EntitySet="ItemImpuesto" />
+    </AssociationSet>
     <AssociationSet Name="FK__OrdenComp__ItemI__513AFB4D" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__ItemI__513AFB4D">
       <End Role="Item" EntitySet="Item" />
       <End Role="OrdenCompraItem" EntitySet="OrdenCompraItem" />
@@ -240,6 +266,10 @@
     <AssociationSet Name="FK__Precio__ItemID__2CBDA3B5" Association="DB_9CAC35_indutradeModel.FK__Precio__ItemID__2CBDA3B5">
       <End Role="Item" EntitySet="Item" />
       <End Role="Precio" EntitySet="Precio" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ItemImpue__TipoI__1A74D648" Association="DB_9CAC35_indutradeModel.FK__ItemImpue__TipoI__1A74D648">
+      <End Role="Opcion" EntitySet="Opcion" />
+      <End Role="ItemImpuesto" EntitySet="ItemImpuesto" />
     </AssociationSet>
     <AssociationSet Name="FK__Precio__ListaPre__2DB1C7EE" Association="DB_9CAC35_indutradeModel.FK__Precio__ListaPre__2DB1C7EE">
       <End Role="ListaPrecio" EntitySet="ListaPrecio" />
@@ -260,10 +290,6 @@
     <AssociationSet Name="FK__Sucursal__ListaP__7D63964E" Association="DB_9CAC35_indutradeModel.FK__Sucursal__ListaP__7D63964E">
       <End Role="ListaPrecio" EntitySet="ListaPrecio" />
       <End Role="Sucursal" EntitySet="Sucursal" />
-    </AssociationSet>
-    <AssociationSet Name="FK__OrdenComp__Sucur__4B8221F7" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Sucur__4B8221F7">
-      <End Role="Sucursal" EntitySet="Sucursal" />
-      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
     </AssociationSet>
     <AssociationSet Name="FK__PuntoEnvi__Sucur__3B0BC30C" Association="DB_9CAC35_indutradeModel.FK__PuntoEnvi__Sucur__3B0BC30C">
       <End Role="Sucursal" EntitySet="Sucursal" />
@@ -301,6 +327,10 @@
       <End Role="Tercero" EntitySet="Tercero" />
       <End Role="Sucursal" EntitySet="Sucursal" />
     </AssociationSet>
+    <AssociationSet Name="FK__Autorizac__Terce__4C0C31DC" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Terce__4C0C31DC">
+      <End Role="Tercero" EntitySet="Tercero" />
+      <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
+    </AssociationSet>
     <AssociationSet Name="FK__Calculado__Broke__0C90CB45" Association="DB_9CAC35_indutradeModel.FK__Calculado__Broke__0C90CB45">
       <End Role="Tercero" EntitySet="Tercero" />
       <End Role="Calculadora" EntitySet="Calculadora" />
@@ -329,14 +359,6 @@
       <End Role="Tercero" EntitySet="Tercero" />
       <End Role="Contrato" EntitySet="Contrato" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrdenComp__Compr__4D6A6A69" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Compr__4D6A6A69">
-      <End Role="Tercero" EntitySet="Tercero" />
-      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
-    </AssociationSet>
-    <AssociationSet Name="FK__OrdenComp__Solic__4E5E8EA2" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Solic__4E5E8EA2">
-      <End Role="Tercero" EntitySet="Tercero" />
-      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
-    </AssociationSet>
     <AssociationSet Name="FK__PuntoEnvi__Vende__3BFFE745" Association="DB_9CAC35_indutradeModel.FK__PuntoEnvi__Vende__3BFFE745">
       <End Role="Tercero" EntitySet="Tercero" />
       <End Role="PuntoEnvio" EntitySet="PuntoEnvio" />
@@ -345,6 +367,30 @@
       <End Role="Tercero" EntitySet="Tercero" />
       <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
+    <AssociationSet Name="FK_SolicitudTransporte_Tercero" Association="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Tercero">
+      <End Role="Tercero" EntitySet="Tercero" />
+      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Autorizac__Autor__4B180DA3" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Autor__4B180DA3">
+      <End Role="AutorizacionCargue" EntitySet="AutorizacionCargue" />
+      <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Autorizac__Estad__6BB9E75F" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Estad__6BB9E75F">
+      <End Role="Estado" EntitySet="Estado" />
+      <End Role="AutorizacionCargue" EntitySet="AutorizacionCargue" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Autorizac__Solic__6CAE0B98" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Solic__6CAE0B98">
+      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
+      <End Role="AutorizacionCargue" EntitySet="AutorizacionCargue" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Autorizac__Remol__4DF47A4E" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Remol__4DF47A4E">
+      <End Role="Vehiculo" EntitySet="Vehiculo" />
+      <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Autorizac__Vehic__4D005615" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Vehic__4D005615">
+      <End Role="Vehiculo" EntitySet="Vehiculo" />
+      <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
+    </AssociationSet>
     <AssociationSet Name="FK__Booking__Proform__0F6D37F0" Association="DB_9CAC35_indutradeModel.FK__Booking__Proform__0F6D37F0">
       <End Role="Proforma" EntitySet="Proforma" />
       <End Role="Booking" EntitySet="Booking" />
@@ -352,6 +398,10 @@
     <AssociationSet Name="FK__Booking__TipoLle__10615C29" Association="DB_9CAC35_indutradeModel.FK__Booking__TipoLle__10615C29">
       <End Role="Opcion" EntitySet="Opcion" />
       <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Encabezad__Booki__129EAA56" Association="DB_9CAC35_indutradeModel.FK__Encabezad__Booki__129EAA56">
+      <End Role="Booking" EntitySet="Booking" />
+      <End Role="EncabezadoMatrizBL" EntitySet="EncabezadoMatrizBL" />
     </AssociationSet>
     <AssociationSet Name="FK__Calculado__Calcu__05F8DC4F" Association="DB_9CAC35_indutradeModel.FK__Calculado__Calcu__05F8DC4F">
       <End Role="Calculadora" EntitySet="Calculadora" />
@@ -409,25 +459,49 @@
       <End Role="Contrato" EntitySet="Contrato" />
       <End Role="Proforma" EntitySet="Proforma" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrdenComp__Estad__4C764630" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Estad__4C764630">
+    <AssociationSet Name="FK__DetalleMa__Encab__166F3B3A" Association="DB_9CAC35_indutradeModel.FK__DetalleMa__Encab__166F3B3A">
+      <End Role="EncabezadoMatrizBL" EntitySet="EncabezadoMatrizBL" />
+      <End Role="DetalleMatrizBL" EntitySet="DetalleMatrizBL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetalleRe__Carro__483BA0F8" Association="DB_9CAC35_indutradeModel.FK__DetalleRe__Carro__483BA0F8">
+      <End Role="Vehiculo" EntitySet="Vehiculo" />
+      <End Role="DetalleRegistroLlenado" EntitySet="DetalleRegistroLlenado" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetalleRe__Encab__47477CBF" Association="DB_9CAC35_indutradeModel.FK__DetalleRe__Encab__47477CBF">
+      <End Role="EncabezadoRegistroLlenado" EntitySet="EncabezadoRegistroLlenado" />
+      <End Role="DetalleRegistroLlenado" EntitySet="DetalleRegistroLlenado" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetalleRe__Remol__64D7DFA6" Association="DB_9CAC35_indutradeModel.FK__DetalleRe__Remol__64D7DFA6">
+      <End Role="Vehiculo" EntitySet="Vehiculo" />
+      <End Role="DetalleRegistroLlenado" EntitySet="DetalleRegistroLlenado" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Encabezad__TipoE__24BD5A91" Association="DB_9CAC35_indutradeModel.FK__Encabezad__TipoE__24BD5A91">
       <End Role="Opcion" EntitySet="Opcion" />
-      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+      <End Role="EncabezadoMatrizBL" EntitySet="EncabezadoMatrizBL" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrdenComp__Orden__522F1F86" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__522F1F86">
-      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
-      <End Role="OrdenCompraItem" EntitySet="OrdenCompraItem" />
+    <AssociationSet Name="FK__Encabezad__Usuar__1392CE8F" Association="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__1392CE8F">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="EncabezadoMatrizBL" EntitySet="EncabezadoMatrizBL" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrdenComp__Orden__55FFB06A" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__55FFB06A">
-      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
-      <End Role="OrdenCompraContrato" EntitySet="OrdenCompraContrato" />
+    <AssociationSet Name="FK__ListaEmpa__Matri__321755AF" Association="DB_9CAC35_indutradeModel.FK__ListaEmpa__Matri__321755AF">
+      <End Role="EncabezadoMatrizBL" EntitySet="EncabezadoMatrizBL" />
+      <End Role="ListaEmpaque" EntitySet="ListaEmpaque" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrdenComp__Orden__58DC1D15" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__58DC1D15">
-      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
-      <End Role="OrdenCompraContrato" EntitySet="OrdenCompraContrato" />
+    <AssociationSet Name="FK__Encabezad__Profo__4282C7A2" Association="DB_9CAC35_indutradeModel.FK__Encabezad__Profo__4282C7A2">
+      <End Role="ProformaItemCalculadora" EntitySet="ProformaItemCalculadora" />
+      <End Role="EncabezadoRegistroLlenado" EntitySet="EncabezadoRegistroLlenado" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrdenComp__Orden__5BB889C0" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__5BB889C0">
-      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
-      <End Role="OrdenCompraItem" EntitySet="OrdenCompraItem" />
+    <AssociationSet Name="FK__Encabezad__Usuar__4376EBDB" Association="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__4376EBDB">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="EncabezadoRegistroLlenado" EntitySet="EncabezadoRegistroLlenado" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Encabezad__Usuar__446B1014" Association="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__446B1014">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="EncabezadoRegistroLlenado" EntitySet="EncabezadoRegistroLlenado" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Factura__Proform__22D5121F" Association="DB_9CAC35_indutradeModel.FK__Factura__Proform__22D5121F">
+      <End Role="Proforma" EntitySet="Proforma" />
+      <End Role="Factura" EntitySet="Factura" />
     </AssociationSet>
     <AssociationSet Name="FK__Proforma__Puerto__61A66D40" Association="DB_9CAC35_indutradeModel.FK__Proforma__Puerto__61A66D40">
       <End Role="Puerto" EntitySet="Puerto" />
@@ -457,6 +531,10 @@
       <End Role="Proforma" EntitySet="Proforma" />
       <End Role="ProformaItemCalculadora" EntitySet="ProformaItemCalculadora" />
     </AssociationSet>
+    <AssociationSet Name="FK_SolicitudTransporte_Proforma" Association="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Proforma">
+      <End Role="Proforma" EntitySet="Proforma" />
+      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
+    </AssociationSet>
     <AssociationSet Name="FK__ProformaI__Usuar__69478F08" Association="DB_9CAC35_indutradeModel.FK__ProformaI__Usuar__69478F08">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="ProformaItemCalculadora" EntitySet="ProformaItemCalculadora" />
@@ -465,9 +543,33 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="ProformaItemCalculadora" EntitySet="ProformaItemCalculadora" />
     </AssociationSet>
+    <AssociationSet Name="FK_SolicitudTransporte_Opcion" Association="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Opcion">
+      <End Role="Opcion" EntitySet="Opcion" />
+      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SolicitudTransporte_Planta" Association="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Planta">
+      <End Role="Planta" EntitySet="Planta" />
+      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SolicitudTransporte_SolicitudTransporte" Association="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_SolicitudTransporte">
+      <End Role="Planta" EntitySet="Planta" />
+      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TipoVehiculo_SolicitudTransporte" Association="DB_9CAC35_indutradeModel.FK_TipoVehiculo_SolicitudTransporte">
+      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
+      <End Role="TipoVehiculo" EntitySet="TipoVehiculo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Estado__Agrupaci__03C67B1A" Association="DB_9CAC35_indutradeModel.FK__Estado__Agrupaci__03C67B1A">
+      <End Role="Agrupacion" EntitySet="Agrupacion" />
+      <End Role="Estado" EntitySet="Estado" />
+    </AssociationSet>
     <AssociationSet Name="FK__Opcion__Agrupaci__0A688BB1" Association="DB_9CAC35_indutradeModel.FK__Opcion__Agrupaci__0A688BB1">
       <End Role="Agrupacion" EntitySet="Agrupacion" />
       <End Role="Opcion" EntitySet="Opcion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ArchivoAd__TipoI__78DED853" Association="DB_9CAC35_indutradeModel.FK__ArchivoAd__TipoI__78DED853">
+      <End Role="Opcion" EntitySet="Opcion" />
+      <End Role="ArchivoAdjunto" EntitySet="ArchivoAdjunto" />
     </AssociationSet>
     <AssociationSet Name="FK__Costo__MonedaID__3429BB53" Association="DB_9CAC35_indutradeModel.FK__Costo__MonedaID__3429BB53">
       <End Role="Opcion" EntitySet="Opcion" />
@@ -477,9 +579,25 @@
       <End Role="Opcion" EntitySet="Opcion" />
       <End Role="Costo" EntitySet="Costo" />
     </AssociationSet>
+    <AssociationSet Name="FK__Firma__TipoFirma__7760A435" Association="DB_9CAC35_indutradeModel.FK__Firma__TipoFirma__7760A435">
+      <End Role="Opcion" EntitySet="Opcion" />
+      <End Role="Firma" EntitySet="Firma" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Firma__UsuarioID__7854C86E" Association="DB_9CAC35_indutradeModel.FK__Firma__UsuarioID__7854C86E">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Firma" EntitySet="Firma" />
+    </AssociationSet>
     <AssociationSet Name="FK__MotoNave__Tipo__44EA3301" Association="DB_9CAC35_indutradeModel.FK__MotoNave__Tipo__44EA3301">
       <End Role="Opcion" EntitySet="Opcion" />
       <End Role="MotoNave" EntitySet="MotoNave" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vehiculo__MarcaI__763775D2" Association="DB_9CAC35_indutradeModel.FK__Vehiculo__MarcaI__763775D2">
+      <End Role="Opcion" EntitySet="Opcion" />
+      <End Role="Vehiculo" EntitySet="Vehiculo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vehiculo__TipoVe__744F2D60" Association="DB_9CAC35_indutradeModel.FK__Vehiculo__TipoVe__744F2D60">
+      <End Role="Opcion" EntitySet="Opcion" />
+      <End Role="Vehiculo" EntitySet="Vehiculo" />
     </AssociationSet>
     <AssociationSet Name="FK__Menu__ModuloID__6BAEFA67" Association="DB_9CAC35_indutradeModel.FK__Menu__ModuloID__6BAEFA67">
       <End Role="Modulo" EntitySet="Modulo" />
@@ -505,127 +623,42 @@
       <End Role="Rol" EntitySet="Rol" />
       <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
-    <EntitySet Name="ItemImpuesto" EntityType="DB_9CAC35_indutradeModel.ItemImpuesto" />
-    <EntitySet Name="AutorizacionCargue" EntityType="DB_9CAC35_indutradeModel.AutorizacionCargue" />
-    <EntitySet Name="SolicitudTransporte" EntityType="DB_9CAC35_indutradeModel.SolicitudTransporte" />
-    <EntitySet Name="TipoVehiculo" EntityType="DB_9CAC35_indutradeModel.TipoVehiculo" />
-    <EntitySet Name="EnvioMail" EntityType="DB_9CAC35_indutradeModel.EnvioMail" />
-    <EntitySet Name="Estado" EntityType="DB_9CAC35_indutradeModel.Estado" />
-    <EntitySet Name="Firma" EntityType="DB_9CAC35_indutradeModel.Firma" />
-    <EntitySet Name="Parametro" EntityType="DB_9CAC35_indutradeModel.Parametro" />
-    <AssociationSet Name="FK__ItemImpue__Compa__1980B20F" Association="DB_9CAC35_indutradeModel.FK__ItemImpue__Compa__1980B20F">
-      <End Role="Compañia" EntitySet="Compañia" />
-      <End Role="ItemImpuesto" EntitySet="ItemImpuesto" />
+    <EntitySet Name="OrdenCompra" EntityType="DB_9CAC35_indutradeModel.OrdenCompra" />
+    <AssociationSet Name="FK__OrdenComp__Forma__4A8DFDBE" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Forma__4A8DFDBE">
+      <End Role="CondicionPago" EntitySet="CondicionPago" />
+      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
     </AssociationSet>
-    <AssociationSet Name="FK__ItemImpue__ItemI__1B68FA81" Association="DB_9CAC35_indutradeModel.FK__ItemImpue__ItemI__1B68FA81">
-      <End Role="Item" EntitySet="Item" />
-      <End Role="ItemImpuesto" EntitySet="ItemImpuesto" />
+    <AssociationSet Name="FK__OrdenComp__Sucur__4B8221F7" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Sucur__4B8221F7">
+      <End Role="Sucursal" EntitySet="Sucursal" />
+      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
     </AssociationSet>
-    <AssociationSet Name="FK__ItemImpue__TipoI__1A74D648" Association="DB_9CAC35_indutradeModel.FK__ItemImpue__TipoI__1A74D648">
-      <End Role="Opcion" EntitySet="Opcion" />
-      <End Role="ItemImpuesto" EntitySet="ItemImpuesto" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SolicitudTransporte_Tercero" Association="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Tercero">
+    <AssociationSet Name="FK__OrdenComp__Compr__4D6A6A69" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Compr__4D6A6A69">
       <End Role="Tercero" EntitySet="Tercero" />
-      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
+      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
     </AssociationSet>
-    <AssociationSet Name="FK__Autorizac__Estad__6BB9E75F" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Estad__6BB9E75F">
-      <End Role="Estado" EntitySet="Estado" />
-      <End Role="AutorizacionCargue" EntitySet="AutorizacionCargue" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Autorizac__Solic__6CAE0B98" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Solic__6CAE0B98">
-      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
-      <End Role="AutorizacionCargue" EntitySet="AutorizacionCargue" />
+    <AssociationSet Name="FK__OrdenComp__Solic__4E5E8EA2" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Solic__4E5E8EA2">
+      <End Role="Tercero" EntitySet="Tercero" />
+      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
     </AssociationSet>
     <AssociationSet Name="FK__OrdenComp__Estad__04BA9F53" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Estad__04BA9F53">
       <End Role="Estado" EntitySet="Estado" />
       <End Role="OrdenCompra" EntitySet="OrdenCompra" />
     </AssociationSet>
-    <AssociationSet Name="FK_SolicitudTransporte_Proforma" Association="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Proforma">
-      <End Role="Proforma" EntitySet="Proforma" />
-      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
+    <AssociationSet Name="FK__OrdenComp__Orden__522F1F86" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__522F1F86">
+      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+      <End Role="OrdenCompraItem" EntitySet="OrdenCompraItem" />
     </AssociationSet>
-    <AssociationSet Name="FK_SolicitudTransporte_Opcion" Association="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Opcion">
-      <End Role="Opcion" EntitySet="Opcion" />
-      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
+    <AssociationSet Name="FK__OrdenComp__Orden__55FFB06A" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__55FFB06A">
+      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+      <End Role="OrdenCompraContrato" EntitySet="OrdenCompraContrato" />
     </AssociationSet>
-    <AssociationSet Name="FK_SolicitudTransporte_Planta" Association="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Planta">
-      <End Role="Planta" EntitySet="Planta" />
-      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
+    <AssociationSet Name="FK__OrdenComp__Orden__58DC1D15" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__58DC1D15">
+      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+      <End Role="OrdenCompraContrato" EntitySet="OrdenCompraContrato" />
     </AssociationSet>
-    <AssociationSet Name="FK_SolicitudTransporte_SolicitudTransporte" Association="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_SolicitudTransporte">
-      <End Role="Planta" EntitySet="Planta" />
-      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TipoVehiculo_SolicitudTransporte" Association="DB_9CAC35_indutradeModel.FK_TipoVehiculo_SolicitudTransporte">
-      <End Role="SolicitudTransporte" EntitySet="SolicitudTransporte" />
-      <End Role="TipoVehiculo" EntitySet="TipoVehiculo" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Estado__Agrupaci__03C67B1A" Association="DB_9CAC35_indutradeModel.FK__Estado__Agrupaci__03C67B1A">
-      <End Role="Agrupacion" EntitySet="Agrupacion" />
-      <End Role="Estado" EntitySet="Estado" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Firma__TipoFirma__7760A435" Association="DB_9CAC35_indutradeModel.FK__Firma__TipoFirma__7760A435">
-      <End Role="Opcion" EntitySet="Opcion" />
-      <End Role="Firma" EntitySet="Firma" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Firma__UsuarioID__7854C86E" Association="DB_9CAC35_indutradeModel.FK__Firma__UsuarioID__7854C86E">
-      <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="Firma" EntitySet="Firma" />
-    </AssociationSet>
-    <FunctionImport Name="ProformaExport" ReturnType="Collection(DB_9CAC35_indutradeModel.ProformaExport_Result)">
-      <Parameter Name="RowID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="SolicitudTransportePDF" ReturnType="Collection(DB_9CAC35_indutradeModel.SolicitudTransportePDF_Result)">
-      <Parameter Name="RowID" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <EntitySet Name="Vehiculo" EntityType="DB_9CAC35_indutradeModel.Vehiculo" />
-    <AssociationSet Name="FK__Vehiculo__MarcaI__763775D2" Association="DB_9CAC35_indutradeModel.FK__Vehiculo__MarcaI__763775D2">
-      <End Role="Opcion" EntitySet="Opcion" />
-      <End Role="Vehiculo" EntitySet="Vehiculo" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Vehiculo__TipoVe__744F2D60" Association="DB_9CAC35_indutradeModel.FK__Vehiculo__TipoVe__744F2D60">
-      <End Role="Opcion" EntitySet="Opcion" />
-      <End Role="Vehiculo" EntitySet="Vehiculo" />
-    </AssociationSet>
-    <EntitySet Name="DetalleRegistroLlenado" EntityType="DB_9CAC35_indutradeModel.DetalleRegistroLlenado" />
-    <EntitySet Name="EncabezadoRegistroLlenado" EntityType="DB_9CAC35_indutradeModel.EncabezadoRegistroLlenado" />
-    <AssociationSet Name="FK__DetalleRe__Carro__483BA0F8" Association="DB_9CAC35_indutradeModel.FK__DetalleRe__Carro__483BA0F8">
-      <End Role="Vehiculo" EntitySet="Vehiculo" />
-      <End Role="DetalleRegistroLlenado" EntitySet="DetalleRegistroLlenado" />
-    </AssociationSet>
-    <AssociationSet Name="FK__DetalleRe__Encab__47477CBF" Association="DB_9CAC35_indutradeModel.FK__DetalleRe__Encab__47477CBF">
-      <End Role="EncabezadoRegistroLlenado" EntitySet="EncabezadoRegistroLlenado" />
-      <End Role="DetalleRegistroLlenado" EntitySet="DetalleRegistroLlenado" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Encabezad__Profo__4282C7A2" Association="DB_9CAC35_indutradeModel.FK__Encabezad__Profo__4282C7A2">
-      <End Role="ProformaItemCalculadora" EntitySet="ProformaItemCalculadora" />
-      <End Role="EncabezadoRegistroLlenado" EntitySet="EncabezadoRegistroLlenado" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Encabezad__Usuar__4376EBDB" Association="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__4376EBDB">
-      <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="EncabezadoRegistroLlenado" EntitySet="EncabezadoRegistroLlenado" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Encabezad__Usuar__446B1014" Association="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__446B1014">
-      <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="EncabezadoRegistroLlenado" EntitySet="EncabezadoRegistroLlenado" />
-    </AssociationSet>
-    <EntitySet Name="AutorizacionCargueVehiculo" EntityType="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" />
-    <AssociationSet Name="FK__Autorizac__Terce__4C0C31DC" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Terce__4C0C31DC">
-      <End Role="Tercero" EntitySet="Tercero" />
-      <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Autorizac__Autor__4B180DA3" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Autor__4B180DA3">
-      <End Role="AutorizacionCargue" EntitySet="AutorizacionCargue" />
-      <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Autorizac__Remol__4DF47A4E" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Remol__4DF47A4E">
-      <End Role="Vehiculo" EntitySet="Vehiculo" />
-      <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Autorizac__Vehic__4D005615" Association="DB_9CAC35_indutradeModel.FK__Autorizac__Vehic__4D005615">
-      <End Role="Vehiculo" EntitySet="Vehiculo" />
-      <End Role="AutorizacionCargueVehiculo" EntitySet="AutorizacionCargueVehiculo" />
+    <AssociationSet Name="FK__OrdenComp__Orden__5BB889C0" Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__5BB889C0">
+      <End Role="OrdenCompra" EntitySet="OrdenCompra" />
+      <End Role="OrdenCompraItem" EntitySet="OrdenCompraItem" />
     </AssociationSet>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -671,6 +704,51 @@
     <Property Type="String" Name="referencia" Nullable="true" MaxLength="50" />
     <Property Type="Int32" Name="cantidadvehiculos" Nullable="true" />
     <Property Type="String" Name="imputarflete" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ProformaExport_Result">
+    <Property Type="String" Name="Seller" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AdressSeller" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="TelSeller" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ContactSeller" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Buyer" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AdressSeller1" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="TelSeller1" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ContactBuyer" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Ncontract" Nullable="true" MaxLength="116" />
+    <Property Type="String" Name="Loading" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Discharget" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Item" Nullable="true" MaxLength="200" />
+    <Property Type="Double" Name="FobTonelada" Nullable="true" />
+    <Property Type="Double" Name="FleteTonelada" Nullable="true" />
+    <Property Type="Double" Name="SeguroTonelada" Nullable="true" />
+    <Property Type="Double" Name="CifTonelada" Nullable="true" />
+    <Property Type="Double" Name="FobValor" Nullable="true" />
+    <Property Type="Double" Name="FleteValor" Nullable="true" />
+    <Property Type="Double" Name="SeguroValor" Nullable="true" />
+    <Property Type="Double" Name="CifValor" Nullable="true" />
+    <Property Type="Double" Name="USD" Nullable="true" />
+    <Property Type="Int32" Name="TM" Nullable="true" />
+    <Property Type="Double" Name="Price" Nullable="true" />
+    <Property Type="String" Name="Tolerance" Nullable="true" MaxLength="11" />
+  </ComplexType>
+  <ComplexType Name="SolicitudTransportePDF_Result">
+    <Property Type="Int32" Name="Pedido" Nullable="false" />
+    <Property Type="String" Name="Item" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Proveedor" Nullable="true" MaxLength="500" />
+    <Property Type="Int32" Name="Cvehiculos" Nullable="true" />
+    <Property Type="String" Name="PlantaC" Nullable="true" MaxLength="80" />
+    <Property Type="DateTime" Name="Fechacargue" Nullable="true" />
+    <Property Type="String" Name="RequisitosCargue" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="PlantaD" Nullable="true" MaxLength="80" />
+    <Property Type="DateTime" Name="FechaEntrega" Nullable="true" />
+    <Property Type="String" Name="RequisitosDescargue" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Flete" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="opTermico" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="opAcerado" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="opLamina" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="opAluminio" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="opPlancha" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="opCarroceria" Nullable="false" MaxLength="1" />
   </ComplexType>
   <EntityType Name="Actividad">
     <Key>
@@ -818,11 +896,11 @@
     <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Empresa" Relationship="DB_9CAC35_indutradeModel.FK__Compañia__Empres__19AACF41" FromRole="Compañia" ToRole="Empresa" />
     <NavigationProperty Name="Item" Relationship="DB_9CAC35_indutradeModel.FK__Item__CompañiaID__29E1370A" FromRole="Compañia" ToRole="Item" />
+    <NavigationProperty Name="ItemImpuesto" Relationship="DB_9CAC35_indutradeModel.FK__ItemImpue__Compa__1980B20F" FromRole="Compañia" ToRole="ItemImpuesto" />
     <NavigationProperty Name="Sucursal" Relationship="DB_9CAC35_indutradeModel.FK__Sucursal__Compañ__336AA144" FromRole="Compañia" ToRole="Sucursal" />
     <NavigationProperty Name="Sucursal1" Relationship="DB_9CAC35_indutradeModel.FK__Sucursal__Compañ__70099B30" FromRole="Compañia" ToRole="Sucursal" />
     <NavigationProperty Name="Sucursal2" Relationship="DB_9CAC35_indutradeModel.FK__Sucursal__Compañ__76B698BF" FromRole="Compañia" ToRole="Sucursal" />
     <NavigationProperty Name="Sucursal3" Relationship="DB_9CAC35_indutradeModel.FK__Sucursal__Compañ__77AABCF8" FromRole="Compañia" ToRole="Sucursal" />
-    <NavigationProperty Name="ItemImpuesto" Relationship="DB_9CAC35_indutradeModel.FK__ItemImpue__Compa__1980B20F" FromRole="Compañia" ToRole="ItemImpuesto" />
   </EntityType>
   <EntityType Name="CondicionPago">
     <Key>
@@ -836,8 +914,8 @@
     <Property Name="UsuarioModificacion" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="DiasVCTO" Type="Int32" />
-    <NavigationProperty Name="OrdenCompra" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Forma__4A8DFDBE" FromRole="CondicionPago" ToRole="OrdenCompra" />
     <NavigationProperty Name="Sucursal" Relationship="DB_9CAC35_indutradeModel.FK__Sucursal__Condic__789EE131" FromRole="CondicionPago" ToRole="Sucursal" />
+    <NavigationProperty Name="OrdenCompra" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Forma__4A8DFDBE" FromRole="CondicionPago" ToRole="OrdenCompra" />
   </EntityType>
   <EntityType Name="ContactoERP">
     <Key>
@@ -928,10 +1006,30 @@
     <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Compañia" Relationship="DB_9CAC35_indutradeModel.FK__Item__CompañiaID__29E1370A" FromRole="Item" ToRole="Compañia" />
     <NavigationProperty Name="CalculadoraItems" Relationship="DB_9CAC35_indutradeModel.FK__Calculado__ItemI__07E124C1" FromRole="Item" ToRole="CalculadoraItems" />
+    <NavigationProperty Name="ItemImpuesto" Relationship="DB_9CAC35_indutradeModel.FK__ItemImpue__ItemI__1B68FA81" FromRole="Item" ToRole="ItemImpuesto" />
     <NavigationProperty Name="OrdenCompraItem" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__ItemI__513AFB4D" FromRole="Item" ToRole="OrdenCompraItem" />
     <NavigationProperty Name="OrdenCompraItem1" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__ItemI__5AC46587" FromRole="Item" ToRole="OrdenCompraItem" />
     <NavigationProperty Name="Precio" Relationship="DB_9CAC35_indutradeModel.FK__Precio__ItemID__2CBDA3B5" FromRole="Item" ToRole="Precio" />
-    <NavigationProperty Name="ItemImpuesto" Relationship="DB_9CAC35_indutradeModel.FK__ItemImpue__ItemI__1B68FA81" FromRole="Item" ToRole="ItemImpuesto" />
+  </EntityType>
+  <EntityType Name="ItemImpuesto">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompañiaID" Type="Int32" />
+    <Property Name="TipoID" Type="Int32" />
+    <Property Name="ItemID" Type="Int32" />
+    <Property Name="Llave" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="PorcentajeBase" Type="Decimal" Precision="10" Scale="4" />
+    <Property Name="BaseMinimaCompra" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Tasa" Type="Decimal" Precision="10" Scale="4" />
+    <Property Name="UsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Compañia" Relationship="DB_9CAC35_indutradeModel.FK__ItemImpue__Compa__1980B20F" FromRole="ItemImpuesto" ToRole="Compañia" />
+    <NavigationProperty Name="Item" Relationship="DB_9CAC35_indutradeModel.FK__ItemImpue__ItemI__1B68FA81" FromRole="ItemImpuesto" ToRole="Item" />
+    <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__ItemImpue__TipoI__1A74D648" FromRole="ItemImpuesto" ToRole="Opcion" />
   </EntityType>
   <EntityType Name="ListaPrecio">
     <Key>
@@ -1021,7 +1119,6 @@
     <NavigationProperty Name="ListaPrecio1" Relationship="DB_9CAC35_indutradeModel.FK__Sucursal__ListaP__72E607DB" FromRole="Sucursal" ToRole="ListaPrecio" />
     <NavigationProperty Name="ListaPrecio2" Relationship="DB_9CAC35_indutradeModel.FK__Sucursal__ListaP__7C6F7215" FromRole="Sucursal" ToRole="ListaPrecio" />
     <NavigationProperty Name="ListaPrecio3" Relationship="DB_9CAC35_indutradeModel.FK__Sucursal__ListaP__7D63964E" FromRole="Sucursal" ToRole="ListaPrecio" />
-    <NavigationProperty Name="OrdenCompra" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Sucur__4B8221F7" FromRole="Sucursal" ToRole="OrdenCompra" />
     <NavigationProperty Name="PuntoEnvio" Relationship="DB_9CAC35_indutradeModel.FK__PuntoEnvi__Sucur__3B0BC30C" FromRole="Sucursal" ToRole="PuntoEnvio" />
     <NavigationProperty Name="Tercero" Relationship="DB_9CAC35_indutradeModel.FK__Sucursal__Tercer__373B3228" FromRole="Sucursal" ToRole="Tercero" />
     <NavigationProperty Name="Tercero1" Relationship="DB_9CAC35_indutradeModel.FK__Sucursal__Tercer__73DA2C14" FromRole="Sucursal" ToRole="Tercero" />
@@ -1031,6 +1128,7 @@
     <NavigationProperty Name="Tercero5" Relationship="DB_9CAC35_indutradeModel.FK__Sucursal__Vended__01342732" FromRole="Sucursal" ToRole="Tercero" />
     <NavigationProperty Name="Tercero6" Relationship="DB_9CAC35_indutradeModel.FK__Sucursal__Vended__39237A9A" FromRole="Sucursal" ToRole="Tercero" />
     <NavigationProperty Name="Tercero7" Relationship="DB_9CAC35_indutradeModel.FK__Sucursal__Vended__74CE504D" FromRole="Sucursal" ToRole="Tercero" />
+    <NavigationProperty Name="OrdenCompra" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Sucur__4B8221F7" FromRole="Sucursal" ToRole="OrdenCompra" />
   </EntityType>
   <EntityType Name="Tercero">
     <Key>
@@ -1063,6 +1161,7 @@
     <NavigationProperty Name="Sucursal5" Relationship="DB_9CAC35_indutradeModel.FK__Sucursal__Vended__01342732" FromRole="Tercero" ToRole="Sucursal" />
     <NavigationProperty Name="Sucursal6" Relationship="DB_9CAC35_indutradeModel.FK__Sucursal__Vended__39237A9A" FromRole="Tercero" ToRole="Sucursal" />
     <NavigationProperty Name="Sucursal7" Relationship="DB_9CAC35_indutradeModel.FK__Sucursal__Vended__74CE504D" FromRole="Tercero" ToRole="Sucursal" />
+    <NavigationProperty Name="AutorizacionCargueVehiculo" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Terce__4C0C31DC" FromRole="Tercero" ToRole="AutorizacionCargueVehiculo" />
     <NavigationProperty Name="Calculadora" Relationship="DB_9CAC35_indutradeModel.FK__Calculado__Broke__0C90CB45" FromRole="Tercero" ToRole="Calculadora" />
     <NavigationProperty Name="Calculadora1" Relationship="DB_9CAC35_indutradeModel.FK__Calculado__Terce__23F3538A" FromRole="Tercero" ToRole="Calculadora" />
     <NavigationProperty Name="Calculadora2" Relationship="DB_9CAC35_indutradeModel.FK__Calculado__Terce__2AA05119" FromRole="Tercero" ToRole="Calculadora" />
@@ -1070,12 +1169,46 @@
     <NavigationProperty Name="Contrato1" Relationship="DB_9CAC35_indutradeModel.FK__Contrato__Inspec__581D0306" FromRole="Tercero" ToRole="Contrato" />
     <NavigationProperty Name="Contrato2" Relationship="DB_9CAC35_indutradeModel.FK__Contrato__Interm__5911273F" FromRole="Tercero" ToRole="Contrato" />
     <NavigationProperty Name="Contrato3" Relationship="DB_9CAC35_indutradeModel.FK__Contrato__Vended__5CE1B823" FromRole="Tercero" ToRole="Contrato" />
-    <NavigationProperty Name="OrdenCompra" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Compr__4D6A6A69" FromRole="Tercero" ToRole="OrdenCompra" />
-    <NavigationProperty Name="OrdenCompra1" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Solic__4E5E8EA2" FromRole="Tercero" ToRole="OrdenCompra" />
     <NavigationProperty Name="PuntoEnvio" Relationship="DB_9CAC35_indutradeModel.FK__PuntoEnvi__Vende__3BFFE745" FromRole="Tercero" ToRole="PuntoEnvio" />
     <NavigationProperty Name="Usuario" Relationship="DB_9CAC35_indutradeModel.FK__Usuario__Tercero__251C81ED" FromRole="Tercero" ToRole="Usuario" />
     <NavigationProperty Name="SolicitudTransporte" Relationship="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Tercero" FromRole="Tercero" ToRole="SolicitudTransporte" />
-    <NavigationProperty Name="AutorizacionCargueVehiculo" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Terce__4C0C31DC" FromRole="Tercero" ToRole="AutorizacionCargueVehiculo" />
+    <NavigationProperty Name="OrdenCompra" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Compr__4D6A6A69" FromRole="Tercero" ToRole="OrdenCompra" />
+    <NavigationProperty Name="OrdenCompra1" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Solic__4E5E8EA2" FromRole="Tercero" ToRole="OrdenCompra" />
+  </EntityType>
+  <EntityType Name="AutorizacionCargue">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SolicitudTransporteID" Type="Int32" />
+    <Property Name="EstadoID" Type="Int32" />
+    <Property Name="UsuarioCreacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="UsuarioModificacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="BKK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Empaque" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AutorizacionCargueVehiculo" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Autor__4B180DA3" FromRole="AutorizacionCargue" ToRole="AutorizacionCargueVehiculo" />
+    <NavigationProperty Name="Estado" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Estad__6BB9E75F" FromRole="AutorizacionCargue" ToRole="Estado" />
+    <NavigationProperty Name="SolicitudTransporte" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Solic__6CAE0B98" FromRole="AutorizacionCargue" ToRole="SolicitudTransporte" />
+  </EntityType>
+  <EntityType Name="AutorizacionCargueVehiculo">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AutorizacionCargueID" Type="Int32" />
+    <Property Name="TerceroID" Type="Int32" />
+    <Property Name="RemolqueID" Type="Int32" />
+    <Property Name="UsuarioCreacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="UsuarioModificacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="VehiculoID" Type="Int32" />
+    <NavigationProperty Name="Tercero" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Terce__4C0C31DC" FromRole="AutorizacionCargueVehiculo" ToRole="Tercero" />
+    <NavigationProperty Name="AutorizacionCargue" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Autor__4B180DA3" FromRole="AutorizacionCargueVehiculo" ToRole="AutorizacionCargue" />
+    <NavigationProperty Name="Vehiculo" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Remol__4DF47A4E" FromRole="AutorizacionCargueVehiculo" ToRole="Vehiculo" />
+    <NavigationProperty Name="Vehiculo1" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Vehic__4D005615" FromRole="AutorizacionCargueVehiculo" ToRole="Vehiculo" />
   </EntityType>
   <EntityType Name="Booking">
     <Key>
@@ -1085,10 +1218,11 @@
     <Property Name="ProformaID" Type="Int32" />
     <Property Name="TipoLlenadoID" Type="Int32" />
     <Property Name="Nota" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Proforma" Relationship="DB_9CAC35_indutradeModel.FK__Booking__Proform__0F6D37F0" FromRole="Booking" ToRole="Proforma" />
-    <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__Booking__TipoLle__10615C29" FromRole="Booking" ToRole="Opcion" />
     <Property Name="Asunto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="CorreoEnvio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Proforma" Relationship="DB_9CAC35_indutradeModel.FK__Booking__Proform__0F6D37F0" FromRole="Booking" ToRole="Proforma" />
+    <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__Booking__TipoLle__10615C29" FromRole="Booking" ToRole="Opcion" />
+    <NavigationProperty Name="EncabezadoMatrizBL" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Booki__129EAA56" FromRole="Booking" ToRole="EncabezadoMatrizBL" />
   </EntityType>
   <EntityType Name="Calculadora">
     <Key>
@@ -1334,36 +1468,105 @@
     <Property Name="UsuarioModificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Contrato" Relationship="DB_9CAC35_indutradeModel.FK__ContratoA__Contr__47B19113" FromRole="ContratoAdjunto" ToRole="Contrato" />
   </EntityType>
-  <EntityType Name="OrdenCompra">
+  <EntityType Name="DetalleMatrizBL">
     <Key>
       <PropertyRef Name="RowID" />
     </Key>
     <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Fecha" Type="DateTime" Precision="3" />
-    <Property Name="FormaPagoID" Type="Int32" />
-    <Property Name="SucursalProveedorID" Type="Int32" />
-    <Property Name="EstadoID" Type="Int32" />
-    <Property Name="CompradorID" Type="Int32" />
-    <Property Name="SolicitanteID" Type="Int32" />
-    <Property Name="ERPCodigo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="Referencia" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="Observaciones" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-    <Property Name="UsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EncabezadoMatrizBLID" Type="Int32" />
+    <Property Name="NoEmpaque" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="NetWeight" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="NoFlexitanks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="GrossWeight" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="NoSecuritySeal" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EncabezadoMatrizBL" Relationship="DB_9CAC35_indutradeModel.FK__DetalleMa__Encab__166F3B3A" FromRole="DetalleMatrizBL" ToRole="EncabezadoMatrizBL" />
+  </EntityType>
+  <EntityType Name="DetalleRegistroLlenado">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EncabezadoRegistroLlenadoID" Type="Int32" />
+    <Property Name="VehiculoID" Type="Int32" />
     <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-    <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FechaInspeccion" Type="DateTime" Precision="3" />
+    <Property Name="NumeroCTU_IT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="NumeroFlexitanks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="InspeccionAntinarcoticos" Type="Boolean" />
+    <Property Name="Sello" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="TipoSello" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FechaLlegada" Type="DateTime" Precision="3" />
+    <Property Name="RemolqueID" Type="Int32" />
+    <Property Name="ProveedorFlexitanks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Vehiculo" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Carro__483BA0F8" FromRole="DetalleRegistroLlenado" ToRole="Vehiculo" />
+    <NavigationProperty Name="EncabezadoRegistroLlenado" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Encab__47477CBF" FromRole="DetalleRegistroLlenado" ToRole="EncabezadoRegistroLlenado" />
+    <NavigationProperty Name="Vehiculo1" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Remol__64D7DFA6" FromRole="DetalleRegistroLlenado" ToRole="Vehiculo" />
+  </EntityType>
+  <EntityType Name="EncabezadoMatrizBL">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookingID" Type="Int32" />
+    <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UnidadMedida" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="PrintLading" Type="Boolean" />
+    <Property Name="Consignatario" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="Notificacion" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="UsuarioCreacionID" Type="Int32" />
+    <Property Name="TipoEmpaqueID" Type="Int32" />
+    <NavigationProperty Name="Booking" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Booki__129EAA56" FromRole="EncabezadoMatrizBL" ToRole="Booking" />
+    <NavigationProperty Name="DetalleMatrizBL" Relationship="DB_9CAC35_indutradeModel.FK__DetalleMa__Encab__166F3B3A" FromRole="EncabezadoMatrizBL" ToRole="DetalleMatrizBL" />
+    <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__TipoE__24BD5A91" FromRole="EncabezadoMatrizBL" ToRole="Opcion" />
+    <NavigationProperty Name="Usuario" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__1392CE8F" FromRole="EncabezadoMatrizBL" ToRole="Usuario" />
+    <NavigationProperty Name="ListaEmpaque" Relationship="DB_9CAC35_indutradeModel.FK__ListaEmpa__Matri__321755AF" FromRole="EncabezadoMatrizBL" ToRole="ListaEmpaque" />
+  </EntityType>
+  <EntityType Name="EncabezadoRegistroLlenado">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProformaItemID" Type="Int32" />
+    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="UsuarioCreacionID" Type="Int32" />
     <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-    <Property Name="Despacho" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="LugarEntrega" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="CondicionPago" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Forma__4A8DFDBE" FromRole="OrdenCompra" ToRole="CondicionPago" />
-    <NavigationProperty Name="Sucursal" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Sucur__4B8221F7" FromRole="OrdenCompra" ToRole="Sucursal" />
-    <NavigationProperty Name="Tercero" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Compr__4D6A6A69" FromRole="OrdenCompra" ToRole="Tercero" />
-    <NavigationProperty Name="Tercero1" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Solic__4E5E8EA2" FromRole="OrdenCompra" ToRole="Tercero" />
-    <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Estad__4C764630" FromRole="OrdenCompra" ToRole="Opcion" />
-    <NavigationProperty Name="OrdenCompraItem" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__522F1F86" FromRole="OrdenCompra" ToRole="OrdenCompraItem" />
-    <NavigationProperty Name="OrdenCompraContrato" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__55FFB06A" FromRole="OrdenCompra" ToRole="OrdenCompraContrato" />
-    <NavigationProperty Name="OrdenCompraContrato1" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__58DC1D15" FromRole="OrdenCompra" ToRole="OrdenCompraContrato" />
-    <NavigationProperty Name="OrdenCompraItem1" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__5BB889C0" FromRole="OrdenCompra" ToRole="OrdenCompraItem" />
-    <NavigationProperty Name="Estado" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Estad__04BA9F53" FromRole="OrdenCompra" ToRole="Estado" />
+    <Property Name="UsuarioModificacionID" Type="Int32" />
+    <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DetalleRegistroLlenado" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Encab__47477CBF" FromRole="EncabezadoRegistroLlenado" ToRole="DetalleRegistroLlenado" />
+    <NavigationProperty Name="ProformaItemCalculadora" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Profo__4282C7A2" FromRole="EncabezadoRegistroLlenado" ToRole="ProformaItemCalculadora" />
+    <NavigationProperty Name="Usuario" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__4376EBDB" FromRole="EncabezadoRegistroLlenado" ToRole="Usuario" />
+    <NavigationProperty Name="Usuario1" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__446B1014" FromRole="EncabezadoRegistroLlenado" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Factura">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProformaID" Type="Int32" />
+    <Property Name="Nota" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FOB" Type="Double" />
+    <Property Name="Flete" Type="Double" />
+    <Property Name="Seguro" Type="Double" />
+    <Property Name="Cantidad" Type="Double" />
+    <Property Name="ValorUnitario" Type="Double" />
+    <Property Name="Total" Type="Double" />
+    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="UsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Proforma" Relationship="DB_9CAC35_indutradeModel.FK__Factura__Proform__22D5121F" FromRole="Factura" ToRole="Proforma" />
+  </EntityType>
+  <EntityType Name="ListaEmpaque">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MatrizBLID" Type="Int32" />
+    <Property Name="VESSEL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="UsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EncabezadoMatrizBL" Relationship="DB_9CAC35_indutradeModel.FK__ListaEmpa__Matri__321755AF" FromRole="ListaEmpaque" ToRole="EncabezadoMatrizBL" />
   </EntityType>
   <EntityType Name="OrdenCompraContrato">
     <Key>
@@ -1400,11 +1603,11 @@
     <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
     <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="Retencion" Type="Double" />
     <NavigationProperty Name="Item" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__ItemI__513AFB4D" FromRole="OrdenCompraItem" ToRole="Item" />
     <NavigationProperty Name="Item1" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__ItemI__5AC46587" FromRole="OrdenCompraItem" ToRole="Item" />
     <NavigationProperty Name="OrdenCompra" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__522F1F86" FromRole="OrdenCompraItem" ToRole="OrdenCompra" />
     <NavigationProperty Name="OrdenCompra1" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__5BB889C0" FromRole="OrdenCompraItem" ToRole="OrdenCompra" />
-    <Property Name="Retencion" Type="Double" />
   </EntityType>
   <EntityType Name="Proforma">
     <Key>
@@ -1424,6 +1627,7 @@
     <Property Name="TipoProformaID" Type="Int32" />
     <NavigationProperty Name="Booking" Relationship="DB_9CAC35_indutradeModel.FK__Booking__Proform__0F6D37F0" FromRole="Proforma" ToRole="Booking" />
     <NavigationProperty Name="Contrato" Relationship="DB_9CAC35_indutradeModel.FK__Proforma__Contra__5FBE24CE" FromRole="Proforma" ToRole="Contrato" />
+    <NavigationProperty Name="Factura" Relationship="DB_9CAC35_indutradeModel.FK__Factura__Proform__22D5121F" FromRole="Proforma" ToRole="Factura" />
     <NavigationProperty Name="Puerto" Relationship="DB_9CAC35_indutradeModel.FK__Proforma__Puerto__61A66D40" FromRole="Proforma" ToRole="Puerto" />
     <NavigationProperty Name="Puerto1" Relationship="DB_9CAC35_indutradeModel.FK__Proforma__Puerto__629A9179" FromRole="Proforma" ToRole="Puerto" />
     <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__Proforma__TipoPr__6B2FD77A" FromRole="Proforma" ToRole="Opcion" />
@@ -1454,12 +1658,49 @@
     <Property Name="FleteValor" Type="Double" />
     <Property Name="SeguroValor" Type="Double" />
     <Property Name="CifValor" Type="Double" />
+    <Property Name="Porcentaje" Type="Int32" />
     <NavigationProperty Name="CalculadoraItems" Relationship="DB_9CAC35_indutradeModel.FK__ProformaI__ItemC__675F4696" FromRole="ProformaItemCalculadora" ToRole="CalculadoraItems" />
+    <NavigationProperty Name="EncabezadoRegistroLlenado" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Profo__4282C7A2" FromRole="ProformaItemCalculadora" ToRole="EncabezadoRegistroLlenado" />
     <NavigationProperty Name="Proforma" Relationship="DB_9CAC35_indutradeModel.FK__ProformaI__Profo__68536ACF" FromRole="ProformaItemCalculadora" ToRole="Proforma" />
     <NavigationProperty Name="Usuario" Relationship="DB_9CAC35_indutradeModel.FK__ProformaI__Usuar__69478F08" FromRole="ProformaItemCalculadora" ToRole="Usuario" />
     <NavigationProperty Name="Usuario1" Relationship="DB_9CAC35_indutradeModel.FK__ProformaI__Usuar__6A3BB341" FromRole="ProformaItemCalculadora" ToRole="Usuario" />
-    <Property Name="Porcentaje" Type="Int32" />
-    <NavigationProperty Name="EncabezadoRegistroLlenado" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Profo__4282C7A2" FromRole="ProformaItemCalculadora" ToRole="EncabezadoRegistroLlenado" />
+  </EntityType>
+  <EntityType Name="SolicitudTransporte">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProformaID" Type="Int32" Nullable="false" />
+    <Property Name="ProveedorID" Type="Int32" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" />
+    <Property Name="Flete" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="OpcionID" Type="Int32" />
+    <Property Name="PlantaCargueID" Type="Int32" />
+    <Property Name="FechaCargue" Type="DateTime" Precision="0" />
+    <Property Name="RequisitosCargue" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PlantaDescargueID" Type="Int32" />
+    <Property Name="FechaEntrega" Type="DateTime" Precision="0" />
+    <Property Name="RequisitosDescargue" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCreacion" Type="DateTime" Precision="0" />
+    <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Tercero" Relationship="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Tercero" FromRole="SolicitudTransporte" ToRole="Tercero" />
+    <NavigationProperty Name="AutorizacionCargue" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Solic__6CAE0B98" FromRole="SolicitudTransporte" ToRole="AutorizacionCargue" />
+    <NavigationProperty Name="Proforma" Relationship="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Proforma" FromRole="SolicitudTransporte" ToRole="Proforma" />
+    <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Opcion" FromRole="SolicitudTransporte" ToRole="Opcion" />
+    <NavigationProperty Name="Planta" Relationship="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Planta" FromRole="SolicitudTransporte" ToRole="Planta" />
+    <NavigationProperty Name="Planta1" Relationship="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_SolicitudTransporte" FromRole="SolicitudTransporte" ToRole="Planta" />
+    <NavigationProperty Name="TipoVehiculo" Relationship="DB_9CAC35_indutradeModel.FK_TipoVehiculo_SolicitudTransporte" FromRole="SolicitudTransporte" ToRole="TipoVehiculo" />
+  </EntityType>
+  <EntityType Name="TipoVehiculo">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SolicitudTransporteID" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SolicitudTransporte" Relationship="DB_9CAC35_indutradeModel.FK_TipoVehiculo_SolicitudTransporte" FromRole="TipoVehiculo" ToRole="SolicitudTransporte" />
   </EntityType>
   <EntityType Name="Agrupacion">
     <Key>
@@ -1473,8 +1714,20 @@
     <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="FechaModificacion" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__Opcion__Agrupaci__0A688BB1" FromRole="Agrupacion" ToRole="Opcion" />
     <NavigationProperty Name="Estado" Relationship="DB_9CAC35_indutradeModel.FK__Estado__Agrupaci__03C67B1A" FromRole="Agrupacion" ToRole="Estado" />
+    <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__Opcion__Agrupaci__0A688BB1" FromRole="Agrupacion" ToRole="Opcion" />
+  </EntityType>
+  <EntityType Name="ArchivoAdjunto">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TipoID" Type="Int32" />
+    <Property Name="Recurso" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ModuloID" Type="Int32" />
+    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="UsuarioCreacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__ArchivoAd__TipoI__78DED853" FromRole="ArchivoAdjunto" ToRole="Opcion" />
   </EntityType>
   <EntityType Name="Costo">
     <Key>
@@ -1492,6 +1745,51 @@
     <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__Costo__MonedaID__3429BB53" FromRole="Costo" ToRole="Opcion" />
     <NavigationProperty Name="Opcion1" Relationship="DB_9CAC35_indutradeModel.FK__Costo__TipoID__351DDF8C" FromRole="Costo" ToRole="Opcion" />
+  </EntityType>
+  <EntityType Name="EnvioMail">
+    <Key>
+      <PropertyRef Name="rowid" />
+    </Key>
+    <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MTo" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="MFrom" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Asunto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Mensaje" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CreadoPor" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FechaEnviado" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="sent" Type="Int32" />
+    <Property Name="Adjunto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Estado">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AgrupacionID" Type="Int32" />
+    <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AutorizacionCargue" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Estad__6BB9E75F" FromRole="Estado" ToRole="AutorizacionCargue" />
+    <NavigationProperty Name="Agrupacion" Relationship="DB_9CAC35_indutradeModel.FK__Estado__Agrupaci__03C67B1A" FromRole="Estado" ToRole="Agrupacion" />
+    <NavigationProperty Name="OrdenCompra" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Estad__04BA9F53" FromRole="Estado" ToRole="OrdenCompra" />
+  </EntityType>
+  <EntityType Name="Firma">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Imagen" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TipoFirmaID" Type="Int32" />
+    <Property Name="UsuarioID" Type="Int32" />
+    <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__Firma__TipoFirma__7760A435" FromRole="Firma" ToRole="Opcion" />
+    <NavigationProperty Name="Usuario" Relationship="DB_9CAC35_indutradeModel.FK__Firma__UsuarioID__7854C86E" FromRole="Firma" ToRole="Usuario" />
   </EntityType>
   <EntityType Name="MotoNave">
     <Key>
@@ -1536,24 +1834,38 @@
     <NavigationProperty Name="TerceroPotencial1" Relationship="DB_9CAC35_indutradeModel.FK__TerceroPo__Orige__414EAC47" FromRole="Opcion" ToRole="TerceroPotencial" />
     <NavigationProperty Name="Empresa" Relationship="DB_9CAC35_indutradeModel.FK__Empresa__ErpID__15DA3E5D" FromRole="Opcion" ToRole="Empresa" />
     <NavigationProperty Name="Empresa1" Relationship="DB_9CAC35_indutradeModel.FK__Empresa__IdiomaI__16CE6296" FromRole="Opcion" ToRole="Empresa" />
+    <NavigationProperty Name="ItemImpuesto" Relationship="DB_9CAC35_indutradeModel.FK__ItemImpue__TipoI__1A74D648" FromRole="Opcion" ToRole="ItemImpuesto" />
     <NavigationProperty Name="Booking" Relationship="DB_9CAC35_indutradeModel.FK__Booking__TipoLle__10615C29" FromRole="Opcion" ToRole="Booking" />
     <NavigationProperty Name="Calculadora" Relationship="DB_9CAC35_indutradeModel.FK__Calculado__Incot__22FF2F51" FromRole="Opcion" ToRole="Calculadora" />
     <NavigationProperty Name="Calculadora1" Relationship="DB_9CAC35_indutradeModel.FK__Calculado__Incot__29AC2CE0" FromRole="Opcion" ToRole="Calculadora" />
     <NavigationProperty Name="CalculadoraItems" Relationship="DB_9CAC35_indutradeModel.FK__Calculado__Embal__06ED0088" FromRole="Opcion" ToRole="CalculadoraItems" />
     <NavigationProperty Name="Contrato" Relationship="DB_9CAC35_indutradeModel.FK__Contrato__FormaP__797DF6D1" FromRole="Opcion" ToRole="Contrato" />
     <NavigationProperty Name="Contrato1" Relationship="DB_9CAC35_indutradeModel.FK__Contrato__TipoCo__5A054B78" FromRole="Opcion" ToRole="Contrato" />
-    <NavigationProperty Name="OrdenCompra" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Estad__4C764630" FromRole="Opcion" ToRole="OrdenCompra" />
+    <NavigationProperty Name="EncabezadoMatrizBL" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__TipoE__24BD5A91" FromRole="Opcion" ToRole="EncabezadoMatrizBL" />
     <NavigationProperty Name="Proforma" Relationship="DB_9CAC35_indutradeModel.FK__Proforma__TipoPr__6B2FD77A" FromRole="Opcion" ToRole="Proforma" />
     <NavigationProperty Name="Proforma1" Relationship="DB_9CAC35_indutradeModel.FK__Proforma__TipoPr__6C23FBB3" FromRole="Opcion" ToRole="Proforma" />
+    <NavigationProperty Name="SolicitudTransporte" Relationship="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Opcion" FromRole="Opcion" ToRole="SolicitudTransporte" />
     <NavigationProperty Name="Agrupacion" Relationship="DB_9CAC35_indutradeModel.FK__Opcion__Agrupaci__0A688BB1" FromRole="Opcion" ToRole="Agrupacion" />
+    <NavigationProperty Name="ArchivoAdjunto" Relationship="DB_9CAC35_indutradeModel.FK__ArchivoAd__TipoI__78DED853" FromRole="Opcion" ToRole="ArchivoAdjunto" />
     <NavigationProperty Name="Costo" Relationship="DB_9CAC35_indutradeModel.FK__Costo__MonedaID__3429BB53" FromRole="Opcion" ToRole="Costo" />
     <NavigationProperty Name="Costo1" Relationship="DB_9CAC35_indutradeModel.FK__Costo__TipoID__351DDF8C" FromRole="Opcion" ToRole="Costo" />
-    <NavigationProperty Name="MotoNave" Relationship="DB_9CAC35_indutradeModel.FK__MotoNave__Tipo__44EA3301" FromRole="Opcion" ToRole="MotoNave" />
-    <NavigationProperty Name="ItemImpuesto" Relationship="DB_9CAC35_indutradeModel.FK__ItemImpue__TipoI__1A74D648" FromRole="Opcion" ToRole="ItemImpuesto" />
-    <NavigationProperty Name="SolicitudTransporte" Relationship="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Opcion" FromRole="Opcion" ToRole="SolicitudTransporte" />
     <NavigationProperty Name="Firma" Relationship="DB_9CAC35_indutradeModel.FK__Firma__TipoFirma__7760A435" FromRole="Opcion" ToRole="Firma" />
+    <NavigationProperty Name="MotoNave" Relationship="DB_9CAC35_indutradeModel.FK__MotoNave__Tipo__44EA3301" FromRole="Opcion" ToRole="MotoNave" />
     <NavigationProperty Name="Vehiculo" Relationship="DB_9CAC35_indutradeModel.FK__Vehiculo__MarcaI__763775D2" FromRole="Opcion" ToRole="Vehiculo" />
     <NavigationProperty Name="Vehiculo1" Relationship="DB_9CAC35_indutradeModel.FK__Vehiculo__TipoVe__744F2D60" FromRole="Opcion" ToRole="Vehiculo" />
+  </EntityType>
+  <EntityType Name="Parametro">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="Valor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CreadoPor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="ModificadoPor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="Planta">
     <Key>
@@ -1583,6 +1895,32 @@
     <NavigationProperty Name="Ciudad1" Relationship="DB_9CAC35_indutradeModel.FK__Puerto__CiudadID__5E1FF51F" FromRole="Puerto" ToRole="Ciudad" />
     <NavigationProperty Name="Proforma" Relationship="DB_9CAC35_indutradeModel.FK__Proforma__Puerto__61A66D40" FromRole="Puerto" ToRole="Proforma" />
     <NavigationProperty Name="Proforma1" Relationship="DB_9CAC35_indutradeModel.FK__Proforma__Puerto__629A9179" FromRole="Puerto" ToRole="Proforma" />
+  </EntityType>
+  <EntityType Name="Vehiculo">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TipoVehiculoID" Type="Int32" />
+    <Property Name="Placa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Año" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CapacidadKG" Type="Int32" />
+    <Property Name="Volumen" Type="Int32" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="Estado" Type="Boolean" />
+    <Property Name="MarcaID" Type="Int32" />
+    <Property Name="Rendimiento" Type="Int32" />
+    <Property Name="PesoVacio" Type="Double" />
+    <Property Name="CargaMaxima" Type="Double" />
+    <NavigationProperty Name="AutorizacionCargueVehiculo" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Remol__4DF47A4E" FromRole="Vehiculo" ToRole="AutorizacionCargueVehiculo" />
+    <NavigationProperty Name="AutorizacionCargueVehiculo1" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Vehic__4D005615" FromRole="Vehiculo" ToRole="AutorizacionCargueVehiculo" />
+    <NavigationProperty Name="DetalleRegistroLlenado" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Carro__483BA0F8" FromRole="Vehiculo" ToRole="DetalleRegistroLlenado" />
+    <NavigationProperty Name="DetalleRegistroLlenado1" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Remol__64D7DFA6" FromRole="Vehiculo" ToRole="DetalleRegistroLlenado" />
+    <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__Vehiculo__MarcaI__763775D2" FromRole="Vehiculo" ToRole="Opcion" />
+    <NavigationProperty Name="Opcion1" Relationship="DB_9CAC35_indutradeModel.FK__Vehiculo__TipoVe__744F2D60" FromRole="Vehiculo" ToRole="Opcion" />
   </EntityType>
   <EntityType Name="Menu">
     <Key>
@@ -1671,14 +2009,15 @@
     <NavigationProperty Name="Tercero" Relationship="DB_9CAC35_indutradeModel.FK__Usuario__Tercero__251C81ED" FromRole="Usuario" ToRole="Tercero" />
     <NavigationProperty Name="Contrato" Relationship="DB_9CAC35_indutradeModel.FK__Contrato__Usuari__5AF96FB1" FromRole="Usuario" ToRole="Contrato" />
     <NavigationProperty Name="Contrato1" Relationship="DB_9CAC35_indutradeModel.FK__Contrato__Usuari__5BED93EA" FromRole="Usuario" ToRole="Contrato" />
+    <NavigationProperty Name="EncabezadoMatrizBL" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__1392CE8F" FromRole="Usuario" ToRole="EncabezadoMatrizBL" />
+    <NavigationProperty Name="EncabezadoRegistroLlenado" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__4376EBDB" FromRole="Usuario" ToRole="EncabezadoRegistroLlenado" />
+    <NavigationProperty Name="EncabezadoRegistroLlenado1" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__446B1014" FromRole="Usuario" ToRole="EncabezadoRegistroLlenado" />
     <NavigationProperty Name="Proforma" Relationship="DB_9CAC35_indutradeModel.FK__Proforma__Usuari__638EB5B2" FromRole="Usuario" ToRole="Proforma" />
     <NavigationProperty Name="Proforma1" Relationship="DB_9CAC35_indutradeModel.FK__Proforma__Usuari__6482D9EB" FromRole="Usuario" ToRole="Proforma" />
     <NavigationProperty Name="ProformaItemCalculadora" Relationship="DB_9CAC35_indutradeModel.FK__ProformaI__Usuar__69478F08" FromRole="Usuario" ToRole="ProformaItemCalculadora" />
     <NavigationProperty Name="ProformaItemCalculadora1" Relationship="DB_9CAC35_indutradeModel.FK__ProformaI__Usuar__6A3BB341" FromRole="Usuario" ToRole="ProformaItemCalculadora" />
-    <NavigationProperty Name="Rol" Relationship="DB_9CAC35_indutradeModel.FK__Usuario__RolID__24285DB4" FromRole="Usuario" ToRole="Rol" />
     <NavigationProperty Name="Firma" Relationship="DB_9CAC35_indutradeModel.FK__Firma__UsuarioID__7854C86E" FromRole="Usuario" ToRole="Firma" />
-    <NavigationProperty Name="EncabezadoRegistroLlenado" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__4376EBDB" FromRole="Usuario" ToRole="EncabezadoRegistroLlenado" />
-    <NavigationProperty Name="EncabezadoRegistroLlenado1" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__446B1014" FromRole="Usuario" ToRole="EncabezadoRegistroLlenado" />
+    <NavigationProperty Name="Rol" Relationship="DB_9CAC35_indutradeModel.FK__Usuario__RolID__24285DB4" FromRole="Usuario" ToRole="Rol" />
   </EntityType>
   <EntityType Name="m_plantillas">
     <Key>
@@ -1985,6 +2324,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__ItemImpue__Compa__1980B20F">
+    <End Type="DB_9CAC35_indutradeModel.Compañia" Role="Compañia" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.ItemImpuesto" Role="ItemImpuesto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Compañia">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="ItemImpuesto">
+        <PropertyRef Name="CompañiaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Sucursal__Compañ__336AA144">
     <End Type="DB_9CAC35_indutradeModel.Compañia" Role="Compañia" Multiplicity="0..1" />
     <End Type="DB_9CAC35_indutradeModel.Sucursal" Role="Sucursal" Multiplicity="*" />
@@ -2030,18 +2381,6 @@
       </Principal>
       <Dependent Role="Sucursal">
         <PropertyRef Name="CompañiaID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__OrdenComp__Forma__4A8DFDBE">
-    <End Type="DB_9CAC35_indutradeModel.CondicionPago" Role="CondicionPago" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.OrdenCompra" Role="OrdenCompra" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CondicionPago">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="OrdenCompra">
-        <PropertyRef Name="FormaPagoID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2165,6 +2504,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__ItemImpue__ItemI__1B68FA81">
+    <End Type="DB_9CAC35_indutradeModel.Item" Role="Item" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.ItemImpuesto" Role="ItemImpuesto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="ItemImpuesto">
+        <PropertyRef Name="ItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__OrdenComp__ItemI__513AFB4D">
     <End Type="DB_9CAC35_indutradeModel.Item" Role="Item" Multiplicity="0..1" />
     <End Type="DB_9CAC35_indutradeModel.OrdenCompraItem" Role="OrdenCompraItem" Multiplicity="*" />
@@ -2198,6 +2549,18 @@
       </Principal>
       <Dependent Role="Precio">
         <PropertyRef Name="ItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ItemImpue__TipoI__1A74D648">
+    <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.ItemImpuesto" Role="ItemImpuesto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opcion">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="ItemImpuesto">
+        <PropertyRef Name="TipoID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2258,18 +2621,6 @@
       </Principal>
       <Dependent Role="Sucursal">
         <PropertyRef Name="ListaPrecioID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__OrdenComp__Sucur__4B8221F7">
-    <End Type="DB_9CAC35_indutradeModel.Sucursal" Role="Sucursal" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.OrdenCompra" Role="OrdenCompra" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Sucursal">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="OrdenCompra">
-        <PropertyRef Name="SucursalProveedorID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2381,6 +2732,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Autorizac__Terce__4C0C31DC">
+    <End Type="DB_9CAC35_indutradeModel.Tercero" Role="Tercero" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" Role="AutorizacionCargueVehiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tercero">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="AutorizacionCargueVehiculo">
+        <PropertyRef Name="TerceroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Calculado__Broke__0C90CB45">
     <End Type="DB_9CAC35_indutradeModel.Tercero" Role="Tercero" Multiplicity="0..1" />
     <End Type="DB_9CAC35_indutradeModel.Calculadora" Role="Calculadora" Multiplicity="*" />
@@ -2465,30 +2828,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrdenComp__Compr__4D6A6A69">
-    <End Type="DB_9CAC35_indutradeModel.Tercero" Role="Tercero" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.OrdenCompra" Role="OrdenCompra" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tercero">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="OrdenCompra">
-        <PropertyRef Name="CompradorID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__OrdenComp__Solic__4E5E8EA2">
-    <End Type="DB_9CAC35_indutradeModel.Tercero" Role="Tercero" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.OrdenCompra" Role="OrdenCompra" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tercero">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="OrdenCompra">
-        <PropertyRef Name="SolicitanteID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__PuntoEnvi__Vende__3BFFE745">
     <End Type="DB_9CAC35_indutradeModel.Tercero" Role="Tercero" Multiplicity="0..1" />
     <End Type="DB_9CAC35_indutradeModel.PuntoEnvio" Role="PuntoEnvio" Multiplicity="*" />
@@ -2513,6 +2852,78 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SolicitudTransporte_Tercero">
+    <End Type="DB_9CAC35_indutradeModel.Tercero" Role="Tercero" Multiplicity="1" />
+    <End Type="DB_9CAC35_indutradeModel.SolicitudTransporte" Role="SolicitudTransporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tercero">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="SolicitudTransporte">
+        <PropertyRef Name="ProveedorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Autorizac__Autor__4B180DA3">
+    <End Type="DB_9CAC35_indutradeModel.AutorizacionCargue" Role="AutorizacionCargue" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" Role="AutorizacionCargueVehiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AutorizacionCargue">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="AutorizacionCargueVehiculo">
+        <PropertyRef Name="AutorizacionCargueID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Autorizac__Estad__6BB9E75F">
+    <End Type="DB_9CAC35_indutradeModel.Estado" Role="Estado" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.AutorizacionCargue" Role="AutorizacionCargue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estado">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="AutorizacionCargue">
+        <PropertyRef Name="EstadoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Autorizac__Solic__6CAE0B98">
+    <End Type="DB_9CAC35_indutradeModel.SolicitudTransporte" Role="SolicitudTransporte" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.AutorizacionCargue" Role="AutorizacionCargue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SolicitudTransporte">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="AutorizacionCargue">
+        <PropertyRef Name="SolicitudTransporteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Autorizac__Remol__4DF47A4E">
+    <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" Role="AutorizacionCargueVehiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehiculo">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="AutorizacionCargueVehiculo">
+        <PropertyRef Name="RemolqueID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Autorizac__Vehic__4D005615">
+    <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" Role="AutorizacionCargueVehiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehiculo">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="AutorizacionCargueVehiculo">
+        <PropertyRef Name="VehiculoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Booking__Proform__0F6D37F0">
     <End Type="DB_9CAC35_indutradeModel.Proforma" Role="Proforma" Multiplicity="0..1" />
     <End Type="DB_9CAC35_indutradeModel.Booking" Role="Booking" Multiplicity="*" />
@@ -2534,6 +2945,18 @@
       </Principal>
       <Dependent Role="Booking">
         <PropertyRef Name="TipoLlenadoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Encabezad__Booki__129EAA56">
+    <End Type="DB_9CAC35_indutradeModel.Booking" Role="Booking" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.EncabezadoMatrizBL" Role="EncabezadoMatrizBL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Booking">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="EncabezadoMatrizBL">
+        <PropertyRef Name="BookingID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2705,63 +3128,135 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrdenComp__Estad__4C764630">
+  <Association Name="FK__DetalleMa__Encab__166F3B3A">
+    <End Type="DB_9CAC35_indutradeModel.EncabezadoMatrizBL" Role="EncabezadoMatrizBL" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.DetalleMatrizBL" Role="DetalleMatrizBL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EncabezadoMatrizBL">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="DetalleMatrizBL">
+        <PropertyRef Name="EncabezadoMatrizBLID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetalleRe__Carro__483BA0F8">
+    <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.DetalleRegistroLlenado" Role="DetalleRegistroLlenado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehiculo">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="DetalleRegistroLlenado">
+        <PropertyRef Name="VehiculoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetalleRe__Encab__47477CBF">
+    <End Type="DB_9CAC35_indutradeModel.EncabezadoRegistroLlenado" Role="EncabezadoRegistroLlenado" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.DetalleRegistroLlenado" Role="DetalleRegistroLlenado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EncabezadoRegistroLlenado">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="DetalleRegistroLlenado">
+        <PropertyRef Name="EncabezadoRegistroLlenadoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetalleRe__Remol__64D7DFA6">
+    <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.DetalleRegistroLlenado" Role="DetalleRegistroLlenado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehiculo">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="DetalleRegistroLlenado">
+        <PropertyRef Name="RemolqueID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Encabezad__TipoE__24BD5A91">
     <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.OrdenCompra" Role="OrdenCompra" Multiplicity="*" />
+    <End Type="DB_9CAC35_indutradeModel.EncabezadoMatrizBL" Role="EncabezadoMatrizBL" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Opcion">
         <PropertyRef Name="RowID" />
       </Principal>
-      <Dependent Role="OrdenCompra">
-        <PropertyRef Name="EstadoID" />
+      <Dependent Role="EncabezadoMatrizBL">
+        <PropertyRef Name="TipoEmpaqueID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrdenComp__Orden__522F1F86">
-    <End Type="DB_9CAC35_indutradeModel.OrdenCompra" Role="OrdenCompra" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.OrdenCompraItem" Role="OrdenCompraItem" Multiplicity="*" />
+  <Association Name="FK__Encabezad__Usuar__1392CE8F">
+    <End Type="DB_9CAC35_indutradeModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.EncabezadoMatrizBL" Role="EncabezadoMatrizBL" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="OrdenCompra">
+      <Principal Role="Usuario">
         <PropertyRef Name="RowID" />
       </Principal>
-      <Dependent Role="OrdenCompraItem">
-        <PropertyRef Name="OrdenCompraID" />
+      <Dependent Role="EncabezadoMatrizBL">
+        <PropertyRef Name="UsuarioCreacionID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrdenComp__Orden__55FFB06A">
-    <End Type="DB_9CAC35_indutradeModel.OrdenCompra" Role="OrdenCompra" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.OrdenCompraContrato" Role="OrdenCompraContrato" Multiplicity="*" />
+  <Association Name="FK__ListaEmpa__Matri__321755AF">
+    <End Type="DB_9CAC35_indutradeModel.EncabezadoMatrizBL" Role="EncabezadoMatrizBL" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.ListaEmpaque" Role="ListaEmpaque" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="OrdenCompra">
+      <Principal Role="EncabezadoMatrizBL">
         <PropertyRef Name="RowID" />
       </Principal>
-      <Dependent Role="OrdenCompraContrato">
-        <PropertyRef Name="OrdenCompraID" />
+      <Dependent Role="ListaEmpaque">
+        <PropertyRef Name="MatrizBLID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrdenComp__Orden__58DC1D15">
-    <End Type="DB_9CAC35_indutradeModel.OrdenCompra" Role="OrdenCompra" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.OrdenCompraContrato" Role="OrdenCompraContrato" Multiplicity="*" />
+  <Association Name="FK__Encabezad__Profo__4282C7A2">
+    <End Type="DB_9CAC35_indutradeModel.ProformaItemCalculadora" Role="ProformaItemCalculadora" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.EncabezadoRegistroLlenado" Role="EncabezadoRegistroLlenado" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="OrdenCompra">
+      <Principal Role="ProformaItemCalculadora">
         <PropertyRef Name="RowID" />
       </Principal>
-      <Dependent Role="OrdenCompraContrato">
-        <PropertyRef Name="OrdenCompraID" />
+      <Dependent Role="EncabezadoRegistroLlenado">
+        <PropertyRef Name="ProformaItemID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrdenComp__Orden__5BB889C0">
-    <End Type="DB_9CAC35_indutradeModel.OrdenCompra" Role="OrdenCompra" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.OrdenCompraItem" Role="OrdenCompraItem" Multiplicity="*" />
+  <Association Name="FK__Encabezad__Usuar__4376EBDB">
+    <End Type="DB_9CAC35_indutradeModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.EncabezadoRegistroLlenado" Role="EncabezadoRegistroLlenado" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="OrdenCompra">
+      <Principal Role="Usuario">
         <PropertyRef Name="RowID" />
       </Principal>
-      <Dependent Role="OrdenCompraItem">
-        <PropertyRef Name="OrdenCompraID" />
+      <Dependent Role="EncabezadoRegistroLlenado">
+        <PropertyRef Name="UsuarioCreacionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Encabezad__Usuar__446B1014">
+    <End Type="DB_9CAC35_indutradeModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.EncabezadoRegistroLlenado" Role="EncabezadoRegistroLlenado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="EncabezadoRegistroLlenado">
+        <PropertyRef Name="UsuarioModificacionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Factura__Proform__22D5121F">
+    <End Type="DB_9CAC35_indutradeModel.Proforma" Role="Proforma" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.Factura" Role="Factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proforma">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Factura">
+        <PropertyRef Name="ProformaID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2849,6 +3344,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SolicitudTransporte_Proforma">
+    <End Type="DB_9CAC35_indutradeModel.Proforma" Role="Proforma" Multiplicity="1" />
+    <End Type="DB_9CAC35_indutradeModel.SolicitudTransporte" Role="SolicitudTransporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proforma">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="SolicitudTransporte">
+        <PropertyRef Name="ProformaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__ProformaI__Usuar__69478F08">
     <End Type="DB_9CAC35_indutradeModel.Usuario" Role="Usuario" Multiplicity="0..1" />
     <End Type="DB_9CAC35_indutradeModel.ProformaItemCalculadora" Role="ProformaItemCalculadora" Multiplicity="*" />
@@ -2873,6 +3380,66 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SolicitudTransporte_Opcion">
+    <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.SolicitudTransporte" Role="SolicitudTransporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opcion">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="SolicitudTransporte">
+        <PropertyRef Name="OpcionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SolicitudTransporte_Planta">
+    <End Type="DB_9CAC35_indutradeModel.Planta" Role="Planta" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.SolicitudTransporte" Role="SolicitudTransporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Planta">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="SolicitudTransporte">
+        <PropertyRef Name="PlantaCargueID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SolicitudTransporte_SolicitudTransporte">
+    <End Type="DB_9CAC35_indutradeModel.Planta" Role="Planta" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.SolicitudTransporte" Role="SolicitudTransporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Planta">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="SolicitudTransporte">
+        <PropertyRef Name="PlantaDescargueID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TipoVehiculo_SolicitudTransporte">
+    <End Type="DB_9CAC35_indutradeModel.SolicitudTransporte" Role="SolicitudTransporte" Multiplicity="1" />
+    <End Type="DB_9CAC35_indutradeModel.TipoVehiculo" Role="TipoVehiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SolicitudTransporte">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="TipoVehiculo">
+        <PropertyRef Name="SolicitudTransporteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Estado__Agrupaci__03C67B1A">
+    <End Type="DB_9CAC35_indutradeModel.Agrupacion" Role="Agrupacion" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.Estado" Role="Estado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agrupacion">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Estado">
+        <PropertyRef Name="AgrupacionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Opcion__Agrupaci__0A688BB1">
     <End Type="DB_9CAC35_indutradeModel.Agrupacion" Role="Agrupacion" Multiplicity="0..1" />
     <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="*" />
@@ -2882,6 +3449,18 @@
       </Principal>
       <Dependent Role="Opcion">
         <PropertyRef Name="AgrupacionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ArchivoAd__TipoI__78DED853">
+    <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.ArchivoAdjunto" Role="ArchivoAdjunto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opcion">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="ArchivoAdjunto">
+        <PropertyRef Name="TipoID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2909,6 +3488,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Firma__TipoFirma__7760A435">
+    <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.Firma" Role="Firma" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opcion">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Firma">
+        <PropertyRef Name="TipoFirmaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Firma__UsuarioID__7854C86E">
+    <End Type="DB_9CAC35_indutradeModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.Firma" Role="Firma" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Firma">
+        <PropertyRef Name="UsuarioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__MotoNave__Tipo__44EA3301">
     <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="0..1" />
     <End Type="DB_9CAC35_indutradeModel.MotoNave" Role="MotoNave" Multiplicity="*" />
@@ -2918,6 +3521,30 @@
       </Principal>
       <Dependent Role="MotoNave">
         <PropertyRef Name="Tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vehiculo__MarcaI__763775D2">
+    <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opcion">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Vehiculo">
+        <PropertyRef Name="MarcaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vehiculo__TipoVe__744F2D60">
+    <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opcion">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Vehiculo">
+        <PropertyRef Name="TipoVehiculoID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2993,207 +3620,81 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="ItemImpuesto">
+  <EntityType Name="OrdenCompra">
     <Key>
       <PropertyRef Name="RowID" />
     </Key>
     <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CompañiaID" Type="Int32" />
-    <Property Name="TipoID" Type="Int32" />
-    <Property Name="ItemID" Type="Int32" />
-    <Property Name="Llave" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="PorcentajeBase" Type="Decimal" Precision="10" Scale="4" />
-    <Property Name="BaseMinimaCompra" Type="Decimal" Precision="19" Scale="4" />
-    <Property Name="Tasa" Type="Decimal" Precision="10" Scale="4" />
-    <Property Name="UsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-    <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Compañia" Relationship="DB_9CAC35_indutradeModel.FK__ItemImpue__Compa__1980B20F" FromRole="ItemImpuesto" ToRole="Compañia" />
-    <NavigationProperty Name="Item" Relationship="DB_9CAC35_indutradeModel.FK__ItemImpue__ItemI__1B68FA81" FromRole="ItemImpuesto" ToRole="Item" />
-    <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__ItemImpue__TipoI__1A74D648" FromRole="ItemImpuesto" ToRole="Opcion" />
-  </EntityType>
-  <EntityType Name="AutorizacionCargue">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="SolicitudTransporteID" Type="Int32" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="FormaPagoID" Type="Int32" />
+    <Property Name="SucursalProveedorID" Type="Int32" />
     <Property Name="EstadoID" Type="Int32" />
-    <Property Name="UsuarioCreacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-    <Property Name="UsuarioModificacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-    <Property Name="BKK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Empaque" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Estado" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Estad__6BB9E75F" FromRole="AutorizacionCargue" ToRole="Estado" />
-    <NavigationProperty Name="SolicitudTransporte" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Solic__6CAE0B98" FromRole="AutorizacionCargue" ToRole="SolicitudTransporte" />
-    <NavigationProperty Name="AutorizacionCargueVehiculo" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Autor__4B180DA3" FromRole="AutorizacionCargue" ToRole="AutorizacionCargueVehiculo" />
-  </EntityType>
-  <EntityType Name="SolicitudTransporte">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ProformaID" Type="Int32" Nullable="false" />
-    <Property Name="ProveedorID" Type="Int32" Nullable="false" />
-    <Property Name="Cantidad" Type="Int32" />
-    <Property Name="Flete" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="OpcionID" Type="Int32" />
-    <Property Name="PlantaCargueID" Type="Int32" />
-    <Property Name="FechaCargue" Type="DateTime" Precision="0" />
-    <Property Name="RequisitosCargue" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="PlantaDescargueID" Type="Int32" />
-    <Property Name="FechaEntrega" Type="DateTime" Precision="0" />
-    <Property Name="RequisitosDescargue" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CompradorID" Type="Int32" />
+    <Property Name="SolicitanteID" Type="Int32" />
+    <Property Name="ERPCodigo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Referencia" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Observaciones" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
     <Property Name="UsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="FechaCreacion" Type="DateTime" Precision="0" />
-    <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="FechaModificacion" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="Tercero" Relationship="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Tercero" FromRole="SolicitudTransporte" ToRole="Tercero" />
-    <NavigationProperty Name="AutorizacionCargue" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Solic__6CAE0B98" FromRole="SolicitudTransporte" ToRole="AutorizacionCargue" />
-    <NavigationProperty Name="Proforma" Relationship="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Proforma" FromRole="SolicitudTransporte" ToRole="Proforma" />
-    <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Opcion" FromRole="SolicitudTransporte" ToRole="Opcion" />
-    <NavigationProperty Name="Planta" Relationship="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Planta" FromRole="SolicitudTransporte" ToRole="Planta" />
-    <NavigationProperty Name="Planta1" Relationship="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_SolicitudTransporte" FromRole="SolicitudTransporte" ToRole="Planta" />
-    <NavigationProperty Name="TipoVehiculo" Relationship="DB_9CAC35_indutradeModel.FK_TipoVehiculo_SolicitudTransporte" FromRole="SolicitudTransporte" ToRole="TipoVehiculo" />
-  </EntityType>
-  <EntityType Name="TipoVehiculo">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="SolicitudTransporteID" Type="Int32" Nullable="false" />
-    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="SolicitudTransporte" Relationship="DB_9CAC35_indutradeModel.FK_TipoVehiculo_SolicitudTransporte" FromRole="TipoVehiculo" ToRole="SolicitudTransporte" />
-  </EntityType>
-  <EntityType Name="EnvioMail">
-    <Key>
-      <PropertyRef Name="rowid" />
-    </Key>
-    <Property Name="rowid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MTo" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
-    <Property Name="MFrom" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Asunto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Mensaje" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="CreadoPor" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
-    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="FechaEnviado" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="sent" Type="Int32" />
-    <Property Name="Adjunto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="Estado">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="AgrupacionID" Type="Int32" />
-    <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Activo" Type="Boolean" />
-    <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="AutorizacionCargue" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Estad__6BB9E75F" FromRole="Estado" ToRole="AutorizacionCargue" />
-    <NavigationProperty Name="OrdenCompra" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Estad__04BA9F53" FromRole="Estado" ToRole="OrdenCompra" />
-    <NavigationProperty Name="Agrupacion" Relationship="DB_9CAC35_indutradeModel.FK__Estado__Agrupaci__03C67B1A" FromRole="Estado" ToRole="Agrupacion" />
-  </EntityType>
-  <EntityType Name="Firma">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Imagen" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="TipoFirmaID" Type="Int32" />
-    <Property Name="UsuarioID" Type="Int32" />
-    <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__Firma__TipoFirma__7760A435" FromRole="Firma" ToRole="Opcion" />
-    <NavigationProperty Name="Usuario" Relationship="DB_9CAC35_indutradeModel.FK__Firma__UsuarioID__7854C86E" FromRole="Firma" ToRole="Usuario" />
-  </EntityType>
-  <EntityType Name="Parametro">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
-    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
-    <Property Name="Valor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="CreadoPor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-    <Property Name="ModificadoPor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="Despacho" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="LugarEntrega" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CondicionPago" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Forma__4A8DFDBE" FromRole="OrdenCompra" ToRole="CondicionPago" />
+    <NavigationProperty Name="Sucursal" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Sucur__4B8221F7" FromRole="OrdenCompra" ToRole="Sucursal" />
+    <NavigationProperty Name="Tercero" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Compr__4D6A6A69" FromRole="OrdenCompra" ToRole="Tercero" />
+    <NavigationProperty Name="Tercero1" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Solic__4E5E8EA2" FromRole="OrdenCompra" ToRole="Tercero" />
+    <NavigationProperty Name="Estado" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Estad__04BA9F53" FromRole="OrdenCompra" ToRole="Estado" />
+    <NavigationProperty Name="OrdenCompraItem" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__522F1F86" FromRole="OrdenCompra" ToRole="OrdenCompraItem" />
+    <NavigationProperty Name="OrdenCompraContrato" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__55FFB06A" FromRole="OrdenCompra" ToRole="OrdenCompraContrato" />
+    <NavigationProperty Name="OrdenCompraContrato1" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__58DC1D15" FromRole="OrdenCompra" ToRole="OrdenCompraContrato" />
+    <NavigationProperty Name="OrdenCompraItem1" Relationship="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__5BB889C0" FromRole="OrdenCompra" ToRole="OrdenCompraItem" />
   </EntityType>
-  <Association Name="FK__ItemImpue__Compa__1980B20F">
-    <End Type="DB_9CAC35_indutradeModel.Compañia" Role="Compañia" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.ItemImpuesto" Role="ItemImpuesto" Multiplicity="*" />
+  <Association Name="FK__OrdenComp__Forma__4A8DFDBE">
+    <End Type="DB_9CAC35_indutradeModel.CondicionPago" Role="CondicionPago" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.OrdenCompra" Role="OrdenCompra" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Compañia">
+      <Principal Role="CondicionPago">
         <PropertyRef Name="RowID" />
       </Principal>
-      <Dependent Role="ItemImpuesto">
-        <PropertyRef Name="CompañiaID" />
+      <Dependent Role="OrdenCompra">
+        <PropertyRef Name="FormaPagoID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ItemImpue__ItemI__1B68FA81">
-    <End Type="DB_9CAC35_indutradeModel.Item" Role="Item" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.ItemImpuesto" Role="ItemImpuesto" Multiplicity="*" />
+  <Association Name="FK__OrdenComp__Sucur__4B8221F7">
+    <End Type="DB_9CAC35_indutradeModel.Sucursal" Role="Sucursal" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.OrdenCompra" Role="OrdenCompra" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Item">
+      <Principal Role="Sucursal">
         <PropertyRef Name="RowID" />
       </Principal>
-      <Dependent Role="ItemImpuesto">
-        <PropertyRef Name="ItemID" />
+      <Dependent Role="OrdenCompra">
+        <PropertyRef Name="SucursalProveedorID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ItemImpue__TipoI__1A74D648">
-    <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.ItemImpuesto" Role="ItemImpuesto" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Opcion">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="ItemImpuesto">
-        <PropertyRef Name="TipoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SolicitudTransporte_Tercero">
-    <End Type="DB_9CAC35_indutradeModel.Tercero" Role="Tercero" Multiplicity="1" />
-    <End Type="DB_9CAC35_indutradeModel.SolicitudTransporte" Role="SolicitudTransporte" Multiplicity="*" />
+  <Association Name="FK__OrdenComp__Compr__4D6A6A69">
+    <End Type="DB_9CAC35_indutradeModel.Tercero" Role="Tercero" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.OrdenCompra" Role="OrdenCompra" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Tercero">
         <PropertyRef Name="RowID" />
       </Principal>
-      <Dependent Role="SolicitudTransporte">
-        <PropertyRef Name="ProveedorID" />
+      <Dependent Role="OrdenCompra">
+        <PropertyRef Name="CompradorID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Autorizac__Estad__6BB9E75F">
-    <End Type="DB_9CAC35_indutradeModel.Estado" Role="Estado" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.AutorizacionCargue" Role="AutorizacionCargue" Multiplicity="*" />
+  <Association Name="FK__OrdenComp__Solic__4E5E8EA2">
+    <End Type="DB_9CAC35_indutradeModel.Tercero" Role="Tercero" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.OrdenCompra" Role="OrdenCompra" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Estado">
+      <Principal Role="Tercero">
         <PropertyRef Name="RowID" />
       </Principal>
-      <Dependent Role="AutorizacionCargue">
-        <PropertyRef Name="EstadoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Autorizac__Solic__6CAE0B98">
-    <End Type="DB_9CAC35_indutradeModel.SolicitudTransporte" Role="SolicitudTransporte" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.AutorizacionCargue" Role="AutorizacionCargue" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SolicitudTransporte">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="AutorizacionCargue">
-        <PropertyRef Name="SolicitudTransporteID" />
+      <Dependent Role="OrdenCompra">
+        <PropertyRef Name="SolicitanteID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3209,353 +3710,51 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_SolicitudTransporte_Proforma">
-    <End Type="DB_9CAC35_indutradeModel.Proforma" Role="Proforma" Multiplicity="1" />
-    <End Type="DB_9CAC35_indutradeModel.SolicitudTransporte" Role="SolicitudTransporte" Multiplicity="*" />
+  <Association Name="FK__OrdenComp__Orden__522F1F86">
+    <End Type="DB_9CAC35_indutradeModel.OrdenCompra" Role="OrdenCompra" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.OrdenCompraItem" Role="OrdenCompraItem" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Proforma">
+      <Principal Role="OrdenCompra">
         <PropertyRef Name="RowID" />
       </Principal>
-      <Dependent Role="SolicitudTransporte">
-        <PropertyRef Name="ProformaID" />
+      <Dependent Role="OrdenCompraItem">
+        <PropertyRef Name="OrdenCompraID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_SolicitudTransporte_Opcion">
-    <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.SolicitudTransporte" Role="SolicitudTransporte" Multiplicity="*" />
+  <Association Name="FK__OrdenComp__Orden__55FFB06A">
+    <End Type="DB_9CAC35_indutradeModel.OrdenCompra" Role="OrdenCompra" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.OrdenCompraContrato" Role="OrdenCompraContrato" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Opcion">
+      <Principal Role="OrdenCompra">
         <PropertyRef Name="RowID" />
       </Principal>
-      <Dependent Role="SolicitudTransporte">
-        <PropertyRef Name="OpcionID" />
+      <Dependent Role="OrdenCompraContrato">
+        <PropertyRef Name="OrdenCompraID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_SolicitudTransporte_Planta">
-    <End Type="DB_9CAC35_indutradeModel.Planta" Role="Planta" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.SolicitudTransporte" Role="SolicitudTransporte" Multiplicity="*" />
+  <Association Name="FK__OrdenComp__Orden__58DC1D15">
+    <End Type="DB_9CAC35_indutradeModel.OrdenCompra" Role="OrdenCompra" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.OrdenCompraContrato" Role="OrdenCompraContrato" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Planta">
+      <Principal Role="OrdenCompra">
         <PropertyRef Name="RowID" />
       </Principal>
-      <Dependent Role="SolicitudTransporte">
-        <PropertyRef Name="PlantaCargueID" />
+      <Dependent Role="OrdenCompraContrato">
+        <PropertyRef Name="OrdenCompraID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_SolicitudTransporte_SolicitudTransporte">
-    <End Type="DB_9CAC35_indutradeModel.Planta" Role="Planta" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.SolicitudTransporte" Role="SolicitudTransporte" Multiplicity="*" />
+  <Association Name="FK__OrdenComp__Orden__5BB889C0">
+    <End Type="DB_9CAC35_indutradeModel.OrdenCompra" Role="OrdenCompra" Multiplicity="0..1" />
+    <End Type="DB_9CAC35_indutradeModel.OrdenCompraItem" Role="OrdenCompraItem" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Planta">
+      <Principal Role="OrdenCompra">
         <PropertyRef Name="RowID" />
       </Principal>
-      <Dependent Role="SolicitudTransporte">
-        <PropertyRef Name="PlantaDescargueID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TipoVehiculo_SolicitudTransporte">
-    <End Type="DB_9CAC35_indutradeModel.SolicitudTransporte" Role="SolicitudTransporte" Multiplicity="1" />
-    <End Type="DB_9CAC35_indutradeModel.TipoVehiculo" Role="TipoVehiculo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SolicitudTransporte">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="TipoVehiculo">
-        <PropertyRef Name="SolicitudTransporteID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Estado__Agrupaci__03C67B1A">
-    <End Type="DB_9CAC35_indutradeModel.Agrupacion" Role="Agrupacion" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.Estado" Role="Estado" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Agrupacion">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="Estado">
-        <PropertyRef Name="AgrupacionID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Firma__TipoFirma__7760A435">
-    <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.Firma" Role="Firma" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Opcion">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="Firma">
-        <PropertyRef Name="TipoFirmaID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Firma__UsuarioID__7854C86E">
-    <End Type="DB_9CAC35_indutradeModel.Usuario" Role="Usuario" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.Firma" Role="Firma" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="Firma">
-        <PropertyRef Name="UsuarioID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <ComplexType Name="ProformaExport_Result">
-    <Property Type="String" Name="Seller" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="AdressSeller" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="TelSeller" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="ContactSeller" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="Buyer" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="AdressSeller1" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="TelSeller1" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="ContactBuyer" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="Ncontract" Nullable="true" MaxLength="116" />
-    <Property Type="String" Name="Loading" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="Discharget" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="Item" Nullable="true" MaxLength="200" />
-    <Property Type="Double" Name="FobTonelada" Nullable="true" />
-    <Property Type="Double" Name="FleteTonelada" Nullable="true" />
-    <Property Type="Double" Name="SeguroTonelada" Nullable="true" />
-    <Property Type="Double" Name="CifTonelada" Nullable="true" />
-    <Property Type="Double" Name="FobValor" Nullable="true" />
-    <Property Type="Double" Name="FleteValor" Nullable="true" />
-    <Property Type="Double" Name="SeguroValor" Nullable="true" />
-    <Property Type="Double" Name="CifValor" Nullable="true" />
-    <Property Type="Double" Name="USD" Nullable="true" />
-    <Property Type="Int32" Name="TM" Nullable="true" />
-    <Property Type="Double" Name="Price" Nullable="true" />
-    <Property Type="String" Name="Tolerance" Nullable="true" MaxLength="11" />
-  </ComplexType>
-  <ComplexType Name="SolicitudTransportePDF_Result">
-    <Property Type="Int32" Name="Pedido" Nullable="false" />
-    <Property Type="String" Name="Item" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="Proveedor" Nullable="true" MaxLength="500" />
-    <Property Type="Int32" Name="Cvehiculos" Nullable="true" />
-    <Property Type="String" Name="PlantaC" Nullable="true" MaxLength="80" />
-    <Property Type="DateTime" Name="Fechacargue" Nullable="true" />
-    <Property Type="String" Name="RequisitosCargue" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="PlantaD" Nullable="true" MaxLength="80" />
-    <Property Type="DateTime" Name="FechaEntrega" Nullable="true" />
-    <Property Type="String" Name="RequisitosDescargue" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="Flete" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="opTermico" Nullable="false" MaxLength="1" />
-    <Property Type="String" Name="opAcerado" Nullable="false" MaxLength="1" />
-    <Property Type="String" Name="opLamina" Nullable="false" MaxLength="1" />
-    <Property Type="String" Name="opAluminio" Nullable="false" MaxLength="1" />
-    <Property Type="String" Name="opPlancha" Nullable="false" MaxLength="1" />
-    <Property Type="String" Name="opCarroceria" Nullable="false" MaxLength="1" />
-  </ComplexType>
-  <EntityType Name="Vehiculo">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TipoVehiculoID" Type="Int32" />
-    <Property Name="Placa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Año" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CapacidadKG" Type="Int32" />
-    <Property Name="Volumen" Type="Int32" />
-    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-    <Property Name="Estado" Type="Boolean" />
-    <Property Name="MarcaID" Type="Int32" />
-    <Property Name="Rendimiento" Type="Int32" />
-    <Property Name="PesoVacio" Type="Double" />
-    <Property Name="CargaMaxima" Type="Double" />
-    <NavigationProperty Name="Opcion" Relationship="DB_9CAC35_indutradeModel.FK__Vehiculo__MarcaI__763775D2" FromRole="Vehiculo" ToRole="Opcion" />
-    <NavigationProperty Name="Opcion1" Relationship="DB_9CAC35_indutradeModel.FK__Vehiculo__TipoVe__744F2D60" FromRole="Vehiculo" ToRole="Opcion" />
-    <NavigationProperty Name="DetalleRegistroLlenado" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Carro__483BA0F8" FromRole="Vehiculo" ToRole="DetalleRegistroLlenado" />
-    <NavigationProperty Name="AutorizacionCargueVehiculo" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Remol__4DF47A4E" FromRole="Vehiculo" ToRole="AutorizacionCargueVehiculo" />
-    <NavigationProperty Name="AutorizacionCargueVehiculo1" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Vehic__4D005615" FromRole="Vehiculo" ToRole="AutorizacionCargueVehiculo" />
-  </EntityType>
-  <Association Name="FK__Vehiculo__MarcaI__763775D2">
-    <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Opcion">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="Vehiculo">
-        <PropertyRef Name="MarcaID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Vehiculo__TipoVe__744F2D60">
-    <End Type="DB_9CAC35_indutradeModel.Opcion" Role="Opcion" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Opcion">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="Vehiculo">
-        <PropertyRef Name="TipoVehiculoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="DetalleRegistroLlenado">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="EncabezadoRegistroLlenadoID" Type="Int32" />
-    <Property Name="CarroTanqueID" Type="Int32" />
-    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-    <Property Name="FechaInspeccion" Type="DateTime" Precision="3" />
-    <Property Name="NumeroCTU_IT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="NumeroFlexitanks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="InspeccionAntinarcoticos" Type="Boolean" />
-    <Property Name="Sello" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="TipoSello" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="FechaLlegada" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Vehiculo" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Carro__483BA0F8" FromRole="DetalleRegistroLlenado" ToRole="Vehiculo" />
-    <NavigationProperty Name="EncabezadoRegistroLlenado" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Encab__47477CBF" FromRole="DetalleRegistroLlenado" ToRole="EncabezadoRegistroLlenado" />
-  </EntityType>
-  <EntityType Name="EncabezadoRegistroLlenado">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ProformaItemID" Type="Int32" />
-    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-    <Property Name="UsuarioCreacionID" Type="Int32" />
-    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-    <Property Name="UsuarioModificacionID" Type="Int32" />
-    <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="DetalleRegistroLlenado" Relationship="DB_9CAC35_indutradeModel.FK__DetalleRe__Encab__47477CBF" FromRole="EncabezadoRegistroLlenado" ToRole="DetalleRegistroLlenado" />
-    <NavigationProperty Name="ProformaItemCalculadora" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Profo__4282C7A2" FromRole="EncabezadoRegistroLlenado" ToRole="ProformaItemCalculadora" />
-    <NavigationProperty Name="Usuario" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__4376EBDB" FromRole="EncabezadoRegistroLlenado" ToRole="Usuario" />
-    <NavigationProperty Name="Usuario1" Relationship="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__446B1014" FromRole="EncabezadoRegistroLlenado" ToRole="Usuario" />
-  </EntityType>
-  <Association Name="FK__DetalleRe__Carro__483BA0F8">
-    <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.DetalleRegistroLlenado" Role="DetalleRegistroLlenado" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Vehiculo">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="DetalleRegistroLlenado">
-        <PropertyRef Name="CarroTanqueID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__DetalleRe__Encab__47477CBF">
-    <End Type="DB_9CAC35_indutradeModel.EncabezadoRegistroLlenado" Role="EncabezadoRegistroLlenado" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.DetalleRegistroLlenado" Role="DetalleRegistroLlenado" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EncabezadoRegistroLlenado">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="DetalleRegistroLlenado">
-        <PropertyRef Name="EncabezadoRegistroLlenadoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Encabezad__Profo__4282C7A2">
-    <End Type="DB_9CAC35_indutradeModel.ProformaItemCalculadora" Role="ProformaItemCalculadora" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.EncabezadoRegistroLlenado" Role="EncabezadoRegistroLlenado" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProformaItemCalculadora">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="EncabezadoRegistroLlenado">
-        <PropertyRef Name="ProformaItemID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Encabezad__Usuar__4376EBDB">
-    <End Type="DB_9CAC35_indutradeModel.Usuario" Role="Usuario" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.EncabezadoRegistroLlenado" Role="EncabezadoRegistroLlenado" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="EncabezadoRegistroLlenado">
-        <PropertyRef Name="UsuarioCreacionID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Encabezad__Usuar__446B1014">
-    <End Type="DB_9CAC35_indutradeModel.Usuario" Role="Usuario" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.EncabezadoRegistroLlenado" Role="EncabezadoRegistroLlenado" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="EncabezadoRegistroLlenado">
-        <PropertyRef Name="UsuarioModificacionID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="AutorizacionCargueVehiculo">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="AutorizacionCargueID" Type="Int32" />
-    <Property Name="TerceroID" Type="Int32" />
-    <Property Name="RemolqueID" Type="Int32" />
-    <Property Name="UsuarioCreacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-    <Property Name="UsuarioModificacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-    <Property Name="VehiculoID" Type="Int32" />
-    <NavigationProperty Name="Tercero" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Terce__4C0C31DC" FromRole="AutorizacionCargueVehiculo" ToRole="Tercero" />
-    <NavigationProperty Name="AutorizacionCargue" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Autor__4B180DA3" FromRole="AutorizacionCargueVehiculo" ToRole="AutorizacionCargue" />
-    <NavigationProperty Name="Vehiculo" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Remol__4DF47A4E" FromRole="AutorizacionCargueVehiculo" ToRole="Vehiculo" />
-    <NavigationProperty Name="Vehiculo1" Relationship="DB_9CAC35_indutradeModel.FK__Autorizac__Vehic__4D005615" FromRole="AutorizacionCargueVehiculo" ToRole="Vehiculo" />
-  </EntityType>
-  <Association Name="FK__Autorizac__Terce__4C0C31DC">
-    <End Type="DB_9CAC35_indutradeModel.Tercero" Role="Tercero" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" Role="AutorizacionCargueVehiculo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tercero">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="AutorizacionCargueVehiculo">
-        <PropertyRef Name="TerceroID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Autorizac__Autor__4B180DA3">
-    <End Type="DB_9CAC35_indutradeModel.AutorizacionCargue" Role="AutorizacionCargue" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" Role="AutorizacionCargueVehiculo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AutorizacionCargue">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="AutorizacionCargueVehiculo">
-        <PropertyRef Name="AutorizacionCargueID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Autorizac__Remol__4DF47A4E">
-    <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" Role="AutorizacionCargueVehiculo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Vehiculo">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="AutorizacionCargueVehiculo">
-        <PropertyRef Name="RemolqueID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Autorizac__Vehic__4D005615">
-    <End Type="DB_9CAC35_indutradeModel.Vehiculo" Role="Vehiculo" Multiplicity="0..1" />
-    <End Type="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" Role="AutorizacionCargueVehiculo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Vehiculo">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="AutorizacionCargueVehiculo">
-        <PropertyRef Name="VehiculoID" />
+      <Dependent Role="OrdenCompraItem">
+        <PropertyRef Name="OrdenCompraID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

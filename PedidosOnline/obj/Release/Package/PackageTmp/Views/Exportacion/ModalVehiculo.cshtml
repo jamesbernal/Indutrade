@@ -1,0 +1,202 @@
+﻿@model PedidosOnline.Models.Vehiculo
+@{
+    ViewBag.Title = "ModalVehiculo";
+    Layout = null;
+}
+<script>
+
+    function Guardar() {
+
+        if ($("#placa").val() == "") {
+            Mensajes('El campo placa puede estar vacio!', 'error', '');
+            return null;
+        }
+        if ($("#Año").val() == "") {
+            Mensajes('El campo Año puede estar vacio!', 'error', '');
+            return null;
+        }
+        if ($("#tipo").val() == "") {
+            Mensajes('El campo tipo puede estar vacio!', 'error', '');
+            return null;
+        }
+        var formData = new FormData(document.getElementById("form"));
+        debugger
+        $.ajax({
+            type: "POST",
+            url: "GuardarVehiculo",
+            contentType: false,
+            processData: false,
+            
+            data: formData,
+            success: function (data) {
+                if(data != null)
+                {
+                    $("input").val('');
+                }
+            }
+        });
+    }
+
+
+</script>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+<div class="modal fade" id="myModal1" data-backdrop="static" data-keyboard="false" style="overflow: hidden;">
+    <div class="modal-dialog">
+        <form id="form" name="form" onsubmit="return false">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close salir" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><b>Vehículo</b></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row" id="div_btns">
+                        <div class="nav" style="margin-left:30px">
+                            <span>
+                                <a href="javascript:Guardar(1);" class="alink">
+                                    <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
+                                </a>
+                            </span>
+                        </div>
+                        <br />
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label for="fecha" class="lang">Placa</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" id="placa" name="placa" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label for="Año" class="lang">Año</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" id="Año" name="Año" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label for="fecha" class="lang">Modelo</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" id="Modelo" name="Modelo" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label for="fecha" class="lang">Rendimiento</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" id="Rendimiento" name="Rendimiento" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label for="fecha" class="lang">Color</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="color" id="Color" name="Color" style="width: 100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label>Tipo Vehiculo</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select id="tipo" name="tipo" required>
+                                            <option value="" selected>-Seleccionar-</option>
+                                            @foreach (PedidosOnline.Models.Opcion op in ((List<PedidosOnline.Models.Opcion>)ViewBag.TipoVehiculo).ToList())
+                                            {
+                                                <option value="@op.RowID">@op.Codigo</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label for="fecha" class="lang">Capacidad</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" id="Capacidad" name="Capacidad" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label for="fecha" class="lang">Volumen</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" id="Volumen" name="Volumen" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label for="fecha" class="lang">Peso Vacio</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" id="Peso" name="Peso" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        <label for="fecha" class="lang">Carga Maxima</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" id="Carga" name="Carga" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $("#myModal1").modal('show');
+
+
+    $('#fechaC').datepicker({
+        dateFormat: 'dd/mm/yy',
+        minDate: 0,
+        maxDate: '+3Y',
+        inline: true
+    });
+</script>

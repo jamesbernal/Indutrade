@@ -1,0 +1,211 @@
+﻿@model PedidosOnline.Models.EncabezadoRegistroLlenado
+@{
+    ViewBag.Title = "FormatoRegistroLlenado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="row" id="div_menu" style="margin-bottom:20px">
+        <div class="col-md-12">
+            <div class="nav">
+                <span>
+                    &nbsp;&nbsp;
+                    <a href="@Url.Action("Calculadoras","Exportacion",new {  @rih = Request.Params["rih"] })" class="alink">
+                        <i class="glyphicon glyphicon-list-alt"></i>&nbsp;<span class="lang" key="VISTA">Vista</span>
+                    </a>
+                </span>
+                <span>
+                    <a href="javascript:guardar(1);" class="alink">
+                        <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
+                    </a>
+                </span>
+                <span>
+                    &nbsp;&nbsp;
+                    <a href="javascript:guardar(2);" class="alink">
+                        <i class="glyphicon glyphicon-floppy-disk"></i><span class="lang" key="GUARDAR_&_CERRAR">&nbsp;Guardar&nbsp;&&nbsp;Cerrar</span>
+                    </a>
+                </span>
+               
+            </div>
+        </div>
+    </div>
+    <div class="tabbable tabbable-custom tabs-top">
+        <ul class="nav nav-tabs tabs-top">
+            <li class="active"><a href="#tab_1" id="litab_1" data-toggle="tab" class="lang" key="">Informacion General Calculadora</a></li>
+            <li class="item"><a href="#tab_2" id="litab_2" data-toggle="tab" class="lang" key="">Items </a></li>
+            <li class="item" style="display:none"><a href="#tab_3" id="litab_3" data-toggle="tab" class="lang" key="">Balance </a></li>
+        </ul>
+    </div>
+    <div class="tab-content" style="overflow:hidden">
+        <div class="tab-pane active" id="tab_1">
+            <div class="col-sm-12" style="margin-top:20px;">
+                <form id="form_encabezado" name="form_encabezado
+                      " onsubmit="return false">
+                    <input type="hidden" id="encaRowID" name="encaRowID" value="@Model.RowID"/>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="auto_proforma" class="control-label">Proforma</label>
+                                <br />
+                                <input type="text" id="auto_proforma" placeholder="------" class="col-sm-10" name="" required/>
+                                <input type="hidden" id="proforma_id" class="col-sm-10" name="proforma_id" />
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="control-label">Producto </label>
+                                <br />
+                                <select name="producto_id" id="producto_id" class="col-sm-10" required>
+                                    <option value="" id="primera_opcion" selected disabled>Elija un producto</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="control-label">Observaciones</label>
+                                <br />
+                                <textarea cols="10"  class="col-sm-10" rows="3" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="tab-pane " id="tab_2">
+            <div class="col-md-12" style="margin-top:20px;">
+                <form id="form_detalle">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label class="control-label">Carrotanque</label>
+                                <br />
+                                <input type="text" name="" />
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label class="control-label">Carrotanque</label>
+                                <br />
+                                <input type="text" name="" />
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label class="control-label">Carrotanque</label>
+                                <br />
+                                <input type="text" name="" />
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label class="control-label">Carrotanque</label>
+                                <br />
+                                <input type="text" name="" />
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label class="control-label">Carrotanque</label>
+                                <br />
+                                <input type="text" name="" />
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label class="control-label">Carrotanque</label>
+                                <br />
+                                <input type="text" name="" />
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label class="control-label">Carrotanque</label>
+                                <br />
+                                <input type="text" name="" />
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label class="control-label">Carrotanque</label>
+                                <br />
+                                <input type="text" name="" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  
+
+</div>
+<script>
+    $("#auto_proforma").autocomplete({
+        source: "auto_completa_proforma",
+        select: function (evento, ui) {
+            $("#auto_proforma").val(ui.item.label);
+            $("#proforma_id").val(ui.item.RowID);
+            crear_opcion(ui.item.RowID)
+
+        }
+    })
+    function crear_opcion(rowid) {
+        $.ajax({
+            type: "POST",
+            url:"opcion_producto",
+            data: { RowIDProforma: rowid },
+            success: function (data) {
+                $("#producto_id").empty();
+                $("#producto_id").append(data);
+            },
+            error: function () {
+
+            }
+        })
+    }
+    $(document).ready(function () {
+        $.extend($.validator.defaults, {
+            invalidHandler: function (form, validator) {
+                var errors = validator.numberOfInvalids();
+                if (errors) {
+                    var message = errors == 1
+                    ? 'Completar Campo Vacio.'
+                    : 'Completar ' + errors + ' Campos que se encuentran vacios.';
+                    Mensajes(message, 'error', '');
+                }
+            }
+        });
+        $.validator.messages.required = 'Campo requerido';
+        $.validator.messages.email = 'Campo para correo eléctronico';
+    })
+    function guardar(caso) {
+        if (caso==1) {
+            guardarencabezado();
+        }
+        if (caso==2) {
+
+        }
+    }
+    function guardarencabezado() {
+        debugger
+
+        var validar = $("#form_encabezado").validate();
+        if (validar.form()) {
+           var formData = new FormData(document.getElementById("form_encabezado"))
+            $.ajax({
+                type: "POST",
+                contentType: false,
+                processData: false,
+                url: "GuardarEncabezadoRegLlen",
+                data: formData,
+                success: function (data) {
+                    debugger
+                },
+                error: function (data) {
+                    debugger
+                }
+            })
+        }
+        
+    }
+    
+</script>

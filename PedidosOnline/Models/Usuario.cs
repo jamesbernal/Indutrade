@@ -26,6 +26,12 @@ public partial class Usuario
 
         this.Contrato1 = new HashSet<Contrato>();
 
+        this.EncabezadoMatrizBL = new HashSet<EncabezadoMatrizBL>();
+
+        this.EncabezadoRegistroLlenado = new HashSet<EncabezadoRegistroLlenado>();
+
+        this.EncabezadoRegistroLlenado1 = new HashSet<EncabezadoRegistroLlenado>();
+
         this.Proforma = new HashSet<Proforma>();
 
         this.Proforma1 = new HashSet<Proforma>();
@@ -35,10 +41,6 @@ public partial class Usuario
         this.ProformaItemCalculadora1 = new HashSet<ProformaItemCalculadora>();
 
         this.Firma = new HashSet<Firma>();
-
-        this.EncabezadoRegistroLlenado = new HashSet<EncabezadoRegistroLlenado>();
-
-        this.EncabezadoRegistroLlenado1 = new HashSet<EncabezadoRegistroLlenado>();
 
     }
 
@@ -77,6 +79,18 @@ public partial class Usuario
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
+    public virtual ICollection<EncabezadoMatrizBL> EncabezadoMatrizBL { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<EncabezadoRegistroLlenado> EncabezadoRegistroLlenado { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<EncabezadoRegistroLlenado> EncabezadoRegistroLlenado1 { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
     public virtual ICollection<Proforma> Proforma { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -91,19 +105,11 @@ public partial class Usuario
 
     public virtual ICollection<ProformaItemCalculadora> ProformaItemCalculadora1 { get; set; }
 
-    public virtual Rol Rol { get; set; }
-
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Firma> Firma { get; set; }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<EncabezadoRegistroLlenado> EncabezadoRegistroLlenado { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<EncabezadoRegistroLlenado> EncabezadoRegistroLlenado1 { get; set; }
+    public virtual Rol Rol { get; set; }
 
 }
 

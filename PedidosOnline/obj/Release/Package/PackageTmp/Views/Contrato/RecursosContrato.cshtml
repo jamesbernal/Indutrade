@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "Recursos Contrato";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    ModalProcesandoHiden();
+    $("#modal-recursos").modal("show");
+</script>
+<div class="modal fade" id="modal-recursos" data-keyboard="false" style="overflow: hidden; border-radius:2px;">
+    <div class="modal-dialog" style="width:600px ;margin-top:-25px;">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 5px;">
+                @*<button type="button" class="close salir" data-dismiss="modal" aria-hidden="true">&times;</button>*@
+                <h4 class="modal-title" style="padding:1px;color:#455A64"><b>Recursos proforma</b></h4>
+            </div>
+            <form id="form_recursos" name="form_recursos" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <br />
+                    <div id="recursos">
+                        <div class="row caja-recurso controls">
+
+                            <div class="col-sm-5" id="primer_recurso">
+                                <div class="form-group">
+                                    <label class="control-label">Codigo recurso</label>
+                                    <input class="form-control" type="text" name="codigo_archivo" />
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label class="control-label">Codigo recurso</label>
+                                    <input class="form-control" type="file" name="archivo_recurso" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <table class="table-responsive table">
+                            <thead>
+                                <tr>
+                                    <th>Archvio</th>
+                                    <th>Codigo archivo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.recursos != null)
+                                {
+                                    foreach (PedidosOnline.Models.RecursosProforma recurso in ViewBag.recursos)
+                                    {
+                                        <tr>
+                                            <td>@recurso.Archivo</td>
+                                            <td>@recurso.Codigo</td>
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div style="float:right">
+                            <a onclick="javascript:AdicionarRecurso()" class="btn btn-default">Adicionar recurso</a>
+                            <button type="button" onclick="enviar_formulario()" class="btn btn-info">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" value="@Request.Params["rowid_proformaimportacion"]" name="rowid_proforma" />
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function AdicionarRecurso() {
+        new_recurso = $(".caja-recurso").clone().removeClass("caja-recurso").appendTo("#recursos").append('<div class="col-sm-2"><a href="#" class="close"><i class="ion-ios-close"></i>X</a></div>').slideDown();
+        new_recurso.find("input").val("");
+        CloseAdicionarRecurso();
+
+    }
+    function CloseAdicionarRecurso() {
+        jQuery(".controls .close").unbind('click').bind('click', function (e) {
+            e.preventDefault();
+            jQuery(this).closest('.controls').fadeOut('400', function () {
+                jQuery(this).closest('.controls').remove();
+            });
+        });
+    }
+    $('.controls .close').click(function () {
+
+        CloseAdicionarRecurso();
+    });
+    function enviar_formulario() {
+        var formData = new FormData(document.getElementById("form_recursos"));
+        debugger
+
+        $.ajax({
+            type: "POST",
+            url: "GuardarRecursoProformaImportacion",
+            dataType: "html",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                debugger
+                data = JSON.parse(data);
+                Mensajes(data.respuesta, data.tiporepuesta, "");
+                $("#modal-recursos").modal("hide");
+                debugger
+            },
+            error: function (data) {
+                debugger
+                Mensajes(data.respuesta, data.tiporepuesta, "");
+            }
+        })
+    }
+
+</script>

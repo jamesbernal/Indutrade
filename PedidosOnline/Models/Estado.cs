@@ -55,11 +55,11 @@ public partial class Estado
 
     public virtual ICollection<AutorizacionCargue> AutorizacionCargue { get; set; }
 
+    public virtual Agrupacion Agrupacion { get; set; }
+
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<OrdenCompra> OrdenCompra { get; set; }
-
-    public virtual Agrupacion Agrupacion { get; set; }
 
 }
 

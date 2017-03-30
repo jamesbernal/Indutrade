@@ -22,9 +22,9 @@ public partial class Agrupacion
     public Agrupacion()
     {
 
-        this.Opcion = new HashSet<Opcion>();
-
         this.Estado = new HashSet<Estado>();
+
+        this.Opcion = new HashSet<Opcion>();
 
     }
 
@@ -49,11 +49,11 @@ public partial class Agrupacion
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Opcion> Opcion { get; set; }
+    public virtual ICollection<Estado> Estado { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Estado> Estado { get; set; }
+    public virtual ICollection<Opcion> Opcion { get; set; }
 
 }
 

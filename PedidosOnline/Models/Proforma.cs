@@ -24,6 +24,8 @@ public partial class Proforma
 
         this.Booking = new HashSet<Booking>();
 
+        this.Factura = new HashSet<Factura>();
+
         this.ProformaItemCalculadora = new HashSet<ProformaItemCalculadora>();
 
         this.SolicitudTransporte = new HashSet<SolicitudTransporte>();
@@ -62,6 +64,10 @@ public partial class Proforma
     public virtual ICollection<Booking> Booking { get; set; }
 
     public virtual Contrato Contrato { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Factura> Factura { get; set; }
 
     public virtual Puerto Puerto { get; set; }
 

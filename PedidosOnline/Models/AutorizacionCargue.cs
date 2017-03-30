@@ -47,13 +47,13 @@ public partial class AutorizacionCargue
 
 
 
-    public virtual Estado Estado { get; set; }
-
-    public virtual SolicitudTransporte SolicitudTransporte { get; set; }
-
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<AutorizacionCargueVehiculo> AutorizacionCargueVehiculo { get; set; }
+
+    public virtual Estado Estado { get; set; }
+
+    public virtual SolicitudTransporte SolicitudTransporte { get; set; }
 
 }
 

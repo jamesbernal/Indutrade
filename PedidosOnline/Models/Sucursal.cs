@@ -24,9 +24,9 @@ public partial class Sucursal
 
         this.Contacto = new HashSet<Contacto>();
 
-        this.OrdenCompra = new HashSet<OrdenCompra>();
-
         this.PuntoEnvio = new HashSet<PuntoEnvio>();
+
+        this.OrdenCompra = new HashSet<OrdenCompra>();
 
     }
 
@@ -103,10 +103,6 @@ public partial class Sucursal
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<OrdenCompra> OrdenCompra { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
     public virtual ICollection<PuntoEnvio> PuntoEnvio { get; set; }
 
     public virtual Tercero Tercero { get; set; }
@@ -124,6 +120,10 @@ public partial class Sucursal
     public virtual Tercero Tercero6 { get; set; }
 
     public virtual Tercero Tercero7 { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<OrdenCompra> OrdenCompra { get; set; }
 
 }
 

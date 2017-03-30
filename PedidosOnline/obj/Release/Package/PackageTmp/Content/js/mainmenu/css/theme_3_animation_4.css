@@ -1,0 +1,119 @@
+/* Animated Horizontal Submenu (Theme 3) - Animation 4 */
+body{
+	margin:0;
+	}
+/* ========== THE MAIN FONT ========== */
+@font-face{
+	font-family:"BebasNeue";
+	src:url('../font/BebasNeue.eot');
+	src:url('../font/BebasNeue.eot?#iefix') format('embedded-opentype'),
+		url('../font/BebasNeue.ttf') format('truetype'),
+		url('../font/BebasNeue.svg#BebasNeue') format('svg');
+	}	
+/* ========== MAIN DIV THAT HOLDS THE ENTIRE MENU ========== */
+.menu_container{
+	margin-top:150px; 
+	height:73px; 
+	border-bottom:solid 1px #d5d4d4;
+	-webkit-box-shadow:0 0 6px #BBBBBB;
+	-moz-box-shadow:0 0 6px #BBBBBB;
+	box-shadow:0 0 6px #BBBBBB;
+	background:#F5F5F5;
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#F5F5F5), to(#EEE));
+	background:-webkit-linear-gradient(top, #F5F5F5, #EEE);
+	background:-moz-linear-gradient(top, #F5F5F5, #EEE);
+	background:-ms-linear-gradient(top, #F5F5F5, #EEE);
+	background:-o-linear-gradient(top, #F5F5F5, #EEE);
+	}
+/* ========== BIG GREEN LINE ========== */
+.menu{
+	width:100%; 
+	height:37px; 
+	background:#9C0;
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#9C0), to(#8BB900));
+	background:-webkit-linear-gradient(top, #9C0, #8BB900);
+	background:-moz-linear-gradient(top, #9C0, #8BB900);
+	background:-ms-linear-gradient(top, #9C0, #8BB900);
+	background:-o-linear-gradient(top, #9C0, #8BB900);
+	}
+/* ========== DIV THAT HOLDS MAIN LINKS ========== */	
+.menu ul{
+	width:980px; 
+	position:relative;
+	margin:0 auto; 
+	padding:0; 
+	list-style:none;
+	}
+/* ========== MAIN LINKS ========== */
+.menu ul li{
+	float:left;
+	}
+.menu ul li a{
+	display:block;
+	height:37px; 
+	padding:0 17px; 
+	font-family:"BebasNeue"; 
+	font-size:22px; 
+	color:#FFF; 
+	text-decoration:none;
+	line-height:42px;
+	-webkit-transition:background 210ms ease-in, color 210ms ease-in;
+	-moz-transition:background 210ms ease-in, color 210ms ease-in;
+	-ms-transition:background 210ms ease-in, color 210ms ease-in;
+	-o-transition:background 210ms ease-in, color 210ms ease-in;
+	transition:background 210ms ease-in, color 210ms ease-in;
+	}
+/* ========== MAIN LINKS ON MOUSEOVER ========== */				
+.menu ul li:hover > a, .menu ul li.active > a{
+	background:#F5F5F5;
+	color:#999;
+	}
+/* ========== HORIZONTAL SUBMENU ========= */
+.menu ul ul{
+	position:absolute;
+	left:0;
+	visibility:hidden;
+	opacity:0;
+	height:36px;
+	margin-left:-16px;
+	background:#F5F5F5;
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#F5F5F5), to(#EEE));
+	background:-webkit-linear-gradient(top, #F5F5F5, #EEE);
+	background:-moz-linear-gradient(top, #F5F5F5, #EEE);
+	background:-ms-linear-gradient(top, #F5F5F5, #EEE);
+	background:-o-linear-gradient(top, #F5F5F5, #EEE);
+	-webkit-transition:all 250ms linear 20ms;
+	-moz-transition:all 250ms linear 20ms;
+	-ms-transition:all 250ms linear 20ms;
+	-o-transition:all 250ms linear 20ms;
+	transition:all 250ms linear 20ms;
+	}
+.menu ul li:hover ul, .menu ul li.active ul{
+	visibility:visible;
+	opacity:1;
+	margin-left:0;
+	}
+/* ========== LINKS IN SUBMENU ========== */	
+.menu ul ul li a{
+	padding:0 12px; 
+	font-family:Arial,Helvetica,sans-serif; 
+	font-style:italic; 
+	font-size:14px; 
+	color:#999; 
+	-webkit-transition:all 190ms linear;
+	-moz-transition:all 190ms linear;
+	-ms-transition:all 190ms linear;
+	-o-transition:all 190ms linear;
+	transition:all 190ms linear;
+	}
+/* ========== LINKS IN SUBMENU ON MOUSEOVER ========== */
+.menu ul ul li:hover a{
+	color:#8BB900;
+	text-shadow:0 0 6px #CCC;
+	background:none;
+	}
+/* ========== LINKS IN SUBMENU ON MOUSE CLICK ========== */
+.menu ul ul li a:active{
+	color:#9FD500;
+	}
+/* LizardThemes/May2013 */

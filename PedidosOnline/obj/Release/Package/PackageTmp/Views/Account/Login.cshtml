@@ -1,0 +1,222 @@
+﻿
+@model PedidosOnline.Models.LoginModel
+
+@{
+    ViewBag.Title = "ERP Portal";//Portal de Proveedores
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>INDUTRADE</title>
+    <link href='~/Content/img/favicon-pangea.ico' rel='shortcut icon' type='image/x-icon'> 
+    <link href="~/Content/Edex-Responsive.min.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/js/login.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="~/Content/js/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/js/jquery/ui/jquery-ui.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+
+    <style>
+        .form-horizontal .form-group {
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+
+        a#logins {
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        //$(document).on("keypress keyup", "#Password", function (evt) {
+        //    var charCode = (evt.which) ? evt.which : event.keyCode
+        //    if (charCode == 13) {
+        //        logeo();
+        //    }
+        //});
+        $(document).ready(function () {
+
+            //$("form").addClass("form-horizontal");
+
+            var aadasd = $('#vali ul li').text();
+            if (aadasd == "El usuario o la contraseña ingresados son incorrectos.") {
+                eraseCookie('p')
+                eraseCookie('p2')
+                eraseCookie('p3')
+                return
+            }
+            var p = readCookie('p')
+            var usu = readCookie('p2')
+            var psw = readCookie('p3')
+            if (p == "True") {
+
+                $("#RememberMe").prop("checked", "checked");
+                $("#Password").val(psw);
+                $("#UserName").val(usu);
+                $("form").submit();
+
+            }
+
+
+
+        });
+
+        function ModalRecuperarClave() {
+            var urlWithCont = '../Account/RecuperarCuenta';
+            $("#Dialog")
+            .load(urlWithCont.trim())
+            .dialog('open');
+        }
+        function logeo() {
+            debugger
+            if ($('#RememberMe').is(":checked")) {
+                //window.localStorage.removeItem('p2')
+                //window.localStorage.removeItem('p3')
+                var usu = $('#UserName').val();
+                var psw = $('#Password').val();
+                //localStorage["p2"] = usu;
+                //localStorage["p3"] = psw;
+                //localStorage["p"] = "True";
+                //window.localStorage.setItem('p2',usu)
+                //window.localStorage.setItem('p3', psw)
+                //window.localStorage.setItem('p',"True")
+                createCookie('p2', usu, 1)
+                createCookie('p3', psw, 1)
+                createCookie('p', 'True', 1)
+                $("form").submit();
+            }
+            else {
+                eraseCookie('p')
+                eraseCookie('p2')
+                eraseCookie('p3')
+                $("form").submit();
+            }
+        }
+    </script>
+    <script>
+        function createCookie(name, value, days) {
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                var expires = "; expires=" + date.toGMTString();
+            }
+            else var expires = "";
+            document.cookie = name + "=" + value + expires + "; path=/";
+        }
+
+        function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+        function eraseCookie(name) {
+            createCookie(name, "", -1);
+        }
+    </script>
+</head>
+<body>
+    <div class="vid-container" id="color">
+        <div id="Dialog"></div>
+        <div class="row">
+            <div class="col-md-8" style="margin-left: -15px;padding-right: 0px;">
+                <!-- <h2>Use a local account to log in.</h2> -->
+                @*<img src="~/Images/portadapedidos.jpg" style="width:100%;" />
+                    <img src="~/Images/portadapedidos.jpg" style="width: 50%;margin-left: auto; margin-right: auto; display: block; margin-top: 50px;" />*@
+
+
+                @*<img id="img_empresa" style=" display:none; background-color: white; position: absolute; width: 329px; height: 70px; top: 30px; z-index: 10001; float:left;" src="~/Images/logo_ejemplo.png" />*@
+            </div>
+
+            <div class="col-md-4 ">
+                <div class="row" id="formulario">
+                    <div class="col-md-12">
+                        <div class="logo-Respon">
+                            <img src="~/Content/img/logo-pangea-Responsive.png" id="imgPangea" />
+                        </div>
+                        @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+                        {
+                            <div class="col-md-12" id="DivDad">
+                                <br /><br />
+                                <div class="pangea">
+                                    <img src="~/Content/img/logo-pangea.png" id="imgPangea" />
+                                </div>
+
+                                @*<img src="~/Images/cli_logo.png" style="height:90px;margin-left:auto;margin-right:auto;display:block;margin-top: 10px;" />*@
+
+                                <hr style="margin:0px;width: 70%;" />
+                                <br /><br />
+                            </div>
+                            @Html.AntiForgeryToken()
+
+                            <div class="col-md-9">
+                                <div class="form-group" id="label">
+                                    @Html.LabelFor(m => m.UserName)
+                                    @Html.TextBoxFor(m => m.UserName, new { @style = "width:100%", placeholder = "Usuario", id = "UserName" })
+                                    <p>@Html.ValidationMessageFor(m => m.UserName, "El usuario es requerido.")</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-9">
+                                <div class="form-group" id="label">
+                                    @Html.LabelFor(m => m.Password)
+                                    @Html.PasswordFor(m => m.Password, new { @style = "width:100%", placeholder = "Contraseña", id = "Password" })
+                                    <p>@Html.ValidationMessageFor(m => m.Password, "La contraseña es requerida.")</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-9">
+                                <div class="form-group" id="recordar">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                                    @*@Html.TextBoxFor(m => m.p, new { @type = "hidden" })*@
+                                </div>
+                            </div>
+
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                  
+                                    @*<a href="javascript:logeo()" class="btn btn-primary" style="color:#fff;" id="logins">Ingresar</a>*@
+                                    <input type="submit" value="Ingresar" class="btn btn-primary" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-9">
+                                <div class="form-group" id="vali">
+                                    <p>
+                                        <a onclick="ModalRecuperarClave();">¿No puedes acceder a tu cuenta?</a>
+                                    </p>
+
+                                    <p id="validacionD">@Html.ValidationSummary(true)</p>
+
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="row" id="footer">
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <img src="~/Content/img/Google-Play-logo.png" width="150" />
+                            </div>
+                            <div class="col-md-6">
+                                <img src="~/Content/img/AppStore.png" width="150" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

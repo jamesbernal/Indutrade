@@ -38,6 +38,8 @@ public partial class Opcion
 
         this.Empresa1 = new HashSet<Empresa>();
 
+        this.ItemImpuesto = new HashSet<ItemImpuesto>();
+
         this.Booking = new HashSet<Booking>();
 
         this.Calculadora = new HashSet<Calculadora>();
@@ -50,23 +52,23 @@ public partial class Opcion
 
         this.Contrato1 = new HashSet<Contrato>();
 
-        this.OrdenCompra = new HashSet<OrdenCompra>();
+        this.EncabezadoMatrizBL = new HashSet<EncabezadoMatrizBL>();
 
         this.Proforma = new HashSet<Proforma>();
 
         this.Proforma1 = new HashSet<Proforma>();
 
+        this.SolicitudTransporte = new HashSet<SolicitudTransporte>();
+
+        this.ArchivoAdjunto = new HashSet<ArchivoAdjunto>();
+
         this.Costo = new HashSet<Costo>();
 
         this.Costo1 = new HashSet<Costo>();
 
-        this.MotoNave = new HashSet<MotoNave>();
-
-        this.ItemImpuesto = new HashSet<ItemImpuesto>();
-
-        this.SolicitudTransporte = new HashSet<SolicitudTransporte>();
-
         this.Firma = new HashSet<Firma>();
+
+        this.MotoNave = new HashSet<MotoNave>();
 
         this.Vehiculo = new HashSet<Vehiculo>();
 
@@ -131,6 +133,10 @@ public partial class Opcion
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
+    public virtual ICollection<ItemImpuesto> ItemImpuesto { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
     public virtual ICollection<Booking> Booking { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -155,7 +161,7 @@ public partial class Opcion
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<OrdenCompra> OrdenCompra { get; set; }
+    public virtual ICollection<EncabezadoMatrizBL> EncabezadoMatrizBL { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
@@ -165,7 +171,15 @@ public partial class Opcion
 
     public virtual ICollection<Proforma> Proforma1 { get; set; }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<SolicitudTransporte> SolicitudTransporte { get; set; }
+
     public virtual Agrupacion Agrupacion { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<ArchivoAdjunto> ArchivoAdjunto { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
@@ -177,19 +191,11 @@ public partial class Opcion
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<MotoNave> MotoNave { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<ItemImpuesto> ItemImpuesto { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<SolicitudTransporte> SolicitudTransporte { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
     public virtual ICollection<Firma> Firma { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<MotoNave> MotoNave { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

@@ -18,6 +18,15 @@ using System;
 public partial class Booking
 {
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public Booking()
+    {
+
+        this.EncabezadoMatrizBL = new HashSet<EncabezadoMatrizBL>();
+
+    }
+
+
     public int RowID { get; set; }
 
     public Nullable<int> ProformaID { get; set; }
@@ -35,6 +44,10 @@ public partial class Booking
     public virtual Proforma Proforma { get; set; }
 
     public virtual Opcion Opcion { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<EncabezadoMatrizBL> EncabezadoMatrizBL { get; set; }
 
 }
 

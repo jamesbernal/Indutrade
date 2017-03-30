@@ -56,12 +56,13 @@
             }
         });
 
-        $('#fecha').datepicker({
-            dateFormat: 'dd/mm/yy',
-            minDate: 0,
-            maxDate: '+3Y',
-            inline: true
-        });
+        $('#fecha').datetimepicker(
+           {
+               dayOfWeekStart: 1,
+               timepicker: true,
+               lang: 'es',
+               timepicker: false
+           });
 
         $("#contrato").autocomplete({
             source: "Buscar_contrato",
@@ -250,9 +251,6 @@
                                 }
                                 <br />
                             </div>
-                            <div class="col-md-3">
-                                <label>Forma de Pago</label>
-                            </div>
                         </div>
                         <div class="col-md-6">
                             <br />
@@ -270,7 +268,7 @@
                                     else
                                     {
                                         <div class="col-md-6">
-                                            <input type="text" id="comprador" name="comprador" value="" rdisabled />
+                                            <input type="text" id="comprador" name="comprador" value="" disabled />
                                         </div>
                                     }
                                 </div>

@@ -831,6 +831,7 @@ namespace PedidosOnline.Controllers
         #endregion
 
         #region BOOKING
+        [CheckSessionOut]
         public ActionResult Booking(int? RowID) {
             PedidosOnline.Models.Booking objBooking = db.Booking.Where(boo => boo.RowID == RowID).FirstOrDefault();
             ViewBag.TipoLlenado = db.Opcion.Where(o => o.Agrupacion.Nombre == "TIPOLLENADO" && o.Activo == true).ToList();
@@ -847,9 +848,72 @@ namespace PedidosOnline.Controllers
                 return View(new Booking());
 
             }
-            return View();
+        }
+        [CheckSessionOut]
+        public string BookingAdjuntoGuardar()
+        {
+            try
+            {
+                HttpPostedFileBase file = Request.Files[0];
+                int? rowid = int.Parse(Request.Params["rowid"]);
+                var ruta = "";
+                if (file != null && file.ContentLength > 0)
+                {
+                    string Guid_Img = Guid.NewGuid().ToString();
+                    Guid_Img = Guid_Img.Substring(1, 7);
+                    var nombreArchivo = Guid_Img.Trim() + "_" + Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/RepositorioArchivos/ArchivosBooking"), nombreArchivo);
+                    //Directory.CreateDirectory(path);
+
+                    ruta = "/RepositorioArchivos/ArchivosBooking/" + nombreArchivo;
+                    try
+                    {
+                        Directory.CreateDirectory(Server.MapPath("~/RepositorioArchivos/ArchivosBooking"));
+                    }
+                    catch (Exception ex) { }
+                    file.SaveAs(path);
+                    ArchivoAdjunto contratoad = new ArchivoAdjunto();
+                    contratoad.Recurso = ruta;
+                    contratoad.ModuloID = rowid;
+                    contratoad.TipoID = db.Opcion.Where(f=>f.Codigo== "EXPORTACION.BOOKING").FirstOrDefault().RowID;
+                    contratoad.UsuarioCreacion = ((Usuario)Session["curUser"]).NombreUsuario;
+                    contratoad.FechaCreacion = DateTime.Now;
+                    db.ArchivoAdjunto.Add(contratoad);
+                    db.SaveChanges();
+                }
+
+                if (string.IsNullOrEmpty(ruta))
+                {
+                    Response.StatusCode = 500;
+                }
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = 500;
+            }
+
+            return "";
         }
 
+        
+        public string EliminarEvidenciaBooking(int? rowid)
+        {
+            db.ArchivoAdjunto.Remove(db.ArchivoAdjunto.Where(f => f.RowID == rowid).FirstOrDefault());
+            db.SaveChanges();
+            return "";
+        }
+        [CheckSessionOut]
+        public string CargarEvidenciasBooking(int? rowid)
+        {
+            string result = "";
+            foreach (var item in db.ArchivoAdjunto.Where(f => f.ModuloID == rowid && f.Opcion.Codigo== "EXPORTACION.BOOKING").ToList())
+            {
+                result += "<tr><td><a href=\"" + item.Recurso + "\" target=\"_blank\"><i class=\"glyphicon glyphicon-picture\"></i></a></td><td>" + item.UsuarioCreacion + "</td><td>" + item.FechaCreacion + "</td><td><a onclick=\"EliminarEvidencia(" + item.RowID + ")\"><i class=\"glyphicon glyphicon-trash\"></a></td></tr>";
+            }
+
+            return result;
+        }
+        [CheckSessionOut]
         public ActionResult Bookings()
         {
             ViewBag.ListaBookings = db.Booking.Where(boo=>boo.Proforma.ProformaItemCalculadora.Count!=0).ToList();
@@ -858,22 +922,23 @@ namespace PedidosOnline.Controllers
         public JsonResult InformacionProformaBooking()
         {
             string term = Request.Params["term"].Trim();
-            var InfoProforma = (from listado in db.Proforma.Where(list => list.Contrato.Consecutivo.Contains(term) || list.Titulo.Contains(term))
+            var InfoProforma = (from listado in db.ProformaItemCalculadora.Where(list => list.Proforma.Contrato.Consecutivo.Contains(term) || list.Proforma.Titulo.Contains(term))
                                 select new
                                 {
                                     RowID = listado.RowID,
-                                    Cliente = string.Concat(listado.Contrato.Tercero.RazonSocial, "-", listado.Contrato.Tercero.Identificacion),
-                                    Cantidad = listado.ProformaItemCalculadora.FirstOrDefault().Cantidad,
-                                    PuertoDescargue = string.Concat(listado.Puerto1.Nombre," ",listado.Puerto1.Ciudad.Nombre),
-                                    FechaEmbarque=listado.FechaEnvio,
-                                    PuertoCargue=string.Concat(listado.Puerto.Ciudad.Nombre," ",listado.Puerto.Nombre),
-                                    label=string.Concat(listado.Contrato.Consecutivo," ",listado.Titulo)
+                                    Cliente = string.Concat(listado.Proforma.Contrato.Tercero.RazonSocial, "-", listado.Proforma.Contrato.Tercero.Identificacion),
+                                    Cantidad = listado.Proforma.ProformaItemCalculadora.FirstOrDefault().Cantidad,
+                                    PuertoDescargue = string.Concat(listado.Proforma.Puerto1.Nombre," ",listado.Proforma.Puerto1.Ciudad.Nombre),
+                                    FechaEmbarque=listado.Proforma.FechaEnvio,
+                                    PuertoCargue=string.Concat(listado.Proforma.Puerto.Ciudad.Nombre," ",listado.Proforma.Puerto.Nombre),
+                                    label=string.Concat(listado.Proforma.Contrato.Consecutivo," ",listado.Proforma.Titulo)
                                 }
                               ).Distinct().OrderBy(l => l.RowID).ToList();
             var returnJson = Json(InfoProforma.OrderBy(ip => ip.RowID), JsonRequestBehavior.AllowGet);
             returnJson.MaxJsonLength = int.MaxValue;
             return returnJson;
         }
+        [CheckSessionOut]
         [ValidateInput(false)]
         public JsonResult GuardarBooking(FormCollection form)
         {
@@ -912,7 +977,7 @@ namespace PedidosOnline.Controllers
                 throw;
             }
 
-            return Json(new { tipo_respuesta = tipo_respuesta, respuesta = respuesta }, JsonRequestBehavior.AllowGet);
+            return Json(new { tipo_respuesta = tipo_respuesta, respuesta = respuesta ,rowid=objBooking.RowID}, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
@@ -938,7 +1003,6 @@ namespace PedidosOnline.Controllers
                 reg.Tercero.ContactoERP = new ContactoERP();
                 reg.Tercero.ContactoERP.Ciudad = new Ciudad();
                 reg.Tercero1 = new Tercero();
-                reg.Opcion = new Opcion();
                 reg.CondicionPago = new CondicionPago();
                 reg.Sucursal = new Sucursal();
                 reg.Sucursal.Tercero = new Tercero();
@@ -1368,6 +1432,7 @@ namespace PedidosOnline.Controllers
             int rowid = ObjSolicitud.RowID;
             return Json(rowid, JsonRequestBehavior.AllowGet);
         }
+
         #endregion
 
         #region :::::PROFORMA:::::
@@ -1636,7 +1701,6 @@ namespace PedidosOnline.Controllers
             {
                 return View(new EncabezadoRegistroLlenado());
             }
-            return View();
         }
         public JsonResult auto_completa_proforma()
        {
@@ -1692,6 +1756,8 @@ namespace PedidosOnline.Controllers
         #endregion
 
 
+
+
         #region:::::AUTORIZACION DE CARGUE:::::
 
         [CheckSessionOut]
@@ -1712,6 +1778,8 @@ namespace PedidosOnline.Controllers
             else
             {
                 AC = new AutorizacionCargue();
+                AC.Estado = new Models.Estado();
+                
             }
             return View(AC);
         }
@@ -1774,9 +1842,9 @@ namespace PedidosOnline.Controllers
                     lista3 = db.AutorizacionCargueVehiculo.Where(f => f.AutorizacionCargueID == rowid).ToList();
                     foreach (var item in lista3)
                     {
-                        result += "<tr><td><td><td><input type='text' value='" + item.Vehiculo.Placa + "' readonly /></td>" +
-                          "<td><input type='text' value='" + item.Vehiculo1.Placa + "' readonly /></td>" +
-                          "<td><input type='text' value='" + item.Tercero.RazonSocial + "' readonly /></td>" +
+                        result += "<tr><td><td><td><input type='text' value='" + item.Vehiculo.Placa + "'  /></td>" +
+                          "<td><input type='text' value='" + item.Vehiculo1.Placa + "'  /></td>" +
+                          "<td><input type='text' value='" + item.Tercero.RazonSocial + "'  /></td>" +
                           "</tr>";
                     }
                 }
@@ -1790,12 +1858,12 @@ namespace PedidosOnline.Controllers
                             Response.StatusCode = 500;
                             return "Conductor ya agregado";
                         }
-                        if (item.Vehiculo.RowID == vehiculo)
+                        if (item.Vehiculo1.RowID == vehiculo)
                         {
                             Response.StatusCode = 500;
                             return "Vehiculo ya agregado";
                         }
-                        if (item.Vehiculo1.RowID == remolque)
+                        if (item.Vehiculo.RowID == remolque)
                         {
                             Response.StatusCode = 500;
                             return "Remolque ya agregado";
@@ -1818,9 +1886,11 @@ namespace PedidosOnline.Controllers
                     foreach (var item in lista2)
                     {
                         item.Tercero = db.Tercero.Where(f => f.RowID == item.TerceroID).FirstOrDefault();
-                        result += "<tr><td><td><td><input type='text' value='" + item.Vehiculo.Placa + "' readonly /></td>" +
-                          "<td><input type='text' value='" + item.Vehiculo1.Placa + "' readonly /></td>" +
-                          "<td><input type='text' value='" + item.Tercero.RazonSocial + "' readonly /></td>" +
+                        item.Vehiculo = db.Vehiculo.Where(f => f.RowID == item.VehiculoID).FirstOrDefault();
+                        item.Vehiculo1 = db.Vehiculo.Where(f => f.RowID == item.RemolqueID).FirstOrDefault();
+                        result += "<tr><td><td><td><input type='text' value='" + item.Vehiculo.Placa + "'  /></td>" +
+                          "<td><input type='text' value='" + item.Vehiculo1.Placa + "'  /></td>" +
+                          "<td><input type='text' value='" + item.Tercero.RazonSocial + "'  /></td>" +
                           "</tr>";
                     }
                 }
@@ -1838,7 +1908,40 @@ namespace PedidosOnline.Controllers
             ac.EstadoID = es.RowID;
             db.AutorizacionCargue.Add(ac);
             db.SaveChanges();
+
             return Json(ac.RowID);
+        }
+        [HttpPost]
+        public JsonResult ActualizarAutorizacion(int? rowid, string bkk, string embalaje)
+        {
+            AutorizacionCargue ac = db.AutorizacionCargue.Where(f => f.RowID == rowid).FirstOrDefault();
+            ac.FechaModificacion = DateTime.Now;
+            ac.BKK = bkk;
+            ac.Empaque = embalaje;
+            ac.UsuarioModificacion = ((Usuario)Session["CurUser"]).NombreUsuario;
+            Estado es = db.Estado.Where(f => f.Codigo == "LLENADO").FirstOrDefault();
+            ac.EstadoID = es.RowID;
+            db.SaveChanges();
+            return Json(ac.RowID);
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public JsonResult EnviarAutorizacionCargue(int? rowid, string correoenvio, string cuerpocorreo, string asunto)
+        {
+            AutorizacionCargue objAutoriCarg = db.AutorizacionCargue.Where(l => l.RowID == rowid).FirstOrDefault();
+            objAutoriCarg.EstadoID = db.Estado.Where(li => li.Nombre == "AUTORIZACION").FirstOrDefault().RowID;
+            db.SaveChanges();
+            Usuario objUsuario = (Usuario)(Session["curUser"]);
+            try
+            {
+                Utilidades.MailSender.EnviarBooking(cuerpocorreo, asunto, objUsuario, correoenvio);
+                return Json(new { tipo_respuesta = "success", respuesta = "Correo enviado" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { tipo_respuesta = "warning", respuesta = ex.Message });
+                throw;
+            }
         }
         #endregion
 
@@ -1851,14 +1954,14 @@ namespace PedidosOnline.Controllers
         }
         [HttpPost]
         public JsonResult GuardarVehiculo(FormCollection form)
-        { 
-            Vehiculo ObjVehiculo = new Vehiculo(); 
+        {
+            Vehiculo ObjVehiculo = new Vehiculo();
             ObjVehiculo.Placa = form["placa"];
             ObjVehiculo.Año = form["Año"].ToString();
             ObjVehiculo.CapacidadKG = int.Parse(form["Capacidad"]);
             ObjVehiculo.CargaMaxima = double.Parse(form["Carga"]);
             ObjVehiculo.Color = form["Color"];
-            ObjVehiculo.Rendimiento = form["Rendimiento"] == null? 0:int.Parse(form["Rendimiento"]);
+            ObjVehiculo.Rendimiento = form["Rendimiento"] == null ? 0 : int.Parse(form["Rendimiento"]);
             ObjVehiculo.TipoVehiculoID = int.Parse(form["tipo"]);
             ObjVehiculo.Volumen = form["Volumen"] == null ? 0 : int.Parse(form["Volumen"]);
             ObjVehiculo.Estado = true;
@@ -1867,7 +1970,130 @@ namespace PedidosOnline.Controllers
             db.SaveChanges();
             return Json("");
         }
-        
+
+        #endregion
+
+        #region :::::FACTURA FINAL:::::
+        [CheckSessionOut]
+        public ActionResult ListadoFacturas()
+        {
+            List<Factura> Lista = db.Factura.OrderBy(f => f.RowID).ToList();
+            ViewBag.ListaFacturas = Lista.ToList();
+            return View(Lista);
+        }
+        [CheckSessionOut]
+        public ActionResult Factura(int? rowid)
+        {
+            Factura FAC = new Factura();
+            if (rowid != null && rowid > 0)
+            {
+                FAC = db.Factura.Where(f => f.RowID == rowid).FirstOrDefault();
+            }
+            else
+            {
+                FAC = new Factura();
+            }
+            return View(FAC);
+        }
+        [CheckSessionOut]
+        public JsonResult Proforma_Factura()
+        {
+            string terms = Request.Params["term"].Trim().ToUpper();
+            
+            var cont = (from proforma in db.ProformaItemCalculadora.Where(f => f.Proforma.Titulo.Contains(terms))
+                        select new
+                        {
+                            label = proforma.Proforma.Titulo,
+                            RowID = proforma.Proforma.RowID,
+                        });
+            return Json(cont, JsonRequestBehavior.AllowGet);
+        }
+        [CheckSessionOut]
+        public JsonResult CargarProforma_Factura(int? rowid)
+        {
+            var cont = (from terceroexiste in db.ProformaItemCalculadora.Where(f => f.Proforma.RowID == rowid)
+                        select new
+                        {
+                            contrato = terceroexiste.Proforma.Contrato.Consecutivo,
+                            vendedornom = terceroexiste.Proforma.Contrato.Tercero.RazonSocial,
+                            vendedornit = terceroexiste.Proforma.Contrato.Tercero.Identificacion,
+                            vendedortel = terceroexiste.Proforma.Contrato.Tercero.ContactoERP.Telefono1,
+                            vendedordir = terceroexiste.Proforma.Contrato.Tercero.ContactoERP.Direccion1,
+                            comprador = terceroexiste.Proforma.Contrato.Tercero3.RazonSocial,
+                            compradornit = terceroexiste.Proforma.Contrato.Tercero3.Identificacion,
+                            compradortel = terceroexiste.Proforma.Contrato.Tercero3.ContactoERP.Telefono1,
+                            compradordir = terceroexiste.Proforma.Contrato.Tercero3.ContactoERP.Direccion1,
+                            nitven = terceroexiste.Proforma.Contrato.Tercero3.Identificacion,
+                        });
+            return Json(cont, JsonRequestBehavior.AllowGet);
+        }
+        [CheckSessionOut]
+        public JsonResult CalcularTotales(double? fob, double? flete, double? seguro, double? cantidad)
+        {
+            if (fob == null)
+                fob = 0;
+            if (flete == null)
+                flete = 0;
+            if (seguro == null)
+                seguro = 0;
+            if (cantidad == null)
+                cantidad = 1;
+            var data = new
+            {
+                unitario = ((fob + flete + seguro) / cantidad),
+                ValorTotal = fob + flete + seguro,
+            };
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult GuardarFactura(FormCollection form)
+        {
+            Factura ObjFactura = new Factura();
+            Int32 rowid = Int32.Parse(form["RowID"].ToString());
+            
+            if (rowid > 0)
+            {
+                ObjFactura.Total = double.Parse(form["total"].ToString());
+                ObjFactura.Seguro = double.Parse(form["seguro"].ToString());
+                ObjFactura.Cantidad = double.Parse(form["cantidad"].ToString());
+                ObjFactura.FOB = double.Parse(form["fob"].ToString());
+                ObjFactura.ValorUnitario = double.Parse(form["unitario"].ToString());
+                var RowidProforma = form["RowProforma"];
+                ObjFactura.Flete = double.Parse(form["flete"].ToString());
+                ObjFactura.ProformaID = int.Parse(RowidProforma);
+                db.SaveChanges();
+            }
+            else
+            {
+                ObjFactura = new Factura();
+                ObjFactura.Total = double.Parse(form["total"].ToString());
+                ObjFactura.Seguro = double.Parse(form["seguro"].ToString());
+                ObjFactura.Cantidad = double.Parse(form["cantidad"].ToString());
+                ObjFactura.FOB = double.Parse(form["fob"].ToString());
+                ObjFactura.ValorUnitario = double.Parse(form["unitario"].ToString());
+                var RowidProforma = form["RowProforma"];
+                ObjFactura.Flete = double.Parse(form["flete"].ToString());
+                ObjFactura.ProformaID = int.Parse(RowidProforma);
+                ObjFactura.FechaCreacion = DateTime.Now;
+                ObjFactura.UsuarioCreacion  = ((Usuario)Session["CurUser"]).NombreUsuario;
+                db.Factura.Add(ObjFactura);
+                db.SaveChanges();
+            }
+            return Json(ObjFactura.RowID);
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public JsonResult GuardarFormatoFactura(int? rowid, string nota)
+        {
+            Factura ObjFactura = new Factura();
+            if(rowid > 0)
+            {
+                ObjFactura = db.Factura.Where(f => f.RowID == rowid).FirstOrDefault();
+                ObjFactura.Nota = nota;
+                db.SaveChanges();
+            }
+            return Json(ObjFactura.RowID);
+        }
         #endregion
 
         //#region :::::ORDEN COMPRA:::::

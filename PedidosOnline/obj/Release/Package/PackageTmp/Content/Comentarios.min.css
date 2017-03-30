@@ -1,0 +1,411 @@
+﻿ul{
+    list-style-type: none;
+}
+/*Lista de comentarios*/
+.comments-container{
+    margin: 30px auto 15px;
+    width: 500px;
+    overflow-x: hidden;
+    height:500px;
+}
+#Graficas{
+    margin-left:-20px;
+}
+.comments-container h1{
+    font-size: 36px;
+    color: #ae122a;
+    font-weight: 400;
+}
+.comments-list{
+    margin-top: 30px;
+    position: relative;
+}
+.comments-list li{
+    margin-bottom: 15px;
+    display: block;
+    position: relative;
+}
+.comments-list li:after{
+    content: '';
+    display: block;
+    height: 0;
+    width: 0;
+}
+/*Avatar*/
+.comments-list .comment-avatar{
+    width: 65px;
+    height: 65px;
+    position: relative;
+    z-index: 99;
+    float: left;
+    /*border: 1px solid rgba(33,33,33,.4);*/
+    -webkit-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    -ms-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    -o-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+.comments-list .comment-avatar img{
+    width: 100%;
+    height: 100%;
+}
+/*Caja del Comentario*/
+.comments-list .comment-box{
+    width: 680px;
+    float: right;
+    position: relative;
+
+}
+.comment-box .comment-head{
+    padding: 0px 270px;
+    overflow: hidden;
+    margin-top:-60px;
+    margin-bottom:0px;
+    z-index: 1;
+}
+.comment-box .comment-head .estrellas{
+
+}
+.comment-box .comment-head i:hover{
+    color: #212121;
+}
+.comment-box .comment-name{
+    color: #283035;
+    font-size: 12px;
+    font-weight: 700;
+    float: left;
+    margin-right: 10px;
+}
+.comment-box .comment-head span{
+    float: left;
+    color: #999;
+    font-size: 13px;
+    position: relative;
+    top: -1.55px;
+}
+.comment-box .comment-content{
+    padding-top: 0px;
+    font-size: 12px;
+    color: #333;
+    line-height: 18px;
+    padding-left:125px;
+    margin-top:-10px;
+    width:70%;
+
+}
+.comment-box .comment-content span{
+   border-bottom-style: dashed; 
+   border-bottom-width: 1px;
+   border-bottom-color: #b6b6b6;
+}
+.comments-list .comment-box:before ,.comments-list .comment-box:after{
+
+
+}
+.comments-list .comment-box:before {
+    border-width: 11px 13px 11px 0;
+    border-color:transparent rgba(236, 239, 241, 0.64);
+    left: -12px;
+}
+.comments-container{
+    margin-bottom: 100px;
+}
+.comment-main-level{
+    overflow: hidden;
+}
+.comentarios h1{
+    color: #ae122a;
+}
+.comentarios img{
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+.comentarios form{
+    margin: auto;
+    margin-top: 100px;
+}
+.comentarios form textarea{
+    height: 65px;
+    margin-top:0px;
+    margin-left: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+    width: 680px;
+    border: 1px solid rgba(178, 178, 178, 0.49);
+    resize: vertical;
+    outline: none;
+    border-radius: 3px;
+}
+.comentarios form textarea:focus{
+    border: 1px solid rgba(174, 18, 42, 0.67);
+}
+.comentarios .imagen{
+    margin-left:0px;
+    width: 65px;
+    height: 65px;
+    position: relative;
+    z-index: 99;
+    float: left;
+    border: 3px solid #dee1e3;
+    -webkit-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    -ms-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    -o-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+.comentarios form .alinear{
+    display: inline-block;
+}
+.comentarios form input[type="submit"]{
+    height: 30px;
+    width: 70px;
+    cursor: pointer;
+    background-color: #ae122a;
+    border: 0px;
+    color: #fff;
+    border-radius: 3px;
+    outline: none;
+
+}
+.comentarios form input[type="submit"]:hover{
+    background-color: rgba(174, 18, 42, 0.70);
+}
+.comentarios form button{
+    width: 70px;
+    height: 30px;
+    cursor: pointer;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    border: 1px solid rgba(182, 182, 182, 0.87);
+    outline: none;
+}
+.comentarios form button:hover{
+    background-color: rgba(234, 234, 234, 0.60);
+}
+.comentarios form .botones li{
+    display: inline-block;
+}
+.comentarios form .botones{
+    margin-left: 600px;
+    display: none;
+}
+.comentarios h1{
+    font-family: cac_champagne;
+    font-size: 50px;
+}
+/*Estrellas*/
+.comentarios .estrellas .ec-stars-wrapper a{
+    text-decoration: none;
+    color: #ae122a;
+}
+.comentarios form .ec-stars-wrapper a{
+    text-decoration: none;
+    color: #ae122a;
+}
+.comentarios form .clasificacion{
+    margin-left: -950px;
+}
+
+.comentarios form label {
+    font-size: 20px;
+}
+.comentarios .icon-penx{
+    cursor: pointer;
+    font-size: 1.5em;
+    float: right;
+    margin-left: 640px;
+    margin-top: 5px;
+}
+.comentarios .icon-penx:hover{
+    color: #ae122a;
+}
+.comentarios .icon-penx .acciones{
+    position: relative;
+    background: #fff;
+    /*display: none;*/
+    z-index: 3;
+    margin-left: -70px;
+}
+.comentarios .icon-penx a{
+    text-decoration: none;
+    color: #333;
+    display: inline;
+    line-height: 20px;
+    padding: 5px;
+    
+}
+.comentarios .icon-penx a:hover{
+    background: #ae122a;
+    color: #fff;
+    
+}
+input[type="radio"] {
+    display: none;
+}
+
+label {
+    color: grey;
+}
+
+.clasificacion {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+}
+
+label:hover,
+label:hover ~ label {
+    color: #ae122a;
+}
+
+input[type="radio"]:checked ~ label {
+    color: #ae122a;
+}
+.comentarios #estre{
+    color: #ae122a;
+    letter-spacing: -15px;
+}
+span.icon-laughing-face{
+    margin-left: 160px;
+}
+.paginacion ul{
+    list-style: none;
+    text-align: center;
+    margin-top: -50px;
+}
+.paginacion ul li{
+    display: inline-block;
+    margin-right: 10px;
+}
+.paginacion ul li a{
+    display: block;
+    padding: 10px 20px;
+    color: #fff;
+    background: #ae122a;
+    text-decoration: none;
+}
+.paginacion ul li a:hover{
+    background: #e57373;
+}
+.paginacion ul li.active{
+    background:#e57373;
+    font-weight: bold;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+}
+.paginacion ul li.disabled{
+    background:#ae122a;
+    font-weight: bold;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+}
+footer{
+    text-align: center;
+    font-family: 'Argon', verdana;
+}
+.pie{
+    margin-top: 70px;
+    padding: 20px;
+    background: #ae122a;
+}
+.pie img{
+    width: 20%;
+    height: 30px;
+}
+h2#titulo2{
+    z-index: 9999;
+    text-align: center;
+    font-family: 'Argon', verdana;
+    color: #a7152b;
+    padding: 15px;
+    margin-top: -60px;
+    color: #fff;
+    margin-left: auto;
+    margin-right:auto;
+    height: 60px;
+    width: 100%;
+    -webkit-box-shadow: 0px 0px 0px 0px #B6B6B6;
+    background: #8f041a;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+h2#titulo2 img{
+    width: 20%;
+    height: 30px;
+    margin-bottom: 10px;
+}
+@media screen and (max-width:480px){
+}
+/**Responsive*/
+@media screen and (max-width:413px){
+    #chart_anual_cartera{
+        width:100%;
+    }
+    .comment-box .comment-head{
+        margin-top:1px;
+        margin-left:-280px;
+    }
+    .comment-content{
+        margin-left:-120px;
+        margin-top:-10px;
+    }
+}
+@media screen and (min-width:1200px){
+    #chart_anual_cartera{
+    width:100%;
+}
+}
+@media only screen and (max-width: 766px){
+    .comments-container{
+        width: 480px;
+    }
+    .comments-list .comment-box{
+        width: 390px;
+    }
+}
+#chart_mensual, #chart_anual{
+    width:100%;
+    height:auto;
+}
+
+h3{
+    color:#b6b6b6;
+}
+@media screen and (max-width: 992px){
+    .col-md-6{
+        width:100%;
+        display:block;
+    }
+    .row .col-md-6 .comentarios{
+        display:block;
+    }
+    #container{
+        display:block;
+    }
+}
+@media screen and (max-width: 991px){
+    .col-md-6{
+        width:100%;
+        display:block;
+    }
+    .row .col-md-6 .comentarios{
+        display:block;
+    }
+    #container{
+        display:block;
+    }
+}

@@ -857,4 +857,3 @@ C:\Users\dell\Documents\ControladorVersiones\Indutrade\PedidosOnline\bin\es\Micr
 C:\Users\dell\Documents\ControladorVersiones\Indutrade\PedidosOnline\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
 C:\Users\dell\Documents\ControladorVersiones\Indutrade\PedidosOnline\obj\Debug\PedidosOnline.dll
 C:\Users\dell\Documents\ControladorVersiones\Indutrade\PedidosOnline\obj\Debug\PedidosOnline.pdb
-C:\Users\dell\Documents\ControladorVersiones\Indutrade\PedidosOnline\obj\Debug\PedidosOnline.csprojResolveAssemblyReference.cache

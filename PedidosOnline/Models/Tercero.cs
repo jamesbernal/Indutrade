@@ -40,6 +40,8 @@ public partial class Tercero
 
         this.Sucursal7 = new HashSet<Sucursal>();
 
+        this.AutorizacionCargueVehiculo = new HashSet<AutorizacionCargueVehiculo>();
+
         this.Calculadora = new HashSet<Calculadora>();
 
         this.Calculadora1 = new HashSet<Calculadora>();
@@ -54,17 +56,15 @@ public partial class Tercero
 
         this.Contrato3 = new HashSet<Contrato>();
 
-        this.OrdenCompra = new HashSet<OrdenCompra>();
-
-        this.OrdenCompra1 = new HashSet<OrdenCompra>();
-
         this.PuntoEnvio = new HashSet<PuntoEnvio>();
 
         this.Usuario = new HashSet<Usuario>();
 
         this.SolicitudTransporte = new HashSet<SolicitudTransporte>();
 
-        this.AutorizacionCargueVehiculo = new HashSet<AutorizacionCargueVehiculo>();
+        this.OrdenCompra = new HashSet<OrdenCompra>();
+
+        this.OrdenCompra1 = new HashSet<OrdenCompra>();
 
     }
 
@@ -145,6 +145,10 @@ public partial class Tercero
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
+    public virtual ICollection<AutorizacionCargueVehiculo> AutorizacionCargueVehiculo { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
     public virtual ICollection<Calculadora> Calculadora { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -173,14 +177,6 @@ public partial class Tercero
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<OrdenCompra> OrdenCompra { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<OrdenCompra> OrdenCompra1 { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
     public virtual ICollection<PuntoEnvio> PuntoEnvio { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -193,7 +189,11 @@ public partial class Tercero
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<AutorizacionCargueVehiculo> AutorizacionCargueVehiculo { get; set; }
+    public virtual ICollection<OrdenCompra> OrdenCompra { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<OrdenCompra> OrdenCompra1 { get; set; }
 
 }
 

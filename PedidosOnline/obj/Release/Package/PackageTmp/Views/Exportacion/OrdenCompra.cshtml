@@ -1,0 +1,771 @@
+﻿@using PedidosOnline.Models
+@model PedidosOnline.Models.OrdenCompra
+@{
+    ViewBag.Title = "Calculadora";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Styled select boxes -->
+<link href="~/Content/Tabs.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=2.0, maximum-scale=1.0, minimum-scale=1.0">
+<script type="text/javascript" src="~/Content/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
+<link href="~/Content/js/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">
+<style>
+    a {
+        color: #333;
+    }
+</style>
+<style>
+    label {
+        width: 100%;
+    }
+
+    form input {
+        width: 100%;
+    }
+
+    form select {
+        width: 100%;
+    }
+
+    .row {
+        margin-bottom: 3px;
+    }
+
+    textarea {
+        width: 100%;
+    }
+</style>
+
+<script>
+    $.extend($.validator.defaults, {
+        invalidHandler: function (form, validator) {
+            var errors = validator.numberOfInvalids();
+            if (errors) {
+                var message = errors == 1
+                ? 'Completar Campo Vacio.'
+                : 'Completar ' + errors + ' Campos que se encuentran vacios.';
+                Mensajes(message, 'error', '');
+            }
+        }
+    });
+    $.validator.messages.required = 'Campo requerido';
+
+    $(document).ready(function () {
+
+        $('#DateDetalle').datetimepicker(
+           {
+               dayOfWeekStart: 1,
+               lang: 'es',
+               timepicker: false
+           });
+    });
+    function Guardar(accion)
+    {
+
+        var validator = $("#formPrincial").validate();
+        if (validator.form())
+        {
+            ModalProcesandoShow();
+            var formData = new FormData(document.getElementById("formPrincial"));
+            $.ajax({
+                url: "GuardarOrdenCompra",
+                type:"post",
+                contentType: false,
+                processData: false,
+                data:formData,
+                success:function(data)
+                {
+                    if (@Model.RowID==0) {
+                        location.href = "../Exportacion/OrdenCompra?rowid=" + data;
+                    }else
+                    {
+                        Mensajes('Guardado Correctamente','success','');
+                    }
+                    ModalProcesandoHiden();
+
+                },
+                error:function(error)
+                {
+                    ModalProcesandoHiden();
+                    Mensajes("Error de Proceso, Por favor Intentelo de Nuevo",'error','');
+                }
+            })
+        }
+    }
+</script>
+
+<div class="row">
+    <div class="row" id="div_menu" style="margin-bottom:20px">
+        <div class="col-md-12">
+            <div class="nav">
+                <span>
+                    &nbsp;&nbsp;
+                    <a href="@Url.Action("OrdenCompras","Exportacion",new {  @rih = Request.Params["rih"] })" class="alink">
+                        <i class="glyphicon glyphicon-list-alt"></i>&nbsp;<span class="lang" key="VISTA">Vista</span>
+                    </a>
+                </span>
+                <span>
+                    <a href="javascript:Guardar(1);" class="alink">
+                        <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
+                    </a>
+                </span>
+                <span>
+                    &nbsp;&nbsp;
+                    <a href="javascript:Guardar(2);" class="alink">
+                        <i class="glyphicon glyphicon-floppy-disk"></i><span class="lang" key="GUARDAR_&_CERRAR">&nbsp;Guardar&nbsp;&&nbsp;Cerrar</span>
+                    </a>
+                </span>
+                @if (Model.RowID != 0)
+                {
+                    <span>
+                        &nbsp;&nbsp;
+                        <a href="~/Exportacion/SolicitudTransporte" class="alink">
+                            <i class="glyphicon glyphicon-arrow-right"></i><span class="lang" key="Siguiente">Siguiente</span>
+                        </a>
+                    </span>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="tabbable tabbable-custom tabs-top">
+        <ul class="nav nav-tabs tabs-top">
+            <li id="ordencompra" class="active"><a href="#tab_1" id="litab_1" data-toggle="tab" class="lang" key="">Informacion General </a></li>
+            <li id="item" style="display:none"><a href="#tab_2" id="litab_2" data-toggle="tab" class="lang" key="">Items </a></li>
+        </ul>
+    </div>
+    <div class="tab-content" style="overflow:hidden">
+        <div class="tab-pane active" id="tab_1">
+            <div class="col-md-12" style="margin-top:20px;">
+                <form id="formPrincial" name="formPrincial" method="post" onsubmit="return false">
+                    <input type="hidden" name="rowid" id="rowid" value="@Model.RowID" />
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div style="margin-bottom: 20px">
+                                    <h4 class="lang" key=" ">Facturacion</h4>
+                                    <hr style="margin:0px">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Proveedor</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="proveedor" id="proveedor" value="@Model.Sucursal.Tercero.RazonSocial" />
+                                    <input type="hidden" name="rowid_proveedor" id="rowid_proveedor" value="@Model.Sucursal.TerceroID" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Sucursal Proveedor</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select id="sucursalproveedor" name="sucursalproveedor">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Nit</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="proveedor_nit" id="proveedor_nit" disabled value="@Model.Sucursal.Tercero.Identificacion" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Telefono</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="proveedor_telefono" id="proveedor_telefono" disabled value="@Model.Sucursal.Tercero.ContactoERP.Telefono1" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Direccion</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="proveedor_direccion" id="proveedor_direccion" disabled value="@Model.Sucursal.Tercero.ContactoERP.Direccion1" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Ciudad</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="proveedor_ciudad" id="proveedor_ciudad" disabled value="@Model.Sucursal.Tercero.ContactoERP.Ciudad.Nombre" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Fecha</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="Fecha" id="Fecha" value="@DateTime.Now" disabled />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Condicion de Pago</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select id="formapago" name="formapago">
+                                        <option value="">-Seleccionar-</option>
+                                        @foreach (PedidosOnline.Models.CondicionPago item in ((List<PedidosOnline.Models.CondicionPago>)ViewBag.FormaPago).ToList())
+                                        {
+                                            if (Model.RowID > 0)
+                                            {
+                                                if (Model.FormaPagoID == item.RowID)
+                                                {
+                                                    <option value="@item.RowID" selected>@item.Descripcion</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.RowID">@item.Descripcion</option>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.RowID">@item.Descripcion</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Despacho</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="despacho" name="despacho" value="@Model.Despacho" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Lugar Entrega</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" id="lugar_entrega" name="lugar_entrega" value="@Model.LugarEntrega" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Comprador</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="comprador" id="comprador"  value="@Model.Tercero.RazonSocial" />
+                                    <input type="hidden" name="compradorid" id="compradorid" value="@Model.CompradorID" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Solicitante</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="solicitante" id="solicitante" value="@Model.Tercero1.RazonSocial" />
+                                    <input type="hidden" name="solicitanteid" id="solicitanteid" value="@Model.SolicitanteID" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Nit</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="facturacion_nit" id="facturacion_nit" value="@Model.Tercero.Identificacion" disabled />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Telefono</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="facturacion_telefono" id="facturacion_telefono" value="@Model.Tercero.ContactoERP.Telefono1" disabled />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Direccion</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="facturacion_direccion" id="facturacion_direccion" value="@Model.Tercero.ContactoERP.Direccion1"  disabled />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Ciudad</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="facturacion_ciudad" id="facturacion_ciudad" value="@Model.Tercero.ContactoERP.Ciudad.Nombre" disabled />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="lang">Observaciones</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <textarea id="observaciones" name="observaciones" rows="4" style="resize:none">@Model.Observaciones</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="tab_2" class="tab-pane">
+            <div class="row">
+                <div class="col-md-12">
+                    <div style="margin-bottom: 20px">
+                        <h4 class="lang" key=" ">Contratos</h4>
+                        <hr style="margin:0px">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="lang">Contrato</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="contrato" id="contrato" style="width:100%" placeholder="Contratos.." value="" />
+                            <input type="hidden" name="contratoid" id="contratoid" value="" />
+                        </div>
+                        <div class="col-md-5">
+                            <button type="button" onclick="guardarContrato()" class="btn btn-primary">Agregar Contrato</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-hover table-responsive table-condensed table-bordered" id="tablaContratos">
+                        <thead>
+                            <tr>
+                                <th>Contrato</th>
+                                <th>Agrego items</th>
+                                <th>Fecha </th>
+                                <th>Usuario</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div style="margin-bottom: 20px">
+                        <h4 class="lang" key=" ">Productos Agregados</h4>
+                        <hr style="margin:0px">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-hover table-responsive table-condensed table-bordered" id="tablaItems">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Empaque</th>
+                                <th>Cantidad</th>
+                                <th>Valor Unitario</th>
+                                <th>Valor Base</th>
+                                <th>Valor Impuesto</th>
+                                <th>Valor Total</th>
+                                <th>Accion</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="itemc" name="itemc" placeholder="Productos" type="text" style="width:100%" />
+                                    <input id="itemid" type="hidden" />
+                                </td>
+                                <td>
+                                    <input  readonly id="embalaje" style="width:100%" />
+                                </td>
+                                <td>
+                                    <input  id="cantidad" type="number" placeholder="Cantidad" onkeyup="ActualizarDatos()" style="width:100%" readonly />
+                                </td>
+                                <td>
+                                    <input id="valor" type="number" placeholder="Valor unitario"  onkeyup="ActualizarDatos()" readonly step="any" style="width:100%" />
+                                </td>
+                                <td>
+                                    <input id="valorbase"  readonly type="text" style="width:100%"/>
+                                </td>
+                                <td>
+                                    <input  id="valorimpuesto" readonly type="text" style="width:100%"/>
+                                </td>
+                                <td>
+                                    <input id="valortotal" readonly type="text" style="width:100%" />
+                                </td>
+                                <td>
+                                    <a href="javascript:AgregarItem()"><i class="glyphicon glyphicon-save" ></i></a>
+                                    <a href="javascript:LimpiarCamposItem()"><i class="glyphicon glyphicon-trash"></i></a>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    function pageLoad()
+    {
+        if (@Model.RowID>0) {
+            CargarSucursalProveedor(@Model.Sucursal.TerceroID);
+        }   
+    }
+
+    $(document).ready(function () {
+        pageLoad()
+        $('#proveedor').autocomplete({
+            source: "Buscar_Tercero_Proveedor",
+            minLength: 1,
+            select: function (evento, ui)
+            {
+                $('#rowid_proveedor').val(ui.item.RowID);
+                CargarInformacionTerceroProveedor(ui.item.RowID)
+                CargarSucursalProveedor(ui.item.RowID);
+            }
+        });
+        $('#itemc').keyup(function(){
+            if ($('#itemc').val()=='') {
+                $('#itemid').val('');
+                $('#cantidad').attr('readonly','readonly');
+                $('#valor').attr('readonly','readonly');
+                $('#valor').val('');
+                $('#cantidad').val('');
+            }
+        })
+        $('#itemc').autocomplete({
+            source:"ItemsAutocomplete",
+            minLength:1,
+            select:function(evento,ui)
+            {
+                $('#valor').removeAttr('readonly');
+                $('#cantidad').removeAttr('readonly');
+                $('#itemid').val(ui.item.rowid)
+            }
+        })
+        $('#comprador').autocomplete({
+            source: "Buscar_Tercero",
+            minLength: 1,
+            select: function (evento, ui) {
+                $('#compradorid').val(ui.item.RowID);
+                CargarInformacionTerceroFacturacion(ui.item.RowID);
+                
+            }
+        });
+        $('#solicitante').autocomplete({
+            source: "Buscar_Tercero",
+            minLength: 1,
+            select: function (evento, ui) {
+                $('#solicitanteid').val(ui.item.RowID);
+                
+            }
+        });
+    });
+    function CargarSucursalProveedor(rowid)
+    {
+        $.ajax({
+            url: "TerceroSucursales",
+            data: { rowid: rowid },
+            success: function (data)
+            {
+                $('#sucursalproveedor').empty();
+                $('#sucursalproveedor').append(data);
+                if (@Model.RowID>0) {
+                    $('#sucursalproveedor').val(@Model.SucursalProveedorID);
+                }
+            }
+        });
+    }
+    function CargarInformacionTerceroProveedor(rowid)
+    {
+        $.ajax({
+            url: "TerceroInformacion",
+            data: { rowid: rowid },
+            success: function (data) {
+                $('#proveedor_nit').val(data[0].nit);
+                $('#proveedor_ciudad').val(data[0].ciudad);
+                $('#proveedor_telefono').val(data[0].telefono);
+                $('#proveedor_direccion').val(data[0].direccion);
+            }
+        });
+    }
+    function CargarInformacionTerceroFacturacion(rowid) {
+        $.ajax({
+            url: "TerceroInformacion",
+            data: { rowid: rowid },
+            success: function (data) {
+                $('#facturacion_nit').val(data[0].nit);
+                $('#facturacion_telefono').val(data[0].nit);
+                $('#facturacion_ciudad').val(data[0].ciudad);
+                $('#facturacion_direccion').val(data[0].direccion);
+            }
+        });
+    }
+   
+</script>
+<!--ITEM-->
+<script>
+    $(document).ready(function () {
+        if (@Model.RowID>0) {
+            $('#item').show();
+            debugger
+            cargarTablaContratos();
+            cargarItems();
+        }
+        $('#contrato').autocomplete({
+            source:"BuscarContratos",
+            minLength:1,
+            select:function(evento,ui){
+                $('#contratoid').val(ui.item.rowid);
+                //$('#embalaje').val(ui.item.embalaje)
+            }
+        })
+    });
+    function eliminarItem(rowid)
+    {
+        if (confirm("Desea Eliminar el Item")) {
+            $.ajax({
+                url:"eliminarItemOC",
+                data:{
+                    rowid:rowid
+                },
+                success:function(data){
+                    cargarItems()
+                    Mensajes('Item eliminado','success','');
+                },
+                error:function(eve){
+                    Mensajes('Error, intente de nuevo','error','');
+                }
+            })
+        }
+    }
+    function AgregarItem()
+    {
+        if ($('#itemid').val()=='' || $('#cantidad').val()==''|| $('#valor').val()=='') {
+            Mensajes('Se debe llenar toda la informacion','error','');
+            return;
+        }
+        ModalProcesandoShow();
+        $.ajax({
+            url:"AgregarItemOC",
+            data:{
+                cantidad:$('#cantidad').val(),
+                valor:$('#valor').val(),
+                itemid:$('#itemid').val(),
+                oc:'@Model.RowID'
+            },
+            success:function(data)
+            {
+                ModalProcesandoHiden();
+                LimpiarCamposItem();
+                cargarItems();
+                Mensajes(data,'success','');
+            },
+            error:function(e,error)
+            {
+                Mensajes(e.responseText,'error','');
+            }
+
+        })
+    }
+    function LimpiarCamposItem()
+    {
+        $('#valor').val('');
+        $('#valor').attr('readonly','readonly');
+        $('#cantidad').val('');
+        $('#cantidad').attr('readonly','readonly');
+        $('#itemid').val('');
+        $('#itemc').val('');
+        $('#valortotal').val('');
+        $('#valorimpuesto').val('');
+
+    }
+
+    function ActualizarDatos()
+    {
+        var cantidad=0;
+        var valorunitario=0;
+        if ($('#cantidad').val()!="") {
+            cantidad=$('#cantidad').val();
+        }
+        if ($('#valor').val()!="") {
+            valorunitario=$('#valor').val();
+        }
+        $.ajax({
+            url:"ValoresItem",
+            data:{
+                cantidad:cantidad,
+                valorunitario:valorunitario,
+                iditem:$('#itemid').val()
+            },
+            success:function(data)
+            {
+                $('#valorbase').val(data.valorbase);
+                $('#valorimpuesto').val(data.valorimpuesto);
+                $('#valortotal').val(data.valorTotal);
+            }
+        
+        })
+    }
+    function eliminarContrato(rowid)
+    {
+        if (confirm("Desea Eliminar el contrato de la Orden Compra")) {
+            $.ajax({
+                url:"eliminarContratoOrdenCompra",
+                data:{rowid:rowid},
+                success:function()
+                {
+                    cargarTablaContratos();
+                    Mensajes('Eliminado correctamente','success','');
+                },
+                error:function()
+                {
+                    Mensajes('Error en Proceso, vuelva a intentar','error','');
+                }
+            })
+        }
+    }
+    function cargarTablaContratos()
+    {
+        $.ajax({
+            url:"CargarContratosOrdenCompra",
+            data:{rowid:@Model.RowID},
+            success:function(data)
+            {
+                $('#tablaContratos tbody').empty();
+                $('#tablaContratos tbody').append(data);
+                pluginTablaContrato();
+            }
+        })
+
+    }
+    function guardarContrato()
+    {
+        if ($('#contratoid').val()=="") {
+            Mensajes('Seleccionar un Contrato','error','');
+            return;
+        }
+        var item=0;
+        if (confirm("Desea agregar Items de el contrato a la proforma")) {
+            item=1;
+        }
+        else
+        {
+            item=0
+        }
+        ModalProcesandoShow();
+        $.ajax({
+            url:"AgregarContrato",
+            data:{
+                oc:@Model.RowID,
+                contrato:$('#contratoid').val(),
+                item:item
+            },
+            success:function(data)
+            {
+                ModalProcesandoHiden();
+                Mensajes(data,'success','');
+                cargarTablaContratos()
+            },
+            error:function(status,error)
+            {
+                
+                ModalProcesandoHiden();
+                Mensajes(status.responseText,'error','');
+            }
+        })
+    }
+
+    function pluginTablaContrato()
+    {
+        //$('#tablaContratos').dataTable({
+        //    " processing": true,
+        //    "bFilter": true,
+        //    "bPaginate": true,
+        //    "info": false,
+        //    "bDestroy":true,
+        //    aLengthMenu: [
+        //    [15, 25, 50, 100, -1],
+        //    [15, 25, 50, 100, "All"]
+        //    ],
+        //    "iDisplayLength": 15
+
+        //});
+        //$('#tablaContratos').removeAttr("style");
+    }
+    function ActualizarDatosItem(obj,rowid,dato)
+    {
+        var valor=$(obj).val();
+        if (valor=="") {
+            valor=0;
+        }
+        $.ajax({
+            url:"ActualizacionItemOC",
+            data:{
+                valor:valor,
+                rowid:rowid,
+                dato:dato
+            },
+            success:function(data)
+            {
+                debugger
+                $('#valorimpuesto'+rowid).empty().text(data.valorimpuesto);
+                $('#valorbase'+rowid).empty().text(data.valorbase);
+                $('#valortotal'+rowid).empty().text(data.valorTotal);
+            }
+        })
+    }
+    function cargarItems()
+    {
+        debugger
+        $.ajax({
+            url:"ItemsOC",
+            data:{rowid:@Model.RowID},
+            success:function(data){
+                debugger
+                $('#tablaItems tbody').empty();
+                $('#tablaItems tbody').append(data);
+                pluginTablaItems();
+            },
+            error:function(data){
+                ModalProcesandoHiden();
+                Mensajes("Error Cargar Items",'error','');
+                
+            }
+        })
+        
+    }
+    function pluginTablaItems()
+    {
+        //$('#tablaItems').dataTable({
+        //    " processing": true,
+        //    "bFilter": true,
+        //    "bPaginate": true,
+        //    "info": false,
+        //    "bDestroy":true,
+        //    aLengthMenu: [
+        //    [15, 25, 50, 100, -1],
+        //    [15, 25, 50, 100, "All"]
+        //    ],
+        //    "iDisplayLength": 15
+
+        //});
+        //$('#tablaItems').removeAttr("style");
+    }
+
+</script>
+<!--ITEM-->

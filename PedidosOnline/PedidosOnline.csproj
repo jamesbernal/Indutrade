@@ -199,6 +199,9 @@
     <Compile Include="Models\Agrupacion.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ArchivoAdjunto.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AutorizacionCargue.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
@@ -256,10 +259,16 @@
     <Compile Include="Models\Departamento.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetalleMatrizBL.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DetalleRegistroLlenado.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Empresa.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EncabezadoMatrizBL.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EncabezadoRegistroLlenado.cs">
@@ -271,6 +280,9 @@
     <Compile Include="Models\Estado.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Factura.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Firma.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
@@ -278,6 +290,9 @@
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ItemImpuesto.cs">
+      <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListaEmpaque.cs">
       <DependentUpon>DAO_PedidosOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ListaPrecio.cs">
@@ -2028,8 +2043,6 @@
     <Content Include="Views\Maestro\ListadoPuerto.cshtml" />
     <Content Include="Views\Maestro\Puerto.cshtml" />
     <Content Include="RDL_FILES\Proforma.rdl" />
-    <Content Include="RDL_FILES\ReporteAnticipo.rdl" />
-    <Content Include="RDL_FILES\DOCUMENTO_PEDIDO.rdl" />
     <Content Include="Views\Exportacion\DCD.cshtml" />
     <Content Include="Views\Exportacion\DatosDCD.cshtml" />
     <Content Include="Views\Exportacion\ListadoRemisionFEP.cshtml" />
@@ -2071,6 +2084,9 @@
     <Content Include="Views\Exportacion\SolicitudCargue.cshtml" />
     <Content Include="Views\Exportacion\FormatoRegistroLlenado.cshtml" />
     <Content Include="Views\Exportacion\Bookings.cshtml" />
+    <None Include="Properties\PublishProfiles\INDUTRADEPROYECT.pubxml" />
+    <Content Include="Views\Exportacion\ListadoFacturas.cshtml" />
+    <Content Include="Views\Exportacion\Factura.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2091,8 +2107,10 @@
     <Folder Include="Content\themes\base\minified\images\" />
     <Folder Include="PRINT\" />
     <Folder Include="Recurso\ImagenPerfil\" />
+    <Folder Include="RepositorioArchivos\ArchivoBooking\" />
     <Folder Include="RepositorioArchivos\ArchivosContrato\" />
     <Folder Include="RepositorioArchivos\ArchivosProformas\" />
+    <Folder Include="RepositorioArchivos\Booking\" />
     <Folder Include="RepositorioArchivos\FirmaUsuario\" />
   </ItemGroup>
   <ItemGroup>

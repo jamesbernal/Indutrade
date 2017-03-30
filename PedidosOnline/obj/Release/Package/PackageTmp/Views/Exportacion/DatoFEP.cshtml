@@ -1,0 +1,296 @@
+﻿@model PedidosOnline.Models.FEP
+@{
+    ViewBag.Title = "DatosFEP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+
+    function BuscarDCD() {
+
+        $.ajax({
+            type: "POST",
+            url: "/Exportacion/BuscarDCD",
+            data: {
+                formulario: $("#form").serialize(),
+                RowID: $('#ndcd').val()
+            },
+            success: function (data) {
+                $('#Compradorrazon').empty();
+                $('#Compradorrazon').val(data.nombrecomp);
+                $('#compradornit').empty();
+                $('#compradornit').val(data.nitcomp);
+                $('#vendedorrazon').empty();
+                $('#vendedorrazon').val(data.nombreven);
+                $('#vendedornit').empty();
+                $('#Vendedornit').val(data.nitven);
+                $('#NroConvenio').empty();
+                $('#NroConvenio').val(data.convenio);
+                $('#fcargue').empty();
+                $('#fcargue').val(data.fechac);
+                TablaBalance();
+            },
+            error: function (data) {
+                $('#form')[0].reset();
+            }
+        });
+        return false;
+
+    }
+
+    function guardarFEP(a) {
+        //debugger
+        ModalProcesandoShow();
+
+        var RowID = $(".RowID").val();
+        var RowIDPro = $(".RowIDPro").val();
+
+        if ($("#ndcd").val() == "") {
+            Mensajes('El campo No DCD es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+        if ($("#nCertificado").val() == "") {
+            Mensajes('El campo No Certificado CP es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+        if ($("#Dex").val() == "") {
+            Mensajes('El campo No Dex CP es requerido!', 'error', '');
+            ModalProcesandoHiden();
+            return null;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "GuardarFEP",
+            data: {
+                formulario: $("#form").serialize(),
+                RowID: RowID,
+                RowID_DCD: $("#ndcd").val()
+            },
+            success: function (data2) {
+
+                if (a == 1) {
+
+                    window.location = 'ListadoRemisionFEP'
+                    ModalProcesandoHiden();
+                }
+                else {
+                    ModalProcesandoHiden();
+                    location.href = "../ListadoRemisionFEP/Exportacion";
+                }
+            },
+            error: function (request) {
+                Mensajes(request.responseText, 'error', '');
+                ModalProcesandoHiden();
+            }
+        });
+    }
+</script>
+
+<div class="col-md-12">
+    <div class="nav">
+        <span>
+            &nbsp;&nbsp;
+            <a href="@Url.Action("ListadoRemisionFEP","Exportacion",new {  @rih = Request.Params["rih"] })" class="alink">
+                <i class="glyphicon glyphicon-list-alt"></i>&nbsp;<span class="lang" key="VISTA">Vista&nbsp;&nbsp;</span>
+            </a>
+        </span>
+        <span>
+            <a href="javascript:guardarFEP(1);" class="alink">
+                <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span class="lang" key="GUARDAR">Guardar</span>
+            </a>
+        </span>
+        <span>
+            &nbsp;&nbsp;
+            <a href="javascript:guardarFEP(2);" class="alink">
+                <i class="glyphicon glyphicon-floppy-disk"></i><span class="lang" key="GUARDAR_&_CERRAR">&nbsp;Guardar&nbsp;&&nbsp;Cerrar</span>
+            </a>
+        </span>
+        <div class="tab-content" style="overflow:hidden">
+            <div class="col-md-12">
+                <form id="form" name="form" onsubmit="return false">
+                    <input type="hidden" class="RowID" id="RowID" name="RowID" value="@Model.RowID" />
+                    <div class="col-md-4">
+                        <br />
+                        <br />
+                        <h4>Datos del emisor DCD</h4>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="RazonS" class="lang">No DCD</label>
+                            </div>
+                            <div class="col-md-5">
+                                @if (Model.RowID > 0)
+                                {
+                                    <input type="text" id="ndcd" name="ndcd" value="@Model.DCDID" onblur="BuscarDCD()" style="width: 100%" />
+                                }
+                                else
+                                {
+                                    <input type="text" id="ndcd" name="ndcd" onblur="BuscarDCD()" style="width: 100%" />
+                                }
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="fecha" class="lang">Razon Social</label>
+                                </div>
+                                @if (Model.RowID > 0)
+                                {
+                                    <div class="col-md-5">
+                                        <input type="text" id="Compradorrazon" name="Compradorrazon" style="width: 100%" value="@Model.DCD.Contrato.Proforma.Tercero.RazonSocial" readonly="readonly" />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-md-5">
+                                        <input type="text" id="Compradorrazon" name="Compradorrazon" style="width: 100%" readonly="readonly"/>
+                                    </div>
+                                }
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">NIT</label>
+                            </div>
+                            <div class="col-md-5">
+                                @if (Model.RowID > 0)
+                                {
+                                    <input type="text" id="compradornit" name="compradornit" value="@Model.DCD.Contrato.Proforma.Tercero.Identificacion" style="width: 100%" readonly="readonly" />
+                                }
+                                else
+                                {
+                                    <input type="text" id="compradornit" name="compradornit" value="" style="width: 100%" readonly="readonly"/>
+                                }
+                            </div>
+                            <br />
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">Telefono</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="compradortel" name="compradortel" value="" style="width: 100%" readonly="readonly" />
+                            </div>
+                            <br />
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">Direccion</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="compradordireccion" name="compradordireccion" value="" style="width: 100%" readonly="readonly"/>
+                            </div>
+                            <br />
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">Ciudad</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="compradorciu" name="compradorciu" value="" style="width: 100%" readonly="readonly"/>
+                            </div>
+                            <br />
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">No Convenio - CMCD</label>
+                            </div>
+                            <div class="col-md-5">
+                                @if (Model.RowID > 0)
+                                {
+                                    <input type="text" id="NroConvenio" name="NroConvenio" value="@Model.DCD.NroConvenio" style="width: 100%" readonly="readonly" />
+                                }
+                                else
+                                {
+                                    <input type="text" id="NroConvenio" name="NroConvenio" value="" style="width: 100%" readonly="readonly"/>
+                                }
+
+                            </div>              
+                          </div>
+                        <br />
+                    </div>
+                    <div class="col-md-6">
+                        <br />
+                        <br />
+                        <h4></h4>
+                        <br />
+                        <div class="form-group">
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="fecha" class="lang">Razon Social</label>
+                                </div>
+                                @if (Model.RowID > 0)
+                                {
+                                    <div class="col-md-5">
+                                        <input type="text" id="vendedorrazon" name="vendedorrazon" style="width: 100%" value="@Model.DCD.Contrato.Proforma.Tercero1.RazonSocial" readonly="readonly" />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-md-5">
+                                        <input type="text" id="vendedorrazon" name="vendedorrazon" style="width: 100%" readonly="readonly"/>
+                                    </div>
+                                }
+                            </div>
+                            <br />
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">NIT</label>
+                            </div>
+                            <div class="col-md-5">
+                                @if (Model.RowID > 0)
+                                {
+                                    <input type="text" id="Vendedornit" name="Vendedornit" value="@Model.DCD.Contrato.Proforma.Tercero1.Identificacion" style="width: 100%" readonly="readonly"/>
+                                }
+                                else
+                                {
+                                    <input type="text" id="Vendedornit" name="Vendedornit" value="" style="width: 100%" readonly="readonly"/>
+                                }
+                            </div>
+                            <br />
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">Fecha Cargue</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="fcargue" name="fcargue" value="@ViewBag.FechaC" style="width: 100%" readonly="readonly"/>
+                            </div>
+                            <br />
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">No Dex</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="Dex" name="Dex" value="@Model.Dex" style="width: 100%" />
+                            </div>
+                            <br />
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="nit" class="lang">No Certificado CP</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" id="nCertificado" name="nCertificado" value="@Model.NCertificadoCP" style="width: 100%" />
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

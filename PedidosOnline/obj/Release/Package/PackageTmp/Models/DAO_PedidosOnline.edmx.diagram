@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b82249f4f66a41c0a3ea8a7c0f1e1bf8" Name="Diagram1" ZoomLevel="62">
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Actividad" Width="1.5" PointX="10.5" PointY="17.75" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Contacto" Width="1.5" PointX="8.25" PointY="17.125" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.TerceroPotencial" Width="1.5" PointX="13.5" PointY="17.625" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.AgenteNaviera" Width="1.5" PointX="0.75" PointY="74.5" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.125" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Ciudad" Width="1.5" PointX="1.5" PointY="54.5" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Compañia" Width="1.5" PointX="1.5" PointY="7.375" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.CondicionPago" Width="1.5" PointX="0.75" PointY="23" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.ContactoERP" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Departamento" Width="1.5" PointX="1.5" PointY="60" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Empresa" Width="1.5" PointX="1.5" PointY="27.375" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Item" Width="1.5" PointX="3.75" PointY="6.5" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.ListaPrecio" Width="1.5" PointX="0.75" PointY="18.625" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Pais" Width="1.5" PointX="1.5" PointY="64.125" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Precio" Width="1.5" PointX="6" PointY="18.375" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Sucursal" Width="1.5" PointX="3" PointY="15.625" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Tercero" Width="1.5" PointX="0.75" PointY="45" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Booking" Width="1.5" PointX="9.75" PointY="44" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Calculadora" Width="1.5" PointX="3" PointY="73.125" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.CalculadoraItems" Width="1.5" PointX="7.5" PointY="81.75" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Contrato" Width="1.5" PointX="5.25" PointY="69.5" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.ContratoAdjunto" Width="1.5" PointX="7.5" PointY="77.75" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.OrdenCompra" Width="1.5" PointX="5.25" PointY="23.375" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.OrdenCompraContrato" Width="1.5" PointX="7.5" PointY="24.625" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.OrdenCompraItem" Width="1.5" PointX="10.5" PointY="24" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Proforma" Width="1.5" PointX="7.5" PointY="52.375" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.ProformaItemCalculadora" Width="1.5" PointX="9.75" PointY="59.875" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Agrupacion" Width="1.5" PointX="1.5" PointY="40.875" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Costo" Width="1.5" PointX="3.75" PointY="37" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.MotoNave" Width="1.5" PointX="3.75" PointY="32.25" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Opcion" Width="1.5" PointX="1.5" PointY="32.75" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Planta" Width="1.5" PointX="5.75" PointY="10.125" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Puerto" Width="1.5" PointX="5.25" PointY="53.375" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Menu" Width="1.5" PointX="3.75" PointY="80.125" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Modulo" Width="1.5" PointX="1.5" PointY="80.625" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Rol" Width="1.5" PointX="0.75" PointY="68.625" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.RolMenu" Width="1.5" PointX="6" PointY="64.5" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Usuario" Width="1.5" PointX="3" PointY="68" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.m_plantillas" Width="1.5" PointX="7.75" PointY="4.125" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.PuntoEnvio" Width="1.5" PointX="5.25" PointY="13.5" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Actividad__Estad__2A6B46EF" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Actividad__Prior__2B5F6B28" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Actividad__Terce__2C538F61" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Actividad__TipoI__2D47B39A" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK_Actividad_Contacto" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.fk_TipoRelacionID" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Contacto__Ciudad__3C89F72A" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Contacto__Sucurs__269AB60B" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__TerceroPo__Conta__3F6663D5" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__TerceroPo__Estad__405A880E" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__TerceroPo__Orige__414EAC47" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Calculado__Agent__27C3E46E" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Calculado__Agent__2B947552" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Calculado__Agent__3BB5CE82" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Calculado__Desti__370627FE" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Ciudad__Departam__10216507" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__ContactoE__Ciuda__12FDD1B2" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__ContactoE__Ciuda__278EDA44" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Puerto__CiudadID__39E294A9" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Puerto__CiudadID__5E1FF51F" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Compañia__Empres__19AACF41" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Item__CompañiaID__29E1370A" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Compañ__336AA144" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Compañ__70099B30" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Compañ__76B698BF" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Compañ__77AABCF8" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Forma__4A8DFDBE" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Condic__789EE131" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Contac__3552E9B6" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Contac__71F1E3A2" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Contac__7A8729A3" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Contac__7B7B4DDC" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Tercero__Contact__214BF109" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Departame__PaisI__0D44F85C" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Empresa__ErpID__15DA3E5D" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Empresa__IdiomaI__16CE6296" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Calculado__ItemI__07E124C1" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__OrdenComp__ItemI__513AFB4D" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__OrdenComp__ItemI__5AC46587" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Precio__ItemID__2CBDA3B5" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Precio__ListaPre__2DB1C7EE" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__ListaP__36470DEF" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__ListaP__72E607DB" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__ListaP__7C6F7215" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__ListaP__7D63964E" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Sucur__4B8221F7" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__PuntoEnvi__Sucur__3B0BC30C" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Tercer__373B3228" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Tercer__73DA2C14" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Tercer__7E57BA87" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Tercer__7F4BDEC0" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Vended__004002F9" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Vended__01342732" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Vended__39237A9A" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Sucursal__Vended__74CE504D" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Calculado__Broke__0C90CB45" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Calculado__Terce__23F3538A" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Calculado__Terce__2AA05119" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Contrato__Client__5728DECD" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Contrato__Inspec__581D0306" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Contrato__Interm__5911273F" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Contrato__Vended__5CE1B823" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Compr__4D6A6A69" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Solic__4E5E8EA2" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__PuntoEnvi__Vende__3BFFE745" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Usuario__Tercero__251C81ED" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Booking__Proform__0F6D37F0" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Booking__TipoLle__10615C29" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Calculado__Calcu__05F8DC4F" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Calculado__Incot__22FF2F51" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Calculado__Incot__29AC2CE0" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Contrato__Calcul__5634BA94" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Calculado__Embal__06ED0088" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__ProformaI__ItemC__675F4696" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Contrato__FormaP__797DF6D1" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Contrato__TipoCo__5A054B78" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Contrato__Usuari__5AF96FB1" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Contrato__Usuari__5BED93EA" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__ContratoA__Contr__47B19113" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Contr__550B8C31" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Contr__57E7F8DC" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Proforma__Contra__5FBE24CE" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Estad__4C764630" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__522F1F86" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__55FFB06A" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__58DC1D15" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Orden__5BB889C0" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Proforma__Puerto__61A66D40" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Proforma__Puerto__629A9179" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Proforma__TipoPr__6B2FD77A" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Proforma__TipoPr__6C23FBB3" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Proforma__Usuari__638EB5B2" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Proforma__Usuari__6482D9EB" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__ProformaI__Profo__68536ACF" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__ProformaI__Usuar__69478F08" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__ProformaI__Usuar__6A3BB341" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Opcion__Agrupaci__0A688BB1" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Costo__MonedaID__3429BB53" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Costo__TipoID__351DDF8C" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__MotoNave__Tipo__44EA3301" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Menu__ModuloID__6BAEFA67" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__RolMenu__MenuID__7AF13DF7" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__RolMenu__MenuID__7BE56230" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__RolMenu__RolID__7CD98669" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__RolMenu__RolID__7DCDAAA2" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Usuario__RolID__24285DB4" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.ItemImpuesto" Width="1.5" PointX="13" PointY="23.625" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.AutorizacionCargue" Width="1.5" PointX="15" PointY="32.25" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.SolicitudTransporte" Width="1.5" PointX="9.75" PointY="31.125" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.TipoVehiculo" Width="1.5" PointX="12" PointY="33" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.EnvioMail" Width="1.5" PointX="8.375" PointY="8.75" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Estado" Width="1.5" PointX="3" PointY="44.625" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Firma" Width="1.5" PointX="5.25" PointY="49.5" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Parametro" Width="1.5" PointX="3.375" PointY="0.75" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__ItemImpue__Compa__1980B20F" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__ItemImpue__ItemI__1B68FA81" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__ItemImpue__TipoI__1A74D648" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Tercero" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Autorizac__Estad__6BB9E75F" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Autorizac__Solic__6CAE0B98" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__OrdenComp__Estad__04BA9F53" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Proforma" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Opcion" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_Planta" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK_SolicitudTransporte_SolicitudTransporte" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK_TipoVehiculo_SolicitudTransporte" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Estado__Agrupaci__03C67B1A" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Firma__TipoFirma__7760A435" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Firma__UsuarioID__7854C86E" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.Vehiculo" Width="1.5" PointX="3.75" PointY="57.5" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Vehiculo__MarcaI__763775D2" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Vehiculo__TipoVe__744F2D60" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.EncabezadoRegistroLlenado" Width="1.5" PointX="12" PointY="64.875" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Encabezad__Profo__4282C7A2" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__4376EBDB" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Encabezad__Usuar__446B1014" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.AutorizacionCargueVehiculo" Width="1.5" PointX="17.625" PointY="45.5" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Autorizac__Terce__4C0C31DC" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Autorizac__Autor__4B180DA3" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Autorizac__Remol__4DF47A4E" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__Autorizac__Vehic__4D005615" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.ArchivoAdjunto" Width="1.5" PointX="3.75" PointY="63.625" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__ArchivoAd__TipoI__78DED853" />
+        <EntityTypeShape EntityType="DB_9CAC35_indutradeModel.DetalleRegistroLlenado" Width="1.5" PointX="14.625" PointY="60.75" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__DetalleRe__Carro__483BA0F8" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__DetalleRe__Encab__47477CBF" />
+        <AssociationConnector Association="DB_9CAC35_indutradeModel.FK__DetalleRe__Remol__64D7DFA6" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

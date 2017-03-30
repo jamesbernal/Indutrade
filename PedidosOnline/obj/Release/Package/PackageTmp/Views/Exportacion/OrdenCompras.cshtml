@@ -1,0 +1,108 @@
+﻿@using PedidosOnline.Models;
+@model List<PedidosOnline.Models.OrdenCompra>
+@{
+    ViewBag.Title = "ListCalculadoras";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<system.web>
+    <compilation debug="true" targetFramework="4.0">
+        <assemblies>
+            <add assembly="System.Data.Entity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+        </assemblies>
+    </compilation>
+</system.web>
+<style>
+    a {
+        color: #333;
+    }
+</style>
+<script>
+
+    $(document).ready(function () {
+        $('table').dataTable({
+            " processing": true,
+            "bFilter": true,
+            "bPaginate": true,
+            "info": false,
+            "bDestroy":true,
+            aLengthMenu: [
+            [15, 25, 50, 100, -1],
+            [15, 25, 50, 100, "All"]
+            ],
+            "iDisplayLength": 15
+
+        });
+
+    });
+</script>
+
+<br />
+<div class="row ">
+    <div class="row" id="" style="margin-bottom:20px">
+        <div class="col-md-12">
+            <div class="">
+                <span>
+                    <a href="@Url.Action( "OrdenCompra","Exportacion",new {   @rih = Request.Params["rih"] })" class="alink">
+                        <i class="glyphicon glyphicon-plus"></i>&nbsp;<SPAN class="lang" key="NUEVO">Nuevo</SPAN>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <table id="table" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="lang">#</th>
+                    <th></th>
+                    <th class="lang">Fecha</th>
+                    <th class="lang">Proveedor</th>
+                    <th class="lang">Facturar a</th>
+                    <th class="lang">Forma Pago</th>
+                    <th class="lang">Usuario Creacion</th>
+                    <th class="lang">Fecha Creacion</th>
+                </tr>
+            </thead>
+            <tbody style="text-align:center;">
+                @foreach (OrdenCompra cal in Model.ToList())
+                {
+
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("OrdenCompra", "Exportacion", new { @rowid = @cal.RowID, @rih = Request.Params["rih"] })"><i class="glyphicon glyphicon-search"> </i></a>
+                        </td>
+                        <td>
+                            <a href="javascript:UtilExportarPDF('ORDENCOMPRA',@cal.RowID)" class="alink" ata-toggle="tooltip" data-placement="bottom" title="Exportar PDF">
+                                <i class="glyphicon glyphicon-file"></i>
+                            </a>
+                            @*<a href="@Url.Action("Export", "Proforma", new { @rowid = @cal.RowID, @rih = Request.Params["rih"] })"><i class="glyphicon glyphicon-export"></i></a>*@
+                        </td>
+                        <td>
+                            @cal.RowID
+                        </td>
+                        <td>
+                            @cal.Fecha
+                        </td>
+                        <td>
+                            @cal.Sucursal.Tercero.RazonSocial
+                        </td>
+                        <td>
+                            @cal.Tercero.RazonSocial
+                        </td>
+                        <td>
+                            @cal.CondicionPago.Descripcion
+                        </td>
+                        <td>
+                            @cal.UsuarioCreacion
+                        </td>
+                        <td>
+                            @cal.FechaCreacion
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

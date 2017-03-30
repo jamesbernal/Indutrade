@@ -24,13 +24,13 @@ public partial class Item
 
         this.CalculadoraItems = new HashSet<CalculadoraItems>();
 
+        this.ItemImpuesto = new HashSet<ItemImpuesto>();
+
         this.OrdenCompraItem = new HashSet<OrdenCompraItem>();
 
         this.OrdenCompraItem1 = new HashSet<OrdenCompraItem>();
 
         this.Precio = new HashSet<Precio>();
-
-        this.ItemImpuesto = new HashSet<ItemImpuesto>();
 
     }
 
@@ -81,6 +81,10 @@ public partial class Item
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
+    public virtual ICollection<ItemImpuesto> ItemImpuesto { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
     public virtual ICollection<OrdenCompraItem> OrdenCompraItem { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -90,10 +94,6 @@ public partial class Item
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Precio> Precio { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<ItemImpuesto> ItemImpuesto { get; set; }
 
 }
 

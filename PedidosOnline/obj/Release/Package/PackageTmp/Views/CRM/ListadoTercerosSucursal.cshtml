@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Listado_TercerosSucursal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/js/select2/select2.css" rel="stylesheet" />
+<script type="text/javascript" src="~/js/select2/select2.min.js?v=166"></script> <!-- Styled select boxes -->
+<script>
+
+    $(document).ready(function () {
+        $('table').dataTable({
+            " processing": true,
+            "bFilter": true,
+            "bPaginate": true,
+            "info": false,
+            "bDestroy": true,
+            aLengthMenu: [
+            [15, 25, 50, 100, -1],
+            [15, 25, 50, 100, "All"]
+            ],
+            "iDisplayLength": 15
+
+        });
+
+    });
+    function ExportarExcel() {//permite exportar desde el data procedure con la palabra clave
+        UtilExportarExcel('TERCEROS', $("#table_filter").find("input").val());
+    }
+</script>
+
+<div class="nav">
+
+    <span>
+        <a href="javascript:ExportarExcel();" class="alink">
+            <i class="glyphicon glyphicon-export"></i>&nbsp;<span class="lang" key="EXPORTAR">Exportar</span>
+        </a>
+    </span>
+</div>
+<br />
+
+<div class="row ">
+    <div class="col-md-12">
+        <table id="table" class="table table-condensed table-striped table-bordered table-hover table-checkable table-responsive">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="lang" key="NIT">Nit</th>
+                    <th class="lang" key="RAZON SOCIAL">Razon Social</th>
+                    <th class="lang" key="CONTACTO_PRINCIPAL">Contacto Principal</th>
+                    <th class="lang" key="TELEFONO">Telélefono</th>
+                    <th class="lang" key="TIPO_RELACION">Tipo de Relación</th>
+                    <th class="lang" key="COMERCIAL">Comercial</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (ViewBag.listercero != null)
+                {<!--Esto me lo imprime en pantalla porque el if no tiene el aroa, pero si lo pongo me imprime error-->
+                    foreach (PedidosOnline.Models.Tercero item in ViewBag.listercero)
+                    {
+                        string tipo_relacion = "";
+                        item.ContactoERP = item.ContactoERP == null ? new PedidosOnline.Models.ContactoERP() : item.ContactoERP;
+                        <tr>
+                            <td>
+                                <a href="@Url.Action("Tercero", "CRM", new { @rowid_tercero = @item.RowID, @rih = Request.Params["rih"] })"><i class="glyphicon glyphicon-search"> </i></a>
+                            </td>
+                            <td>
+                                @item.Identificacion
+                            </td>
+                            <td>
+                                @item.RazonSocial
+                            </td>
+                            <td>
+                                @item.ContactoERP.Nombre
+                            </td>
+                            <td>
+                                @item.ContactoERP.Telefono1
+                            </td>
+                            <td>
+                                @if (item.Cliente == 1)
+                                { tipo_relacion = "Cliente "; }
+                                @if (item.Proveedor == 1)
+                                {
+                                    if (tipo_relacion.Length > 0)
+                                    { tipo_relacion += ","; }
+                                    tipo_relacion += " Proveedor ";
+                                }
+                                @if (item.Accionista == 1)
+                                {
+                                    if (tipo_relacion.Length > 0)
+                                    { tipo_relacion += ","; }
+                                    tipo_relacion += " Socio ";
+                                }
+                                @tipo_relacion
+                            </td>
+                            <td>
+                                @item.NombreComercial
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -75,7 +75,7 @@ public partial class OrdenCompra
 
     public virtual Tercero Tercero1 { get; set; }
 
-    public virtual Opcion Opcion { get; set; }
+    public virtual Estado Estado { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
@@ -92,8 +92,6 @@ public partial class OrdenCompra
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<OrdenCompraItem> OrdenCompraItem1 { get; set; }
-
-    public virtual Estado Estado { get; set; }
 
 }
 

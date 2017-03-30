@@ -3,6 +3,8 @@
     ViewBag.Title = "Contrato";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script type="text/javascript" src="~/Content/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
+<link href="~/Content/js/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">
 <style>
     a {
         color: #333;
@@ -546,7 +548,7 @@
                         <div class="col-md-5">
                             <div class="col-md-12">
                                 <div style="margin-bottom: 20px">
-                                    <h4 class="lang" key="PQRS">Recursos</h4>
+                                    <h4 class="lang" key="">Recursos</h4>
                                     <hr style="margin:0px">
                                 </div>
                             </div>
@@ -631,18 +633,20 @@
     function cargarmodal(){
         $("#myModal1").modal('show');
     }
-    $('#fecha').datepicker({
-        dateFormat: 'dd/mm/yy',
-        minDate: 0,
-        maxDate: '+3Y',
-        inline: true
-    });
-    $('#periodoE').datepicker({
-        dateFormat: 'dd/mm/yy',
-        minDate: 0,
-        maxDate: '+3Y',
-        inline: true
-    });
+    $('#fecha').datetimepicker(
+           {
+               dayOfWeekStart: 1,
+               timepicker: true,
+               lang: 'es',
+               timepicker: false
+           });
+    $('#periodoE').datetimepicker(
+           {
+               dayOfWeekStart: 1,
+               timepicker: true,
+               lang: 'es',
+               timepicker: false
+           });
 
     $('.autocompletar').on('keyup keypress', function (e) {
         var code = (e.keyCode ? e.keyCode : e.which);

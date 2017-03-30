@@ -55,6 +55,14 @@ namespace ErpPortal.WebApp.Controllers
                 m_plantillas m_plantilla = db.m_plantillas.Where(f => f.Nombre == "RDL_" + entidad).First();
                 return RDL_UTIL.RDL_Generate_PDF_File_VIEW(Server.MapPath("//"), dt, m_plantilla, entidad);
             }
+            if (entidad.ToUpper() == "FACTURA")
+            {
+                llamada = "EXEC FacturaExport " + parm1 + "";
+                DataSet dt = SQLBase.ReturnDataSet(llamada,
+                new SqlConnection(db.Database.Connection.ConnectionString));
+                m_plantillas m_plantilla = db.m_plantillas.Where(f => f.Nombre == "RDL_" + entidad).First();
+                return RDL_UTIL.RDL_Generate_PDF_File_VIEW(Server.MapPath("//"), dt, m_plantilla, entidad);
+            }
             else
             {
                 return "";
